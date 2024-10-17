@@ -42,11 +42,16 @@ def get_all_events(onsale_start_date):
     events = []
     page = 0
     size = 199  # Maximum allowed size for one page
-    
+
+    # Create the publicVisibilityStartDateTime dynamically based on onsale_start_date
+    public_visibility_start_date = f"{onsale_start_date}T00:00:00Z"
+
     while True:
         params = {
             "apikey": TICKETMASTER_API_KEY,
             "onsaleOnStartDate": onsale_start_date,  # Filter events with onsale starting on this date
+            "countryCode": "US",                    # Filter events only in the US
+            # "publicVisibilityStartDateTime": public_visibility_start_date,  # IDK if we want this bc we miss like 200 events that were visible before
             "size": size,                            # Limit to maximum 199 results per page
             "page": page,                            # Current page number
         }
