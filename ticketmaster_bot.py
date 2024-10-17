@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands, tasks
 import requests
 import os
-import asyncio
-from datetime import datetime, timezone, timedelta
+import sqlite3
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -21,24 +21,61 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-known_events = set()
+# Initialize SQLite Database
+conn = sqlite3.connect('events.db')
+c = conn.cursor()
+c.execute('''CREATE TABLE IF NOT EXISTS seen_events (event_id TEXT PRIMARY KEY)''')
+conn.commit()
 
-def get_events(start_date, end_date):
+def event_seen(event_id):
+    c.execute("SELECT 1 FROM seen_events WHERE event_id = ?", (event_id,))
+    return c.fetchone() is not None
+
+def mark_event_seen(event_id):
+    c.execute("INSERT INTO seen_events (event_id) VALUES (?)", (event_id,))
+    conn.commit()
+
+def get_all_events(onsale_start_date):
     url = "https://app.ticketmaster.com/discovery/v2/events.json"
-    params = {
-        "apikey": TICKETMASTER_API_KEY,
-        "startDateTime": start_date.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "endDateTime": end_date.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "size": 200
-    }
     
-    try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        return response.json().get("_embedded", {}).get("events", [])
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
-        return []
+    # Initialize pagination variables
+    events = []
+    page = 0
+    size = 199  # Maximum allowed size for one page
+    
+    while True:
+        params = {
+            "apikey": TICKETMASTER_API_KEY,
+            "onsaleOnStartDate": onsale_start_date,  # Filter events with onsale starting on this date
+            "size": size,                            # Limit to maximum 199 results per page
+            "page": page,                            # Current page number
+        }
+
+        try:
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+            
+            # Extract events from the response
+            page_events = data.get("_embedded", {}).get("events", [])
+            events.extend(page_events)
+            
+            # Extract pagination details
+            pagination = data.get("page", {})
+            total_pages = pagination.get("totalPages", 1)
+
+            # If we've processed all pages, break the loop
+            if page >= total_pages - 1 or page > 4:
+                break
+
+            # Move to the next page
+            page += 1
+
+        except requests.exceptions.RequestException as e:
+            print(f"Error: {e}")
+            break
+
+    return events
 
 @tasks.loop(minutes=1)
 async def check_for_new_events():
@@ -47,24 +84,45 @@ async def check_for_new_events():
         print(f"Error: Could not find channel with ID {CHANNEL_ID}")
         return
 
-    now = datetime.now(timezone.utc)
-    end_date = now + timedelta(days=30)
+    # Get today's date to filter events that are on sale today
+    onsale_start_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    events = get_all_events(onsale_start_date)
     
-    events = get_events(now, end_date)
+    total_events = len(events)
+    seen_events_count = 0
     new_events = []
     
     for event in events:
         event_id = event['id']
-        if event_id not in known_events:
-            known_events.add(event_id)
+        if event_seen(event_id):
+            seen_events_count += 1
+        else:
+            mark_event_seen(event_id)  # Mark this event as seen
             new_events.append(event)
+    
+    new_events_count = len(new_events)
+
+    # Print summary to terminal
+    print(f"Total events received: {total_events}")
+    print(f"Events already seen: {seen_events_count}")
+    print(f"New events: {new_events_count}")
     
     if new_events:
         for event in new_events:
+            # Get sale start and end dates if available
+            sales_start = event.get('sales', {}).get('public', {}).get('startDateTime', 'Unknown')
+            sales_end = event.get('sales', {}).get('public', {}).get('endDateTime', 'Unknown')
+            
+            # Format the sales times into something more readable
+            sales_start = datetime.strptime(sales_start, "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M:%S") if sales_start != 'Unknown' else 'Unknown'
+            sales_end = datetime.strptime(sales_end, "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M:%S") if sales_end != 'Unknown' else 'Unknown'
+            
             embed = discord.Embed(
                 title=event['name'],
                 url=event['url'],
-                description=f"Date: {event['dates']['start']['localDate']}",
+                description=f"Date: {event['dates']['start']['localDate']}\n"
+                            f"Ticket Sales Start: {sales_start}\n"
+                            f"Ticket Sales End: {sales_end}",
                 color=discord.Color.blue()
             )
             if 'images' in event and event['images']:
@@ -80,19 +138,29 @@ async def on_ready():
 
 @bot.command(name='events')
 async def list_events(ctx):
-    now = datetime.now(timezone.utc)
-    end_date = now + timedelta(days=30)
-    events = get_events(now, end_date)
+    # Get today's date to filter events that are on sale today
+    onsale_start_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    events = get_all_events(onsale_start_date)
     
     if not events:
-        await ctx.send("No upcoming events found.")
+        await ctx.send("No events with today's onsale date found.")
         return
 
     for event in events[:5]:  # Limit to 5 events to avoid flooding the channel
+        # Get sale start and end dates if available
+        sales_start = event.get('sales', {}).get('public', {}).get('startDateTime', 'Unknown')
+        sales_end = event.get('sales', {}).get('public', {}).get('endDateTime', 'Unknown')
+
+        # Format the sales times into something more readable
+        sales_start = datetime.strptime(sales_start, "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M:%S") if sales_start != 'Unknown' else 'Unknown'
+        sales_end = datetime.strptime(sales_end, "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M:%S") if sales_end != 'Unknown' else 'Unknown'
+        
         embed = discord.Embed(
             title=event['name'],
             url=event['url'],
-            description=f"Date: {event['dates']['start']['localDate']}",
+            description=f"Date: {event['dates']['start']['localDate']}\n"
+                        f"Ticket Sales Start: {sales_start}\n"
+                        f"Ticket Sales End: {sales_end}",
             color=discord.Color.green()
         )
         if 'images' in event and event['images']:
@@ -104,3 +172,4 @@ async def list_events(ctx):
 
 if __name__ == "__main__":
     bot.run(DISCORD_BOT_TOKEN)
+
