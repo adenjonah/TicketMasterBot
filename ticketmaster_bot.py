@@ -3,8 +3,11 @@ from discord.ext import commands, tasks
 import requests
 import os
 import sqlite3
+import pytz
+import asyncio
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -54,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Venues (
     venueID TEXT PRIMARY KEY,
     name TEXT,
     city TEXT,
-    country TEXT
+    state TEXT 
 )
 ''')
 
@@ -79,12 +82,13 @@ def ensure_artist_exists(artist_id, artist_name):
         c.execute('INSERT OR IGNORE INTO Artists (artistID, name, notable) VALUES (?, ?, ?)', (artist_id, artist_name, False))
         conn.commit()
 
-def ensure_venue_exists(venue_id, venue_name, city):
-    """Ensure the venue exists in the Venues table."""
+def ensure_venue_exists(venue_id, venue_name, city, state):
+    """Ensure the venue exists in the Venues table, including city and state."""
     if venue_id is not None:
-        c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city) VALUES (?, ?, ?)', (venue_id, venue_name, city))
+        c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city, state) VALUES (?, ?, ?, ?)', (venue_id, venue_name, city, state))
         conn.commit()
 
+# Adjust store_event to save the state information as well
 def store_event(event):
     """Store event in the database if not already present."""
     event_id = event['id']
@@ -96,20 +100,21 @@ def store_event(event):
     # Select a suitable image URL (16:9, at least 1024px wide)
     image_url = None
     for image in event.get('images', []):
-        if image['ratio'] == '16_9' and image['width'] >= 1024:
+        # Check for presence of 'ratio' and 'width' keys to avoid KeyError
+        if image.get('ratio') == '16_9' and image.get('width', 0) >= 1024:
             image_url = image['url']
             break
 
     # Fallback if no suitable image is found
     if not image_url and event.get('images'):
-        image_url = event['images'][0]['url']  # Use the first available image
+        image_url = event['images'][0]['url']  # Use the first available image if no 16:9 image meets criteria
 
-    # Venue data
+    # Venue data with city and state
     venue_data = event['_embedded']['venues'][0]
     venue_id = venue_data['id']
     venue_name = venue_data['name']
     venue_city = venue_data['city']['name']
-    venue_country = venue_data['country']['name']  # Get country from JSON data
+    venue_state = venue_data['state']['stateCode']  # Get the state code
 
     # Artist data if available
     if 'attractions' in event['_embedded']:
@@ -121,7 +126,7 @@ def store_event(event):
 
     # Ensure artist and venue records exist
     ensure_artist_exists(artist_id, artist_name)
-    ensure_venue_exists(venue_id, venue_name, venue_city, venue_country)
+    ensure_venue_exists(venue_id, venue_name, venue_city, venue_state)
 
     # Insert event data into the database with all details
     c.execute('''
@@ -130,11 +135,11 @@ def store_event(event):
     ''', (event_id, event_name, artist_id, venue_id, event_date, onsale_start, url, image_url, datetime.now(timezone.utc).isoformat()))
     
     conn.commit()
-
-def ensure_venue_exists(venue_id, venue_name, city, country):
-    """Ensure the venue exists in the Venues table, including country."""
+    
+def ensure_venue_exists(venue_id, venue_name, city, state):
+    """Ensure the venue exists in the Venues table, including"""
     if venue_id is not None:
-        c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city, country) VALUES (?, ?, ?, ?)', (venue_id, venue_name, city, country))
+        c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city, state) VALUES (?, ?, ?, ?)', (venue_id, venue_name, city, state))
         conn.commit()
     
 def fetch_today_events():
@@ -206,7 +211,7 @@ async def fetch_events_task():
     fetch_today_events()
     print("Events fetched and stored.")
 
-@tasks.loop(minutes=1)  # Runs every minute
+@tasks.loop(minutes=1)
 async def notify_events_task():
     now = datetime.now(timezone.utc)
     minute_ahead = now + timedelta(minutes=1)
@@ -214,7 +219,7 @@ async def notify_events_task():
     # Query events that are ready for notification
     c.execute('''
     SELECT Events.eventID, Events.name AS event_name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
-           Venues.city, Venues.country, Events.image_url, Artists.name AS artist_name
+           Venues.city, Venues.state, Events.image_url, Artists.name AS artist_name
     FROM Events
     LEFT JOIN Venues ON Events.venueID = Venues.venueID
     LEFT JOIN Artists ON Events.artistID = Artists.artistID
@@ -225,10 +230,38 @@ async def notify_events_task():
     channel = bot.get_channel(CHANNEL_ID)
 
     if events_to_notify and channel:
-        for event_id, event_name, onsale_start, event_date, url, city, country, image_url, artist_name in events_to_notify:
-            # Format event and onsale dates to "Month D, Year" (removing leading zeros)
+        for event_id, event_name, onsale_start, event_date, url, city, state, image_url, artist_name in events_to_notify:
+            # Format event date to "Month D, Year" without leading zeros
             formatted_event_date = datetime.strptime(event_date, "%Y-%m-%d").strftime("%B %-d, %Y")
-            formatted_onsale_start = datetime.strptime(onsale_start, "%Y-%m-%dT%H:%M:%SZ").strftime("%B %-d, %Y")
+            
+            # Parse and format the onsale start time with timezone and relative time
+            onsale_datetime = datetime.strptime(onsale_start, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+            formatted_onsale_start = onsale_datetime.strftime("%B %-d, %Y %I:%M %p %Z").lstrip("0").replace(" 0", " ")
+
+            # Calculate the time difference and format the relative time
+            time_diff = onsale_datetime - now
+            if time_diff.total_seconds() > 0:
+                days, remainder = divmod(time_diff.total_seconds(), 86400)
+                hours, remainder = divmod(remainder, 3600)
+                minutes, _ = divmod(remainder, 60)
+                if days > 0:
+                    net_time = f"{int(days)}day {int(hours)}hr {int(minutes)}min from now" if hours or minutes else f"{int(days)} days from now"
+                elif hours > 0:
+                    net_time = f"{int(hours)}hr {int(minutes)}min from now" if minutes else f"{int(hours)}hr from now"
+                else:
+                    net_time = f"{int(minutes)}min from now"
+            else:
+                days, remainder = divmod(-time_diff.total_seconds(), 86400)
+                hours, remainder = divmod(remainder, 3600)
+                minutes, _ = divmod(remainder, 60)
+                if days > 0:
+                    net_time = f"{int(days)}day {int(hours)}hr {int(minutes)}min ago" if hours or minutes else f"{int(days)} days ago"
+                elif hours > 0:
+                    net_time = f"{int(hours)}hr {int(minutes)}min ago" if minutes else f"{int(hours)}hr ago"
+                else:
+                    net_time = f"{int(minutes)}min ago"
+
+            formatted_onsale_start_with_net_time = f"{formatted_onsale_start} ({net_time})"
             
             # Artist information if available
             artist_info = f"**Artist**: {artist_name}\n" if artist_name else ""
@@ -240,8 +273,8 @@ async def notify_events_task():
                 description=(
                     f"{artist_info}"
                     f"**Event Date**: {formatted_event_date}\n"
-                    f"**Ticket Sale Start Date**: {formatted_onsale_start}\n"
-                    f"**Location**: {city}, {country}"
+                    f"**Ticket Sale Start Date**: {formatted_onsale_start_with_net_time}\n"
+                    f"**Location**: {city}, {state}"
                 ),
                 color=discord.Color.blue()
             )
@@ -251,14 +284,14 @@ async def notify_events_task():
                 embed.set_image(url=image_url)
             
             # Add footer and author details
-            embed.set_footer(text="Don't miss out! Get your tickets now.")
+            embed.set_footer(text="Purchase Tickets Now!")
             
             # Send the embed message to the channel
             await channel.send(embed=embed)
             
             # Mark the event as sent in the database
             c.execute("UPDATE Events SET sentToDiscord = 1 WHERE eventID = ?", (event_id,))
-            conn.commit()    
+            conn.commit()
             
 @bot.event
 async def on_ready():
