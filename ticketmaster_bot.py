@@ -53,7 +53,8 @@ c.execute('''
 CREATE TABLE IF NOT EXISTS Venues (
     venueID TEXT PRIMARY KEY,
     name TEXT,
-    city TEXT
+    city TEXT,
+    country TEXT
 )
 ''')
 
@@ -84,15 +85,14 @@ def ensure_venue_exists(venue_id, venue_name, city):
         c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city) VALUES (?, ?, ?)', (venue_id, venue_name, city))
         conn.commit()
 
-# Adjust store_event to save the url and image_url for each event
 def store_event(event):
     """Store event in the database if not already present."""
     event_id = event['id']
     event_name = event['name']
     event_date = event['dates']['start']['localDate']
     onsale_start = event['sales']['public']['startDateTime']
-    url = event['url']  # Get the event URL
-    
+    url = event['url']  # Event URL from JSON data
+
     # Select a suitable image URL (16:9, at least 1024px wide)
     image_url = None
     for image in event.get('images', []):
@@ -100,16 +100,18 @@ def store_event(event):
             image_url = image['url']
             break
 
-    # Fallback in case no 16:9, 1024px image is found
+    # Fallback if no suitable image is found
     if not image_url and event.get('images'):
         image_url = event['images'][0]['url']  # Use the first available image
 
+    # Venue data
     venue_data = event['_embedded']['venues'][0]
     venue_id = venue_data['id']
     venue_name = venue_data['name']
     venue_city = venue_data['city']['name']
-    
-    # Check if attractions (artists) data is available
+    venue_country = venue_data['country']['name']  # Get country from JSON data
+
+    # Artist data if available
     if 'attractions' in event['_embedded']:
         artist_id = event['_embedded']['attractions'][0]['id']
         artist_name = event['_embedded']['attractions'][0]['name']
@@ -117,11 +119,11 @@ def store_event(event):
         artist_id = None
         artist_name = None
 
-    # Ensure the artist and venue exist
+    # Ensure artist and venue records exist
     ensure_artist_exists(artist_id, artist_name)
-    ensure_venue_exists(venue_id, venue_name, venue_city)
+    ensure_venue_exists(venue_id, venue_name, venue_city, venue_country)
 
-    # Insert the event into the database with all details
+    # Insert event data into the database with all details
     c.execute('''
     INSERT OR IGNORE INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
@@ -129,6 +131,12 @@ def store_event(event):
     
     conn.commit()
 
+def ensure_venue_exists(venue_id, venue_name, city, country):
+    """Ensure the venue exists in the Venues table, including country."""
+    if venue_id is not None:
+        c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city, country) VALUES (?, ?, ?, ?)', (venue_id, venue_name, city, country))
+        conn.commit()
+    
 def fetch_today_events():
     """Fetch events starting sales today from Ticketmaster and add them to the database."""
     today_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -145,10 +153,10 @@ def fetch_today_events():
     while True:
         params = {
             "apikey": TICKETMASTER_API_KEY,
-            "onsaleOnStartDate": today_date,               # Date filter for onsale events
-            "countryCode": "US",                           # Restrict results to the US
-            "size": size,                                  # Maximum results per page
-            "page": page,                                  # Current page number
+            "onsaleOnStartDate": today_date,
+            "countryCode": "US",
+            "size": size,
+            "page": page,
         }
 
         try:
@@ -165,66 +173,33 @@ def fetch_today_events():
             pagination = data.get("page", {})
             total_pages = pagination.get("totalPages", 1)
 
-            # Debugging output for each page
             print(f"Fetching page {page + 1}/{total_pages}, received {len(page_events)} events on this page.")
 
-            # Exit the loop if all pages have been processed
-            if page >= total_pages - 1 or page == 5:  # Adjust page limit if needed
+            if page >= total_pages - 1 or page == 5:
                 break
 
-            # Move to the next page
             page += 1
 
         except requests.exceptions.RequestException as e:
             print(f"Error: {e}")
             break
 
-   # Process and store events, artists, and venues
+    # Process and store events, using `store_event` to ensure consistent insertion
     for event in events:
         event_id = event['id']
+        
         # Check if the event is already in the database
         c.execute("SELECT 1 FROM Events WHERE eventID = ?", (event_id,))
         if c.fetchone():
             already_seen_count += 1
         else:
-            # Process and add artist
-            artist_id = None
-            if 'attractions' in event['_embedded']:
-                artist_data = event['_embedded']['attractions'][0]
-                artist_id = artist_data['id']
-                artist_name = artist_data['name']
-                notable = artist_data.get('classifications', [{}])[0].get('segment', {}).get('name') == 'Notable'
-
-                # Add artist if not in the database
-                c.execute("INSERT OR IGNORE INTO Artists (artistID, name, notable) VALUES (?, ?, ?)", (artist_id, artist_name, notable))
-
-            # Process and add venue
-            venue_data = event['_embedded']['venues'][0]
-            venue_id = venue_data['id']
-            venue_name = venue_data['name']
-            city = venue_data['city']['name']
-
-            # Add venue if not in the database
-            c.execute("INSERT OR IGNORE INTO Venues (venueID, name, city) VALUES (?, ?, ?)", (venue_id, venue_name, city))
-
-            # Process and add event
-            event_name = event['name']
-            event_date = event['dates']['start']['localDate']
-            ticket_onsale_start = event['sales']['public']['startDateTime']
-            last_updated = datetime.now(timezone.utc).isoformat()
-
-            # Add event to the database
-            c.execute('''
-                INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, sentToDiscord, lastUpdated)
-                VALUES (?, ?, ?, ?, ?, ?, 0, ?)
-            ''', (event_id, event_name, artist_id, venue_id, event_date, ticket_onsale_start, last_updated))
-            
+            # Use store_event to insert event details, including URL and image_url
+            store_event(event)
             new_events_count += 1
 
-    # Final debugging output
     print(f"Total events received across all pages: {total_events_received}")
     print(f"Events already seen in the database: {already_seen_count}")
-    print(f"New events added to the database: {new_events_count}")  
+    print(f"New events added to the database: {new_events_count}")
 
 @tasks.loop(minutes=1)
 async def fetch_events_task():
@@ -238,9 +213,11 @@ async def notify_events_task():
     
     # Query events that are ready for notification
     c.execute('''
-    SELECT Events.eventID, Events.name AS event_name, Events.ticketOnsaleStart, Events.eventDate, Events.url, Venues.city, Events.image_url
+    SELECT Events.eventID, Events.name AS event_name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
+           Venues.city, Venues.country, Events.image_url, Artists.name AS artist_name
     FROM Events
-    JOIN Venues ON Events.venueID = Venues.venueID
+    LEFT JOIN Venues ON Events.venueID = Venues.venueID
+    LEFT JOIN Artists ON Events.artistID = Artists.artistID
     WHERE Events.sentToDiscord = 0 AND Events.ticketOnsaleStart <= ?
     ''', (minute_ahead.isoformat(),))
     
@@ -248,12 +225,24 @@ async def notify_events_task():
     channel = bot.get_channel(CHANNEL_ID)
 
     if events_to_notify and channel:
-        for event_id, event_name, onsale_start, event_date, url, city, image_url in events_to_notify:
+        for event_id, event_name, onsale_start, event_date, url, city, country, image_url, artist_name in events_to_notify:
+            # Format event and onsale dates to "Month D, Year" (removing leading zeros)
+            formatted_event_date = datetime.strptime(event_date, "%Y-%m-%d").strftime("%B %-d, %Y")
+            formatted_onsale_start = datetime.strptime(onsale_start, "%Y-%m-%dT%H:%M:%SZ").strftime("%B %-d, %Y")
+            
+            # Artist information if available
+            artist_info = f"**Artist**: {artist_name}\n" if artist_name else ""
+            
             # Create the embed with event details
             embed = discord.Embed(
                 title=event_name,
                 url=url,  # Adds a clickable link to the title
-                description=f"**Date**: {event_date}\n**Onsale Start**: {onsale_start}\n**City**: {city}",
+                description=(
+                    f"{artist_info}"
+                    f"**Event Date**: {formatted_event_date}\n"
+                    f"**Ticket Sale Start Date**: {formatted_onsale_start}\n"
+                    f"**Location**: {city}, {country}"
+                ),
                 color=discord.Color.blue()
             )
             
@@ -269,7 +258,7 @@ async def notify_events_task():
             
             # Mark the event as sent in the database
             c.execute("UPDATE Events SET sentToDiscord = 1 WHERE eventID = ?", (event_id,))
-            conn.commit()
+            conn.commit()    
             
 @bot.event
 async def on_ready():
