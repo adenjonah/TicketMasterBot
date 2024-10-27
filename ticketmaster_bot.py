@@ -3,8 +3,6 @@ from discord.ext import commands, tasks
 import requests
 import os
 import sqlite3
-import pytz
-import asyncio
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 
