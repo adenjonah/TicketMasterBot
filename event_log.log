@@ -1,0 +1,578 @@
+2024-10-29 14:26:34,505 - dbEditor - INFO - Database initialized successfully.
+2024-10-29 14:27:05,225 - dbEditor - INFO - Database initialized successfully.
+2024-10-29 14:27:05,248 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-10-29 14:27:05,249 - discord.client - INFO - logging in using static token
+2024-10-29 14:27:05,851 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 47318c4d3bedafa993c5fe7bfc834d60).
+2024-10-29 14:27:07,855 - main - INFO - Bot connected and task started.
+2024-10-29 14:27:09,095 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:27:09,099 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:27:09,103 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:27:09,107 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:27:09,112 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:27:09,116 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:27:09,120 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:27:09,125 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,129 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,133 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,138 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,142 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,146 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,150 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,155 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,159 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,163 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,168 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,172 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,176 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,180 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,184 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,188 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,193 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,197 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,201 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,205 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,210 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,214 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,218 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,222 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,226 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,230 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,235 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,239 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,243 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,247 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,252 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,256 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,260 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,264 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,269 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,273 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,277 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,281 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,285 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,290 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:27:09,294 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:27:09,298 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:27:09,302 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:27:09,306 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:27:09,310 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:27:09,314 - dbEditor - INFO - Event Dixie National Rodeo Featuring Zach Top added to database.
+2024-10-29 14:27:09,318 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,322 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,327 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,331 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:27:09,335 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,339 - dbEditor - INFO - Event Songs of Hope - A Benefit Concert for Western NC - Raleigh Youth Choir added to database.
+2024-10-29 14:27:09,343 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,348 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,352 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,356 - dbEditor - INFO - Event Tobe Nwigwe: Home is Where the Hood is added to database.
+2024-10-29 14:27:09,360 - dbEditor - INFO - Event PBR: Pendleton Whisky Velocity Tour added to database.
+2024-10-29 14:27:09,364 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,368 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,372 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,376 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:27:09,380 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,385 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,389 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:27:09,394 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,399 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,402 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,407 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,411 - dbEditor - INFO - Event Grand Tasting added to database.
+2024-10-29 14:27:09,415 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:27:09,420 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,424 - dbEditor - INFO - Event Grand Tasting Preview added to database.
+2024-10-29 14:27:09,429 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,433 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:27:09,437 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,442 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,446 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,450 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:27:09,454 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:27:09,459 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,462 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,466 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:27:09,471 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,475 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,480 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,484 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:27:09,489 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:27:09,494 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Purdue University Mens Basketball added to database.
+2024-10-29 14:27:09,498 - dbEditor - INFO - Event Dreamstate Presents: Andrew Bayer added to database.
+2024-10-29 14:27:09,503 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:27:09,508 - dbEditor - INFO - Event Celebrity Chef Dine Around added to database.
+2024-10-29 14:27:09,513 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:27:09,517 - dbEditor - INFO - Event PBR: Pendleton Whisky Velocity Tour added to database.
+2024-10-29 14:27:09,522 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,527 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,531 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Stony Brook Mens Basketball added to database.
+2024-10-29 14:27:09,536 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Butler Bulldogs Men's Basketball added to database.
+2024-10-29 14:27:09,540 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:27:09,545 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Stonehill Men's Basketball added to database.
+2024-10-29 14:27:09,549 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:27:09,554 - dbEditor - INFO - Event New York Golf Club v The Bay Golf Club added to database.
+2024-10-29 14:27:09,558 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Central Michigan Chippewas Men's Basketball added to database.
+2024-10-29 14:27:09,562 - dbEditor - INFO - Event Emo Night Brooklyn added to database.
+2024-10-29 14:27:09,566 - dbEditor - INFO - Event Vintage Cru added to database.
+2024-10-29 14:27:09,570 - dbEditor - INFO - Event Sun Patio Ice Bar Experience added to database.
+2024-10-29 14:27:09,574 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Western Carolina Catamounts Men's Basketball added to database.
+2024-10-29 14:27:09,579 - dbEditor - INFO - Event Broadway Rave added to database.
+2024-10-29 14:27:09,583 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:27:09,588 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Xavier Musketeers Men's Basketball added to database.
+2024-10-29 14:27:09,591 - dbEditor - INFO - Event MASS Presents: Wicked West Halloween Party added to database.
+2024-10-29 14:27:09,595 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:27:09,599 - dbEditor - INFO - Event Falcon Open added to database.
+2024-10-29 14:27:09,603 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:27:09,608 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:27:09,612 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:27:09,616 - dbEditor - INFO - Event Chulita Vinyl Club: Spirits Y Sonidos added to database.
+2024-10-29 14:27:09,620 - dbEditor - INFO - Event Micah Schnabel & Vanessa Jean Speckman added to database.
+2024-10-29 14:27:09,624 - dbEditor - INFO - Event University of Nebraska-Omaha Women's Soccer added to database.
+2024-10-29 14:27:09,629 - dbEditor - INFO - Event Falcon Open added to database.
+2024-10-29 14:27:09,633 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:27:09,637 - dbEditor - INFO - Event Bank of America Presents the NSAI Legislative Series: In The Round with Deric Ruttan. JT Harding & Kaylee Rose added to database.
+2024-10-29 14:27:09,644 - dbEditor - INFO - Event An Evening with Ricky Ray with Rick Lonow added to database.
+2024-10-29 14:27:09,656 - dbEditor - INFO - Event We Live In Time (Open Caption Showing) added to database.
+2024-10-29 14:27:09,661 - dbEditor - INFO - Event  NSAA Volleyball Championships - Wednesday - A, B, C1 - First Round added to database.
+2024-10-29 14:27:09,665 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:27:09,669 - dbEditor - INFO - Event  NSAA Volleyball Championships - Thursday - C2,  D1, D2 - First Round added to database.
+2024-10-29 14:27:09,674 - dbEditor - INFO - Event Club 90s Presents: A Night For Liam 1D Night & Benefit added to database.
+2024-10-29 14:27:09,678 - dbEditor - INFO - Event  NSAA Volleyball Championships - Friday - ALL CLASSES - SEMIFINALS added to database.
+2024-10-29 14:27:09,683 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Howard Bison Mens Basketball added to database.
+2024-10-29 14:27:09,687 - dbEditor - INFO - Event La Maquinaria Norteña, Los Rieleros del Norte y Más en Lincoln added to database.
+2024-10-29 14:27:09,691 - dbEditor - INFO - Event Saturday All Stars Magic and Comedy Show added to database.
+2024-10-29 14:27:09,696 - dbEditor - INFO - Event U2 - Tribute by Hollywood U2 added to database.
+2024-10-29 14:27:09,701 - dbEditor - INFO - Event boylife added to database.
+2024-10-29 14:27:09,705 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Eastern Washington Men's Basketball added to database.
+2024-10-29 14:27:09,709 - dbEditor - INFO - Event ASU Kerr Tuesday Morning Music & Tea- Flyin' Winds added to database.
+2024-10-29 14:27:09,713 - dbEditor - INFO - Event Jarren Blair Presents: The Move feat Brian Brown / Adonis / Natalie Duffy added to database.
+2024-10-29 14:27:09,717 - dbEditor - INFO - Event Mad Drunken Americans / Broke String Burnett (TX) / WT Newton / Pat Reedy added to database.
+2024-10-29 14:27:09,721 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Mississippi Valley State Delta Devils Mens Basketball added to database.
+2024-10-29 14:27:09,725 - dbEditor - INFO - Event Issues (Korn Tribute), T.O.A.D. (System of a Down Tribute), Variant Se added to database.
+2024-10-29 14:27:09,729 - dbEditor - INFO - Event Wisconsin Herd vs. Grand Rapids Gold added to database.
+2024-10-29 14:27:09,733 - dbEditor - INFO - Event UFC 309 PPV Viewing Event added to database.
+2024-10-29 14:27:09,738 - dbEditor - INFO - Event The Western Express added to database.
+2024-10-29 14:27:09,742 - dbEditor - INFO - Event Nihilith / Necrostalker / Porphyria / Deiphage added to database.
+2024-10-29 14:27:09,746 - dbEditor - INFO - Event Wisconsin Herd vs. Grand Rapids Gold added to database.
+2024-10-29 14:27:09,753 - dbEditor - INFO - Event THE MOTHSTORYSLAM at FITZGERALDS: OUTGROWN added to database.
+2024-10-29 14:27:09,758 - dbEditor - INFO - Event Wisconsin Herd vs. Sioux Falls Skyforce added to database.
+2024-10-29 14:27:09,762 - dbEditor - INFO - Event US Army Jazz Ambassadors added to database.
+2024-10-29 14:27:09,766 - dbEditor - INFO - Event GUARDIN, Kennedyxoxo added to database.
+2024-10-29 14:27:09,770 - dbEditor - INFO - Event 3-DAY - SKYBOX added to database.
+2024-10-29 14:27:09,774 - dbEditor - INFO - Event 3-DAY - SKYBOX added to database.
+2024-10-29 14:27:09,778 - dbEditor - INFO - Event Troy Weekes, Hannah Ray, Autumn Jones, and Lauren Minear, plus a DJ after-party! added to database.
+2024-10-29 14:27:09,782 - dbEditor - INFO - Event Classic Stadium Tour added to database.
+2024-10-29 14:27:09,786 - dbEditor - INFO - Event Classic Stadium Tour added to database.
+2024-10-29 14:27:09,790 - dbEditor - INFO - Event Autumn Festival: An Arts & Crafts Affair added to database.
+2024-10-29 14:27:09,794 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Pacific Tigers Men's Basketball added to database.
+2024-10-29 14:27:09,798 - dbEditor - INFO - Event Mike Mains, Young Mister added to database.
+2024-10-29 14:27:09,802 - dbEditor - INFO - Event Vegas Race Watch Party added to database.
+2024-10-29 14:27:09,806 - dbEditor - INFO - Event Dom's 50th Bday Bash added to database.
+2024-10-29 14:27:09,810 - dbEditor - INFO - Event Boston Bands Bash: The Boston Betas added to database.
+2024-10-29 14:27:09,814 - dbEditor - INFO - Event Rival FC added to database.
+2024-10-29 14:27:09,818 - dbEditor - INFO - Event Autumn Festival: An Arts & Crafts Affair added to database.
+2024-10-29 14:27:09,822 - dbEditor - INFO - Event Iowa All State Music Festival added to database.
+2024-10-29 14:27:09,826 - dbEditor - INFO - Event Willie Barcena (Early Show) added to database.
+2024-10-29 14:27:09,830 - dbEditor - INFO - Event Willie Barcena (Late Show) added to database.
+2024-10-29 14:27:09,834 - dbEditor - INFO - Event Autumn Festival: An Arts & Crafts Affair added to database.
+2024-10-29 14:27:09,839 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Arkansas-Pine Bluff Golden Lions added to database.
+2024-10-29 14:27:09,843 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Lindenwood Lions Men's Basketball added to database.
+2024-10-29 14:27:09,847 - dbEditor - INFO - Event Cropduster 4 added to database.
+2024-10-29 14:27:09,851 - dbEditor - INFO - Event YeeDC! Country x EDM added to database.
+2024-10-29 14:27:09,855 - dbEditor - INFO - Event Ford Holiday River Parade & Lighting Ceremony added to database.
+2024-10-29 14:27:09,859 - dbEditor - INFO - Event Wisconsin Herd vs Iowa Wolves added to database.
+2024-10-29 14:27:09,863 - dbEditor - INFO - Event Knoxville Firefighters Association Benefit Concert - David Nail added to database.
+2024-10-29 14:27:09,868 - dbEditor - INFO - Event CLUB KARMA - 18+ added to database.
+2024-10-29 14:27:09,872 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:27:09,876 - dbEditor - INFO - Event Wisconsin Herd vs. Iowa Wolves added to database.
+2024-10-29 14:27:09,880 - dbEditor - INFO - Event Leftover Crack added to database.
+2024-10-29 14:27:09,884 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:27:09,889 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Georgetown Hoyas Men's Basketball added to database.
+2024-10-29 14:27:09,893 - dbEditor - INFO - Event Adam Pally And Dave Hill added to database.
+2024-10-29 14:27:09,897 - dbEditor - INFO - Event Ghalia Volt added to database.
+2024-10-29 14:27:09,901 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. California Golden Bears Mens Basketball added to database.
+2024-10-29 14:27:09,905 - dbEditor - INFO - Event The Bathroom Poets, Sweet Piece, Shadow Pattern added to database.
+2024-10-29 14:27:09,909 - dbEditor - INFO - Event Clock-Out Lounge Presents: Toy Drive (bring a new unwrapped toy) feat. Swamp Wife, Miscomings,  Having Issues added to database.
+2024-10-29 14:27:09,913 - dbEditor - INFO - Event South of 80 added to database.
+2024-10-29 14:27:09,917 - dbEditor - INFO - Event ROOT SHOCK w/s/g Ruha added to database.
+2024-10-29 14:27:09,921 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:27:09,925 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:27:09,930 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Creighton Bluejays Men's Basketball added to database.
+2024-10-29 14:27:09,934 - dbEditor - INFO - Event WHY ARE YOU SINGLE? A GAME SHOW WITH MARIE FAUSTIN added to database.
+2024-10-29 14:27:09,938 - dbEditor - INFO - Event Wisconsin Herd vs. Motor City Cruise added to database.
+2024-10-29 14:27:09,942 - dbEditor - INFO - Event D*ck the B*lls Hosted by Brittany Carney added to database.
+2024-10-29 14:27:09,946 - dbEditor - INFO - Event Ej Speaks added to database.
+2024-10-29 14:27:09,949 - main - INFO - Fetched today's events.
+2024-10-29 14:27:10,311 - query - INFO - Notified Discord about event: Jarren Blair Presents: The Move feat Brian Brown / Adonis / Natalie Duffy
+2024-10-29 14:27:10,477 - query - INFO - Notified Discord about event: MASS Presents: Wicked West Halloween Party
+2024-10-29 14:27:10,645 - query - INFO - Notified Discord about event: Saturday All Stars Magic and Comedy Show
+2024-10-29 14:27:10,762 - query - INFO - Notified Discord about event: Willie Barcena (Late Show)
+2024-10-29 14:27:15,125 - query - INFO - Notified Discord about event: The Bathroom Poets, Sweet Piece, Shadow Pattern
+2024-10-29 14:27:15,293 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:15,468 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:15,601 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:16,007 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:20,294 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:20,450 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:20,633 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:20,744 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:20,967 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:25,494 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:25,621 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:25,733 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:25,953 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:26,089 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:30,619 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:30,724 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:30,887 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:31,000 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:31,152 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:35,810 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:36,024 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:36,143 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:36,300 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:36,430 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:40,935 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:41,136 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:41,280 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:41,455 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:41,570 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:46,058 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:46,285 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:46,449 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:46,598 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:46,782 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:51,252 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:51,502 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:51,605 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:51,734 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:51,857 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:56,410 - query - INFO - Notified Discord about event: Hamilton (NY)
+2024-10-29 14:27:56,577 - query - INFO - Notified Discord about event: Les Miserables (Touring)
+2024-10-29 14:27:56,681 - query - INFO - Notified Discord about event: Les Miserables (Touring)
+2024-10-29 14:27:56,824 - query - INFO - Notified Discord about event: Les Miserables (Touring)
+2024-10-29 14:27:56,935 - query - INFO - Notified Discord about event: Les Miserables (Touring)
+2024-10-29 14:28:01,558 - query - INFO - Notified Discord about event: Les Miserables (Touring)
+2024-10-29 14:28:01,716 - query - INFO - Notified Discord about event: Les Miserables (Touring)
+2024-10-29 14:28:01,836 - query - INFO - Notified Discord about event: Les Miserables (Touring)
+2024-10-29 14:28:01,989 - query - INFO - Notified Discord about event: Ej Speaks
+2024-10-29 14:28:02,111 - query - INFO - Notified Discord about event: Bank of America Presents the NSAI Legislative Series: In The Round with Deric Ruttan. JT Harding & Kaylee Rose
+2024-10-29 14:28:06,777 - query - INFO - Notified Discord about event: An Evening with Ricky Ray with Rick Lonow
+2024-10-29 14:28:07,026 - query - INFO - Notified Discord about event: Disney On Ice presents Into the Magic
+2024-10-29 14:28:07,203 - query - INFO - Notified Discord about event: Disney On Ice presents Into the Magic
+2024-10-29 14:28:07,314 - query - INFO - Notified Discord about event: Disney On Ice presents Into the Magic
+2024-10-29 14:28:07,542 - query - INFO - Notified Discord about event: Disney On Ice presents Into the Magic
+2024-10-29 14:28:11,966 - query - INFO - Notified Discord about event: Disney On Ice presents Into the Magic
+2024-10-29 14:28:12,112 - query - INFO - Notified Discord about event: Disney On Ice presents Into the Magic
+2024-10-29 14:28:12,217 - query - INFO - Notified Discord about event: Disney On Ice presents Into the Magic
+2024-10-29 14:28:12,483 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:12,603 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:17,133 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:17,277 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:17,431 - query - INFO - Notified Discord about event: Songs of Hope - A Benefit Concert for Western NC - Raleigh Youth Choir
+2024-10-29 14:28:17,539 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:28:17,669 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:22,310 - query - INFO - Notified Discord about event: PBR: Pendleton Whisky Velocity Tour
+2024-10-29 14:28:22,467 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:28:22,664 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:22,823 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:22,938 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:28:27,447 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:27,584 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:27,749 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:27,959 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:28,106 - query - INFO - Notified Discord about event: Grand Tasting
+2024-10-29 14:28:32,627 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:28:32,758 - query - INFO - Notified Discord about event: Grand Tasting Preview
+2024-10-29 14:28:32,895 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:33,055 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:28:33,213 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:37,996 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:38,134 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:38,438 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:28:38,606 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:38,822 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:43,132 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:43,277 - query - INFO - Notified Discord about event: Celebrity Chef Dine Around
+2024-10-29 14:28:43,436 - query - INFO - Notified Discord about event: PBR: Pendleton Whisky Velocity Tour
+2024-10-29 14:28:43,581 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:43,697 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:48,308 - query - INFO - Notified Discord about event: Disney On Ice presents Mickey's Search Party
+2024-10-29 14:28:48,493 - query - INFO - Notified Discord about event: New York Golf Club v The Bay Golf Club
+2024-10-29 14:28:48,626 - query - INFO - Notified Discord about event: Vintage Cru
+2024-10-29 14:28:48,752 - query - INFO - Notified Discord about event: Sun Patio Ice Bar Experience
+2024-10-29 14:28:48,932 - query - INFO - Notified Discord about event: Broadway Rave
+2024-10-29 14:28:53,483 - query - INFO - Notified Discord about event: U2 - Tribute by Hollywood U2
+2024-10-29 14:28:53,629 - query - INFO - Notified Discord about event: The Polar Express - IMAX 3d Experience
+2024-10-29 14:28:53,855 - query - INFO - Notified Discord about event: The Polar Express - IMAX 3d Experience
+2024-10-29 14:28:54,029 - query - INFO - Notified Discord about event: Ghalia Volt
+2024-10-29 14:28:54,176 - query - INFO - Notified Discord about event: The Polar Express - IMAX 3d Experience
+2024-10-29 14:28:58,636 - query - INFO - Notified Discord about event: The Polar Express - IMAX 3d Experience
+2024-10-29 14:28:58,755 - query - INFO - Notified Discord about event: D*ck the B*lls Hosted by Brittany Carney
+2024-10-29 14:28:58,883 - query - INFO - Notified Discord about event: Troy Weekes, Hannah Ray, Autumn Jones, and Lauren Minear, plus a DJ after-party!
+2024-10-29 14:28:59,055 - query - INFO - Notified Discord about event: Monster Jam
+2024-10-29 14:28:59,190 - query - INFO - Notified Discord about event: Monster Jam
+2024-10-29 14:29:03,796 - query - INFO - Notified Discord about event: Monster Jam
+2024-10-29 14:29:04,027 - query - INFO - Notified Discord about event: Monster Jam
+2024-10-29 14:29:04,203 - query - INFO - Notified Discord about event: Monster Jam
+2024-10-29 14:29:04,387 - query - INFO - Notified Discord about event: Dixie National Rodeo Featuring Zach Top
+2024-10-29 14:29:04,524 - query - INFO - Notified Discord about event: Disney On Ice presents Magic in the Stars
+2024-10-29 14:29:08,948 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:29:09,122 - query - INFO - Notified Discord about event: Disney On Ice presents Magic in the Stars
+2024-10-29 14:29:09,249 - query - INFO - Notified Discord about event: Disney On Ice presents Magic in the Stars
+2024-10-29 14:29:09,380 - query - INFO - Notified Discord about event: Disney On Ice presents Magic in the Stars
+2024-10-29 14:29:09,516 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:29:14,122 - query - INFO - Notified Discord about event: Disney On Ice presents Magic in the Stars
+2024-10-29 14:29:14,238 - query - INFO - Notified Discord about event: Disney On Ice presents Magic in the Stars
+2024-10-29 14:29:14,394 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Purdue University Mens Basketball
+2024-10-29 14:29:14,611 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Stony Brook Mens Basketball
+2024-10-29 14:29:14,834 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Butler Bulldogs Men's Basketball
+2024-10-29 14:29:19,273 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Stonehill Men's Basketball
+2024-10-29 14:29:19,433 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Central Michigan Chippewas Men's Basketball
+2024-10-29 14:29:19,553 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Western Carolina Catamounts Men's Basketball
+2024-10-29 14:29:19,695 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Xavier Musketeers Men's Basketball
+2024-10-29 14:29:19,802 - query - INFO - Notified Discord about event: Falcon Open
+2024-10-29 14:29:24,438 - query - INFO - Notified Discord about event: Chulita Vinyl Club: Spirits Y Sonidos
+2024-10-29 14:29:24,609 - query - INFO - Notified Discord about event: Falcon Open
+2024-10-29 14:29:24,787 - query - INFO - Notified Discord about event: Club 90s Presents: A Night For Liam 1D Night & Benefit
+2024-10-29 14:29:24,914 - query - INFO - Notified Discord about event: Mizzou Tigers Men's Basketball vs. Howard Bison Mens Basketball
+2024-10-29 14:29:34,552 - dbEditor - INFO - Database initialized successfully.
+2024-10-29 14:29:34,573 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-10-29 14:29:34,575 - discord.client - INFO - logging in using static token
+2024-10-29 14:29:35,203 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: b694e4d6c70283e4e5e6225adcb75145).
+2024-10-29 14:29:37,208 - main - INFO - Bot connected and task started.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Disney On Ice presents Into the Magic added to database.
+2024-10-29 14:29:38,443 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,444 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,445 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,446 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Hamilton (NY) added to database.
+2024-10-29 14:29:38,447 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Monster Jam added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Dixie National Rodeo Featuring Zach Top added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:29:38,448 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Songs of Hope - A Benefit Concert for Western NC - Raleigh Youth Choir added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Tobe Nwigwe: Home is Where the Hood is added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event PBR: Pendleton Whisky Velocity Tour added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:29:38,449 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,450 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,450 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:29:38,450 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,450 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,450 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Grand Tasting added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Grand Tasting Preview added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,451 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,452 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Disney On Ice presents Magic in the Stars added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Purdue University Mens Basketball added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Dreamstate Presents: Andrew Bayer added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Celebrity Chef Dine Around added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event PBR: Pendleton Whisky Velocity Tour added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,453 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Stony Brook Mens Basketball added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Butler Bulldogs Men's Basketball added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Disney On Ice presents Mickey's Search Party added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Stonehill Men's Basketball added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event New York Golf Club v The Bay Golf Club added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Central Michigan Chippewas Men's Basketball added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Emo Night Brooklyn added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Vintage Cru added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Sun Patio Ice Bar Experience added to database.
+2024-10-29 14:29:38,454 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Western Carolina Catamounts Men's Basketball added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event Broadway Rave added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event Les Miserables (Touring) added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Xavier Musketeers Men's Basketball added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event MASS Presents: Wicked West Halloween Party added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event Falcon Open added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:29:38,455 - dbEditor - INFO - Event Chulita Vinyl Club: Spirits Y Sonidos added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event Micah Schnabel & Vanessa Jean Speckman added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event University of Nebraska-Omaha Women's Soccer added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event Falcon Open added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event Bank of America Presents the NSAI Legislative Series: In The Round with Deric Ruttan. JT Harding & Kaylee Rose added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event An Evening with Ricky Ray with Rick Lonow added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event We Live In Time (Open Caption Showing) added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event  NSAA Volleyball Championships - Wednesday - A, B, C1 - First Round added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event We Live In Time added to database.
+2024-10-29 14:29:38,456 - dbEditor - INFO - Event  NSAA Volleyball Championships - Thursday - C2,  D1, D2 - First Round added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event Club 90s Presents: A Night For Liam 1D Night & Benefit added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event  NSAA Volleyball Championships - Friday - ALL CLASSES - SEMIFINALS added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Howard Bison Mens Basketball added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event La Maquinaria Norteña, Los Rieleros del Norte y Más en Lincoln added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event Saturday All Stars Magic and Comedy Show added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event U2 - Tribute by Hollywood U2 added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event boylife added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Eastern Washington Men's Basketball added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event ASU Kerr Tuesday Morning Music & Tea- Flyin' Winds added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event Jarren Blair Presents: The Move feat Brian Brown / Adonis / Natalie Duffy added to database.
+2024-10-29 14:29:38,457 - dbEditor - INFO - Event Mad Drunken Americans / Broke String Burnett (TX) / WT Newton / Pat Reedy added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Mississippi Valley State Delta Devils Mens Basketball added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event Issues (Korn Tribute), T.O.A.D. (System of a Down Tribute), Variant Se added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event Wisconsin Herd vs. Grand Rapids Gold added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event UFC 309 PPV Viewing Event added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event The Western Express added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event Nihilith / Necrostalker / Porphyria / Deiphage added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event Wisconsin Herd vs. Grand Rapids Gold added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event THE MOTHSTORYSLAM at FITZGERALDS: OUTGROWN added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event Wisconsin Herd vs. Sioux Falls Skyforce added to database.
+2024-10-29 14:29:38,458 - dbEditor - INFO - Event US Army Jazz Ambassadors added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event GUARDIN, Kennedyxoxo added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event 3-DAY - SKYBOX added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event 3-DAY - SKYBOX added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event Troy Weekes, Hannah Ray, Autumn Jones, and Lauren Minear, plus a DJ after-party! added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event Classic Stadium Tour added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event Classic Stadium Tour added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event Autumn Festival: An Arts & Crafts Affair added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Pacific Tigers Men's Basketball added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event Mike Mains, Young Mister added to database.
+2024-10-29 14:29:38,459 - dbEditor - INFO - Event Vegas Race Watch Party added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Dom's 50th Bday Bash added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Boston Bands Bash: The Boston Betas added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Rival FC added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Autumn Festival: An Arts & Crafts Affair added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Iowa All State Music Festival added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Willie Barcena (Early Show) added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Willie Barcena (Late Show) added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Autumn Festival: An Arts & Crafts Affair added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Arkansas-Pine Bluff Golden Lions added to database.
+2024-10-29 14:29:38,460 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. Lindenwood Lions Men's Basketball added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event Cropduster 4 added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event YeeDC! Country x EDM added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event Ford Holiday River Parade & Lighting Ceremony added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event Wisconsin Herd vs Iowa Wolves added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event Knoxville Firefighters Association Benefit Concert - David Nail added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event CLUB KARMA - 18+ added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event Wisconsin Herd vs. Iowa Wolves added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event Leftover Crack added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:29:38,461 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Georgetown Hoyas Men's Basketball added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event Adam Pally And Dave Hill added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event Ghalia Volt added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event Mizzou Tigers Men's Basketball vs. California Golden Bears Mens Basketball added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event The Bathroom Poets, Sweet Piece, Shadow Pattern added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event Clock-Out Lounge Presents: Toy Drive (bring a new unwrapped toy) feat. Swamp Wife, Miscomings,  Having Issues added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event South of 80 added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event ROOT SHOCK w/s/g Ruha added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event The Polar Express - IMAX 3d Experience added to database.
+2024-10-29 14:29:38,462 - dbEditor - INFO - Event Marquette Golden Eagles Men's Basketball vs. Creighton Bluejays Men's Basketball added to database.
+2024-10-29 14:29:38,463 - dbEditor - INFO - Event WHY ARE YOU SINGLE? A GAME SHOW WITH MARIE FAUSTIN added to database.
+2024-10-29 14:29:38,463 - dbEditor - INFO - Event Wisconsin Herd vs. Motor City Cruise added to database.
+2024-10-29 14:29:38,463 - dbEditor - INFO - Event D*ck the B*lls Hosted by Brittany Carney added to database.
+2024-10-29 14:29:38,463 - dbEditor - INFO - Event Ej Speaks added to database.
+2024-10-29 14:29:38,466 - main - INFO - Fetched today's events.
+2024-10-29 14:29:38,576 - query - INFO - Notified Discord about event: Mizzou Tigers Men's Basketball vs. Eastern Washington Men's Basketball
+2024-10-29 14:29:38,829 - query - INFO - Notified Discord about event: Mizzou Tigers Men's Basketball vs. Mississippi Valley State Delta Devils Mens Basketball
+2024-10-29 14:29:38,987 - query - INFO - Notified Discord about event: US Army Jazz Ambassadors
+2024-10-29 14:29:39,124 - query - INFO - Notified Discord about event: Autumn Festival: An Arts & Crafts Affair
+2024-10-29 14:29:43,635 - query - INFO - Notified Discord about event: Mizzou Tigers Men's Basketball vs. Pacific Tigers Men's Basketball
+2024-10-29 14:29:43,756 - query - INFO - Notified Discord about event: Autumn Festival: An Arts & Crafts Affair
+2024-10-29 14:29:43,857 - commandHandler - INFO - Sent log tail to Discord.
+2024-10-29 14:29:43,875 - query - INFO - Notified Discord about event: Iowa All State Music Festival
+2024-10-29 14:29:44,025 - query - INFO - Notified Discord about event: Autumn Festival: An Arts & Crafts Affair
+2024-10-29 14:29:48,781 - query - INFO - Notified Discord about event: Mizzou Tigers Men's Basketball vs. Arkansas-Pine Bluff Golden Lions
+2024-10-29 14:29:48,930 - query - INFO - Notified Discord about event: Mizzou Tigers Men's Basketball vs. Lindenwood Lions Men's Basketball
+2024-10-29 14:29:49,062 - query - INFO - Notified Discord about event: Cropduster 4
+2024-10-29 14:29:49,229 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Georgetown Hoyas Men's Basketball
+2024-10-29 14:29:49,357 - query - INFO - Notified Discord about event: Mizzou Tigers Men's Basketball vs. California Golden Bears Mens Basketball
+2024-10-29 14:29:53,932 - query - INFO - Notified Discord about event: South of 80
+2024-10-29 14:29:54,068 - query - INFO - Notified Discord about event: ROOT SHOCK w/s/g Ruha
+2024-10-29 14:29:54,235 - query - INFO - Notified Discord about event: Marquette Golden Eagles Men's Basketball vs. Creighton Bluejays Men's Basketball
+2024-10-29 14:29:54,398 - query - INFO - Notified Discord about event: Nihilith / Necrostalker / Porphyria / Deiphage
+2024-10-29 14:29:54,546 - query - INFO - Notified Discord about event: Mad Drunken Americans / Broke String Burnett (TX) / WT Newton / Pat Reedy
+2024-10-29 14:29:59,083 - query - INFO - Notified Discord about event: Boston Bands Bash: The Boston Betas
+2024-10-29 14:29:59,197 - query - INFO - Notified Discord about event: Emo Night Brooklyn
+2024-10-29 14:29:59,400 - query - INFO - Notified Discord about event: La Maquinaria Norteña, Los Rieleros del Norte y Más en Lincoln
+2024-10-29 14:29:59,536 - query - INFO - Notified Discord about event: Knoxville Firefighters Association Benefit Concert - David Nail
+2024-10-29 14:29:59,665 - query - INFO - Notified Discord about event: Leftover Crack
+2024-10-29 14:30:04,214 - query - INFO - Notified Discord about event: Issues (Korn Tribute), T.O.A.D. (System of a Down Tribute), Variant Se
+2024-10-29 14:30:04,367 - query - INFO - Notified Discord about event: GUARDIN, Kennedyxoxo
+2024-10-29 14:30:04,501 - query - INFO - Notified Discord about event: Tobe Nwigwe: Home is Where the Hood is
+2024-10-29 14:30:04,757 - query - INFO - Notified Discord about event: Tobe Nwigwe: HOME IS WHERE THE HOOD IS TOUR
+2024-10-29 14:30:04,941 - query - INFO - Notified Discord about event: Dreamstate Presents: Andrew Bayer
+2024-10-29 14:30:09,355 - query - INFO - Notified Discord about event: University of Nebraska-Omaha Women's Soccer
+2024-10-29 14:30:09,551 - query - INFO - Notified Discord about event: Wisconsin Herd vs. Grand Rapids Gold
+2024-10-29 14:30:09,668 - query - INFO - Notified Discord about event: UFC 309 PPV Viewing Event
+2024-10-29 14:30:09,788 - query - INFO - Notified Discord about event: The Western Express
+2024-10-29 14:30:09,981 - query - INFO - Notified Discord about event: Wisconsin Herd vs. Grand Rapids Gold
