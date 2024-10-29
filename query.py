@@ -3,10 +3,12 @@ import discord
 import logging
 from datetime import datetime, timezone, timedelta
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, filename="event_log.log", filemode="a",
-                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-logger = logging.getLogger("query")
+# Set up message-specific logging
+message_logger = logging.getLogger("messageLogger")
+message_logger.setLevel(logging.INFO)
+message_handler = logging.FileHandler("message_log.log")
+message_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+message_logger.addHandler(message_handler)
 
 conn = sqlite3.connect('events.db')
 c = conn.cursor()
@@ -37,7 +39,7 @@ async def notify_events(bot, channel_id):
             if event[7]:
                 embed.set_image(url=event[7])
             await channel.send(embed=embed)
-            logger.info(f"Notified Discord about event: {event[1]}")
+            message_logger.info(f"Notified Discord about event: {event[1]}")
 
             c.execute("UPDATE Events SET sentToDiscord = 1 WHERE eventID = ?", (event[0],))
             conn.commit()

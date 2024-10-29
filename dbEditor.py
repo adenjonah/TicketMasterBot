@@ -9,10 +9,12 @@ from dotenv import load_dotenv
 load_dotenv()
 TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
 
-# Set up logging
-logging.basicConfig(level=logging.INFO, filename="event_log.log", filemode="a",
-                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-logger = logging.getLogger("dbEditor")
+# Set up database-specific logging
+db_logger = logging.getLogger("dbLogger")
+db_logger.setLevel(logging.INFO)
+db_handler = logging.FileHandler("db_log.log")
+db_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+db_logger.addHandler(db_handler)
 
 # Connect to SQLite
 conn = sqlite3.connect('events.db')
@@ -47,7 +49,7 @@ def initialize_db():
         notable BOOLEAN
     )''')
     conn.commit()
-    logger.info("Database initialized successfully.")
+    db_logger.info("Database initialized successfully.")
 
 def fetch_today_events():
     """Fetches events from Ticketmaster and updates the database."""
@@ -73,7 +75,7 @@ def fetch_today_events():
         for event in events:
             store_event(event)
     except requests.exceptions.RequestException as e:
-        logger.error(f"Error fetching events: {e}")
+        db_logger.error(f"Error fetching events: {e}")
 
 def store_event(event):
     """Stores a new event in the database if not already present."""
@@ -97,6 +99,4 @@ def store_event(event):
     c.execute('INSERT OR IGNORE INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)',
               (event_id, event_name, artist_id, venue_id, event_date, onsale_start, url, image_url, datetime.now(timezone.utc).isoformat()))
     conn.commit()
-    logger.info(f"Event {event_name} added to database.")
-
-initialize_db()
+    db_logger.info(f"Event '{event_name}' added to database.")
