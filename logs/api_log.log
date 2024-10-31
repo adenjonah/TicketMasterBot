@@ -192,3 +192,8 @@
 2024-10-31 14:24:43,454 - INFO - Page 4: Total possible events = 764, Received = 167, New events added = 0
 2024-10-31 14:24:43,454 - INFO - Completed fetching events. Total possible events = 764, Total new events added = 0
 2024-10-31 14:25:20,782 - INFO - Completed fetching events. Total possible events = 0, Total new events added = 0
+2024-10-31 14:53:33,221 - INFO - Page 1: Total possible events = 764, Received = 199, New events added = 0
+2024-10-31 14:53:34,565 - INFO - Page 2: Total possible events = 764, Received = 199, New events added = 0
+2024-10-31 14:53:35,980 - INFO - Page 3: Total possible events = 764, Received = 199, New events added = 0
+2024-10-31 14:53:37,413 - INFO - Page 4: Total possible events = 764, Received = 167, New events added = 0
+2024-10-31 14:53:37,413 - INFO - Completed fetching events. Total possible events = 764, Total new events added = 0

@@ -98,8 +98,8 @@ async def api_log(ctx):
 async def send_log_tail(ctx, log_file, title):
     """Helper function to send the last 20 lines of a log file as an embedded message."""
     try:
-        # Read the last 20 lines of the log file
-        with open(log_file, "r") as file:
+        # Read the last 20 lines of the log file, ignoring errors
+        with open(log_file, "r", encoding="utf-8", errors="ignore") as file:
             log_tail = ''.join(deque(file, maxlen=20))
 
         # Send as an embedded message with code block formatting
