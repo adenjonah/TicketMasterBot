@@ -22,7 +22,23 @@ LOG_FILES = {
 conn = sqlite3.connect('events.db')
 c = conn.cursor()
 
-@bot.command(name="help", help="Shows all available commands with summaries")
+import discord
+from discord.ext import commands
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, filename="event_log.log", filemode="a",
+                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logger = logging.getLogger("commandHandler")
+
+# Set up intents
+intents = discord.Intents.default()
+intents.message_content = True
+
+# Initialize bot with intents
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+@bot.command(name="commands", help="Shows all available commands with summaries")
 async def custom_help(ctx):
     """Sends an embedded help message listing all available commands."""
     help_text = (
@@ -31,7 +47,7 @@ async def custom_help(ctx):
         "**!dblog** - Displays the last 20 lines of the database log.\n"
         "**!messagelog** - Displays the last 20 lines of the message log.\n"
         "**!addNotableArtist <artist_id>** - Adds or marks an artist as notable by their ID.\n"
-        "**!help** - Shows this help message with summaries of all commands."
+        "**!commands** - Shows this help message with summaries of all commands."
     )
 
     embed = discord.Embed(
@@ -40,6 +56,8 @@ async def custom_help(ctx):
         color=discord.Color.green()
     )
     await ctx.send(embed=embed)
+    logger.info("Sent help message to Discord.")
+
 
 @bot.command(name="eventlog", help="Displays the last 20 lines of the event log")
 async def event_log(ctx):
