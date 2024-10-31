@@ -48,8 +48,12 @@ async def fetch_and_notify_events():
 
 @bot.event
 async def on_ready():
-    fetch_and_notify_events.start()
-    event_logger.info("Bot connected and task started.")
+    # Check if the task is already running
+    if not fetch_and_notify_events.is_running():
+        fetch_and_notify_events.start()
+        event_logger.info("Bot connected and task started.")
+    else:
+        event_logger.info("Bot reconnected; fetch_and_notify_events task is already running.")
 
 if __name__ == "__main__":
     bot.run(DISCORD_BOT_TOKEN)
