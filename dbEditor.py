@@ -4,10 +4,12 @@ import logging
 from datetime import datetime, timezone
 import os
 from dotenv import load_dotenv
+import discord
 
 # Load environment variables
 load_dotenv()
 TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
+DISCORD_CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID"))
 
 # Set up database-specific logging
 db_logger = logging.getLogger("dbLogger")
@@ -87,8 +89,8 @@ def initialize_db():
         db_logger.error("File artist_ids.txt not found.")
 
 
-def fetch_events():
-    """Fetches up to 5 pages of events from Ticketmaster using specified filters and updates the database."""
+async def fetch_events(bot, channel_id):
+    """Fetches events from Ticketmaster and handles errors by sending messages to Discord."""
     current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
@@ -119,6 +121,12 @@ def fetch_events():
             if page == 0:
                 # Set total events available only on the first page request
                 total_events_available = data.get("page", {}).get("totalElements", 0)
+                
+                # Stop fetching if there are too many events
+                if total_events_available > 999:
+                    error_message = "⚠️ Error: Total events available exceed 999. Stopping further requests."
+                    await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
+                    return  # Stop further processing
 
             events = data.get("_embedded", {}).get("events", [])
             received_events_count = len(events)
@@ -139,8 +147,9 @@ def fetch_events():
                 break
 
         except requests.exceptions.RequestException as e:
-            api_logger.error(f"Error fetching events on page {page + 1}: {e}")
-            break
+            error_message = f"⚠️ Error fetching events on page {page + 1}: {e}"
+            await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
+            break  # Stop further processing on error
 
         # Move to the next page
         page += 1
@@ -148,6 +157,19 @@ def fetch_events():
     # Log the final summary after fetching all pages
     api_logger.info(f"Completed fetching events. Total possible events = {total_events_available}, "
                     f"Total new events added = {total_new_events}")
+
+
+async def notify_discord_error(bot, channel_id, error_message):
+    """Send an error notification to a Discord channel."""
+    channel = bot.get_channel(channel_id)
+    if channel:
+        embed = discord.Embed(
+            title="Error Notification",
+            description=error_message,
+            color=discord.Color.red()
+        )
+        await channel.send(embed=embed)
+    api_logger.error(error_message)
 
 def store_event(event):
     """Stores a new event in the database if not already present, and ensures venue and artist data are updated."""

@@ -198,6 +198,10 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
         sale_start = datetime.strptime(event[2], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
         time_remaining = sale_start - datetime.now(timezone.utc)
 
+        # Only proceed if time remaining is non-negative
+        if time_remaining.total_seconds() < 0:
+            continue
+
         # Format the time until sale starts
         if time_remaining.total_seconds() < 3600:
             # Less than an hour away
@@ -218,7 +222,7 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
         if total_length + len(event_line) > max_description_length:
             # Send current embed and reset
             embed = discord.Embed(
-                title=f"Next Notable Events with Upcoming Ticket Sales",
+                title="Next Notable Events with Upcoming Ticket Sales",
                 description="".join(message_lines),
                 color=discord.Color.blue()
             )
@@ -233,7 +237,7 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
     # Send remaining lines if any
     if message_lines:
         embed = discord.Embed(
-            title=f"Next Notable Events with Upcoming Ticket Sales",
+            title="Next Notable Events with Upcoming Ticket Sales",
             description="".join(message_lines),
             color=discord.Color.blue()
         )
