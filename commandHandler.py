@@ -3,6 +3,7 @@ from discord.ext import commands
 import sqlite3
 import logging
 from collections import deque
+from datetime import datetime, timedelta, timezone
 
 # Set up intents
 intents = discord.Intents.default()
@@ -113,3 +114,57 @@ async def add_notable_artist(ctx, artist_id: str):
     except Exception as e:
         await ctx.send("Error adding or updating notable artist.")
         logging.getLogger("dbLogger").error(f"Failed to add/update notable artist {artist_id}: {e}")
+
+@bot.command(name="next", help="Shows a list of the next notable events with ticket sales starting soon.")
+async def next_events(ctx, number: int = 5):  # Default to 5 if no number is provided
+    # Cap the number to 50
+    number = min(number, 50)
+
+    # Fetch the next `number` notable events sorted by ticket onsale start date
+    c.execute('''
+        SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
+               Venues.city, Venues.state, Artists.name
+        FROM Events
+        LEFT JOIN Venues ON Events.venueID = Venues.venueID
+        LEFT JOIN Artists ON Events.artistID = Artists.artistID
+        WHERE Artists.notable = 1 AND Events.ticketOnsaleStart >= datetime('now')
+        ORDER BY Events.ticketOnsaleStart ASC
+        LIMIT ?
+    ''', (number,))
+
+    notable_events = c.fetchall()
+
+    if not notable_events:
+        await ctx.send("No upcoming notable events with ticket sales starting soon.")
+        return
+
+    # Prepare the message format
+    message_lines = []
+    for idx, event in enumerate(notable_events, start=1):
+        # Parse the ticket sale start time as an aware datetime in UTC
+        sale_start = datetime.strptime(event[2], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        time_remaining = sale_start - datetime.now(timezone.utc)
+
+        # Format the time until sale starts
+        if time_remaining.total_seconds() < 3600:
+            # Less than an hour away
+            time_str = f"in {int(time_remaining.total_seconds() // 60)} minutes"
+        elif time_remaining.total_seconds() < 86400:
+            # Less than a day away
+            hours, remainder = divmod(time_remaining.total_seconds(), 3600)
+            minutes = remainder // 60
+            time_str = f"in {int(hours)} hours {int(minutes)} minutes"
+        else:
+            # More than a day away, use full date in UTC
+            time_str = sale_start.strftime("%Y-%m-%d %H:%M UTC")
+
+        # Create a hyperlink format: "1. Event Name (link) sale starts: ..."
+        message_lines.append(f"{idx}. [{event[1]}]({event[4]}) sale starts: {time_str}")
+
+    # Send message as an embed to preserve formatting
+    embed = discord.Embed(
+        title=f"Next {number} Notable Events with Upcoming Ticket Sales",
+        description="\n".join(message_lines),
+        color=discord.Color.blue()
+    )
+    await ctx.send(embed=embed)
