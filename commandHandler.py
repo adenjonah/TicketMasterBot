@@ -19,7 +19,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 # Initialize bot with intents
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents, case_insensitive=True)
 
 # Log file paths
 LOG_FILES = {
@@ -42,33 +42,41 @@ logging.basicConfig(level=logging.INFO, filename="logs/event_log.log", filemode=
                     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("commandHandler")
 
-# Set up intents
-intents = discord.Intents.default()
-intents.message_content = True
-
-# Initialize bot with intents
-bot = commands.Bot(command_prefix="!", intents=intents)
+# Available commands
+COMMAND_LIST = (
+    "**!eventlog** - Displays the last 20 lines of the event log.\n"
+    "**!dblog** - Displays the last 20 lines of the database log.\n"
+    "**!apilog** - Displays the last 20 lines of the API log.\n"
+    "**!messagelog** - Displays the last 20 lines of the message log.\n"
+    "**!addArtist <artist_id>** - Adds or marks an artist as notable by their ID.\n"
+    "**!commands** - Shows this help message with summaries of all commands."
+)
 
 @bot.command(name="commands", help="Shows all available commands with summaries")
 async def custom_help(ctx):
     """Sends an embedded help message listing all available commands."""
-    help_text = (
-        "**Available Commands**\n\n"
-        "**!eventlog** - Displays the last 20 lines of the event log.\n"
-        "**!dblog** - Displays the last 20 lines of the database log.\n"
-        "**!apilog** - Displays the last 20 lines of the API log.\n"
-        "**!messagelog** - Displays the last 20 lines of the message log.\n"
-        "**!addNotableArtist <artist_id>** - Adds or marks an artist as notable by their ID.\n"
-        "**!commands** - Shows this help message with summaries of all commands."
-    )
-
     embed = discord.Embed(
         title="Bot Commands",
-        description=help_text,
+        description="**Available Commands**\n\n" + COMMAND_LIST,
         color=discord.Color.green()
     )
     await ctx.send(embed=embed)
     logger.info("Sent help message to Discord.")
+
+# Event to handle unknown commands
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        embed = discord.Embed(
+            title=f"Command \"{ctx.message.content}\" not recognized",
+            description="**Available Commands**\n\n" + COMMAND_LIST,
+            color=discord.Color.green()
+        )
+        await ctx.send(embed=embed)
+        logger.warning(f"User tried unknown command: {ctx.message.content}")
+    else:
+        # For other errors, pass them on
+        raise error
 
 
 @bot.command(name="eventlog", help="Displays the last 20 lines of the event log")
@@ -105,8 +113,8 @@ async def send_log_tail(ctx, log_file, title):
         await ctx.send(f"Unable to retrieve {title.lower()}.")
         logging.getLogger("commandHandler").error(f"Failed to send {title}: {e}")
 
-@bot.command(name="addNotableArtist", help="Adds or marks an artist as notable by ID")
-async def add_notable_artist(ctx, artist_id: str):
+@bot.command(name="addArtist", help="Adds or marks an artist as notable by ID")
+async def add_artist(ctx, artist_id: str):
     """Marks an artist as notable in the database, adding them if they don't exist, and verifies with Ticketmaster API."""
     try:
         # Query the Ticketmaster Discovery API to verify the artist
