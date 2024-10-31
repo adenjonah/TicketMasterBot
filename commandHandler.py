@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
+DISCORD_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
 
 # Ticketmaster API Key
 API_KEY = TICKETMASTER_API_KEY
@@ -170,22 +171,30 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
     # Cap the number to 50
     number = min(number, 50)
 
-    # Fetch the next `number` notable events sorted by ticket onsale start date
-    c.execute('''
+    # Determine if we should filter by notable artists based on the channel
+    notable_only = ctx.channel.id == DISCORD_CHANNEL_ID
+
+    # Modify the query based on whether notable-only events should be fetched
+    query = '''
         SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
                Venues.city, Venues.state, Artists.name
         FROM Events
         LEFT JOIN Venues ON Events.venueID = Venues.venueID
         LEFT JOIN Artists ON Events.artistID = Artists.artistID
-        WHERE Artists.notable = 1 AND Events.ticketOnsaleStart >= datetime('now')
-        ORDER BY Events.ticketOnsaleStart ASC
-        LIMIT ?
-    ''', (number,))
+        WHERE Events.ticketOnsaleStart >= datetime('now')
+    '''
+    if notable_only:
+        query += " AND Artists.notable = 1"
 
-    notable_events = c.fetchall()
+    query += " ORDER BY Events.ticketOnsaleStart ASC LIMIT ?"
 
-    if not notable_events:
-        await ctx.send("No upcoming notable events with ticket sales starting soon.")
+    # Execute the query with the specified limit
+    c.execute(query, (number,))
+    events = c.fetchall()
+
+    if not events:
+        message = "No upcoming notable events with ticket sales starting soon." if notable_only else "No upcoming events with ticket sales starting soon."
+        await ctx.send(message)
         return
 
     # Prepare the message format and track total length
@@ -193,7 +202,7 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
     total_length = 0
     max_description_length = 4096  # Discord's limit for embed descriptions
 
-    for idx, event in enumerate(notable_events, start=1):
+    for idx, event in enumerate(events, start=1):
         # Parse the ticket sale start time as an aware datetime in UTC
         sale_start = datetime.strptime(event[2], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
         time_remaining = sale_start - datetime.now(timezone.utc)
@@ -201,14 +210,12 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
         # Format the time until sale starts
         if time_remaining.total_seconds() < 3600:
             # Less than an hour away
-            time_str = f"in {int(time_remaining.total_seconds() // 60)} minutes"
-            if time_remaining.total_seconds() < 0:
-                time_str = f"{int(time_remaining.total_seconds() // (-60))} minutes ago"
+            time_str = f"in {int(time_remaining.total_seconds() // 60)} minutes" if time_remaining.total_seconds() >= 0 else f"{int(-time_remaining.total_seconds() // 60)} minutes ago"
         elif time_remaining.total_seconds() < 86400:
             # Less than a day away
             hours, remainder = divmod(time_remaining.total_seconds(), 3600)
             minutes = remainder // 60
-            time_str = f"in {int(hours)} hours {int(minutes)} minutes"
+            time_str = f"in {int(hours)} hours {int(minutes)} minutes" if time_remaining.total_seconds() >= 0 else f"{int(hours)} hours {int(minutes)} minutes ago"
         else:
             # More than a day away, use human-readable date with ordinal suffix
             time_str = format_date_with_ordinal(sale_start)
@@ -216,14 +223,11 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
         # Create a line for this event
         event_line = f"{idx}. [{event[1]}]({event[4]}) sale starts {time_str}\n"
         
-        if time_remaining.total_seconds() < 0:
-            event_line = f"{idx}. [{event[1]}]({event[4]}) sale already started {time_str}\n"
-
         # Check if adding this line would exceed the max length for description
         if total_length + len(event_line) > max_description_length:
             # Send current embed and reset
             embed = discord.Embed(
-                title="Next Notable Events with Upcoming Ticket Sales",
+                title="Next Notable Events with Upcoming Ticket Sales" if notable_only else "Next Events with Upcoming Ticket Sales",
                 description="".join(message_lines),
                 color=discord.Color.blue()
             )
@@ -238,7 +242,7 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
     # Send remaining lines if any
     if message_lines:
         embed = discord.Embed(
-            title="Next Notable Events with Upcoming Ticket Sales",
+            title="Next Notable Events with Upcoming Ticket Sales" if notable_only else "Next Events with Upcoming Ticket Sales",
             description="".join(message_lines),
             color=discord.Color.blue()
         )
