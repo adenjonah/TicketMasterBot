@@ -1,7 +1,7 @@
 import discord
 from discord.ext import tasks
 import logging
-from dbEditor import fetch_today_events, initialize_db
+from dbEditor import fetch_events, initialize_db
 from query import notify_events
 from commandHandler import bot
 import os
@@ -24,7 +24,7 @@ event_logger.addHandler(event_handler)
 @tasks.loop(minutes=1)
 async def fetch_and_notify_events():
     """Task to fetch events from the Ticketmaster API and notify Discord of unsent events."""
-    fetch_today_events()
+    fetch_events()
     event_logger.info("Fetched today's events.")
     await notify_events(bot, CHANNEL_ID)
 

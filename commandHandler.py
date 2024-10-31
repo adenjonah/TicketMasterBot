@@ -16,7 +16,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 LOG_FILES = {
     "eventlog": "logs/event_log.log",
     "dblog": "logs/db_log.log",
-    "messagelog": "logs/message_log.log"
+    "messagelog": "logs/message_log.log",
+    "apilog": "logs/api_log.log"
 }
 
 # SQLite database connection
@@ -46,6 +47,7 @@ async def custom_help(ctx):
         "**Available Commands**\n\n"
         "**!eventlog** - Displays the last 20 lines of the event log.\n"
         "**!dblog** - Displays the last 20 lines of the database log.\n"
+        "**!apilog** - Displays the last 20 lines of the API log.\n"
         "**!messagelog** - Displays the last 20 lines of the message log.\n"
         "**!addNotableArtist <artist_id>** - Adds or marks an artist as notable by their ID.\n"
         "**!commands** - Shows this help message with summaries of all commands."
@@ -71,6 +73,10 @@ async def db_log(ctx):
 @bot.command(name="messagelog", help="Displays the last 20 lines of the message log")
 async def message_log(ctx):
     await send_log_tail(ctx, LOG_FILES["messagelog"], "Message Log")
+
+@bot.command(name="apilog", help="Displays the last 20 lines of the API log")
+async def api_log(ctx):
+    await send_log_tail(ctx, LOG_FILES["apilog"], "API Log")
 
 async def send_log_tail(ctx, log_file, title):
     """Helper function to send the last 20 lines of a log file as an embedded message."""

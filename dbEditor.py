@@ -16,6 +16,13 @@ db_handler = logging.FileHandler("logs/db_log.log")
 db_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 db_logger.addHandler(db_handler)
 
+# Set up API-specific logging
+api_logger = logging.getLogger("apiLogger")
+api_logger.setLevel(logging.INFO)
+api_handler = logging.FileHandler("logs/api_log.log")
+api_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+api_logger.addHandler(api_handler)
+
 # Connect to SQLite
 conn = sqlite3.connect('events.db')
 c = conn.cursor()
@@ -80,35 +87,67 @@ def initialize_db():
         db_logger.error("File artist_ids.txt not found.")
 
 
-def fetch_today_events():
-    """Fetches events from Ticketmaster using specified filters and updates the database."""
-    # Get the current UTC date and time for parameters
+def fetch_events():
+    """Fetches up to 5 pages of events from Ticketmaster using specified filters and updates the database."""
     current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-    # Define the API URL and parameters
     url = "https://app.ticketmaster.com/discovery/v2/events"
-    params = {
-        "apikey": TICKETMASTER_API_KEY,
-        "source": "ticketmaster",
-        "locale": "*",
-        "size": 199,
-        "onsaleStartDateTime": current_time,
-        "countryCode": "US",
-        "classificationId": "KZFzniwnSyZfZ7v7nJ",
-        "onsaleOnAfterStartDate": current_date
-    }
+    page = 0
+    total_events_available = 0
+    max_pages = 5
+    total_new_events = 0
 
-    try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        data = response.json()
-        events = data.get("_embedded", {}).get("events", [])
+    while page < max_pages:
+        params = {
+            "apikey": TICKETMASTER_API_KEY,
+            "source": "ticketmaster",
+            "locale": "*",
+            "size": 199,
+            "page": page,
+            "onsaleStartDateTime": current_time,
+            "countryCode": "US",
+            "classificationId": "KZFzniwnSyZfZ7v7nJ",
+            "onsaleOnAfterStartDate": current_date
+        }
 
-        for event in events:
-            store_event(event)
-    except requests.exceptions.RequestException as e:
-        db_logger.error(f"Error fetching events: {e}")
+        try:
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+
+            if page == 0:
+                # Set total events available only on the first page request
+                total_events_available = data.get("page", {}).get("totalElements", 0)
+
+            events = data.get("_embedded", {}).get("events", [])
+            received_events_count = len(events)
+            new_events_count = 0
+
+            for event in events:
+                if store_event(event):
+                    new_events_count += 1
+
+            total_new_events += new_events_count
+
+            # Log request details for each page
+            api_logger.info(f"Page {page + 1}: Total possible events = {total_events_available}, "
+                            f"Received = {received_events_count}, New events added = {new_events_count}")
+
+            # Stop fetching if there are no more events
+            if received_events_count < 199:
+                break
+
+        except requests.exceptions.RequestException as e:
+            api_logger.error(f"Error fetching events on page {page + 1}: {e}")
+            break
+
+        # Move to the next page
+        page += 1
+
+    # Log the final summary after fetching all pages
+    api_logger.info(f"Completed fetching events. Total possible events = {total_events_available}, "
+                    f"Total new events added = {total_new_events}")
 
 def store_event(event):
     """Stores a new event in the database if not already present, and ensures venue and artist data are updated."""
