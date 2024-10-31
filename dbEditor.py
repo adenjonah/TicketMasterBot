@@ -1,10 +1,11 @@
-import requests
+import aiohttp  # New import for async HTTP requests
 import sqlite3
 import logging
 from datetime import datetime, timezone
 import os
 from dotenv import load_dotenv
 import discord
+import asyncio  # Required for async database transactions if needed
 
 # Load environment variables
 load_dotenv()
@@ -90,7 +91,7 @@ def initialize_db():
 
 
 async def fetch_events(bot, channel_id):
-    """Fetches events from Ticketmaster and handles errors by sending messages to Discord."""
+    """Fetches events asynchronously from Ticketmaster API and handles errors."""
     current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
@@ -100,64 +101,61 @@ async def fetch_events(bot, channel_id):
     max_pages = 5
     total_new_events = 0
 
-    while page < max_pages:
-        params = {
-            "apikey": TICKETMASTER_API_KEY,
-            "source": "ticketmaster",
-            "locale": "*",
-            "size": 199,
-            "page": page,
-            "onsaleStartDateTime": current_time,
-            "countryCode": "US",
-            "classificationId": "KZFzniwnSyZfZ7v7nJ",
-            "onsaleOnAfterStartDate": current_date
-        }
+    async with aiohttp.ClientSession() as session:
+        while page < max_pages:
+            params = {
+                "apikey": TICKETMASTER_API_KEY,
+                "source": "ticketmaster",
+                "locale": "*",
+                "size": 199,
+                "page": page,
+                "onsaleStartDateTime": current_time,
+                "countryCode": "US",
+                "classificationId": "KZFzniwnSyZfZ7v7nJ",
+                "onsaleOnAfterStartDate": current_date
+            }
 
-        try:
-            response = requests.get(url, params=params)
-            response.raise_for_status()
-            data = response.json()
+            try:
+                async with session.get(url, params=params) as response:
+                    response.raise_for_status()
+                    data = await response.json()
 
-            if page == 0:
-                # Set total events available only on the first page request
-                total_events_available = data.get("page", {}).get("totalElements", 0)
-                
-                # Stop fetching if there are too many events
-                if total_events_available > 999:
-                    error_message = "⚠️ Error: Total events available exceed 999. Stopping further requests."
-                    await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
-                    return  # Stop further processing
+                    if page == 0:
+                        total_events_available = data.get("page", {}).get("totalElements", 0)
+                        if total_events_available > 999:
+                            error_message = "⚠️ Error: Total events exceed 999. Stopping further requests."
+                            await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
+                            return
 
-            events = data.get("_embedded", {}).get("events", [])
-            received_events_count = len(events)
-            new_events_count = 0
+                    events = data.get("_embedded", {}).get("events", [])
+                    received_events_count = len(events)
+                    new_events_count = 0
 
-            for event in events:
-                if store_event(event):
-                    new_events_count += 1
+                    for event in events:
+                        if store_event(event):
+                            new_events_count += 1
 
-            total_new_events += new_events_count
+                    total_new_events += new_events_count
 
-            # Log request details for each page
-            api_logger.info(f"Page {page + 1}: Total possible events = {total_events_available}, "
-                            f"Received = {received_events_count}, New events added = {new_events_count}")
+                    # Log request details for each page
+                    api_logger.info(f"Page {page + 1}: Total possible events = {total_events_available}, "
+                                    f"Received = {received_events_count}, New events added = {new_events_count}")
 
-            # Stop fetching if there are no more events
-            if received_events_count < 199:
+                    # Stop fetching if there are no more events
+                    if received_events_count < 199:
+                        break
+
+            except aiohttp.ClientError as e:
+                error_message = f"⚠️ Error fetching events on page {page + 1}: {e}"
+                await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
                 break
 
-        except requests.exceptions.RequestException as e:
-            error_message = f"⚠️ Error fetching events on page {page + 1}: {e}"
-            await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
-            break  # Stop further processing on error
-
-        # Move to the next page
-        page += 1
+            # Move to the next page
+            page += 1
 
     # Log the final summary after fetching all pages
     api_logger.info(f"Completed fetching events. Total possible events = {total_events_available}, "
                     f"Total new events added = {total_new_events}")
-
 
 async def notify_discord_error(bot, channel_id, error_message):
     """Send an error notification to a Discord channel."""
