@@ -144,8 +144,11 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
         await ctx.send("No upcoming notable events with ticket sales starting soon.")
         return
 
-    # Prepare the message format
+    # Prepare the message format and track total length
     message_lines = []
+    total_length = 0
+    max_description_length = 4096  # Discord's limit for embed descriptions
+
     for idx, event in enumerate(notable_events, start=1):
         # Parse the ticket sale start time as an aware datetime in UTC
         sale_start = datetime.strptime(event[2], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
@@ -164,16 +167,33 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
             # More than a day away, use human-readable date with ordinal suffix
             time_str = format_date_with_ordinal(sale_start)
 
-        # Create a hyperlink format: "1. Event Name (link) sale starts: ..."
-        message_lines.append(f"{idx}. [{event[1]}]({event[4]}) sale starts: {time_str}")
+        # Create a line for this event
+        event_line = f"{idx}. [{event[1]}]({event[4]}) sale starts: {time_str}\n"
 
-    # Send message as an embed to preserve formatting
-    embed = discord.Embed(
-        title=f"Next {number} Notable Events with Upcoming Ticket Sales",
-        description="\n".join(message_lines),
-        color=discord.Color.blue()
-    )
-    await ctx.send(embed=embed)
+        # Check if adding this line would exceed the max length for description
+        if total_length + len(event_line) > max_description_length:
+            # Send current embed and reset
+            embed = discord.Embed(
+                title=f"Next Notable Events with Upcoming Ticket Sales",
+                description="".join(message_lines),
+                color=discord.Color.blue()
+            )
+            await ctx.send(embed=embed)
+            message_lines.clear()
+            total_length = 0
+
+        # Add the event line to the current list and update length
+        message_lines.append(event_line)
+        total_length += len(event_line)
+
+    # Send remaining lines if any
+    if message_lines:
+        embed = discord.Embed(
+            title=f"Next Notable Events with Upcoming Ticket Sales",
+            description="".join(message_lines),
+            color=discord.Color.blue()
+        )
+        await ctx.send(embed=embed)
 
 # Helper function to format dates with ordinal suffixes for the day
 def format_date_with_ordinal(dt):
