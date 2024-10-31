@@ -2,7 +2,7 @@ import discord
 from discord.ext import tasks
 import logging
 from dbEditor import fetch_events, initialize_db
-from query import notify_events
+from notifier import notify_events
 from commandHandler import bot
 import os
 from dotenv import load_dotenv
@@ -37,9 +37,8 @@ async def fetch_and_notify_events():
     """Fetches events and notifies Discord of unsent events, differentiating by channel."""
     
     # Fetch all events, unsent notable events, and send to respective channels
-    await fetch_events(bot, MAIN_CHANNEL_ID)  # Pass bot and MAIN_CHANNEL_ID for fetching notable events
-    await fetch_events(bot, SECONDARY_CHANNEL_ID)  # Pass bot and SECONDARY_CHANNEL_ID for all events
-    event_logger.info("Fetched today's events.")
+    await fetch_events(bot)  # Pass bot and MAIN_CHANNEL_ID for fetching notable events
+    event_logger.info("Fetched events.")
 
     # Notify notable events to MAIN_CHANNEL_ID
     await notify_events(bot, MAIN_CHANNEL_ID, notable_only=True)

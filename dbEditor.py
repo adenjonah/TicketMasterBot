@@ -90,7 +90,7 @@ def initialize_db():
         db_logger.error("File artist_ids.txt not found.")
 
 
-async def fetch_events(bot, channel_id):
+async def fetch_events(bot):
     """Fetches events asynchronously from Ticketmaster API and handles errors."""
     current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -123,7 +123,7 @@ async def fetch_events(bot, channel_id):
                     if page == 0:
                         total_events_available = data.get("page", {}).get("totalElements", 0)
                         if total_events_available > 999:
-                            error_message = "⚠️ Error: Total events exceed 999. Stopping further requests."
+                            error_message = "Error: Total events exceed 999. Stopping further requests."
                             await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
                             return
 
@@ -146,7 +146,7 @@ async def fetch_events(bot, channel_id):
                         break
 
             except aiohttp.ClientError as e:
-                error_message = f"⚠️ Error fetching events on page {page + 1}: {e}"
+                error_message = f"Error fetching events on page {page + 1}: {e}"
                 await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
                 break
 

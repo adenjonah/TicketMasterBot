@@ -1,20 +1,2 @@
-2024-10-31 18:43:51,559 - INFO - Page 1: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:43:52,834 - INFO - Page 2: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:43:54,091 - INFO - Page 3: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:43:55,504 - INFO - Page 4: Total possible events = 769, Received = 172, New events added = 0
-2024-10-31 18:43:55,504 - INFO - Completed fetching events. Total possible events = 769, Total new events added = 0
-2024-10-31 18:43:57,281 - INFO - Page 1: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:43:58,576 - INFO - Page 2: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:43:59,765 - INFO - Page 3: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:44:01,216 - INFO - Page 4: Total possible events = 769, Received = 172, New events added = 0
-2024-10-31 18:44:01,216 - INFO - Completed fetching events. Total possible events = 769, Total new events added = 0
-2024-10-31 18:44:51,553 - INFO - Page 1: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:44:52,707 - INFO - Page 2: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:44:54,078 - INFO - Page 3: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:44:55,507 - INFO - Page 4: Total possible events = 769, Received = 172, New events added = 0
-2024-10-31 18:44:55,507 - INFO - Completed fetching events. Total possible events = 769, Total new events added = 0
-2024-10-31 18:44:57,296 - INFO - Page 1: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:44:58,399 - INFO - Page 2: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:44:59,708 - INFO - Page 3: Total possible events = 769, Received = 199, New events added = 0
-2024-10-31 18:45:01,036 - INFO - Page 4: Total possible events = 769, Received = 172, New events added = 0
-2024-10-31 18:45:01,036 - INFO - Completed fetching events. Total possible events = 769, Total new events added = 0
+2024-10-31 19:00:29,538 - ERROR - Error fetching events on page 1: 400, message='Bad Request', url='https://app.ticketmaster.com/discovery/v2/events?apikey=P9v7AOq29cv0AHD4IcP9oq1T5HfiUnb5&source=ticketmaster&locale=*&size=201&page=0&onsaleStartDateTime=2024-10-31T23:00:28Z&countryCode=US&classificationId=KZFzniwnSyZfZ7v7nJ&onsaleOnAfterStartDate=2024-10-31'
+2024-10-31 19:00:29,539 - INFO - Completed fetching events. Total possible events = 0, Total new events added = 0
