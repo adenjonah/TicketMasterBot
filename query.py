@@ -14,15 +14,15 @@ conn = sqlite3.connect('events.db')
 c = conn.cursor()
 
 async def notify_events(bot, channel_id):
-    """Notifies Discord about all unsent events in the database."""
-    # Select all unsent events without time restriction
+    """Notifies Discord about unsent events associated with notable artists in the database."""
+    # Select unsent events only if the artist is notable
     c.execute('''
     SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
            Venues.city, Venues.state, Events.image_url, Artists.name
     FROM Events
     LEFT JOIN Venues ON Events.venueID = Venues.venueID
     LEFT JOIN Artists ON Events.artistID = Artists.artistID
-    WHERE Events.sentToDiscord = 0
+    WHERE Events.sentToDiscord = 0 AND Artists.notable = 1
     ''')
 
     events_to_notify = c.fetchall()
