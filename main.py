@@ -1,62 +1,37 @@
-import requests
+import discord
+from discord.ext import tasks
+import logging
+from dbEditor import fetch_events, initialize_db
+from query import notify_events
+from commandHandler import bot
 import os
-import time
-from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+# Load environment variables
 load_dotenv()
+DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
 
-# Retrieve Ticketmaster API key from environment variable
-API_KEY = os.getenv('TICKETMASTER_API_KEY')
-if not API_KEY:
-    raise ValueError("Ticketmaster API key not found. Please ensure it's set in the .env file.")
+initialize_db()
 
-def get_events(start_date, end_date):
-    url = "https://app.ticketmaster.com/discovery/v2/events.json"
-    params = {
-        "apikey": API_KEY,
-        "startDateTime": start_date.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "endDateTime": end_date.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "size": 200  # Adjust as needed
-    }
-    
-    try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()  # Raises an HTTPError for bad responses
-        return response.json().get("_embedded", {}).get("events", [])
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
-        return []
+# Set up general event logging
+event_logger = logging.getLogger("eventLogger")
+event_logger.setLevel(logging.INFO)
+event_handler = logging.FileHandler("logs/event_log.log")
+event_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+event_logger.addHandler(event_handler)
 
-def alert_new_events(events):
-    for event in events:
-        print(f"New event: {event['name']} on {event['dates']['start']['localDate']}")
+@tasks.loop(minutes=1)
+async def fetch_and_notify_events():
+    """Task to fetch events from the Ticketmaster API and notify Discord of unsent events."""
+    fetch_events()
+    event_logger.info("Fetched today's events.")
+    await notify_events(bot, CHANNEL_ID)
 
-def main():
-    known_events = set()
-    check_interval = 65  # 1 minute
-
-    while True:
-        now = datetime.now(timezone.utc)
-        end_date = now + timedelta(days=30)  # Look for events in the next 30 days
-        
-        events = get_events(now, end_date)
-        new_events = []
-        
-        for event in events:
-            event_id = event['id']
-            if event_id not in known_events:
-                known_events.add(event_id)
-                new_events.append(event)
-        
-        if new_events:
-            alert_new_events(new_events)
-        else:
-            print("No new events found.")
-        
-        print(f"Sleeping for {check_interval} seconds...")
-        time.sleep(check_interval)
+@bot.event
+async def on_ready():
+    fetch_and_notify_events.start()
+    event_logger.info("Bot connected and task started.")
 
 if __name__ == "__main__":
-    main()
+    bot.run(DISCORD_BOT_TOKEN)
