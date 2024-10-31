@@ -4,7 +4,16 @@ import sqlite3
 import logging
 from collections import deque
 from datetime import datetime, timedelta, timezone
+import requests
+import os
+from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
+TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
+
+# Ticketmaster API Key
+API_KEY = TICKETMASTER_API_KEY
 # Set up intents
 intents = discord.Intents.default()
 intents.message_content = True
@@ -98,9 +107,31 @@ async def send_log_tail(ctx, log_file, title):
 
 @bot.command(name="addNotableArtist", help="Adds or marks an artist as notable by ID")
 async def add_notable_artist(ctx, artist_id: str):
-    """Marks an artist as notable in the database, adding them if they don't exist."""
+    """Marks an artist as notable in the database, adding them if they don't exist, and verifies with Ticketmaster API."""
     try:
-        # Check if the artist already exists
+        # Query the Ticketmaster Discovery API to verify the artist
+        api_url = f"https://app.ticketmaster.com/discovery/v2/attractions"
+        params = {
+            "apikey": TICKETMASTER_API_KEY,
+            "id": artist_id,
+            "locale": "*"
+        }
+        
+        # Make the API request
+        response = requests.get(api_url, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        # Check if artist data is present
+        attractions = data.get("_embedded", {}).get("attractions", [])
+        if not attractions:
+            await ctx.send("Artist not found, check Ticketmaster API for the correct ID.")
+            return
+        
+        # Retrieve artist name and ID from the API response
+        artist_name = attractions[0].get("name", "Unknown Artist")
+
+        # Check if the artist already exists in the database
         c.execute("SELECT artistID FROM Artists WHERE artistID = ?", (artist_id,))
         existing_artist = c.fetchone()
 
@@ -108,15 +139,20 @@ async def add_notable_artist(ctx, artist_id: str):
             # Update the artist to be notable if they exist
             c.execute("UPDATE Artists SET notable = 1 WHERE artistID = ?", (artist_id,))
             conn.commit()
-            await ctx.send(f"Artist {artist_id} marked as notable.")
+            await ctx.send(f"Artist \"{artist_name}\" with ID: {artist_id} marked as notable.")
         else:
             # Insert a new artist record and mark as notable if they don't exist
-            c.execute("INSERT INTO Artists (artistID, name, notable) VALUES (?, ?, ?)", (artist_id, None, 1))
+            c.execute("INSERT INTO Artists (artistID, name, notable) VALUES (?, ?, ?)", (artist_id, artist_name, 1))
             conn.commit()
-            await ctx.send(f"Artist {artist_id} added and marked as notable.")
+            await ctx.send(f"Artist \"{artist_name}\" with ID: {artist_id} added and marked as notable.")
 
         # Log this action
-        logging.getLogger("dbLogger").info(f"Artist {artist_id} added/updated as notable.")
+        logging.getLogger("dbLogger").info(f"Artist \"{artist_name}\" with ID {artist_id} added/updated as notable.")
+    
+    except requests.exceptions.RequestException as e:
+        await ctx.send("Error fetching artist data from Ticketmaster API.")
+        logging.getLogger("dbLogger").error(f"Ticketmaster API request failed for artist ID {artist_id}: {e}")
+    
     except Exception as e:
         await ctx.send("Error adding or updating notable artist.")
         logging.getLogger("dbLogger").error(f"Failed to add/update notable artist {artist_id}: {e}")
