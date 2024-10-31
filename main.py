@@ -13,6 +13,16 @@ DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 MAIN_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))  # Channel for notable artist events only
 SECONDARY_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID_TWO'))  # Channel for all unsent events
 
+# Clear log files on startup
+def clear_log_files():
+    log_files = ["logs/event_log.log", "logs/db_log.log", "logs/message_log.log", "logs/api_log.log"]
+    for log_file in log_files:
+        with open(log_file, 'w'):
+            pass  # Open in write mode to clear the file
+
+clear_log_files()  # Clear logs
+
+# Initialize database
 initialize_db()
 
 # Set up general event logging
