@@ -8,3 +8,4 @@ events.db
 *.db
 *.log
 /logs
+/__pycache__

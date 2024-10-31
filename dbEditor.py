@@ -194,21 +194,29 @@ def store_event(event):
     artist_id = artist_data.get('id')
     artist_name = artist_data.get('name')
 
-    # Insert venue data
-    c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city, state) VALUES (?, ?, ?, ?)',
-              (venue_id, venue_name, venue_city, venue_state))
-    conn.commit()
-    db_logger.info(f"Venue '{venue_name}' added to database with city '{venue_city}' and state '{venue_state}'.")
-
-    # Insert artist data if available
-    if artist_id:
-        c.execute('INSERT OR IGNORE INTO Artists (artistID, name, notable) VALUES (?, ?, ?)',
-                  (artist_id, artist_name, False))
+    # Insert venue data only if it does not exist
+    c.execute('SELECT venueID FROM Venues WHERE venueID = ?', (venue_id,))
+    if not c.fetchone():  # Only insert and log if the venue is new
+        c.execute('INSERT INTO Venues (venueID, name, city, state) VALUES (?, ?, ?, ?)',
+                  (venue_id, venue_name, venue_city, venue_state))
         conn.commit()
-        db_logger.info(f"Artist '{artist_name}' added to database.")
+        db_logger.info(f"Venue '{venue_name}' added to database with city '{venue_city}' and state '{venue_state}'.")
 
-    # Insert event data
-    c.execute('INSERT OR IGNORE INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)',
-              (event_id, event_name, artist_id, venue_id, event_date, onsale_start, url, image_url, datetime.now(timezone.utc).isoformat()))
-    conn.commit()
-    db_logger.info(f"Event '{event_name}' added to database.")
+    # Insert artist data if available and if it does not exist
+    if artist_id:
+        c.execute('SELECT artistID FROM Artists WHERE artistID = ?', (artist_id,))
+        if not c.fetchone():  # Only insert and log if the artist is new
+            c.execute('INSERT INTO Artists (artistID, name, notable) VALUES (?, ?, ?)',
+                      (artist_id, artist_name, False))
+            conn.commit()
+            db_logger.info(f"Artist '{artist_name}' added to database.")
+
+    # Insert event data only if it does not exist
+    c.execute('SELECT eventID FROM Events WHERE eventID = ?', (event_id,))
+    if not c.fetchone():  # Only insert and log if the event is new
+        c.execute('INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)',
+                  (event_id, event_name, artist_id, venue_id, event_date, onsale_start, url, image_url, datetime.now(timezone.utc).isoformat()))
+        conn.commit()
+        db_logger.info(f"Event '{event_name}' added to database.")
+
+    return True  # Return whether new data was added (for counting purposes in fetch_events)
