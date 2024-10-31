@@ -1,0 +1,115 @@
+Original ID: 1094215 - Name: Taylor Swift | API ID: K8vZ9175Tr0
+Original ID: 1159272 - Name: Adele | API ID: K8vZ917Gku7
+Original ID: 2453935 - Name: Koe Wetzel | API ID: K8vZ917pldV
+Original ID: 2811359 - Name: Zach Bryan | API ID: K8vZ917_NoV
+Original ID: 1508961 - Name: Hans Zimmer | API ID: K8vZ917ubK0
+Original ID: 2404695 - Name: Gunna | API ID: K8vZ917psY7
+Original ID: 3168081 - Name: Maddox Batson | API ID: K8vZ917qeuV
+Original ID: 3103513 - Name: Max McNown | API ID: K8vZ917jfuf
+Original ID: 3251698 - Name: Masayoshi Takanaka | API ID: K8vZ917q59f
+Original ID: 731454 - Name: Creed | API ID: K8vZ9171buf
+Original ID: 806431 - Name: Coldplay | API ID: K8vZ9171izV
+Original ID: 766720 - Name: Oasis | API ID: K8vZ9171fw7
+Original ID: 806203 - Name: Rascal Flatts | API ID: K8vZ9171nF7
+Original ID: 3184880 - Name: Kenshi Yonezu | API ID: K8vZ917q7K0
+Original ID: 807367 - Name: Blake Shelton | API ID: K8vZ9171Bm7
+Original ID: 770768 - Name: Van Morrison | API ID: K8vZ917hY-V
+Original ID: 1435919 - Name: Imagine Dragons | API ID: K8vZ917GSz7
+Original ID: 2222681 - Name: Cigarettes After Sex | API ID: K8vZ917fN6V
+Original ID: 2892837 - Name: Benson Boone | API ID: K8vZ917Qjw0
+Original ID: 2782189 - Name: Lizzy McAlpine | API ID: K8vZ917_p3V
+Original ID: 736262 - Name: James Taylor | API ID: K8vZ917G-E7
+Original ID: 2150342 - Name: Luke Combs | API ID: K8vZ917KVr7
+Original ID: 1020885 - Name: Eric Church | API ID: K8vZ917G5G0
+Original ID: 2253625 - Name: Billy Strings | API ID: K8vZ9174G2V
+Original ID: 2288122 - Name: Morgan Wallen | API ID: K8vZ917jiY0
+Original ID: 734977 - Name: Eagles | API ID: K8vZ9171ob7
+Original ID: 3175130 - Name: Anyma | API ID: K8vZ917jHEf
+Original ID: 1567745 - Name: Tedeschi Trucks Band | API ID: K8vZ917C1E0
+Original ID: 2625223 - Name: Ticketmaster - Dude Perfect | API ID: K8vZ917bZLV
+Original ID: 1747243 - Name: Pentatonix | API ID: K8vZ9172Wtf
+Original ID: 1788754 - Name: Travis Scott | API ID: K8vZ9178bS0
+Original ID: 2001092 - Name: Sabrina Carpenter | API ID: K8vZ9173-lV
+Original ID: 2257710 - Name: Billie Eilish | API ID: K8vZ9174Za7
+Original ID: 772848 - Name: Stevie Wonder | API ID: K8vZ91715af
+Original ID: 735647 - Name: Metallica | API ID: K8vZ9171G9V
+Original ID: 1997046 - Name: Jonathan Lee | API ID: K8vZ9173OrV
+Original ID: 798903 - Name: Dropkick Murphys | API ID: K8vZ9171h_V
+Original ID: 777416 - Name: Deftones | API ID: K8vZ9171pP7
+Original ID: 766722 - Name: USHER | API ID: K8vZ9171bMV
+Original ID: 2880729 - Name: Megan Moroney | API ID: K8vZ917Q9yV
+Original ID: 2903928 - Name: GloRilla | API ID: K8vZ917QER7
+Original ID: 1833710 - Name: Cody Johnson | API ID: K8vZ9178Uz0
+Original ID: 2194218 - Name: $UICIDEBOY$ | API ID: K8vZ917f2N7
+Original ID: 2119390 - Name: Post Malone | API ID: K8vZ917KjPf
+Original ID: 2131374 - Name: Jelly Roll | API ID: K8vZ9174y8V
+Original ID: 768018 - Name: Eric Clapton | API ID: K8vZ917hG-0
+Original ID: 2730221 - Name: John Summit | API ID: K8vZ917_pO7
+Original ID: 718655 - Name: P!NK | API ID: K8vZ9171Jo7
+Original ID: 2300002 - Name: Shane Gillis | API ID: K8vZ9174xuV
+Original ID: 2818001 - Name: Fred again.. | API ID: K8vZ917_0xf
+Original ID: 2869566 - Name: Warren Zeiders | API ID: K8vZ917QK3f
+Original ID: 767870 - Name: Mariah Carey | API ID: K8vZ9171KB7
+Original ID: 712214 - Name: Lil Wayne | API ID: K8vZ917GemV
+Original ID: 2826519 - Name: Carin Leon | API ID: K8vZ917_m_f
+Original ID: 2397430 - Name: Chappell Roan | API ID: K8vZ917p56f
+Original ID: 2075742 - Name: Leon Bridges | API ID: K8vZ917Kkuf
+Original ID: 862453 - Name: Kings of Leon | API ID: K8vZ9175hx7
+Original ID: 703831 - Name: LINKIN PARK | API ID: K8vZ9171if7
+Original ID: 2712573 - Name: Teddy Swims | API ID: K8vZ917bnP0
+Original ID: 775700 - Name: Korn | API ID: K8vZ9171fF7
+Original ID: 1113792 - Name: Dave Matthews | API ID: K8vZ91713NV
+Original ID: 847841 - Name: Justin Timberlake | API ID: K8vZ91754g7
+Original ID: 1057637 - Name: Kevin Hart | API ID: K8vZ917GQ1f
+Original ID: 2663489 - Name: Rod Wave | API ID: K8vZ917b8z7
+Original ID: 863832 - Name: Jim Gaffigan | API ID: K8vZ9175R0V
+Original ID: 1148845 - Name: Leanne Morgan | API ID: K8vZ917fQxV
+Original ID: 2194370 - Name: Shaboozey | API ID: K8vZ917f2P7
+Original ID: 3164506 - Name: Sammy Virji | API ID: K8vZ917qam0
+Original ID: 847492 - Name: Fisher | API ID: K8vZ9171mPf
+Original ID: 2431961 - Name: Matt Rife | API ID: K8vZ9179SV7
+Original ID: 803682 - Name: Dave Chappelle | API ID: K8vZ9171rcf
+Original ID: 2660883 - Name: Sleep Token | API ID: K8vZ917b81f
+Original ID: 2182670 - Name: Kane Brown | API ID: K8vZ917fFLf
+Original ID: 732705 - Name: Garth Brooks | API ID: K8vZ9171aAV
+Original ID: 767989 - Name: Kenny Chesney | API ID: K8vZ9171f30
+Original ID: 1429693 - Name: SWEDISH HOUSE MAFIA | API ID: K8vZ917G0e0
+Original ID: 1646704 - Name: Lana Del Rey | API ID: K8vZ9172ZIV
+Original ID: 2998425 - Name: Mau P | API ID: K8vZ917hQaf
+Original ID: 1536543 - Name: Nikki Glaser | API ID: K8vZ917uwA7
+Original ID: 2514177 - Name: Ella Langley | API ID: K8vZ917_mB0
+Original ID: 779049 - Name: Shakira | API ID: K8vZ9171xeV
+Original ID: 111163 - Name: Sarah Millican | API ID: K8vZ917GQn0
+Original ID: 1896592 - Name: Hozier | API ID: K8vZ917o-E7
+Original ID: 1580836 - Name: Hugh Jackman | API ID: K8vZ917C3VV
+Original ID: 3178720 - Name: Jesse Welles | API ID: K8vZ917qvGf
+Original ID: 1904831 - Name: Lil Durk | API ID: K8vZ9173A9f
+Original ID: 2282847 - Name: A Boogie Wit Da Hoodie | API ID: K8vZ9174hA7
+Original ID: 2895379 - Name: Destroy Lonely | API ID: K8vZ917QLi7
+Original ID: 1638380 - Name: Charli XCX | API ID: K8vZ917CDKf
+Original ID: 735392 - Name: Billy Joel | API ID: K8vZ9171uv0
+Original ID: 755226 - Name: Los Temerarios | API ID: K8vZ9171ajf
+Original ID: 2733829 - Name: Don Toliver | API ID: K8vZ917bVK7
+Original ID: 726146 - Name: System Of A Down | API ID: K8vZ917hmYf
+Original ID: 2499958 - Name: Fuerza Regida | API ID: K8vZ9179vO0
+Original ID: 2590072 - Name: BLACKPINK | API ID: K8vZ9179wi7
+Original ID: 2110227 - Name: BTS | API ID: K8vZ917KpXV
+Original ID: 2281371 - Name: SEVENTEEN | API ID: K8vZ9174Qw0
+Original ID: 942726 - Name: Mike Birbiglia | API ID: K8vZ9175wo7
+Original ID: 2842518 - Name: Latto | API ID: K8vZ917_glV
+Original ID: 1319618 - Name: Theo Von | API ID: K8vZ917ur6V
+Original ID: 1266616 - Name: Whiskey Myers | API ID: K8vZ917uDgf
+Original ID: 1871860 - Name: KAYTRANADA | API ID: K8vZ917ooF0
+Original ID: 1506392 - Name: Jamie XX | API ID: K8vZ917u4Qf
+Original ID: 1983434 - Name: Shawn Mendes | API ID: K8vZ91739Nf
+Original ID: 1013826 - Name: Rihanna | API ID: K8vZ9175gS7
+Original ID: 3008978 - Name: Wave To Earth | API ID: K8vZ917h9Jf
+Original ID: 2555869 - Name: HARDY | API ID: K8vZ9179LdV
+Original ID: 3109542 - Name: Diplo | API ID: K8vZ917G2o7
+Original ID: 1244865 - Name: Diplo | API ID: K8vZ917G2o7
+Original ID: 2543736 - Name: Conan Gray | API ID: K8vZ9179_07
+Original ID: 773309 - Name: Aaron Kwok | API ID: K8vZ9171zFV
+Original ID: 3297169 - Name: hannah bahng | API ID: K8vZ917q2T7
+Original ID: 2433469 - Name: Maisie Peters | API ID: K8vZ917pq90
+Original ID: 836902 - Name: Carimi | API ID: K8vZ9174_g0
+Original ID: 1114794 - Name: Ricky Gervais | API ID: K8vZ9175M60

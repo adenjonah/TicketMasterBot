@@ -1,7 +1,7 @@
 import discord
 from discord.ext import tasks
 import logging
-from dbEditor import fetch_today_events
+from dbEditor import fetch_today_events, initialize_db
 from query import notify_events
 from commandHandler import bot
 import os
@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
+
+initialize_db()
 
 # Set up general event logging
 event_logger = logging.getLogger("eventLogger")
