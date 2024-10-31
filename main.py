@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
-CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
+MAIN_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))  # Channel for notable artist events only
+SECONDARY_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID_TWO'))  # Channel for all unsent events
 
 initialize_db()
 
@@ -23,10 +24,18 @@ event_logger.addHandler(event_handler)
 
 @tasks.loop(minutes=1)
 async def fetch_and_notify_events():
-    """Fetches events and notifies Discord of unsent events."""
-    await fetch_events(bot, CHANNEL_ID)  # Pass bot and CHANNEL_ID
+    """Fetches events and notifies Discord of unsent events, differentiating by channel."""
+    
+    # Fetch all events, unsent notable events, and send to respective channels
+    await fetch_events(bot, MAIN_CHANNEL_ID)  # Pass bot and MAIN_CHANNEL_ID for fetching notable events
+    await fetch_events(bot, SECONDARY_CHANNEL_ID)  # Pass bot and SECONDARY_CHANNEL_ID for all events
     event_logger.info("Fetched today's events.")
-    await notify_events(bot, CHANNEL_ID)
+
+    # Notify notable events to MAIN_CHANNEL_ID
+    await notify_events(bot, MAIN_CHANNEL_ID, notable_only=True)
+    
+    # Notify all unsent events to SECONDARY_CHANNEL_ID
+    await notify_events(bot, SECONDARY_CHANNEL_ID, notable_only=False)
 
 @bot.event
 async def on_ready():

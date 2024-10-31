@@ -9,3 +9,5 @@ events.db
 *.log
 /logs
 /__pycache__
+*.db
+/venv
