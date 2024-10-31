@@ -1,9 +1,15 @@
 import requests
 import re
 import time
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
 
 # Ticketmaster API Key
-API_KEY = "P9v7AOq29cv0AHD4IcP9oq1T5HfiUnb5"
+API_KEY = TICKETMASTER_API_KEY
 BASE_URL = "https://app.ticketmaster.com/discovery/v2/attractions"
 
 # Input and output files
