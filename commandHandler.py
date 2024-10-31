@@ -176,16 +176,19 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
 
     # Modify the query based on whether notable-only events should be fetched
     query = '''
-        SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
-               Venues.city, Venues.state, Artists.name
+        SELECT DISTINCT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
+            Venues.city, Venues.state, Artists.name
         FROM Events
         LEFT JOIN Venues ON Events.venueID = Venues.venueID
         LEFT JOIN Artists ON Events.artistID = Artists.artistID
-        WHERE Events.ticketOnsaleStart >= datetime('now')
+        WHERE datetime(Events.ticketOnsaleStart, 'utc') >= datetime('now', 'utc')
     '''
+
+    # Add notable-only filter if required
     if notable_only:
         query += " AND Artists.notable = 1"
 
+    # Finalize ordering and limiting
     query += " ORDER BY Events.ticketOnsaleStart ASC LIMIT ?"
 
     # Execute the query with the specified limit
