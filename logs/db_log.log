@@ -1,0 +1,711 @@
+2024-10-31 02:50:57,848 - INFO - Database initialized successfully.
+2024-10-31 02:50:57,858 - INFO - Added notable artist 'Taylor Swift' with API ID 'K8vZ9175Tr0' to the database.
+2024-10-31 02:50:57,858 - INFO - Added notable artist 'Adele' with API ID 'K8vZ917Gku7' to the database.
+2024-10-31 02:50:57,859 - INFO - Added notable artist 'Koe Wetzel' with API ID 'K8vZ917pldV' to the database.
+2024-10-31 02:50:57,860 - INFO - Added notable artist 'Zach Bryan' with API ID 'K8vZ917_NoV' to the database.
+2024-10-31 02:50:57,860 - INFO - Added notable artist 'Hans Zimmer' with API ID 'K8vZ917ubK0' to the database.
+2024-10-31 02:50:57,861 - INFO - Added notable artist 'Gunna' with API ID 'K8vZ917psY7' to the database.
+2024-10-31 02:50:57,861 - INFO - Added notable artist 'Maddox Batson' with API ID 'K8vZ917qeuV' to the database.
+2024-10-31 02:50:57,862 - INFO - Added notable artist 'Max McNown' with API ID 'K8vZ917jfuf' to the database.
+2024-10-31 02:50:57,862 - INFO - Added notable artist 'Masayoshi Takanaka' with API ID 'K8vZ917q59f' to the database.
+2024-10-31 02:50:57,863 - INFO - Added notable artist 'Creed' with API ID 'K8vZ9171buf' to the database.
+2024-10-31 02:50:57,863 - INFO - Added notable artist 'Coldplay' with API ID 'K8vZ9171izV' to the database.
+2024-10-31 02:50:57,863 - INFO - Added notable artist 'Oasis' with API ID 'K8vZ9171fw7' to the database.
+2024-10-31 02:50:57,864 - INFO - Added notable artist 'Rascal Flatts' with API ID 'K8vZ9171nF7' to the database.
+2024-10-31 02:50:57,865 - INFO - Added notable artist 'Kenshi Yonezu' with API ID 'K8vZ917q7K0' to the database.
+2024-10-31 02:50:57,865 - INFO - Added notable artist 'Blake Shelton' with API ID 'K8vZ9171Bm7' to the database.
+2024-10-31 02:50:57,865 - INFO - Added notable artist 'Van Morrison' with API ID 'K8vZ917hY-V' to the database.
+2024-10-31 02:50:57,866 - INFO - Added notable artist 'Imagine Dragons' with API ID 'K8vZ917GSz7' to the database.
+2024-10-31 02:50:57,866 - INFO - Added notable artist 'Cigarettes After Sex' with API ID 'K8vZ917fN6V' to the database.
+2024-10-31 02:50:57,867 - INFO - Added notable artist 'Benson Boone' with API ID 'K8vZ917Qjw0' to the database.
+2024-10-31 02:50:57,867 - INFO - Added notable artist 'Lizzy McAlpine' with API ID 'K8vZ917_p3V' to the database.
+2024-10-31 02:50:57,868 - INFO - Added notable artist 'James Taylor' with API ID 'K8vZ917G-E7' to the database.
+2024-10-31 02:50:57,868 - INFO - Added notable artist 'Luke Combs' with API ID 'K8vZ917KVr7' to the database.
+2024-10-31 02:50:57,868 - INFO - Added notable artist 'Eric Church' with API ID 'K8vZ917G5G0' to the database.
+2024-10-31 02:50:57,869 - INFO - Added notable artist 'Billy Strings' with API ID 'K8vZ9174G2V' to the database.
+2024-10-31 02:50:57,869 - INFO - Added notable artist 'Morgan Wallen' with API ID 'K8vZ917jiY0' to the database.
+2024-10-31 02:50:57,869 - INFO - Added notable artist 'Eagles' with API ID 'K8vZ9171ob7' to the database.
+2024-10-31 02:50:57,870 - INFO - Added notable artist 'Anyma' with API ID 'K8vZ917jHEf' to the database.
+2024-10-31 02:50:57,870 - INFO - Added notable artist 'Tedeschi Trucks Band' with API ID 'K8vZ917C1E0' to the database.
+2024-10-31 02:50:57,870 - INFO - Added notable artist 'Ticketmaster - Dude Perfect' with API ID 'K8vZ917bZLV' to the database.
+2024-10-31 02:50:57,871 - INFO - Added notable artist 'Pentatonix' with API ID 'K8vZ9172Wtf' to the database.
+2024-10-31 02:50:57,871 - INFO - Added notable artist 'Travis Scott' with API ID 'K8vZ9178bS0' to the database.
+2024-10-31 02:50:57,871 - INFO - Added notable artist 'Sabrina Carpenter' with API ID 'K8vZ9173-lV' to the database.
+2024-10-31 02:50:57,872 - INFO - Added notable artist 'Billie Eilish' with API ID 'K8vZ9174Za7' to the database.
+2024-10-31 02:50:57,872 - INFO - Added notable artist 'Stevie Wonder' with API ID 'K8vZ91715af' to the database.
+2024-10-31 02:50:57,873 - INFO - Added notable artist 'Metallica' with API ID 'K8vZ9171G9V' to the database.
+2024-10-31 02:50:57,873 - INFO - Added notable artist 'Jonathan Lee' with API ID 'K8vZ9173OrV' to the database.
+2024-10-31 02:50:57,874 - INFO - Added notable artist 'Dropkick Murphys' with API ID 'K8vZ9171h_V' to the database.
+2024-10-31 02:50:57,874 - INFO - Added notable artist 'Deftones' with API ID 'K8vZ9171pP7' to the database.
+2024-10-31 02:50:57,874 - INFO - Added notable artist 'USHER' with API ID 'K8vZ9171bMV' to the database.
+2024-10-31 02:50:57,875 - INFO - Added notable artist 'Megan Moroney' with API ID 'K8vZ917Q9yV' to the database.
+2024-10-31 02:50:57,875 - INFO - Added notable artist 'GloRilla' with API ID 'K8vZ917QER7' to the database.
+2024-10-31 02:50:57,875 - INFO - Added notable artist 'Cody Johnson' with API ID 'K8vZ9178Uz0' to the database.
+2024-10-31 02:50:57,876 - INFO - Added notable artist '$UICIDEBOY$' with API ID 'K8vZ917f2N7' to the database.
+2024-10-31 02:50:57,876 - INFO - Added notable artist 'Post Malone' with API ID 'K8vZ917KjPf' to the database.
+2024-10-31 02:50:57,877 - INFO - Added notable artist 'Jelly Roll' with API ID 'K8vZ9174y8V' to the database.
+2024-10-31 02:50:57,877 - INFO - Added notable artist 'Eric Clapton' with API ID 'K8vZ917hG-0' to the database.
+2024-10-31 02:50:57,878 - INFO - Added notable artist 'John Summit' with API ID 'K8vZ917_pO7' to the database.
+2024-10-31 02:50:57,878 - INFO - Added notable artist 'P!NK' with API ID 'K8vZ9171Jo7' to the database.
+2024-10-31 02:50:57,879 - INFO - Added notable artist 'Shane Gillis' with API ID 'K8vZ9174xuV' to the database.
+2024-10-31 02:50:57,879 - INFO - Added notable artist 'Fred again..' with API ID 'K8vZ917_0xf' to the database.
+2024-10-31 02:50:57,879 - INFO - Added notable artist 'Warren Zeiders' with API ID 'K8vZ917QK3f' to the database.
+2024-10-31 02:50:57,880 - INFO - Added notable artist 'Mariah Carey' with API ID 'K8vZ9171KB7' to the database.
+2024-10-31 02:50:57,880 - INFO - Added notable artist 'Lil Wayne' with API ID 'K8vZ917GemV' to the database.
+2024-10-31 02:50:57,881 - INFO - Added notable artist 'Carin Leon' with API ID 'K8vZ917_m_f' to the database.
+2024-10-31 02:50:57,881 - INFO - Added notable artist 'Chappell Roan' with API ID 'K8vZ917p56f' to the database.
+2024-10-31 02:50:57,881 - INFO - Added notable artist 'Leon Bridges' with API ID 'K8vZ917Kkuf' to the database.
+2024-10-31 02:50:57,882 - INFO - Added notable artist 'Kings of Leon' with API ID 'K8vZ9175hx7' to the database.
+2024-10-31 02:50:57,882 - INFO - Added notable artist 'LINKIN PARK' with API ID 'K8vZ9171if7' to the database.
+2024-10-31 02:50:57,883 - INFO - Added notable artist 'Teddy Swims' with API ID 'K8vZ917bnP0' to the database.
+2024-10-31 02:50:57,883 - INFO - Added notable artist 'Korn' with API ID 'K8vZ9171fF7' to the database.
+2024-10-31 02:50:57,883 - INFO - Added notable artist 'Dave Matthews' with API ID 'K8vZ91713NV' to the database.
+2024-10-31 02:50:57,884 - INFO - Added notable artist 'Justin Timberlake' with API ID 'K8vZ91754g7' to the database.
+2024-10-31 02:50:57,884 - INFO - Added notable artist 'Kevin Hart' with API ID 'K8vZ917GQ1f' to the database.
+2024-10-31 02:50:57,884 - INFO - Added notable artist 'Rod Wave' with API ID 'K8vZ917b8z7' to the database.
+2024-10-31 02:50:57,885 - INFO - Added notable artist 'Jim Gaffigan' with API ID 'K8vZ9175R0V' to the database.
+2024-10-31 02:50:57,885 - INFO - Added notable artist 'Leanne Morgan' with API ID 'K8vZ917fQxV' to the database.
+2024-10-31 02:50:57,885 - INFO - Added notable artist 'Shaboozey' with API ID 'K8vZ917f2P7' to the database.
+2024-10-31 02:50:57,886 - INFO - Added notable artist 'Sammy Virji' with API ID 'K8vZ917qam0' to the database.
+2024-10-31 02:50:57,886 - INFO - Added notable artist 'Fisher' with API ID 'K8vZ9171mPf' to the database.
+2024-10-31 02:50:57,886 - INFO - Added notable artist 'Matt Rife' with API ID 'K8vZ9179SV7' to the database.
+2024-10-31 02:50:57,887 - INFO - Added notable artist 'Dave Chappelle' with API ID 'K8vZ9171rcf' to the database.
+2024-10-31 02:50:57,887 - INFO - Added notable artist 'Sleep Token' with API ID 'K8vZ917b81f' to the database.
+2024-10-31 02:50:57,887 - INFO - Added notable artist 'Kane Brown' with API ID 'K8vZ917fFLf' to the database.
+2024-10-31 02:50:57,888 - INFO - Added notable artist 'Garth Brooks' with API ID 'K8vZ9171aAV' to the database.
+2024-10-31 02:50:57,888 - INFO - Added notable artist 'Kenny Chesney' with API ID 'K8vZ9171f30' to the database.
+2024-10-31 02:50:57,889 - INFO - Added notable artist 'SWEDISH HOUSE MAFIA' with API ID 'K8vZ917G0e0' to the database.
+2024-10-31 02:50:57,889 - INFO - Added notable artist 'Lana Del Rey' with API ID 'K8vZ9172ZIV' to the database.
+2024-10-31 02:50:57,889 - INFO - Added notable artist 'Mau P' with API ID 'K8vZ917hQaf' to the database.
+2024-10-31 02:50:57,890 - INFO - Added notable artist 'Nikki Glaser' with API ID 'K8vZ917uwA7' to the database.
+2024-10-31 02:50:57,890 - INFO - Added notable artist 'Ella Langley' with API ID 'K8vZ917_mB0' to the database.
+2024-10-31 02:50:57,891 - INFO - Added notable artist 'Shakira' with API ID 'K8vZ9171xeV' to the database.
+2024-10-31 02:50:57,891 - INFO - Added notable artist 'Sarah Millican' with API ID 'K8vZ917GQn0' to the database.
+2024-10-31 02:50:57,891 - INFO - Added notable artist 'Hozier' with API ID 'K8vZ917o-E7' to the database.
+2024-10-31 02:50:57,892 - INFO - Added notable artist 'Hugh Jackman' with API ID 'K8vZ917C3VV' to the database.
+2024-10-31 02:50:57,892 - INFO - Added notable artist 'Jesse Welles' with API ID 'K8vZ917qvGf' to the database.
+2024-10-31 02:50:57,892 - INFO - Added notable artist 'Lil Durk' with API ID 'K8vZ9173A9f' to the database.
+2024-10-31 02:50:57,893 - INFO - Added notable artist 'A Boogie Wit Da Hoodie' with API ID 'K8vZ9174hA7' to the database.
+2024-10-31 02:50:57,893 - INFO - Added notable artist 'Destroy Lonely' with API ID 'K8vZ917QLi7' to the database.
+2024-10-31 02:50:57,893 - INFO - Added notable artist 'Charli XCX' with API ID 'K8vZ917CDKf' to the database.
+2024-10-31 02:50:57,894 - INFO - Added notable artist 'Billy Joel' with API ID 'K8vZ9171uv0' to the database.
+2024-10-31 02:50:57,894 - INFO - Added notable artist 'Los Temerarios' with API ID 'K8vZ9171ajf' to the database.
+2024-10-31 02:50:57,895 - INFO - Added notable artist 'Don Toliver' with API ID 'K8vZ917bVK7' to the database.
+2024-10-31 02:50:57,895 - INFO - Added notable artist 'System Of A Down' with API ID 'K8vZ917hmYf' to the database.
+2024-10-31 02:50:57,895 - INFO - Added notable artist 'Fuerza Regida' with API ID 'K8vZ9179vO0' to the database.
+2024-10-31 02:50:57,896 - INFO - Added notable artist 'BLACKPINK' with API ID 'K8vZ9179wi7' to the database.
+2024-10-31 02:50:57,896 - INFO - Added notable artist 'BTS' with API ID 'K8vZ917KpXV' to the database.
+2024-10-31 02:50:57,896 - INFO - Added notable artist 'SEVENTEEN' with API ID 'K8vZ9174Qw0' to the database.
+2024-10-31 02:50:57,897 - INFO - Added notable artist 'Mike Birbiglia' with API ID 'K8vZ9175wo7' to the database.
+2024-10-31 02:50:57,897 - INFO - Added notable artist 'Latto' with API ID 'K8vZ917_glV' to the database.
+2024-10-31 02:50:57,898 - INFO - Added notable artist 'Theo Von' with API ID 'K8vZ917ur6V' to the database.
+2024-10-31 02:50:57,898 - INFO - Added notable artist 'Whiskey Myers' with API ID 'K8vZ917uDgf' to the database.
+2024-10-31 02:50:57,898 - INFO - Added notable artist 'KAYTRANADA' with API ID 'K8vZ917ooF0' to the database.
+2024-10-31 02:50:57,899 - INFO - Added notable artist 'Jamie XX' with API ID 'K8vZ917u4Qf' to the database.
+2024-10-31 02:50:57,899 - INFO - Added notable artist 'Shawn Mendes' with API ID 'K8vZ91739Nf' to the database.
+2024-10-31 02:50:57,899 - INFO - Added notable artist 'Rihanna' with API ID 'K8vZ9175gS7' to the database.
+2024-10-31 02:50:57,900 - INFO - Added notable artist 'Wave To Earth' with API ID 'K8vZ917h9Jf' to the database.
+2024-10-31 02:50:57,900 - INFO - Added notable artist 'HARDY' with API ID 'K8vZ9179LdV' to the database.
+2024-10-31 02:50:57,900 - INFO - Added notable artist 'Diplo' with API ID 'K8vZ917G2o7' to the database.
+2024-10-31 02:50:57,901 - INFO - Added notable artist 'Diplo' with API ID 'K8vZ917G2o7' to the database.
+2024-10-31 02:50:57,901 - INFO - Added notable artist 'Conan Gray' with API ID 'K8vZ9179_07' to the database.
+2024-10-31 02:50:57,901 - INFO - Added notable artist 'Aaron Kwok' with API ID 'K8vZ9171zFV' to the database.
+2024-10-31 02:50:57,902 - INFO - Added notable artist 'hannah bahng' with API ID 'K8vZ917q2T7' to the database.
+2024-10-31 02:50:57,902 - INFO - Added notable artist 'Maisie Peters' with API ID 'K8vZ917pq90' to the database.
+2024-10-31 02:50:57,902 - INFO - Added notable artist 'Carimi' with API ID 'K8vZ9174_g0' to the database.
+2024-10-31 02:50:57,903 - INFO - Added notable artist 'Ricky Gervais' with API ID 'K8vZ9175M60' to the database.
+2024-10-31 02:50:57,903 - INFO - Added notable artist 'RUFUS DU SOL' with API ID 'K8vZ9173ujV' to the database.
+2024-10-31 02:50:57,903 - INFO - Added notable artist 'Monster Jam' with API ID 'K8vZ917uyff' to the database.
+2024-10-31 02:50:57,907 - INFO - Completed adding notable artists from artist_ids_output.txt to the database.
+2024-10-31 02:51:01,760 - INFO - Venue 'The Venue at Thunder Valley Casino Resort' added to database with city 'Lincoln' and state 'CA'.
+2024-10-31 02:51:01,765 - INFO - Artist 'Lady A' added to database.
+2024-10-31 02:51:01,769 - INFO - Event 'Lady A' added to database.
+2024-10-31 02:51:01,777 - INFO - Venue 'Allstate Arena' added to database with city 'Rosemont' and state 'IL'.
+2024-10-31 02:51:01,787 - INFO - Artist 'GHOST' added to database.
+2024-10-31 02:51:01,792 - INFO - Event 'GHOST: World Tour 2025' added to database.
+2024-10-31 02:51:01,796 - INFO - Venue 'Ovation Hall at Ocean Casino Resort ' added to database with city 'Atlantic City' and state 'NJ'.
+2024-10-31 02:51:01,801 - INFO - Artist 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:01,806 - INFO - Event 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:01,810 - INFO - Venue 'Knoxville Civic Auditorium' added to database with city 'Knoxville' and state 'TN'.
+2024-10-31 02:51:01,815 - INFO - Artist 'Chris Janson' added to database.
+2024-10-31 02:51:01,820 - INFO - Event 'Chris Janson' added to database.
+2024-10-31 02:51:01,824 - INFO - Venue 'Knitting Factory - Boise' added to database with city 'Boise' and state 'ID'.
+2024-10-31 02:51:01,829 - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:01,834 - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:01,839 - INFO - Venue 'The Moroccan Lounge' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,843 - INFO - Artist 'Lucius Arthur' added to database.
+2024-10-31 02:51:01,848 - INFO - Event 'MASS presents CITY KIDS feat ALX' added to database.
+2024-10-31 02:51:01,852 - INFO - Venue 'Galuppi's' added to database with city 'Pompano Beach' and state 'FL'.
+2024-10-31 02:51:01,857 - INFO - Event 'Marvels of Motown' added to database.
+2024-10-31 02:51:01,857 - INFO - Venue 'Galuppi's' added to database with city 'Pompano Beach' and state 'FL'.
+2024-10-31 02:51:01,862 - INFO - Artist 'Dueling Pianos' added to database.
+2024-10-31 02:51:01,866 - INFO - Event 'Dueling Pianos' added to database.
+2024-10-31 02:51:01,871 - INFO - Venue 'Madison Square Garden' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:01,871 - INFO - Artist 'Dave Matthews Band' added to database.
+2024-10-31 02:51:01,875 - INFO - Event 'SOULSHINE - A BENEFIT FOR HURRICANE RELIEF AND RECOVERY' added to database.
+2024-10-31 02:51:01,880 - INFO - Venue 'Hard Rock Live Rockford' added to database with city 'Rockford' and state 'IL'.
+2024-10-31 02:51:01,885 - INFO - Artist 'James Kennedy' added to database.
+2024-10-31 02:51:01,889 - INFO - Event 'Black Wednesday With DJ James Kennedy' added to database.
+2024-10-31 02:51:01,894 - INFO - Venue 'Lovedraft's Brewing Co.' added to database with city 'Mechanicsburg' and state 'PA'.
+2024-10-31 02:51:01,899 - INFO - Artist 'Unto Others' added to database.
+2024-10-31 02:51:01,903 - INFO - Event 'Unto Others: Never, Neverland North American Tour' added to database.
+2024-10-31 02:51:01,908 - INFO - Venue 'Echoplex' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,912 - INFO - Artist 'Electric Feels' added to database.
+2024-10-31 02:51:01,917 - INFO - Event 'Electric Feels: Indie Rock + Indie Dance Party (21+)' added to database.
+2024-10-31 02:51:01,922 - INFO - Venue 'The Regent Theater' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,926 - INFO - Artist 'Scam and Jam' added to database.
+2024-10-31 02:51:01,931 - INFO - Event 'Scam and Jam ft. Von Kiss, Big Chunk, Vick Jagger & More! ' added to database.
+2024-10-31 02:51:01,936 - INFO - Venue 'Constellation Room' added to database with city 'Santa Ana' and state 'CA'.
+2024-10-31 02:51:01,940 - INFO - Artist 'Abbie Gamboa' added to database.
+2024-10-31 02:51:01,945 - INFO - Event 'Abbie Gamboa - Pure Nights Tour With Elle Limebear' added to database.
+2024-10-31 02:51:01,950 - INFO - Venue 'ASU Kerr' added to database with city 'Scottsdale' and state 'AZ'.
+2024-10-31 02:51:01,955 - INFO - Artist 'ASU Kerr Tuesday Morning Music & Tea' added to database.
+2024-10-31 02:51:01,960 - INFO - Event 'ASU Kerr Tuesday Morning Music & Tea - ASU Community Flute Ensemble ' added to database.
+2024-10-31 02:51:01,964 - INFO - Venue 'The Echo' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,969 - INFO - Artist 'SleazyWorld Go' added to database.
+2024-10-31 02:51:01,973 - INFO - Event 'One Night with Sleazy' added to database.
+2024-10-31 02:51:01,978 - INFO - Venue 'The Fillmore Charlotte' added to database with city 'Charlotte' and state 'NC'.
+2024-10-31 02:51:01,983 - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:01,990 - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,001 - INFO - Venue 'Barclays Center' added to database with city 'Brooklyn' and state 'NY'.
+2024-10-31 02:51:02,001 - INFO - Artist 'USHER' added to database.
+2024-10-31 02:51:02,008 - INFO - Event 'USHER: Past Present Future' added to database.
+2024-10-31 02:51:02,013 - INFO - Venue 'The Ritz' added to database with city 'Raleigh' and state 'NC'.
+2024-10-31 02:51:02,013 - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,018 - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,022 - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,027 - INFO - Artist 'Golub Brothers' added to database.
+2024-10-31 02:51:02,031 - INFO - Event 'Golub Brothers' added to database.
+2024-10-31 02:51:02,035 - INFO - Venue 'The Peppermint Club' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:02,040 - INFO - Artist 'honestav' added to database.
+2024-10-31 02:51:02,045 - INFO - Event 'honestav' added to database.
+2024-10-31 02:51:02,045 - INFO - Venue 'Barclays Center' added to database with city 'Brooklyn' and state 'NY'.
+2024-10-31 02:51:02,045 - INFO - Artist 'USHER' added to database.
+2024-10-31 02:51:02,050 - INFO - Event 'USHER: Past Present Future' added to database.
+2024-10-31 02:51:02,054 - INFO - Venue 'Brooklyn Bowl Nashville' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,059 - INFO - Artist 'Shrek Rave' added to database.
+2024-10-31 02:51:02,064 - INFO - Event 'Shrek Rave' added to database.
+2024-10-31 02:51:02,068 - INFO - Venue 'Club Congress' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:02,073 - INFO - Artist 'Sports Team' added to database.
+2024-10-31 02:51:02,077 - INFO - Event 'Sports Team' added to database.
+2024-10-31 02:51:02,082 - INFO - Venue 'Ovens Auditorium' added to database with city 'Charlotte' and state 'NC'.
+2024-10-31 02:51:02,087 - INFO - Artist 'Boosie BadAzz' added to database.
+2024-10-31 02:51:02,092 - INFO - Event 'BOOCHELLA: Featuring Boosie Live with Symphony Orchestra' added to database.
+2024-10-31 02:51:02,097 - INFO - Venue 'House of Blues New Orleans ' added to database with city 'New Orleans' and state 'LA'.
+2024-10-31 02:51:02,101 - INFO - Artist 'Cozy Worldwide' added to database.
+2024-10-31 02:51:02,106 - INFO - Event 'A Very Cozy Christmas Tour - Throwback + Current R&B / HipHop - 21+' added to database.
+2024-10-31 02:51:02,111 - INFO - Venue 'Lake Charles Event Ctr Rosa Hart Theatre' added to database with city 'Lake Charles' and state 'LA'.
+2024-10-31 02:51:02,116 - INFO - Artist 'Worship Live' added to database.
+2024-10-31 02:51:02,121 - INFO - Event 'Worship Live' added to database.
+2024-10-31 02:51:02,125 - INFO - Venue 'Foundation Room at House of Blues Chicago' added to database with city 'Chicago' and state 'IL'.
+2024-10-31 02:51:02,131 - INFO - Artist 'DJ Hydrate' added to database.
+2024-10-31 02:51:02,136 - INFO - Event 'The Comfy Show w/ special guest Porch Music, DJ Hydrate, Skeet Pete' added to database.
+2024-10-31 02:51:02,140 - INFO - Venue 'Old National Centre' added to database with city 'Indianapolis' and state 'IN'.
+2024-10-31 02:51:02,141 - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,146 - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,151 - INFO - Venue 'Marathon Music Works' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,151 - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,156 - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,160 - INFO - Venue 'Riverside Revival' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,165 - INFO - Artist 'Jeannie Seely' added to database.
+2024-10-31 02:51:02,170 - INFO - Event 'The Jason Coleman Show' added to database.
+2024-10-31 02:51:02,174 - INFO - Venue 'Voodoo Room at the House of Blues San Diego' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:02,175 - INFO - Artist 'Sports Team' added to database.
+2024-10-31 02:51:02,179 - INFO - Event 'Sports Team' added to database.
+2024-10-31 02:51:02,184 - INFO - Venue 'The Factory' added to database with city 'Saint Louis' and state 'MO'.
+2024-10-31 02:51:02,189 - INFO - Artist 'The All-American Rejects' added to database.
+2024-10-31 02:51:02,193 - INFO - Event 'The All-American Rejects' added to database.
+2024-10-31 02:51:02,198 - INFO - Venue 'Bayou Music Center' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,198 - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,202 - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,207 - INFO - Venue 'Aisle 5' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:02,207 - INFO - Artist 'SleazyWorld Go' added to database.
+2024-10-31 02:51:02,212 - INFO - Event 'SleazyWorld Go' added to database.
+2024-10-31 02:51:02,217 - INFO - Venue 'The Rock' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:02,217 - INFO - Artist 'Unto Others' added to database.
+2024-10-31 02:51:02,222 - INFO - Event 'Unto Others' added to database.
+2024-10-31 02:51:02,226 - INFO - Venue 'Brooklyn Paramount' added to database with city 'Brooklyn' and state 'NY'.
+2024-10-31 02:51:02,231 - INFO - Artist 'Whale Jam' added to database.
+2024-10-31 02:51:02,236 - INFO - Event 'Whale Jam 2024 With Guests From Mt.Joy, RKS, Young The Giant And More' added to database.
+2024-10-31 02:51:02,241 - INFO - Venue 'The Salt Shed Indoors (Shed)' added to database with city 'Chicago' and state 'IL'.
+2024-10-31 02:51:02,241 - INFO - Artist 'Kane Brown' added to database.
+2024-10-31 02:51:02,248 - INFO - Event 'B96 Bash with Kane Brown' added to database.
+2024-10-31 02:51:02,253 - INFO - Venue 'Summit' added to database with city 'Denver' and state 'CO'.
+2024-10-31 02:51:02,258 - INFO - Artist 'Emo Nite' added to database.
+2024-10-31 02:51:02,263 - INFO - Event 'Emo Nite - 21+' added to database.
+2024-10-31 02:51:02,267 - INFO - Venue 'The Depot' added to database with city 'Salt Lake City' and state 'UT'.
+2024-10-31 02:51:02,272 - INFO - Artist 'Black Galore One Fest' added to database.
+2024-10-31 02:51:02,277 - INFO - Event 'Black Galore & The Black Menaces Present: One Fest' added to database.
+2024-10-31 02:51:02,277 - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,277 - INFO - Artist 'honestav' added to database.
+2024-10-31 02:51:02,282 - INFO - Event 'honestav' added to database.
+2024-10-31 02:51:02,286 - INFO - Venue 'Echostage' added to database with city 'Washington' and state 'DC'.
+2024-10-31 02:51:02,291 - INFO - Artist 'Four Tet' added to database.
+2024-10-31 02:51:02,299 - INFO - Event 'Four Tet' added to database.
+2024-10-31 02:51:02,303 - INFO - Venue 'Varsity Theater' added to database with city 'Minneapolis' and state 'MN'.
+2024-10-31 02:51:02,304 - INFO - Artist 'Cozy Worldwide' added to database.
+2024-10-31 02:51:02,308 - INFO - Event 'Cozy Worldwide! Throwback and Current Hip-Hop and R&B Party' added to database.
+2024-10-31 02:51:02,309 - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,313 - INFO - Artist 'Lillimure' added to database.
+2024-10-31 02:51:02,318 - INFO - Event 'Umami House, Lillimure, Plane Station' added to database.
+2024-10-31 02:51:02,318 - INFO - Venue 'Voodoo Room at the House of Blues San Diego' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:02,323 - INFO - Artist 'Secrets' added to database.
+2024-10-31 02:51:02,328 - INFO - Event 'Secrets' added to database.
+2024-10-31 02:51:02,332 - INFO - Venue 'Hard Rock Cincinnati Ballroom' added to database with city 'Cincinnati' and state 'OH'.
+2024-10-31 02:51:02,337 - INFO - Artist 'POP 2000 Tour' added to database.
+2024-10-31 02:51:02,342 - INFO - Event 'Pop 2000 Tour: Chris Kirkpatrick of *NSYNC, O-Town, Ryan Cabrera, LFO ' added to database.
+2024-10-31 02:51:02,342 - INFO - Venue 'The Depot' added to database with city 'Salt Lake City' and state 'UT'.
+2024-10-31 02:51:02,347 - INFO - Event 'Halloween Never Dies: Hardcore Edition' added to database.
+2024-10-31 02:51:02,352 - INFO - Venue 'The Vogel at Count Basie Center for the Arts' added to database with city 'Red Bank' and state 'NJ'.
+2024-10-31 02:51:02,363 - INFO - Artist 'The Weeklings' added to database.
+2024-10-31 02:51:02,374 - INFO - Event 'The Weeklings and Friends: Holiday Hullabaloo' added to database.
+2024-10-31 02:51:02,379 - INFO - Venue 'Little Caesars Arena' added to database with city 'Detroit' and state 'MI'.
+2024-10-31 02:51:02,384 - INFO - Artist 'Nick Cannon Presents: MTV Wild 'N Out Live' added to database.
+2024-10-31 02:51:02,390 - INFO - Event 'Nick Cannon Presents Wild 'N Out Live: The Final Lap' added to database.
+2024-10-31 02:51:02,396 - INFO - Venue 'Saenger Theatre Mobile' added to database with city 'Mobile' and state 'AL'.
+2024-10-31 02:51:02,401 - INFO - Artist 'A Charlie Brown Jazz Christmas' added to database.
+2024-10-31 02:51:02,406 - INFO - Event 'A Charlie Brown Jazz Christmas' added to database.
+2024-10-31 02:51:02,411 - INFO - Venue 'The Fillmore Silver Spring' added to database with city 'Silver Spring' and state 'MD'.
+2024-10-31 02:51:02,416 - INFO - Artist 'Backyard Band' added to database.
+2024-10-31 02:51:02,421 - INFO - Event 'Backyard Band' added to database.
+2024-10-31 02:51:02,426 - INFO - Venue 'Fontainebleau' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,430 - INFO - Artist 'Duran Duran' added to database.
+2024-10-31 02:51:02,435 - INFO - Event 'Duran Duran' added to database.
+2024-10-31 02:51:02,440 - INFO - Venue 'The Observatory North Park' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:02,444 - INFO - Artist '-X-' added to database.
+2024-10-31 02:51:02,449 - INFO - Event 'X - Putting the X back in XMAS' added to database.
+2024-10-31 02:51:02,453 - INFO - Venue 'Gila River Resorts & Casinos - Wild Horse Pass' added to database with city 'Chandler' and state 'AZ'.
+2024-10-31 02:51:02,458 - INFO - Artist 'Flavor Flav' added to database.
+2024-10-31 02:51:02,463 - INFO - Event 'Flavor Flav' added to database.
+2024-10-31 02:51:02,467 - INFO - Venue 'Access at Aliante Casino & Hotel' added to database with city 'North Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,472 - INFO - Artist 'Rhythm Nation' added to database.
+2024-10-31 02:51:02,476 - INFO - Event 'Rhythm Nation' added to database.
+2024-10-31 02:51:02,481 - INFO - Venue 'Mystic Lake Center' added to database with city 'Prior Lake' and state 'MN'.
+2024-10-31 02:51:02,485 - INFO - Artist 'San Holo' added to database.
+2024-10-31 02:51:02,490 - INFO - Event 'San Holo NYE DJ Set' added to database.
+2024-10-31 02:51:02,494 - INFO - Venue 'The Paramount' added to database with city 'Huntington' and state 'NY'.
+2024-10-31 02:51:02,499 - INFO - Artist 'Jimmy Kenny & the Pirate Beach Band' added to database.
+2024-10-31 02:51:02,504 - INFO - Event 'Cold Beer on a Friday Night! Feat. Jimmy Kenny & The Pirate Beach Band' added to database.
+2024-10-31 02:51:02,508 - INFO - Venue 'The Atlantis' added to database with city 'Washington' and state 'DC'.
+2024-10-31 02:51:02,513 - INFO - Artist 'Mixtape' added to database.
+2024-10-31 02:51:02,518 - INFO - Event 'MIXTAPE with DJs Matt Bailer and Shea Van Horn' added to database.
+2024-10-31 02:51:02,523 - INFO - Venue 'Blueberry Hill Duck Room' added to database with city 'Saint Louis' and state 'MO'.
+2024-10-31 02:51:02,527 - INFO - Artist 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,532 - INFO - Event 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,537 - INFO - Venue 'High Noon Saloon' added to database with city 'Madison' and state 'WI'.
+2024-10-31 02:51:02,541 - INFO - Artist 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,546 - INFO - Event 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,546 - INFO - Venue 'Old National Centre' added to database with city 'Indianapolis' and state 'IN'.
+2024-10-31 02:51:02,546 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,551 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,556 - INFO - Venue 'Old Forester's Paristown Hall' added to database with city 'Louisville' and state 'KY'.
+2024-10-31 02:51:02,556 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,561 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,565 - INFO - Venue 'White Oak Music Hall - Upstairs ' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,570 - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:02,574 - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:02,579 - INFO - Venue 'The Wellmont Theater' added to database with city 'Montclair' and state 'NJ'.
+2024-10-31 02:51:02,584 - INFO - Artist 'Yacht Rock Revue' added to database.
+2024-10-31 02:51:02,589 - INFO - Event 'Yacht Rock Revue' added to database.
+2024-10-31 02:51:02,594 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,598 - INFO - Artist 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,603 - INFO - Event 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,608 - INFO - Venue 'Madison Center for the Arts' added to database with city 'Phoenix' and state 'AZ'.
+2024-10-31 02:51:02,613 - INFO - Artist 'Gypsy Dreams' added to database.
+2024-10-31 02:51:02,618 - INFO - Event 'The Fleetwood Mac Concert Experience starring Gypsy Dreams' added to database.
+2024-10-31 02:51:02,622 - INFO - Venue 'House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,627 - INFO - Artist 'Who's Bad' added to database.
+2024-10-31 02:51:02,632 - INFO - Event 'Who's Bad - The Ultimate Michael Jackson Experience' added to database.
+2024-10-31 02:51:02,637 - INFO - Venue 'Uptown Theatre Napa' added to database with city 'Napa' and state 'CA'.
+2024-10-31 02:51:02,642 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,646 - INFO - Event 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,646 - INFO - Venue 'Marathon Music Works' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,647 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,651 - INFO - Event 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,656 - INFO - Venue 'Irving Plaza Powered By Verizon 5G' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,661 - INFO - Event 'Kitty's Rave (18+)' added to database.
+2024-10-31 02:51:02,666 - INFO - Venue 'Bowery Ballroom' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,670 - INFO - Artist 'Cab Ellis' added to database.
+2024-10-31 02:51:02,675 - INFO - Event 'CAB ELLIS: "BRAND NEW CHAIR" Single Release Party' added to database.
+2024-10-31 02:51:02,675 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,675 - INFO - Artist 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,680 - INFO - Event 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,684 - INFO - Venue 'Minglewood Hall' added to database with city 'Memphis' and state 'TN'.
+2024-10-31 02:51:02,685 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,689 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,690 - INFO - Venue 'Brooklyn Bowl Nashville' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,694 - INFO - Artist 'Hayes Carll' added to database.
+2024-10-31 02:51:02,702 - INFO - Event 'Hayes Carll's Nashville Birthday Bash Featuring Hayes & The Heathens' added to database.
+2024-10-31 02:51:02,707 - INFO - Venue 'Route 66 Casino' added to database with city 'Albuquerque' and state 'NM'.
+2024-10-31 02:51:02,712 - INFO - Artist 'Air Supply' added to database.
+2024-10-31 02:51:02,716 - INFO - Event 'Air Supply' added to database.
+2024-10-31 02:51:02,721 - INFO - Venue 'The ELM' added to database with city 'Bozeman' and state 'MT'.
+2024-10-31 02:51:02,726 - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:02,731 - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:02,735 - INFO - Venue 'Music Box at the Borgata' added to database with city 'Atlantic City' and state 'NJ'.
+2024-10-31 02:51:02,740 - INFO - Artist 'Back 2 Mac: A Tribute To Fleetwood Mac' added to database.
+2024-10-31 02:51:02,745 - INFO - Event 'Back 2 Mac: A Tribute To Fleetwood Mac' added to database.
+2024-10-31 02:51:02,750 - INFO - Venue 'The Echo Lounge & Music Hall' added to database with city 'Dallas' and state 'TX'.
+2024-10-31 02:51:02,750 - INFO - Artist 'Who's Bad' added to database.
+2024-10-31 02:51:02,755 - INFO - Event 'Who's Bad - The Ultimate Michael Jackson Experience - 18+ Event' added to database.
+2024-10-31 02:51:02,760 - INFO - Venue 'Fox Performing Arts Center' added to database with city 'Riverside' and state 'CA'.
+2024-10-31 02:51:02,760 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,765 - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:02,769 - INFO - Venue 'Rialto Theatre-Tucson' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:02,769 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,774 - INFO - Event 'Dweezil Zappa: The Rox(Postroph)y Tour @ Rialto Theatre' added to database.
+2024-10-31 02:51:02,778 - INFO - Venue 'Mercury Ballroom' added to database with city 'Louisville' and state 'KY'.
+2024-10-31 02:51:02,783 - INFO - Artist 'Nonpoint' added to database.
+2024-10-31 02:51:02,788 - INFO - Event 'Nonpoint' added to database.
+2024-10-31 02:51:02,788 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,788 - INFO - Artist 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,793 - INFO - Event 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,798 - INFO - Venue 'The Masquerade  - Altar' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:02,798 - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:02,802 - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:02,803 - INFO - Venue 'The Ritz' added to database with city 'Raleigh' and state 'NC'.
+2024-10-31 02:51:02,803 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,808 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,808 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,812 - INFO - Artist 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,817 - INFO - Event 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,822 - INFO - Venue 'Revolution Live' added to database with city 'Ft Lauderdale' and state 'FL'.
+2024-10-31 02:51:02,826 - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:02,831 - INFO - Event 'Spafford' added to database.
+2024-10-31 02:51:02,831 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,831 - INFO - Artist 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,836 - INFO - Event 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,836 - INFO - Venue 'House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,836 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,841 - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:02,846 - INFO - Venue 'House of Blues Myrtle Beach' added to database with city 'North Myrtle Beach' and state 'SC'.
+2024-10-31 02:51:02,846 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,850 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,851 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,851 - INFO - Artist 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,856 - INFO - Event 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,860 - INFO - Venue 'Bogart's' added to database with city 'Cincinnati' and state 'OH'.
+2024-10-31 02:51:02,865 - INFO - Artist 'Muscadine Bloodline' added to database.
+2024-10-31 02:51:02,869 - INFO - Event 'Muscadine Bloodline - The Coastal Plain Tour' added to database.
+2024-10-31 02:51:02,874 - INFO - Venue 'The Charleston Music Hall' added to database with city 'Charleston' and state 'SC'.
+2024-10-31 02:51:02,874 - INFO - Artist 'Chris Janson' added to database.
+2024-10-31 02:51:02,879 - INFO - Event 'Chris Janson' added to database.
+2024-10-31 02:51:02,884 - INFO - Venue 'Ace of Spades' added to database with city 'Sacramento' and state 'CA'.
+2024-10-31 02:51:02,884 - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:02,889 - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:02,889 - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,889 - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:02,894 - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:02,899 - INFO - Venue 'DECC Symphony Hall' added to database with city 'Duluth' and state 'MN'.
+2024-10-31 02:51:02,903 - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:02,908 - INFO - Event 'Josh Turner: This Country Music Thing Tour' added to database.
+2024-10-31 02:51:02,913 - INFO - Venue 'Bally's Lake Tahoe' added to database with city 'Stateline' and state 'NV'.
+2024-10-31 02:51:02,914 - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:02,919 - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:02,919 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,923 - INFO - Artist 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,928 - INFO - Event 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,933 - INFO - Venue 'Fillmore New Orleans' added to database with city 'New Orleans' and state 'LA'.
+2024-10-31 02:51:02,934 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,938 - INFO - Event 'Dweezil Zappa - The Rox(Postroph)y Tour' added to database.
+2024-10-31 02:51:02,943 - INFO - Venue 'Mayo Clinic Health System Event Center' added to database with city 'Mankato' and state 'MN'.
+2024-10-31 02:51:02,943 - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:02,948 - INFO - Event 'Josh Turner:  This Country Music Thing Tour' added to database.
+2024-10-31 02:51:02,953 - INFO - Venue 'Legends Casino Event Center' added to database with city 'Toppenish' and state 'WA'.
+2024-10-31 02:51:02,958 - INFO - Event 'Lit & Fuel' added to database.
+2024-10-31 02:51:02,958 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,958 - INFO - Artist 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,962 - INFO - Event 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,967 - INFO - Venue 'South Shore Room at Harrah's Lake Tahoe' added to database with city 'Stateline' and state 'NV'.
+2024-10-31 02:51:02,972 - INFO - Artist 'Three Dog Night' added to database.
+2024-10-31 02:51:02,976 - INFO - Event 'Three Dog Night' added to database.
+2024-10-31 02:51:02,976 - INFO - Venue 'House of Blues Myrtle Beach' added to database with city 'North Myrtle Beach' and state 'SC'.
+2024-10-31 02:51:02,981 - INFO - Artist 'The Purple Madness - Tribute to Prince' added to database.
+2024-10-31 02:51:02,986 - INFO - Event 'The Purple Madness - Prince Tribute Show' added to database.
+2024-10-31 02:51:02,991 - INFO - Venue 'Fox Theater - Oakland' added to database with city 'Oakland' and state 'CA'.
+2024-10-31 02:51:02,995 - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,000 - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,000 - INFO - Venue 'Minglewood Hall' added to database with city 'Memphis' and state 'TN'.
+2024-10-31 02:51:03,000 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:03,005 - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:03,005 - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:03,010 - INFO - Artist 'The Haunt' added to database.
+2024-10-31 02:51:03,014 - INFO - Event 'The Haunt' added to database.
+2024-10-31 02:51:03,019 - INFO - Venue 'Black River Coliseum' added to database with city 'Poplar Bluff' and state 'MO'.
+2024-10-31 02:51:03,024 - INFO - Artist 'Newsboys' added to database.
+2024-10-31 02:51:03,028 - INFO - Event 'Newsboys' added to database.
+2024-10-31 02:51:03,033 - INFO - Venue 'The Fillmore Miami Beach at Jackie Gleason Theater' added to database with city 'Miami Beach' and state 'FL'.
+2024-10-31 02:51:03,038 - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,042 - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,047 - INFO - Venue 'Chandler Center for the Arts' added to database with city 'Chandler' and state 'AZ'.
+2024-10-31 02:51:03,052 - INFO - Artist 'Showtune Productions' added to database.
+2024-10-31 02:51:03,057 - INFO - Event 'Diamond: Songs of Neil Diamond' added to database.
+2024-10-31 02:51:03,057 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,057 - INFO - Artist 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:03,062 - INFO - Event 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:03,062 - INFO - Venue 'The Depot' added to database with city 'Salt Lake City' and state 'UT'.
+2024-10-31 02:51:03,062 - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,067 - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,071 - INFO - Venue 'Baltimore Soundstage' added to database with city 'Baltimore' and state 'MD'.
+2024-10-31 02:51:03,071 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,076 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,076 - INFO - Venue 'The Charleston Music Hall' added to database with city 'Charleston' and state 'SC'.
+2024-10-31 02:51:03,077 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:03,081 - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:03,082 - INFO - Venue 'Rialto Theatre-Tucson' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:03,082 - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,087 - INFO - Event 'Atmosphere: Imagine The Fun Tour @ Rialto Theatre' added to database.
+2024-10-31 02:51:03,087 - INFO - Venue 'The Fillmore Charlotte' added to database with city 'Charlotte' and state 'NC'.
+2024-10-31 02:51:03,087 - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,092 - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,097 - INFO - Venue 'Rialto ' added to database with city 'Bozeman' and state 'MT'.
+2024-10-31 02:51:03,102 - INFO - Artist 'Shwayze' added to database.
+2024-10-31 02:51:03,106 - INFO - Event 'Shwayze' added to database.
+2024-10-31 02:51:03,111 - INFO - Venue 'The Fillmore Philadelphia' added to database with city 'Philadelphia' and state 'PA'.
+2024-10-31 02:51:03,112 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,117 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,122 - INFO - Venue 'War Memorial Auditorium' added to database with city 'Ft Lauderdale' and state 'FL'.
+2024-10-31 02:51:03,127 - INFO - Artist 'Melissa Etheridge' added to database.
+2024-10-31 02:51:03,131 - INFO - Event 'Melissa Etheridge: 2025 Tour' added to database.
+2024-10-31 02:51:03,136 - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,141 - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,146 - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,146 - INFO - Venue 'The Ritz' added to database with city 'Raleigh' and state 'NC'.
+2024-10-31 02:51:03,146 - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,151 - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,156 - INFO - Venue 'Elevation 27' added to database with city 'Virginia Beach' and state 'VA'.
+2024-10-31 02:51:03,156 - INFO - Artist 'Nonpoint' added to database.
+2024-10-31 02:51:03,160 - INFO - Event 'Nonpoint with Crobot and Heartsick' added to database.
+2024-10-31 02:51:03,165 - INFO - Venue 'Wells Hall at The Parker' added to database with city 'Ft Lauderdale' and state 'FL'.
+2024-10-31 02:51:03,165 - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:03,170 - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:03,175 - INFO - Venue 'Vinyl' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:03,180 - INFO - Artist 'Cloud Cult' added to database.
+2024-10-31 02:51:03,185 - INFO - Event 'Cloud Cult' added to database.
+2024-10-31 02:51:03,185 - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,185 - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,190 - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,194 - INFO - Venue 'Hard Rock Live Orlando' added to database with city 'Orlando' and state 'FL'.
+2024-10-31 02:51:03,194 - INFO - Artist 'Melissa Etheridge' added to database.
+2024-10-31 02:51:03,199 - INFO - Event 'Melissa Etheridge: 2025 Tour' added to database.
+2024-10-31 02:51:03,204 - INFO - Venue 'The Van Buren' added to database with city 'Phoenix' and state 'AZ'.
+2024-10-31 02:51:03,204 - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,209 - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,214 - INFO - Venue 'Aztec Theatre ' added to database with city 'San Antonio' and state 'TX'.
+2024-10-31 02:51:03,214 - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,219 - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:03,224 - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,224 - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:03,229 - INFO - Event 'Spafford' added to database.
+2024-10-31 02:51:03,229 - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,229 - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:03,234 - INFO - Event 'Spafford: Two Night Pass ' added to database.
+2024-10-31 02:51:03,239 - INFO - Venue 'Dome at Toyota Oakdale Theatre' added to database with city 'Wallingford' and state 'CT'.
+2024-10-31 02:51:03,240 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,244 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,249 - INFO - Venue 'Top Hat' added to database with city 'Missoula' and state 'MT'.
+2024-10-31 02:51:03,250 - INFO - Artist 'Shwayze' added to database.
+2024-10-31 02:51:03,255 - INFO - Event 'Shwayze' added to database.
+2024-10-31 02:51:03,260 - INFO - Venue 'United Center' added to database with city 'Chicago' and state 'IL'.
+2024-10-31 02:51:03,268 - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,282 - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,286 - INFO - Venue 'Tabernacle' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:03,286 - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,292 - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,292 - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,292 - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:03,297 - INFO - Event 'Spafford' added to database.
+2024-10-31 02:51:03,302 - INFO - Venue 'Hackensack Meridian Health Theatre at the Count Basie Center ' added to database with city 'Red Bank' and state 'NJ'.
+2024-10-31 02:51:03,310 - INFO - Artist 'Tusk' added to database.
+2024-10-31 02:51:03,316 - INFO - Event 'Tusk: The Classic Fleetwood Mac Tribute' added to database.
+2024-10-31 02:51:03,316 - INFO - Venue 'Marathon Music Works' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:03,316 - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,321 - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,326 - INFO - Venue 'Bijou Theatre' added to database with city 'Knoxville' and state 'TN'.
+2024-10-31 02:51:03,332 - INFO - Artist 'Scott Miller' added to database.
+2024-10-31 02:51:03,337 - INFO - Event 'Scott Miller' added to database.
+2024-10-31 02:51:03,337 - INFO - Venue 'The Paramount' added to database with city 'Huntington' and state 'NY'.
+2024-10-31 02:51:03,337 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,342 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,342 - INFO - Venue 'Constellation Room' added to database with city 'Santa Ana' and state 'CA'.
+2024-10-31 02:51:03,347 - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,353 - INFO - Event 'Dua Saleh' added to database.
+2024-10-31 02:51:03,357 - INFO - Venue 'La Crosse Center' added to database with city 'La Crosse' and state 'WI'.
+2024-10-31 02:51:03,362 - INFO - Artist 'Asking Alexandria' added to database.
+2024-10-31 02:51:03,367 - INFO - Event 'Riverfront Revolt' added to database.
+2024-10-31 02:51:03,372 - INFO - Venue 'The Wiltern' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,372 - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,377 - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,382 - INFO - Venue 'Neptune Theatre' added to database with city 'Seattle' and state 'WA'.
+2024-10-31 02:51:03,382 - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,387 - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,391 - INFO - Venue 'Birchmere' added to database with city 'Alexandria' and state 'VA'.
+2024-10-31 02:51:03,396 - INFO - Artist 'Dar Williams' added to database.
+2024-10-31 02:51:03,401 - INFO - Event 'Dar Williams' added to database.
+2024-10-31 02:51:03,401 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,406 - INFO - Artist 'Frankie Scinta' added to database.
+2024-10-31 02:51:03,411 - INFO - Event 'Frankie Scinta' added to database.
+2024-10-31 02:51:03,416 - INFO - Venue 'Marquee Theatre' added to database with city 'Tempe' and state 'AZ'.
+2024-10-31 02:51:03,421 - INFO - Artist 'Cowboy Mouth' added to database.
+2024-10-31 02:51:03,426 - INFO - Event 'Cowboy Mouth' added to database.
+2024-10-31 02:51:03,426 - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,426 - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,431 - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,436 - INFO - Venue 'The Signal' added to database with city 'Chattanooga' and state 'TN'.
+2024-10-31 02:51:03,436 - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,441 - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:03,446 - INFO - Venue 'L'Auberge Casino & Hotel Baton Rouge ' added to database with city 'Baton Rouge' and state 'LA'.
+2024-10-31 02:51:03,451 - INFO - Artist 'John Waite' added to database.
+2024-10-31 02:51:03,456 - INFO - Event 'John Waite' added to database.
+2024-10-31 02:51:03,461 - INFO - Venue 'Ford Wyoming Center' added to database with city 'Casper' and state 'WY'.
+2024-10-31 02:51:03,461 - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:03,466 - INFO - Event 'Josh Turner: This Country Music Thing Tour' added to database.
+2024-10-31 02:51:03,471 - INFO - Venue 'United Palace' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:03,476 - INFO - Artist 'Radel Ortiz' added to database.
+2024-10-31 02:51:03,481 - INFO - Event 'Radel Ortiz  Live From New York' added to database.
+2024-10-31 02:51:03,486 - INFO - Venue 'Bryce Jordan Center' added to database with city 'University Park' and state 'PA'.
+2024-10-31 02:51:03,491 - INFO - Artist 'Parker McCollum' added to database.
+2024-10-31 02:51:03,496 - INFO - Event 'Parker McCollum: What Kinda Man Tour 2025' added to database.
+2024-10-31 02:51:03,501 - INFO - Venue 'Ames Center' added to database with city 'Burnsville' and state 'MN'.
+2024-10-31 02:51:03,506 - INFO - Artist '1964 The Tribute' added to database.
+2024-10-31 02:51:03,511 - INFO - Event '1964 The Tribute' added to database.
+2024-10-31 02:51:03,511 - INFO - Venue 'La Crosse Center' added to database with city 'La Crosse' and state 'WI'.
+2024-10-31 02:51:03,516 - INFO - Artist 'Beartooth' added to database.
+2024-10-31 02:51:03,521 - INFO - Event 'Riverfront Revolt' added to database.
+2024-10-31 02:51:03,521 - INFO - Venue 'The Wellmont Theater' added to database with city 'Montclair' and state 'NJ'.
+2024-10-31 02:51:03,521 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,526 - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,526 - INFO - Venue 'The Moroccan Lounge' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,526 - INFO - Artist 'The Haunt' added to database.
+2024-10-31 02:51:03,531 - INFO - Event 'The Haunt' added to database.
+2024-10-31 02:51:03,531 - INFO - Venue 'The Echo' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,536 - INFO - Artist 'Lutalo' added to database.
+2024-10-31 02:51:03,541 - INFO - Event 'Lutalo' added to database.
+2024-10-31 02:51:03,546 - INFO - Venue 'Fiserv Forum' added to database with city 'Milwaukee' and state 'WI'.
+2024-10-31 02:51:03,546 - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,551 - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,555 - INFO - Venue 'The Sound' added to database with city 'Del Mar' and state 'CA'.
+2024-10-31 02:51:03,555 - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,560 - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,560 - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,560 - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,565 - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,570 - INFO - Venue 'Genesee Theatre' added to database with city 'Waukegan' and state 'IL'.
+2024-10-31 02:51:03,570 - INFO - Artist 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,575 - INFO - Event 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,575 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,580 - INFO - Artist 'Human Nature' added to database.
+2024-10-31 02:51:03,586 - INFO - Event 'Human Nature: Back To The Sound Of Motown' added to database.
+2024-10-31 02:51:03,586 - INFO - Venue 'ASU Kerr' added to database with city 'Scottsdale' and state 'AZ'.
+2024-10-31 02:51:03,586 - INFO - Artist 'ASU Kerr Tuesday Morning Music & Tea' added to database.
+2024-10-31 02:51:03,592 - INFO - Event 'ASU Kerr Tuesday Morning Music & Tea - Collaborative Piano' added to database.
+2024-10-31 02:51:03,592 - INFO - Venue 'White Oak Music Hall - Upstairs ' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,592 - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,597 - INFO - Event 'Dua Saleh - I SHOULD CALL THEM WORLD TOUR' added to database.
+2024-10-31 02:51:03,603 - INFO - Venue 'The Blue Note' added to database with city 'Columbia' and state 'MO'.
+2024-10-31 02:51:03,603 - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,608 - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:03,613 - INFO - Venue 'Orpheum Theatre' added to database with city 'Minneapolis' and state 'MN'.
+2024-10-31 02:51:03,614 - INFO - Artist 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,619 - INFO - Event 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,624 - INFO - Venue 'House of Blues San Diego' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:03,630 - INFO - Artist 'Lauren Mayberry' added to database.
+2024-10-31 02:51:03,635 - INFO - Event 'Lauren Mayberry - Vicious Creature Tour' added to database.
+2024-10-31 02:51:03,635 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,635 - INFO - Artist 'Human Nature' added to database.
+2024-10-31 02:51:03,640 - INFO - Event 'Human Nature: Back To The Sound Of Motown' added to database.
+2024-10-31 02:51:03,640 - INFO - Venue 'The Fillmore Silver Spring' added to database with city 'Silver Spring' and state 'MD'.
+2024-10-31 02:51:03,640 - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,645 - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,645 - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,645 - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,650 - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,650 - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,651 - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,659 - INFO - Event 'Dua Saleh: I SHOULD CALL THEM WORLD TOUR w/ Sam Austins' added to database.
+2024-10-31 02:51:03,664 - INFO - Venue 'White Oak Music Hall - Downstairs' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,668 - INFO - Artist 'Moon Hooch' added to database.
+2024-10-31 02:51:03,673 - INFO - Event 'Moon Zooz: Moon Hooch + Too Many Zooz with Honeycomb' added to database.
+2024-10-31 02:51:03,678 - INFO - Venue 'The Fillmore' added to database with city 'San Francisco' and state 'CA'.
+2024-10-31 02:51:03,678 - INFO - Artist 'Lauren Mayberry' added to database.
+2024-10-31 02:51:03,683 - INFO - Event 'Lauren Mayberry: Vicious Creature Tour' added to database.
+2024-10-31 02:51:03,688 - INFO - Venue 'Buffalo RiverWorks' added to database with city 'Buffalo' and state 'NY'.
+2024-10-31 02:51:03,689 - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,693 - INFO - Event 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,698 - INFO - Venue 'Jefferson Theater' added to database with city 'Charlottesville' and state 'VA'.
+2024-10-31 02:51:03,703 - INFO - Artist 'Badfish - A Tribute To Sublime' added to database.
+2024-10-31 02:51:03,708 - INFO - Event 'Badfish - A Tribute To Sublime: The Gold Tour' added to database.
+2024-10-31 02:51:03,708 - INFO - Venue 'Echoplex' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,713 - INFO - Artist 'Jamie Miller' added to database.
+2024-10-31 02:51:03,718 - INFO - Event 'Jamie Miller' added to database.
+2024-10-31 02:51:03,723 - INFO - Venue 'Gas South Arena' added to database with city 'Duluth' and state 'GA'.
+2024-10-31 02:51:03,723 - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,728 - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,728 - INFO - Venue 'Echostage' added to database with city 'Washington' and state 'DC'.
+2024-10-31 02:51:03,733 - INFO - Artist 'Sullivan King' added to database.
+2024-10-31 02:51:03,738 - INFO - Event 'Sullivan King - Chaos Will Bring Peace 2025 US Tour' added to database.
+2024-10-31 02:51:03,738 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,738 - INFO - Artist 'Human Nature' added to database.
+2024-10-31 02:51:03,743 - INFO - Event 'Human Nature: Back To The Sound Of Motown' added to database.
+2024-10-31 02:51:03,743 - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,743 - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,748 - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,748 - INFO - Venue 'White Oak Music Hall - Upstairs ' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,748 - INFO - Artist 'Lutalo' added to database.
+2024-10-31 02:51:03,753 - INFO - Event 'Lutalo' added to database.
+2024-10-31 02:51:03,753 - INFO - Venue 'The Fillmore' added to database with city 'San Francisco' and state 'CA'.
+2024-10-31 02:51:03,753 - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,758 - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,758 - INFO - Venue 'Constellation Room' added to database with city 'Santa Ana' and state 'CA'.
+2024-10-31 02:51:03,758 - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:03,762 - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:03,767 - INFO - Venue 'The Wind Creek Event Center ' added to database with city 'Bethlehem' and state 'PA'.
+2024-10-31 02:51:03,772 - INFO - Event 'The 3 Kings: Ultimate Elvis 90th Birthday Experience' added to database.
+2024-10-31 02:51:03,772 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,777 - INFO - Artist 'Serpentine Fire' added to database.
+2024-10-31 02:51:03,782 - INFO - Event 'SERPENTINE FIRE: Music of Earth, Wind, and Fire' added to database.
+2024-10-31 02:51:03,787 - INFO - Venue 'The Bronze Peacock at House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,792 - INFO - Artist 'Bayker Blankenship' added to database.
+2024-10-31 02:51:03,796 - INFO - Event 'Bayker Blankenship' added to database.
+2024-10-31 02:51:03,797 - INFO - Venue 'House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,801 - INFO - Artist 'Casey Donahew' added to database.
+2024-10-31 02:51:03,806 - INFO - Event 'Casey Donahew' added to database.
+2024-10-31 02:51:03,811 - INFO - Venue 'Crossroads Arena' added to database with city 'Corinth' and state 'MS'.
+2024-10-31 02:51:03,811 - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:03,816 - INFO - Event 'Josh Turner' added to database.
+2024-10-31 02:51:03,820 - INFO - Venue 'Bridgestone Arena' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:03,821 - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,825 - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,830 - INFO - Venue 'The Stone Pony' added to database with city 'Asbury Park' and state 'NJ'.
+2024-10-31 02:51:03,835 - INFO - Artist 'Joy Oladokun' added to database.
+2024-10-31 02:51:03,840 - INFO - Event 'Joy Oladokun: The Blackbird Tour' added to database.
+2024-10-31 02:51:03,840 - INFO - Venue 'The Fillmore Philadelphia' added to database with city 'Philadelphia' and state 'PA'.
+2024-10-31 02:51:03,840 - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,844 - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,852 - INFO - Venue 'Saint Andrew's Hall' added to database with city 'Detroit' and state 'MI'.
+2024-10-31 02:51:03,853 - INFO - Artist 'Muscadine Bloodline' added to database.
+2024-10-31 02:51:03,863 - INFO - Event 'Muscadine Bloodline- The Coastal Plain Tour' added to database.
+2024-10-31 02:51:03,871 - INFO - Venue 'The Bellwether' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,871 - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,875 - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,880 - INFO - Venue 'The Pageant' added to database with city 'Saint Louis' and state 'MO'.
+2024-10-31 02:51:03,885 - INFO - Artist 'Billy Gibbons' added to database.
+2024-10-31 02:51:03,889 - INFO - Event 'Billy F. Gibbons' added to database.
+2024-10-31 02:51:03,890 - INFO - Venue 'Elevation 27' added to database with city 'Virginia Beach' and state 'VA'.
+2024-10-31 02:51:03,890 - INFO - Artist 'Badfish - A Tribute To Sublime' added to database.
+2024-10-31 02:51:03,894 - INFO - Event 'Badfish - A Tribute To Sublime' added to database.
+2024-10-31 02:51:03,899 - INFO - Venue 'Bell Auditorium' added to database with city 'Augusta' and state 'GA'.
+2024-10-31 02:51:03,904 - INFO - Artist 'Alice Cooper' added to database.
+2024-10-31 02:51:03,909 - INFO - Event 'Alice Cooper' added to database.
+2024-10-31 02:51:03,909 - INFO - Venue 'Vinyl' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:03,909 - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,914 - INFO - Event 'Dua Saleh - I SHOULD CALL THEM WORLD TOUR' added to database.
+2024-10-31 02:51:03,918 - INFO - Venue 'The Theater at MGM National Harbor' added to database with city 'National Harbor' and state 'MD'.
+2024-10-31 02:51:03,923 - INFO - Artist 'KC & the Sunshine Band' added to database.
+2024-10-31 02:51:03,928 - INFO - Event 'KC & the Sunshine Band' added to database.
+2024-10-31 02:51:03,933 - INFO - Venue 'The Maryland Theatre' added to database with city 'Hagerstown' and state 'MD'.
+2024-10-31 02:51:03,937 - INFO - Artist 'The Purple Xperience' added to database.
+2024-10-31 02:51:03,942 - INFO - Event 'The Purple Xperience' added to database.
+2024-10-31 02:51:03,942 - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,942 - INFO - Artist 'Serpentine Fire' added to database.
+2024-10-31 02:51:03,947 - INFO - Event 'SERPENTINE FIRE: Music of Earth, Wind, and Fire' added to database.

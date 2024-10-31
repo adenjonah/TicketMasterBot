@@ -12,7 +12,7 @@ TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
 # Set up database-specific logging
 db_logger = logging.getLogger("dbLogger")
 db_logger.setLevel(logging.INFO)
-db_handler = logging.FileHandler("db_log.log")
+db_handler = logging.FileHandler("logs/db_log.log")
 db_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 db_logger.addHandler(db_handler)
 

@@ -1,0 +1,733 @@
+2024-10-31 02:50:57,848 - dbLogger - INFO - Database initialized successfully.
+2024-10-31 02:50:57,858 - dbLogger - INFO - Added notable artist 'Taylor Swift' with API ID 'K8vZ9175Tr0' to the database.
+2024-10-31 02:50:57,858 - dbLogger - INFO - Added notable artist 'Adele' with API ID 'K8vZ917Gku7' to the database.
+2024-10-31 02:50:57,859 - dbLogger - INFO - Added notable artist 'Koe Wetzel' with API ID 'K8vZ917pldV' to the database.
+2024-10-31 02:50:57,860 - dbLogger - INFO - Added notable artist 'Zach Bryan' with API ID 'K8vZ917_NoV' to the database.
+2024-10-31 02:50:57,860 - dbLogger - INFO - Added notable artist 'Hans Zimmer' with API ID 'K8vZ917ubK0' to the database.
+2024-10-31 02:50:57,861 - dbLogger - INFO - Added notable artist 'Gunna' with API ID 'K8vZ917psY7' to the database.
+2024-10-31 02:50:57,861 - dbLogger - INFO - Added notable artist 'Maddox Batson' with API ID 'K8vZ917qeuV' to the database.
+2024-10-31 02:50:57,862 - dbLogger - INFO - Added notable artist 'Max McNown' with API ID 'K8vZ917jfuf' to the database.
+2024-10-31 02:50:57,862 - dbLogger - INFO - Added notable artist 'Masayoshi Takanaka' with API ID 'K8vZ917q59f' to the database.
+2024-10-31 02:50:57,863 - dbLogger - INFO - Added notable artist 'Creed' with API ID 'K8vZ9171buf' to the database.
+2024-10-31 02:50:57,863 - dbLogger - INFO - Added notable artist 'Coldplay' with API ID 'K8vZ9171izV' to the database.
+2024-10-31 02:50:57,863 - dbLogger - INFO - Added notable artist 'Oasis' with API ID 'K8vZ9171fw7' to the database.
+2024-10-31 02:50:57,864 - dbLogger - INFO - Added notable artist 'Rascal Flatts' with API ID 'K8vZ9171nF7' to the database.
+2024-10-31 02:50:57,865 - dbLogger - INFO - Added notable artist 'Kenshi Yonezu' with API ID 'K8vZ917q7K0' to the database.
+2024-10-31 02:50:57,865 - dbLogger - INFO - Added notable artist 'Blake Shelton' with API ID 'K8vZ9171Bm7' to the database.
+2024-10-31 02:50:57,865 - dbLogger - INFO - Added notable artist 'Van Morrison' with API ID 'K8vZ917hY-V' to the database.
+2024-10-31 02:50:57,866 - dbLogger - INFO - Added notable artist 'Imagine Dragons' with API ID 'K8vZ917GSz7' to the database.
+2024-10-31 02:50:57,866 - dbLogger - INFO - Added notable artist 'Cigarettes After Sex' with API ID 'K8vZ917fN6V' to the database.
+2024-10-31 02:50:57,867 - dbLogger - INFO - Added notable artist 'Benson Boone' with API ID 'K8vZ917Qjw0' to the database.
+2024-10-31 02:50:57,867 - dbLogger - INFO - Added notable artist 'Lizzy McAlpine' with API ID 'K8vZ917_p3V' to the database.
+2024-10-31 02:50:57,868 - dbLogger - INFO - Added notable artist 'James Taylor' with API ID 'K8vZ917G-E7' to the database.
+2024-10-31 02:50:57,868 - dbLogger - INFO - Added notable artist 'Luke Combs' with API ID 'K8vZ917KVr7' to the database.
+2024-10-31 02:50:57,868 - dbLogger - INFO - Added notable artist 'Eric Church' with API ID 'K8vZ917G5G0' to the database.
+2024-10-31 02:50:57,869 - dbLogger - INFO - Added notable artist 'Billy Strings' with API ID 'K8vZ9174G2V' to the database.
+2024-10-31 02:50:57,869 - dbLogger - INFO - Added notable artist 'Morgan Wallen' with API ID 'K8vZ917jiY0' to the database.
+2024-10-31 02:50:57,869 - dbLogger - INFO - Added notable artist 'Eagles' with API ID 'K8vZ9171ob7' to the database.
+2024-10-31 02:50:57,870 - dbLogger - INFO - Added notable artist 'Anyma' with API ID 'K8vZ917jHEf' to the database.
+2024-10-31 02:50:57,870 - dbLogger - INFO - Added notable artist 'Tedeschi Trucks Band' with API ID 'K8vZ917C1E0' to the database.
+2024-10-31 02:50:57,870 - dbLogger - INFO - Added notable artist 'Ticketmaster - Dude Perfect' with API ID 'K8vZ917bZLV' to the database.
+2024-10-31 02:50:57,871 - dbLogger - INFO - Added notable artist 'Pentatonix' with API ID 'K8vZ9172Wtf' to the database.
+2024-10-31 02:50:57,871 - dbLogger - INFO - Added notable artist 'Travis Scott' with API ID 'K8vZ9178bS0' to the database.
+2024-10-31 02:50:57,871 - dbLogger - INFO - Added notable artist 'Sabrina Carpenter' with API ID 'K8vZ9173-lV' to the database.
+2024-10-31 02:50:57,872 - dbLogger - INFO - Added notable artist 'Billie Eilish' with API ID 'K8vZ9174Za7' to the database.
+2024-10-31 02:50:57,872 - dbLogger - INFO - Added notable artist 'Stevie Wonder' with API ID 'K8vZ91715af' to the database.
+2024-10-31 02:50:57,873 - dbLogger - INFO - Added notable artist 'Metallica' with API ID 'K8vZ9171G9V' to the database.
+2024-10-31 02:50:57,873 - dbLogger - INFO - Added notable artist 'Jonathan Lee' with API ID 'K8vZ9173OrV' to the database.
+2024-10-31 02:50:57,874 - dbLogger - INFO - Added notable artist 'Dropkick Murphys' with API ID 'K8vZ9171h_V' to the database.
+2024-10-31 02:50:57,874 - dbLogger - INFO - Added notable artist 'Deftones' with API ID 'K8vZ9171pP7' to the database.
+2024-10-31 02:50:57,874 - dbLogger - INFO - Added notable artist 'USHER' with API ID 'K8vZ9171bMV' to the database.
+2024-10-31 02:50:57,875 - dbLogger - INFO - Added notable artist 'Megan Moroney' with API ID 'K8vZ917Q9yV' to the database.
+2024-10-31 02:50:57,875 - dbLogger - INFO - Added notable artist 'GloRilla' with API ID 'K8vZ917QER7' to the database.
+2024-10-31 02:50:57,875 - dbLogger - INFO - Added notable artist 'Cody Johnson' with API ID 'K8vZ9178Uz0' to the database.
+2024-10-31 02:50:57,876 - dbLogger - INFO - Added notable artist '$UICIDEBOY$' with API ID 'K8vZ917f2N7' to the database.
+2024-10-31 02:50:57,876 - dbLogger - INFO - Added notable artist 'Post Malone' with API ID 'K8vZ917KjPf' to the database.
+2024-10-31 02:50:57,877 - dbLogger - INFO - Added notable artist 'Jelly Roll' with API ID 'K8vZ9174y8V' to the database.
+2024-10-31 02:50:57,877 - dbLogger - INFO - Added notable artist 'Eric Clapton' with API ID 'K8vZ917hG-0' to the database.
+2024-10-31 02:50:57,878 - dbLogger - INFO - Added notable artist 'John Summit' with API ID 'K8vZ917_pO7' to the database.
+2024-10-31 02:50:57,878 - dbLogger - INFO - Added notable artist 'P!NK' with API ID 'K8vZ9171Jo7' to the database.
+2024-10-31 02:50:57,879 - dbLogger - INFO - Added notable artist 'Shane Gillis' with API ID 'K8vZ9174xuV' to the database.
+2024-10-31 02:50:57,879 - dbLogger - INFO - Added notable artist 'Fred again..' with API ID 'K8vZ917_0xf' to the database.
+2024-10-31 02:50:57,879 - dbLogger - INFO - Added notable artist 'Warren Zeiders' with API ID 'K8vZ917QK3f' to the database.
+2024-10-31 02:50:57,880 - dbLogger - INFO - Added notable artist 'Mariah Carey' with API ID 'K8vZ9171KB7' to the database.
+2024-10-31 02:50:57,880 - dbLogger - INFO - Added notable artist 'Lil Wayne' with API ID 'K8vZ917GemV' to the database.
+2024-10-31 02:50:57,881 - dbLogger - INFO - Added notable artist 'Carin Leon' with API ID 'K8vZ917_m_f' to the database.
+2024-10-31 02:50:57,881 - dbLogger - INFO - Added notable artist 'Chappell Roan' with API ID 'K8vZ917p56f' to the database.
+2024-10-31 02:50:57,881 - dbLogger - INFO - Added notable artist 'Leon Bridges' with API ID 'K8vZ917Kkuf' to the database.
+2024-10-31 02:50:57,882 - dbLogger - INFO - Added notable artist 'Kings of Leon' with API ID 'K8vZ9175hx7' to the database.
+2024-10-31 02:50:57,882 - dbLogger - INFO - Added notable artist 'LINKIN PARK' with API ID 'K8vZ9171if7' to the database.
+2024-10-31 02:50:57,883 - dbLogger - INFO - Added notable artist 'Teddy Swims' with API ID 'K8vZ917bnP0' to the database.
+2024-10-31 02:50:57,883 - dbLogger - INFO - Added notable artist 'Korn' with API ID 'K8vZ9171fF7' to the database.
+2024-10-31 02:50:57,883 - dbLogger - INFO - Added notable artist 'Dave Matthews' with API ID 'K8vZ91713NV' to the database.
+2024-10-31 02:50:57,884 - dbLogger - INFO - Added notable artist 'Justin Timberlake' with API ID 'K8vZ91754g7' to the database.
+2024-10-31 02:50:57,884 - dbLogger - INFO - Added notable artist 'Kevin Hart' with API ID 'K8vZ917GQ1f' to the database.
+2024-10-31 02:50:57,884 - dbLogger - INFO - Added notable artist 'Rod Wave' with API ID 'K8vZ917b8z7' to the database.
+2024-10-31 02:50:57,885 - dbLogger - INFO - Added notable artist 'Jim Gaffigan' with API ID 'K8vZ9175R0V' to the database.
+2024-10-31 02:50:57,885 - dbLogger - INFO - Added notable artist 'Leanne Morgan' with API ID 'K8vZ917fQxV' to the database.
+2024-10-31 02:50:57,885 - dbLogger - INFO - Added notable artist 'Shaboozey' with API ID 'K8vZ917f2P7' to the database.
+2024-10-31 02:50:57,886 - dbLogger - INFO - Added notable artist 'Sammy Virji' with API ID 'K8vZ917qam0' to the database.
+2024-10-31 02:50:57,886 - dbLogger - INFO - Added notable artist 'Fisher' with API ID 'K8vZ9171mPf' to the database.
+2024-10-31 02:50:57,886 - dbLogger - INFO - Added notable artist 'Matt Rife' with API ID 'K8vZ9179SV7' to the database.
+2024-10-31 02:50:57,887 - dbLogger - INFO - Added notable artist 'Dave Chappelle' with API ID 'K8vZ9171rcf' to the database.
+2024-10-31 02:50:57,887 - dbLogger - INFO - Added notable artist 'Sleep Token' with API ID 'K8vZ917b81f' to the database.
+2024-10-31 02:50:57,887 - dbLogger - INFO - Added notable artist 'Kane Brown' with API ID 'K8vZ917fFLf' to the database.
+2024-10-31 02:50:57,888 - dbLogger - INFO - Added notable artist 'Garth Brooks' with API ID 'K8vZ9171aAV' to the database.
+2024-10-31 02:50:57,888 - dbLogger - INFO - Added notable artist 'Kenny Chesney' with API ID 'K8vZ9171f30' to the database.
+2024-10-31 02:50:57,889 - dbLogger - INFO - Added notable artist 'SWEDISH HOUSE MAFIA' with API ID 'K8vZ917G0e0' to the database.
+2024-10-31 02:50:57,889 - dbLogger - INFO - Added notable artist 'Lana Del Rey' with API ID 'K8vZ9172ZIV' to the database.
+2024-10-31 02:50:57,889 - dbLogger - INFO - Added notable artist 'Mau P' with API ID 'K8vZ917hQaf' to the database.
+2024-10-31 02:50:57,890 - dbLogger - INFO - Added notable artist 'Nikki Glaser' with API ID 'K8vZ917uwA7' to the database.
+2024-10-31 02:50:57,890 - dbLogger - INFO - Added notable artist 'Ella Langley' with API ID 'K8vZ917_mB0' to the database.
+2024-10-31 02:50:57,891 - dbLogger - INFO - Added notable artist 'Shakira' with API ID 'K8vZ9171xeV' to the database.
+2024-10-31 02:50:57,891 - dbLogger - INFO - Added notable artist 'Sarah Millican' with API ID 'K8vZ917GQn0' to the database.
+2024-10-31 02:50:57,891 - dbLogger - INFO - Added notable artist 'Hozier' with API ID 'K8vZ917o-E7' to the database.
+2024-10-31 02:50:57,892 - dbLogger - INFO - Added notable artist 'Hugh Jackman' with API ID 'K8vZ917C3VV' to the database.
+2024-10-31 02:50:57,892 - dbLogger - INFO - Added notable artist 'Jesse Welles' with API ID 'K8vZ917qvGf' to the database.
+2024-10-31 02:50:57,892 - dbLogger - INFO - Added notable artist 'Lil Durk' with API ID 'K8vZ9173A9f' to the database.
+2024-10-31 02:50:57,893 - dbLogger - INFO - Added notable artist 'A Boogie Wit Da Hoodie' with API ID 'K8vZ9174hA7' to the database.
+2024-10-31 02:50:57,893 - dbLogger - INFO - Added notable artist 'Destroy Lonely' with API ID 'K8vZ917QLi7' to the database.
+2024-10-31 02:50:57,893 - dbLogger - INFO - Added notable artist 'Charli XCX' with API ID 'K8vZ917CDKf' to the database.
+2024-10-31 02:50:57,894 - dbLogger - INFO - Added notable artist 'Billy Joel' with API ID 'K8vZ9171uv0' to the database.
+2024-10-31 02:50:57,894 - dbLogger - INFO - Added notable artist 'Los Temerarios' with API ID 'K8vZ9171ajf' to the database.
+2024-10-31 02:50:57,895 - dbLogger - INFO - Added notable artist 'Don Toliver' with API ID 'K8vZ917bVK7' to the database.
+2024-10-31 02:50:57,895 - dbLogger - INFO - Added notable artist 'System Of A Down' with API ID 'K8vZ917hmYf' to the database.
+2024-10-31 02:50:57,895 - dbLogger - INFO - Added notable artist 'Fuerza Regida' with API ID 'K8vZ9179vO0' to the database.
+2024-10-31 02:50:57,896 - dbLogger - INFO - Added notable artist 'BLACKPINK' with API ID 'K8vZ9179wi7' to the database.
+2024-10-31 02:50:57,896 - dbLogger - INFO - Added notable artist 'BTS' with API ID 'K8vZ917KpXV' to the database.
+2024-10-31 02:50:57,896 - dbLogger - INFO - Added notable artist 'SEVENTEEN' with API ID 'K8vZ9174Qw0' to the database.
+2024-10-31 02:50:57,897 - dbLogger - INFO - Added notable artist 'Mike Birbiglia' with API ID 'K8vZ9175wo7' to the database.
+2024-10-31 02:50:57,897 - dbLogger - INFO - Added notable artist 'Latto' with API ID 'K8vZ917_glV' to the database.
+2024-10-31 02:50:57,898 - dbLogger - INFO - Added notable artist 'Theo Von' with API ID 'K8vZ917ur6V' to the database.
+2024-10-31 02:50:57,898 - dbLogger - INFO - Added notable artist 'Whiskey Myers' with API ID 'K8vZ917uDgf' to the database.
+2024-10-31 02:50:57,898 - dbLogger - INFO - Added notable artist 'KAYTRANADA' with API ID 'K8vZ917ooF0' to the database.
+2024-10-31 02:50:57,899 - dbLogger - INFO - Added notable artist 'Jamie XX' with API ID 'K8vZ917u4Qf' to the database.
+2024-10-31 02:50:57,899 - dbLogger - INFO - Added notable artist 'Shawn Mendes' with API ID 'K8vZ91739Nf' to the database.
+2024-10-31 02:50:57,899 - dbLogger - INFO - Added notable artist 'Rihanna' with API ID 'K8vZ9175gS7' to the database.
+2024-10-31 02:50:57,900 - dbLogger - INFO - Added notable artist 'Wave To Earth' with API ID 'K8vZ917h9Jf' to the database.
+2024-10-31 02:50:57,900 - dbLogger - INFO - Added notable artist 'HARDY' with API ID 'K8vZ9179LdV' to the database.
+2024-10-31 02:50:57,900 - dbLogger - INFO - Added notable artist 'Diplo' with API ID 'K8vZ917G2o7' to the database.
+2024-10-31 02:50:57,901 - dbLogger - INFO - Added notable artist 'Diplo' with API ID 'K8vZ917G2o7' to the database.
+2024-10-31 02:50:57,901 - dbLogger - INFO - Added notable artist 'Conan Gray' with API ID 'K8vZ9179_07' to the database.
+2024-10-31 02:50:57,901 - dbLogger - INFO - Added notable artist 'Aaron Kwok' with API ID 'K8vZ9171zFV' to the database.
+2024-10-31 02:50:57,902 - dbLogger - INFO - Added notable artist 'hannah bahng' with API ID 'K8vZ917q2T7' to the database.
+2024-10-31 02:50:57,902 - dbLogger - INFO - Added notable artist 'Maisie Peters' with API ID 'K8vZ917pq90' to the database.
+2024-10-31 02:50:57,902 - dbLogger - INFO - Added notable artist 'Carimi' with API ID 'K8vZ9174_g0' to the database.
+2024-10-31 02:50:57,903 - dbLogger - INFO - Added notable artist 'Ricky Gervais' with API ID 'K8vZ9175M60' to the database.
+2024-10-31 02:50:57,903 - dbLogger - INFO - Added notable artist 'RUFUS DU SOL' with API ID 'K8vZ9173ujV' to the database.
+2024-10-31 02:50:57,903 - dbLogger - INFO - Added notable artist 'Monster Jam' with API ID 'K8vZ917uyff' to the database.
+2024-10-31 02:50:57,907 - dbLogger - INFO - Completed adding notable artists from artist_ids_output.txt to the database.
+2024-10-31 02:50:57,909 - discord.client - INFO - logging in using static token
+2024-10-31 02:50:58,475 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 2286f5bbaa4f0286e47f1b86f7e8f01a).
+2024-10-31 02:51:00,488 - INFO - Bot connected and task started.
+2024-10-31 02:51:00,488 - eventLogger - INFO - Bot connected and task started.
+2024-10-31 02:51:01,760 - dbLogger - INFO - Venue 'The Venue at Thunder Valley Casino Resort' added to database with city 'Lincoln' and state 'CA'.
+2024-10-31 02:51:01,765 - dbLogger - INFO - Artist 'Lady A' added to database.
+2024-10-31 02:51:01,769 - dbLogger - INFO - Event 'Lady A' added to database.
+2024-10-31 02:51:01,777 - dbLogger - INFO - Venue 'Allstate Arena' added to database with city 'Rosemont' and state 'IL'.
+2024-10-31 02:51:01,787 - dbLogger - INFO - Artist 'GHOST' added to database.
+2024-10-31 02:51:01,792 - dbLogger - INFO - Event 'GHOST: World Tour 2025' added to database.
+2024-10-31 02:51:01,796 - dbLogger - INFO - Venue 'Ovation Hall at Ocean Casino Resort ' added to database with city 'Atlantic City' and state 'NJ'.
+2024-10-31 02:51:01,801 - dbLogger - INFO - Artist 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:01,806 - dbLogger - INFO - Event 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:01,810 - dbLogger - INFO - Venue 'Knoxville Civic Auditorium' added to database with city 'Knoxville' and state 'TN'.
+2024-10-31 02:51:01,815 - dbLogger - INFO - Artist 'Chris Janson' added to database.
+2024-10-31 02:51:01,820 - dbLogger - INFO - Event 'Chris Janson' added to database.
+2024-10-31 02:51:01,824 - dbLogger - INFO - Venue 'Knitting Factory - Boise' added to database with city 'Boise' and state 'ID'.
+2024-10-31 02:51:01,829 - dbLogger - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:01,834 - dbLogger - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:01,839 - dbLogger - INFO - Venue 'The Moroccan Lounge' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,843 - dbLogger - INFO - Artist 'Lucius Arthur' added to database.
+2024-10-31 02:51:01,848 - dbLogger - INFO - Event 'MASS presents CITY KIDS feat ALX' added to database.
+2024-10-31 02:51:01,852 - dbLogger - INFO - Venue 'Galuppi's' added to database with city 'Pompano Beach' and state 'FL'.
+2024-10-31 02:51:01,857 - dbLogger - INFO - Event 'Marvels of Motown' added to database.
+2024-10-31 02:51:01,857 - dbLogger - INFO - Venue 'Galuppi's' added to database with city 'Pompano Beach' and state 'FL'.
+2024-10-31 02:51:01,862 - dbLogger - INFO - Artist 'Dueling Pianos' added to database.
+2024-10-31 02:51:01,866 - dbLogger - INFO - Event 'Dueling Pianos' added to database.
+2024-10-31 02:51:01,871 - dbLogger - INFO - Venue 'Madison Square Garden' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:01,871 - dbLogger - INFO - Artist 'Dave Matthews Band' added to database.
+2024-10-31 02:51:01,875 - dbLogger - INFO - Event 'SOULSHINE - A BENEFIT FOR HURRICANE RELIEF AND RECOVERY' added to database.
+2024-10-31 02:51:01,880 - dbLogger - INFO - Venue 'Hard Rock Live Rockford' added to database with city 'Rockford' and state 'IL'.
+2024-10-31 02:51:01,885 - dbLogger - INFO - Artist 'James Kennedy' added to database.
+2024-10-31 02:51:01,889 - dbLogger - INFO - Event 'Black Wednesday With DJ James Kennedy' added to database.
+2024-10-31 02:51:01,894 - dbLogger - INFO - Venue 'Lovedraft's Brewing Co.' added to database with city 'Mechanicsburg' and state 'PA'.
+2024-10-31 02:51:01,899 - dbLogger - INFO - Artist 'Unto Others' added to database.
+2024-10-31 02:51:01,903 - dbLogger - INFO - Event 'Unto Others: Never, Neverland North American Tour' added to database.
+2024-10-31 02:51:01,908 - dbLogger - INFO - Venue 'Echoplex' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,912 - dbLogger - INFO - Artist 'Electric Feels' added to database.
+2024-10-31 02:51:01,917 - dbLogger - INFO - Event 'Electric Feels: Indie Rock + Indie Dance Party (21+)' added to database.
+2024-10-31 02:51:01,922 - dbLogger - INFO - Venue 'The Regent Theater' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,926 - dbLogger - INFO - Artist 'Scam and Jam' added to database.
+2024-10-31 02:51:01,931 - dbLogger - INFO - Event 'Scam and Jam ft. Von Kiss, Big Chunk, Vick Jagger & More! ' added to database.
+2024-10-31 02:51:01,936 - dbLogger - INFO - Venue 'Constellation Room' added to database with city 'Santa Ana' and state 'CA'.
+2024-10-31 02:51:01,940 - dbLogger - INFO - Artist 'Abbie Gamboa' added to database.
+2024-10-31 02:51:01,945 - dbLogger - INFO - Event 'Abbie Gamboa - Pure Nights Tour With Elle Limebear' added to database.
+2024-10-31 02:51:01,950 - dbLogger - INFO - Venue 'ASU Kerr' added to database with city 'Scottsdale' and state 'AZ'.
+2024-10-31 02:51:01,955 - dbLogger - INFO - Artist 'ASU Kerr Tuesday Morning Music & Tea' added to database.
+2024-10-31 02:51:01,960 - dbLogger - INFO - Event 'ASU Kerr Tuesday Morning Music & Tea - ASU Community Flute Ensemble ' added to database.
+2024-10-31 02:51:01,964 - dbLogger - INFO - Venue 'The Echo' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:01,969 - dbLogger - INFO - Artist 'SleazyWorld Go' added to database.
+2024-10-31 02:51:01,973 - dbLogger - INFO - Event 'One Night with Sleazy' added to database.
+2024-10-31 02:51:01,978 - dbLogger - INFO - Venue 'The Fillmore Charlotte' added to database with city 'Charlotte' and state 'NC'.
+2024-10-31 02:51:01,983 - dbLogger - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:01,990 - dbLogger - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,001 - dbLogger - INFO - Venue 'Barclays Center' added to database with city 'Brooklyn' and state 'NY'.
+2024-10-31 02:51:02,001 - dbLogger - INFO - Artist 'USHER' added to database.
+2024-10-31 02:51:02,008 - dbLogger - INFO - Event 'USHER: Past Present Future' added to database.
+2024-10-31 02:51:02,013 - dbLogger - INFO - Venue 'The Ritz' added to database with city 'Raleigh' and state 'NC'.
+2024-10-31 02:51:02,013 - dbLogger - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,018 - dbLogger - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,022 - dbLogger - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,027 - dbLogger - INFO - Artist 'Golub Brothers' added to database.
+2024-10-31 02:51:02,031 - dbLogger - INFO - Event 'Golub Brothers' added to database.
+2024-10-31 02:51:02,035 - dbLogger - INFO - Venue 'The Peppermint Club' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:02,040 - dbLogger - INFO - Artist 'honestav' added to database.
+2024-10-31 02:51:02,045 - dbLogger - INFO - Event 'honestav' added to database.
+2024-10-31 02:51:02,045 - dbLogger - INFO - Venue 'Barclays Center' added to database with city 'Brooklyn' and state 'NY'.
+2024-10-31 02:51:02,045 - dbLogger - INFO - Artist 'USHER' added to database.
+2024-10-31 02:51:02,050 - dbLogger - INFO - Event 'USHER: Past Present Future' added to database.
+2024-10-31 02:51:02,054 - dbLogger - INFO - Venue 'Brooklyn Bowl Nashville' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,059 - dbLogger - INFO - Artist 'Shrek Rave' added to database.
+2024-10-31 02:51:02,064 - dbLogger - INFO - Event 'Shrek Rave' added to database.
+2024-10-31 02:51:02,068 - dbLogger - INFO - Venue 'Club Congress' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:02,073 - dbLogger - INFO - Artist 'Sports Team' added to database.
+2024-10-31 02:51:02,077 - dbLogger - INFO - Event 'Sports Team' added to database.
+2024-10-31 02:51:02,082 - dbLogger - INFO - Venue 'Ovens Auditorium' added to database with city 'Charlotte' and state 'NC'.
+2024-10-31 02:51:02,087 - dbLogger - INFO - Artist 'Boosie BadAzz' added to database.
+2024-10-31 02:51:02,092 - dbLogger - INFO - Event 'BOOCHELLA: Featuring Boosie Live with Symphony Orchestra' added to database.
+2024-10-31 02:51:02,097 - dbLogger - INFO - Venue 'House of Blues New Orleans ' added to database with city 'New Orleans' and state 'LA'.
+2024-10-31 02:51:02,101 - dbLogger - INFO - Artist 'Cozy Worldwide' added to database.
+2024-10-31 02:51:02,106 - dbLogger - INFO - Event 'A Very Cozy Christmas Tour - Throwback + Current R&B / HipHop - 21+' added to database.
+2024-10-31 02:51:02,111 - dbLogger - INFO - Venue 'Lake Charles Event Ctr Rosa Hart Theatre' added to database with city 'Lake Charles' and state 'LA'.
+2024-10-31 02:51:02,116 - dbLogger - INFO - Artist 'Worship Live' added to database.
+2024-10-31 02:51:02,121 - dbLogger - INFO - Event 'Worship Live' added to database.
+2024-10-31 02:51:02,125 - dbLogger - INFO - Venue 'Foundation Room at House of Blues Chicago' added to database with city 'Chicago' and state 'IL'.
+2024-10-31 02:51:02,131 - dbLogger - INFO - Artist 'DJ Hydrate' added to database.
+2024-10-31 02:51:02,136 - dbLogger - INFO - Event 'The Comfy Show w/ special guest Porch Music, DJ Hydrate, Skeet Pete' added to database.
+2024-10-31 02:51:02,140 - dbLogger - INFO - Venue 'Old National Centre' added to database with city 'Indianapolis' and state 'IN'.
+2024-10-31 02:51:02,141 - dbLogger - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,146 - dbLogger - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,151 - dbLogger - INFO - Venue 'Marathon Music Works' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,151 - dbLogger - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,156 - dbLogger - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,160 - dbLogger - INFO - Venue 'Riverside Revival' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,165 - dbLogger - INFO - Artist 'Jeannie Seely' added to database.
+2024-10-31 02:51:02,170 - dbLogger - INFO - Event 'The Jason Coleman Show' added to database.
+2024-10-31 02:51:02,174 - dbLogger - INFO - Venue 'Voodoo Room at the House of Blues San Diego' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:02,175 - dbLogger - INFO - Artist 'Sports Team' added to database.
+2024-10-31 02:51:02,179 - dbLogger - INFO - Event 'Sports Team' added to database.
+2024-10-31 02:51:02,184 - dbLogger - INFO - Venue 'The Factory' added to database with city 'Saint Louis' and state 'MO'.
+2024-10-31 02:51:02,189 - dbLogger - INFO - Artist 'The All-American Rejects' added to database.
+2024-10-31 02:51:02,193 - dbLogger - INFO - Event 'The All-American Rejects' added to database.
+2024-10-31 02:51:02,198 - dbLogger - INFO - Venue 'Bayou Music Center' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,198 - dbLogger - INFO - Artist 'Young Nudy' added to database.
+2024-10-31 02:51:02,202 - dbLogger - INFO - Event 'Young Nudy' added to database.
+2024-10-31 02:51:02,207 - dbLogger - INFO - Venue 'Aisle 5' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:02,207 - dbLogger - INFO - Artist 'SleazyWorld Go' added to database.
+2024-10-31 02:51:02,212 - dbLogger - INFO - Event 'SleazyWorld Go' added to database.
+2024-10-31 02:51:02,217 - dbLogger - INFO - Venue 'The Rock' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:02,217 - dbLogger - INFO - Artist 'Unto Others' added to database.
+2024-10-31 02:51:02,222 - dbLogger - INFO - Event 'Unto Others' added to database.
+2024-10-31 02:51:02,226 - dbLogger - INFO - Venue 'Brooklyn Paramount' added to database with city 'Brooklyn' and state 'NY'.
+2024-10-31 02:51:02,231 - dbLogger - INFO - Artist 'Whale Jam' added to database.
+2024-10-31 02:51:02,236 - dbLogger - INFO - Event 'Whale Jam 2024 With Guests From Mt.Joy, RKS, Young The Giant And More' added to database.
+2024-10-31 02:51:02,241 - dbLogger - INFO - Venue 'The Salt Shed Indoors (Shed)' added to database with city 'Chicago' and state 'IL'.
+2024-10-31 02:51:02,241 - dbLogger - INFO - Artist 'Kane Brown' added to database.
+2024-10-31 02:51:02,248 - dbLogger - INFO - Event 'B96 Bash with Kane Brown' added to database.
+2024-10-31 02:51:02,253 - dbLogger - INFO - Venue 'Summit' added to database with city 'Denver' and state 'CO'.
+2024-10-31 02:51:02,258 - dbLogger - INFO - Artist 'Emo Nite' added to database.
+2024-10-31 02:51:02,263 - dbLogger - INFO - Event 'Emo Nite - 21+' added to database.
+2024-10-31 02:51:02,267 - dbLogger - INFO - Venue 'The Depot' added to database with city 'Salt Lake City' and state 'UT'.
+2024-10-31 02:51:02,272 - dbLogger - INFO - Artist 'Black Galore One Fest' added to database.
+2024-10-31 02:51:02,277 - dbLogger - INFO - Event 'Black Galore & The Black Menaces Present: One Fest' added to database.
+2024-10-31 02:51:02,277 - dbLogger - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,277 - dbLogger - INFO - Artist 'honestav' added to database.
+2024-10-31 02:51:02,282 - dbLogger - INFO - Event 'honestav' added to database.
+2024-10-31 02:51:02,286 - dbLogger - INFO - Venue 'Echostage' added to database with city 'Washington' and state 'DC'.
+2024-10-31 02:51:02,291 - dbLogger - INFO - Artist 'Four Tet' added to database.
+2024-10-31 02:51:02,299 - dbLogger - INFO - Event 'Four Tet' added to database.
+2024-10-31 02:51:02,303 - dbLogger - INFO - Venue 'Varsity Theater' added to database with city 'Minneapolis' and state 'MN'.
+2024-10-31 02:51:02,304 - dbLogger - INFO - Artist 'Cozy Worldwide' added to database.
+2024-10-31 02:51:02,308 - dbLogger - INFO - Event 'Cozy Worldwide! Throwback and Current Hip-Hop and R&B Party' added to database.
+2024-10-31 02:51:02,309 - dbLogger - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,313 - dbLogger - INFO - Artist 'Lillimure' added to database.
+2024-10-31 02:51:02,318 - dbLogger - INFO - Event 'Umami House, Lillimure, Plane Station' added to database.
+2024-10-31 02:51:02,318 - dbLogger - INFO - Venue 'Voodoo Room at the House of Blues San Diego' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:02,323 - dbLogger - INFO - Artist 'Secrets' added to database.
+2024-10-31 02:51:02,328 - dbLogger - INFO - Event 'Secrets' added to database.
+2024-10-31 02:51:02,332 - dbLogger - INFO - Venue 'Hard Rock Cincinnati Ballroom' added to database with city 'Cincinnati' and state 'OH'.
+2024-10-31 02:51:02,337 - dbLogger - INFO - Artist 'POP 2000 Tour' added to database.
+2024-10-31 02:51:02,342 - dbLogger - INFO - Event 'Pop 2000 Tour: Chris Kirkpatrick of *NSYNC, O-Town, Ryan Cabrera, LFO ' added to database.
+2024-10-31 02:51:02,342 - dbLogger - INFO - Venue 'The Depot' added to database with city 'Salt Lake City' and state 'UT'.
+2024-10-31 02:51:02,347 - dbLogger - INFO - Event 'Halloween Never Dies: Hardcore Edition' added to database.
+2024-10-31 02:51:02,352 - dbLogger - INFO - Venue 'The Vogel at Count Basie Center for the Arts' added to database with city 'Red Bank' and state 'NJ'.
+2024-10-31 02:51:02,363 - dbLogger - INFO - Artist 'The Weeklings' added to database.
+2024-10-31 02:51:02,374 - dbLogger - INFO - Event 'The Weeklings and Friends: Holiday Hullabaloo' added to database.
+2024-10-31 02:51:02,379 - dbLogger - INFO - Venue 'Little Caesars Arena' added to database with city 'Detroit' and state 'MI'.
+2024-10-31 02:51:02,384 - dbLogger - INFO - Artist 'Nick Cannon Presents: MTV Wild 'N Out Live' added to database.
+2024-10-31 02:51:02,390 - dbLogger - INFO - Event 'Nick Cannon Presents Wild 'N Out Live: The Final Lap' added to database.
+2024-10-31 02:51:02,396 - dbLogger - INFO - Venue 'Saenger Theatre Mobile' added to database with city 'Mobile' and state 'AL'.
+2024-10-31 02:51:02,401 - dbLogger - INFO - Artist 'A Charlie Brown Jazz Christmas' added to database.
+2024-10-31 02:51:02,406 - dbLogger - INFO - Event 'A Charlie Brown Jazz Christmas' added to database.
+2024-10-31 02:51:02,411 - dbLogger - INFO - Venue 'The Fillmore Silver Spring' added to database with city 'Silver Spring' and state 'MD'.
+2024-10-31 02:51:02,416 - dbLogger - INFO - Artist 'Backyard Band' added to database.
+2024-10-31 02:51:02,421 - dbLogger - INFO - Event 'Backyard Band' added to database.
+2024-10-31 02:51:02,426 - dbLogger - INFO - Venue 'Fontainebleau' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,430 - dbLogger - INFO - Artist 'Duran Duran' added to database.
+2024-10-31 02:51:02,435 - dbLogger - INFO - Event 'Duran Duran' added to database.
+2024-10-31 02:51:02,440 - dbLogger - INFO - Venue 'The Observatory North Park' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:02,444 - dbLogger - INFO - Artist '-X-' added to database.
+2024-10-31 02:51:02,449 - dbLogger - INFO - Event 'X - Putting the X back in XMAS' added to database.
+2024-10-31 02:51:02,453 - dbLogger - INFO - Venue 'Gila River Resorts & Casinos - Wild Horse Pass' added to database with city 'Chandler' and state 'AZ'.
+2024-10-31 02:51:02,458 - dbLogger - INFO - Artist 'Flavor Flav' added to database.
+2024-10-31 02:51:02,463 - dbLogger - INFO - Event 'Flavor Flav' added to database.
+2024-10-31 02:51:02,467 - dbLogger - INFO - Venue 'Access at Aliante Casino & Hotel' added to database with city 'North Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,472 - dbLogger - INFO - Artist 'Rhythm Nation' added to database.
+2024-10-31 02:51:02,476 - dbLogger - INFO - Event 'Rhythm Nation' added to database.
+2024-10-31 02:51:02,481 - dbLogger - INFO - Venue 'Mystic Lake Center' added to database with city 'Prior Lake' and state 'MN'.
+2024-10-31 02:51:02,485 - dbLogger - INFO - Artist 'San Holo' added to database.
+2024-10-31 02:51:02,490 - dbLogger - INFO - Event 'San Holo NYE DJ Set' added to database.
+2024-10-31 02:51:02,494 - dbLogger - INFO - Venue 'The Paramount' added to database with city 'Huntington' and state 'NY'.
+2024-10-31 02:51:02,499 - dbLogger - INFO - Artist 'Jimmy Kenny & the Pirate Beach Band' added to database.
+2024-10-31 02:51:02,504 - dbLogger - INFO - Event 'Cold Beer on a Friday Night! Feat. Jimmy Kenny & The Pirate Beach Band' added to database.
+2024-10-31 02:51:02,508 - dbLogger - INFO - Venue 'The Atlantis' added to database with city 'Washington' and state 'DC'.
+2024-10-31 02:51:02,513 - dbLogger - INFO - Artist 'Mixtape' added to database.
+2024-10-31 02:51:02,518 - dbLogger - INFO - Event 'MIXTAPE with DJs Matt Bailer and Shea Van Horn' added to database.
+2024-10-31 02:51:02,523 - dbLogger - INFO - Venue 'Blueberry Hill Duck Room' added to database with city 'Saint Louis' and state 'MO'.
+2024-10-31 02:51:02,527 - dbLogger - INFO - Artist 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,532 - dbLogger - INFO - Event 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,537 - dbLogger - INFO - Venue 'High Noon Saloon' added to database with city 'Madison' and state 'WI'.
+2024-10-31 02:51:02,541 - dbLogger - INFO - Artist 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,546 - dbLogger - INFO - Event 'G. Love & Special Sauce' added to database.
+2024-10-31 02:51:02,546 - dbLogger - INFO - Venue 'Old National Centre' added to database with city 'Indianapolis' and state 'IN'.
+2024-10-31 02:51:02,546 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,551 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,556 - dbLogger - INFO - Venue 'Old Forester's Paristown Hall' added to database with city 'Louisville' and state 'KY'.
+2024-10-31 02:51:02,556 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,561 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,565 - dbLogger - INFO - Venue 'White Oak Music Hall - Upstairs ' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,570 - dbLogger - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:02,574 - dbLogger - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:02,579 - dbLogger - INFO - Venue 'The Wellmont Theater' added to database with city 'Montclair' and state 'NJ'.
+2024-10-31 02:51:02,584 - dbLogger - INFO - Artist 'Yacht Rock Revue' added to database.
+2024-10-31 02:51:02,589 - dbLogger - INFO - Event 'Yacht Rock Revue' added to database.
+2024-10-31 02:51:02,594 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,598 - dbLogger - INFO - Artist 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,603 - dbLogger - INFO - Event 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,608 - dbLogger - INFO - Venue 'Madison Center for the Arts' added to database with city 'Phoenix' and state 'AZ'.
+2024-10-31 02:51:02,613 - dbLogger - INFO - Artist 'Gypsy Dreams' added to database.
+2024-10-31 02:51:02,618 - dbLogger - INFO - Event 'The Fleetwood Mac Concert Experience starring Gypsy Dreams' added to database.
+2024-10-31 02:51:02,622 - dbLogger - INFO - Venue 'House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,627 - dbLogger - INFO - Artist 'Who's Bad' added to database.
+2024-10-31 02:51:02,632 - dbLogger - INFO - Event 'Who's Bad - The Ultimate Michael Jackson Experience' added to database.
+2024-10-31 02:51:02,637 - dbLogger - INFO - Venue 'Uptown Theatre Napa' added to database with city 'Napa' and state 'CA'.
+2024-10-31 02:51:02,642 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,646 - dbLogger - INFO - Event 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,646 - dbLogger - INFO - Venue 'Marathon Music Works' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,647 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,651 - dbLogger - INFO - Event 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,656 - dbLogger - INFO - Venue 'Irving Plaza Powered By Verizon 5G' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,661 - dbLogger - INFO - Event 'Kitty's Rave (18+)' added to database.
+2024-10-31 02:51:02,666 - dbLogger - INFO - Venue 'Bowery Ballroom' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,670 - dbLogger - INFO - Artist 'Cab Ellis' added to database.
+2024-10-31 02:51:02,675 - dbLogger - INFO - Event 'CAB ELLIS: "BRAND NEW CHAIR" Single Release Party' added to database.
+2024-10-31 02:51:02,675 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,675 - dbLogger - INFO - Artist 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,680 - dbLogger - INFO - Event 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,684 - dbLogger - INFO - Venue 'Minglewood Hall' added to database with city 'Memphis' and state 'TN'.
+2024-10-31 02:51:02,685 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,689 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,690 - dbLogger - INFO - Venue 'Brooklyn Bowl Nashville' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:02,694 - dbLogger - INFO - Artist 'Hayes Carll' added to database.
+2024-10-31 02:51:02,702 - dbLogger - INFO - Event 'Hayes Carll's Nashville Birthday Bash Featuring Hayes & The Heathens' added to database.
+2024-10-31 02:51:02,707 - dbLogger - INFO - Venue 'Route 66 Casino' added to database with city 'Albuquerque' and state 'NM'.
+2024-10-31 02:51:02,712 - dbLogger - INFO - Artist 'Air Supply' added to database.
+2024-10-31 02:51:02,716 - dbLogger - INFO - Event 'Air Supply' added to database.
+2024-10-31 02:51:02,721 - dbLogger - INFO - Venue 'The ELM' added to database with city 'Bozeman' and state 'MT'.
+2024-10-31 02:51:02,726 - dbLogger - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:02,731 - dbLogger - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:02,735 - dbLogger - INFO - Venue 'Music Box at the Borgata' added to database with city 'Atlantic City' and state 'NJ'.
+2024-10-31 02:51:02,740 - dbLogger - INFO - Artist 'Back 2 Mac: A Tribute To Fleetwood Mac' added to database.
+2024-10-31 02:51:02,745 - dbLogger - INFO - Event 'Back 2 Mac: A Tribute To Fleetwood Mac' added to database.
+2024-10-31 02:51:02,750 - dbLogger - INFO - Venue 'The Echo Lounge & Music Hall' added to database with city 'Dallas' and state 'TX'.
+2024-10-31 02:51:02,750 - dbLogger - INFO - Artist 'Who's Bad' added to database.
+2024-10-31 02:51:02,755 - dbLogger - INFO - Event 'Who's Bad - The Ultimate Michael Jackson Experience - 18+ Event' added to database.
+2024-10-31 02:51:02,760 - dbLogger - INFO - Venue 'Fox Performing Arts Center' added to database with city 'Riverside' and state 'CA'.
+2024-10-31 02:51:02,760 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,765 - dbLogger - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:02,769 - dbLogger - INFO - Venue 'Rialto Theatre-Tucson' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:02,769 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,774 - dbLogger - INFO - Event 'Dweezil Zappa: The Rox(Postroph)y Tour @ Rialto Theatre' added to database.
+2024-10-31 02:51:02,778 - dbLogger - INFO - Venue 'Mercury Ballroom' added to database with city 'Louisville' and state 'KY'.
+2024-10-31 02:51:02,783 - dbLogger - INFO - Artist 'Nonpoint' added to database.
+2024-10-31 02:51:02,788 - dbLogger - INFO - Event 'Nonpoint' added to database.
+2024-10-31 02:51:02,788 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,788 - dbLogger - INFO - Artist 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,793 - dbLogger - INFO - Event 'The Modern Gentlemen' added to database.
+2024-10-31 02:51:02,798 - dbLogger - INFO - Venue 'The Masquerade  - Altar' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:02,798 - dbLogger - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:02,802 - dbLogger - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:02,803 - dbLogger - INFO - Venue 'The Ritz' added to database with city 'Raleigh' and state 'NC'.
+2024-10-31 02:51:02,803 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,808 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,808 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,812 - dbLogger - INFO - Artist 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,817 - dbLogger - INFO - Event 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,822 - dbLogger - INFO - Venue 'Revolution Live' added to database with city 'Ft Lauderdale' and state 'FL'.
+2024-10-31 02:51:02,826 - dbLogger - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:02,831 - dbLogger - INFO - Event 'Spafford' added to database.
+2024-10-31 02:51:02,831 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,831 - dbLogger - INFO - Artist 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,836 - dbLogger - INFO - Event 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,836 - dbLogger - INFO - Venue 'House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:02,836 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,841 - dbLogger - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:02,846 - dbLogger - INFO - Venue 'House of Blues Myrtle Beach' added to database with city 'North Myrtle Beach' and state 'SC'.
+2024-10-31 02:51:02,846 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:02,850 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:02,851 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,851 - dbLogger - INFO - Artist 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,856 - dbLogger - INFO - Event 'Righteous Brothers' added to database.
+2024-10-31 02:51:02,860 - dbLogger - INFO - Venue 'Bogart's' added to database with city 'Cincinnati' and state 'OH'.
+2024-10-31 02:51:02,865 - dbLogger - INFO - Artist 'Muscadine Bloodline' added to database.
+2024-10-31 02:51:02,869 - dbLogger - INFO - Event 'Muscadine Bloodline - The Coastal Plain Tour' added to database.
+2024-10-31 02:51:02,874 - dbLogger - INFO - Venue 'The Charleston Music Hall' added to database with city 'Charleston' and state 'SC'.
+2024-10-31 02:51:02,874 - dbLogger - INFO - Artist 'Chris Janson' added to database.
+2024-10-31 02:51:02,879 - dbLogger - INFO - Event 'Chris Janson' added to database.
+2024-10-31 02:51:02,884 - dbLogger - INFO - Venue 'Ace of Spades' added to database with city 'Sacramento' and state 'CA'.
+2024-10-31 02:51:02,884 - dbLogger - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:02,889 - dbLogger - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:02,889 - dbLogger - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:02,889 - dbLogger - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:02,894 - dbLogger - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:02,899 - dbLogger - INFO - Venue 'DECC Symphony Hall' added to database with city 'Duluth' and state 'MN'.
+2024-10-31 02:51:02,903 - dbLogger - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:02,908 - dbLogger - INFO - Event 'Josh Turner: This Country Music Thing Tour' added to database.
+2024-10-31 02:51:02,913 - dbLogger - INFO - Venue 'Bally's Lake Tahoe' added to database with city 'Stateline' and state 'NV'.
+2024-10-31 02:51:02,914 - dbLogger - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:02,919 - dbLogger - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:02,919 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,923 - dbLogger - INFO - Artist 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,928 - dbLogger - INFO - Event 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,933 - dbLogger - INFO - Venue 'Fillmore New Orleans' added to database with city 'New Orleans' and state 'LA'.
+2024-10-31 02:51:02,934 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:02,938 - dbLogger - INFO - Event 'Dweezil Zappa - The Rox(Postroph)y Tour' added to database.
+2024-10-31 02:51:02,943 - dbLogger - INFO - Venue 'Mayo Clinic Health System Event Center' added to database with city 'Mankato' and state 'MN'.
+2024-10-31 02:51:02,943 - dbLogger - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:02,948 - dbLogger - INFO - Event 'Josh Turner:  This Country Music Thing Tour' added to database.
+2024-10-31 02:51:02,953 - dbLogger - INFO - Venue 'Legends Casino Event Center' added to database with city 'Toppenish' and state 'WA'.
+2024-10-31 02:51:02,958 - dbLogger - INFO - Event 'Lit & Fuel' added to database.
+2024-10-31 02:51:02,958 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:02,958 - dbLogger - INFO - Artist 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,962 - dbLogger - INFO - Event 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:02,967 - dbLogger - INFO - Venue 'South Shore Room at Harrah's Lake Tahoe' added to database with city 'Stateline' and state 'NV'.
+2024-10-31 02:51:02,972 - dbLogger - INFO - Artist 'Three Dog Night' added to database.
+2024-10-31 02:51:02,976 - dbLogger - INFO - Event 'Three Dog Night' added to database.
+2024-10-31 02:51:02,976 - dbLogger - INFO - Venue 'House of Blues Myrtle Beach' added to database with city 'North Myrtle Beach' and state 'SC'.
+2024-10-31 02:51:02,981 - dbLogger - INFO - Artist 'The Purple Madness - Tribute to Prince' added to database.
+2024-10-31 02:51:02,986 - dbLogger - INFO - Event 'The Purple Madness - Prince Tribute Show' added to database.
+2024-10-31 02:51:02,991 - dbLogger - INFO - Venue 'Fox Theater - Oakland' added to database with city 'Oakland' and state 'CA'.
+2024-10-31 02:51:02,995 - dbLogger - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,000 - dbLogger - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,000 - dbLogger - INFO - Venue 'Minglewood Hall' added to database with city 'Memphis' and state 'TN'.
+2024-10-31 02:51:03,000 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:03,005 - dbLogger - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:03,005 - dbLogger - INFO - Venue 'Mercury Lounge' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:03,010 - dbLogger - INFO - Artist 'The Haunt' added to database.
+2024-10-31 02:51:03,014 - dbLogger - INFO - Event 'The Haunt' added to database.
+2024-10-31 02:51:03,019 - dbLogger - INFO - Venue 'Black River Coliseum' added to database with city 'Poplar Bluff' and state 'MO'.
+2024-10-31 02:51:03,024 - dbLogger - INFO - Artist 'Newsboys' added to database.
+2024-10-31 02:51:03,028 - dbLogger - INFO - Event 'Newsboys' added to database.
+2024-10-31 02:51:03,033 - dbLogger - INFO - Venue 'The Fillmore Miami Beach at Jackie Gleason Theater' added to database with city 'Miami Beach' and state 'FL'.
+2024-10-31 02:51:03,038 - dbLogger - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,042 - dbLogger - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,047 - dbLogger - INFO - Venue 'Chandler Center for the Arts' added to database with city 'Chandler' and state 'AZ'.
+2024-10-31 02:51:03,052 - dbLogger - INFO - Artist 'Showtune Productions' added to database.
+2024-10-31 02:51:03,057 - dbLogger - INFO - Event 'Diamond: Songs of Neil Diamond' added to database.
+2024-10-31 02:51:03,057 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,057 - dbLogger - INFO - Artist 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:03,062 - dbLogger - INFO - Event 'The Sinatra Experience With Dave Halston' added to database.
+2024-10-31 02:51:03,062 - dbLogger - INFO - Venue 'The Depot' added to database with city 'Salt Lake City' and state 'UT'.
+2024-10-31 02:51:03,062 - dbLogger - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,067 - dbLogger - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,071 - dbLogger - INFO - Venue 'Baltimore Soundstage' added to database with city 'Baltimore' and state 'MD'.
+2024-10-31 02:51:03,071 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,076 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,076 - dbLogger - INFO - Venue 'The Charleston Music Hall' added to database with city 'Charleston' and state 'SC'.
+2024-10-31 02:51:03,077 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:03,081 - dbLogger - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:03,082 - dbLogger - INFO - Venue 'Rialto Theatre-Tucson' added to database with city 'Tucson' and state 'AZ'.
+2024-10-31 02:51:03,082 - dbLogger - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,087 - dbLogger - INFO - Event 'Atmosphere: Imagine The Fun Tour @ Rialto Theatre' added to database.
+2024-10-31 02:51:03,087 - dbLogger - INFO - Venue 'The Fillmore Charlotte' added to database with city 'Charlotte' and state 'NC'.
+2024-10-31 02:51:03,087 - dbLogger - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,092 - dbLogger - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,097 - dbLogger - INFO - Venue 'Rialto ' added to database with city 'Bozeman' and state 'MT'.
+2024-10-31 02:51:03,102 - dbLogger - INFO - Artist 'Shwayze' added to database.
+2024-10-31 02:51:03,106 - dbLogger - INFO - Event 'Shwayze' added to database.
+2024-10-31 02:51:03,111 - dbLogger - INFO - Venue 'The Fillmore Philadelphia' added to database with city 'Philadelphia' and state 'PA'.
+2024-10-31 02:51:03,112 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,117 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,122 - dbLogger - INFO - Venue 'War Memorial Auditorium' added to database with city 'Ft Lauderdale' and state 'FL'.
+2024-10-31 02:51:03,127 - dbLogger - INFO - Artist 'Melissa Etheridge' added to database.
+2024-10-31 02:51:03,131 - dbLogger - INFO - Event 'Melissa Etheridge: 2025 Tour' added to database.
+2024-10-31 02:51:03,136 - dbLogger - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,141 - dbLogger - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,146 - dbLogger - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,146 - dbLogger - INFO - Venue 'The Ritz' added to database with city 'Raleigh' and state 'NC'.
+2024-10-31 02:51:03,146 - dbLogger - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,151 - dbLogger - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,156 - dbLogger - INFO - Venue 'Elevation 27' added to database with city 'Virginia Beach' and state 'VA'.
+2024-10-31 02:51:03,156 - dbLogger - INFO - Artist 'Nonpoint' added to database.
+2024-10-31 02:51:03,160 - dbLogger - INFO - Event 'Nonpoint with Crobot and Heartsick' added to database.
+2024-10-31 02:51:03,165 - dbLogger - INFO - Venue 'Wells Hall at The Parker' added to database with city 'Ft Lauderdale' and state 'FL'.
+2024-10-31 02:51:03,165 - dbLogger - INFO - Artist 'Dweezil Zappa' added to database.
+2024-10-31 02:51:03,170 - dbLogger - INFO - Event 'Dweezil Zappa: The Rox(postroph)y Tour' added to database.
+2024-10-31 02:51:03,175 - dbLogger - INFO - Venue 'Vinyl' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:03,180 - dbLogger - INFO - Artist 'Cloud Cult' added to database.
+2024-10-31 02:51:03,185 - dbLogger - INFO - Event 'Cloud Cult' added to database.
+2024-10-31 02:51:03,185 - dbLogger - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,185 - dbLogger - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,190 - dbLogger - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,194 - dbLogger - INFO - Venue 'Hard Rock Live Orlando' added to database with city 'Orlando' and state 'FL'.
+2024-10-31 02:51:03,194 - dbLogger - INFO - Artist 'Melissa Etheridge' added to database.
+2024-10-31 02:51:03,199 - dbLogger - INFO - Event 'Melissa Etheridge: 2025 Tour' added to database.
+2024-10-31 02:51:03,204 - dbLogger - INFO - Venue 'The Van Buren' added to database with city 'Phoenix' and state 'AZ'.
+2024-10-31 02:51:03,204 - dbLogger - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,209 - dbLogger - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,214 - dbLogger - INFO - Venue 'Aztec Theatre ' added to database with city 'San Antonio' and state 'TX'.
+2024-10-31 02:51:03,214 - dbLogger - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,219 - dbLogger - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:03,224 - dbLogger - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,224 - dbLogger - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:03,229 - dbLogger - INFO - Event 'Spafford' added to database.
+2024-10-31 02:51:03,229 - dbLogger - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,229 - dbLogger - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:03,234 - dbLogger - INFO - Event 'Spafford: Two Night Pass ' added to database.
+2024-10-31 02:51:03,239 - dbLogger - INFO - Venue 'Dome at Toyota Oakdale Theatre' added to database with city 'Wallingford' and state 'CT'.
+2024-10-31 02:51:03,240 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,244 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,249 - dbLogger - INFO - Venue 'Top Hat' added to database with city 'Missoula' and state 'MT'.
+2024-10-31 02:51:03,250 - dbLogger - INFO - Artist 'Shwayze' added to database.
+2024-10-31 02:51:03,255 - dbLogger - INFO - Event 'Shwayze' added to database.
+2024-10-31 02:51:03,260 - dbLogger - INFO - Venue 'United Center' added to database with city 'Chicago' and state 'IL'.
+2024-10-31 02:51:03,268 - dbLogger - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,282 - dbLogger - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,286 - dbLogger - INFO - Venue 'Tabernacle' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:03,286 - dbLogger - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,292 - dbLogger - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,292 - dbLogger - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,292 - dbLogger - INFO - Artist 'Spafford' added to database.
+2024-10-31 02:51:03,297 - dbLogger - INFO - Event 'Spafford' added to database.
+2024-10-31 02:51:03,302 - dbLogger - INFO - Venue 'Hackensack Meridian Health Theatre at the Count Basie Center ' added to database with city 'Red Bank' and state 'NJ'.
+2024-10-31 02:51:03,310 - dbLogger - INFO - Artist 'Tusk' added to database.
+2024-10-31 02:51:03,316 - dbLogger - INFO - Event 'Tusk: The Classic Fleetwood Mac Tribute' added to database.
+2024-10-31 02:51:03,316 - dbLogger - INFO - Venue 'Marathon Music Works' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:03,316 - dbLogger - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,321 - dbLogger - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,326 - dbLogger - INFO - Venue 'Bijou Theatre' added to database with city 'Knoxville' and state 'TN'.
+2024-10-31 02:51:03,332 - dbLogger - INFO - Artist 'Scott Miller' added to database.
+2024-10-31 02:51:03,337 - dbLogger - INFO - Event 'Scott Miller' added to database.
+2024-10-31 02:51:03,337 - dbLogger - INFO - Venue 'The Paramount' added to database with city 'Huntington' and state 'NY'.
+2024-10-31 02:51:03,337 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,342 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,342 - dbLogger - INFO - Venue 'Constellation Room' added to database with city 'Santa Ana' and state 'CA'.
+2024-10-31 02:51:03,347 - dbLogger - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,353 - dbLogger - INFO - Event 'Dua Saleh' added to database.
+2024-10-31 02:51:03,357 - dbLogger - INFO - Venue 'La Crosse Center' added to database with city 'La Crosse' and state 'WI'.
+2024-10-31 02:51:03,362 - dbLogger - INFO - Artist 'Asking Alexandria' added to database.
+2024-10-31 02:51:03,367 - dbLogger - INFO - Event 'Riverfront Revolt' added to database.
+2024-10-31 02:51:03,372 - dbLogger - INFO - Venue 'The Wiltern' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,372 - dbLogger - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,377 - dbLogger - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,382 - dbLogger - INFO - Venue 'Neptune Theatre' added to database with city 'Seattle' and state 'WA'.
+2024-10-31 02:51:03,382 - dbLogger - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,387 - dbLogger - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,391 - dbLogger - INFO - Venue 'Birchmere' added to database with city 'Alexandria' and state 'VA'.
+2024-10-31 02:51:03,396 - dbLogger - INFO - Artist 'Dar Williams' added to database.
+2024-10-31 02:51:03,401 - dbLogger - INFO - Event 'Dar Williams' added to database.
+2024-10-31 02:51:03,401 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,406 - dbLogger - INFO - Artist 'Frankie Scinta' added to database.
+2024-10-31 02:51:03,411 - dbLogger - INFO - Event 'Frankie Scinta' added to database.
+2024-10-31 02:51:03,416 - dbLogger - INFO - Venue 'Marquee Theatre' added to database with city 'Tempe' and state 'AZ'.
+2024-10-31 02:51:03,421 - dbLogger - INFO - Artist 'Cowboy Mouth' added to database.
+2024-10-31 02:51:03,426 - dbLogger - INFO - Event 'Cowboy Mouth' added to database.
+2024-10-31 02:51:03,426 - dbLogger - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,426 - dbLogger - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,431 - dbLogger - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,436 - dbLogger - INFO - Venue 'The Signal' added to database with city 'Chattanooga' and state 'TN'.
+2024-10-31 02:51:03,436 - dbLogger - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,441 - dbLogger - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:03,446 - dbLogger - INFO - Venue 'L'Auberge Casino & Hotel Baton Rouge ' added to database with city 'Baton Rouge' and state 'LA'.
+2024-10-31 02:51:03,451 - dbLogger - INFO - Artist 'John Waite' added to database.
+2024-10-31 02:51:03,456 - dbLogger - INFO - Event 'John Waite' added to database.
+2024-10-31 02:51:03,461 - dbLogger - INFO - Venue 'Ford Wyoming Center' added to database with city 'Casper' and state 'WY'.
+2024-10-31 02:51:03,461 - dbLogger - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:03,466 - dbLogger - INFO - Event 'Josh Turner: This Country Music Thing Tour' added to database.
+2024-10-31 02:51:03,471 - dbLogger - INFO - Venue 'United Palace' added to database with city 'New York' and state 'NY'.
+2024-10-31 02:51:03,476 - dbLogger - INFO - Artist 'Radel Ortiz' added to database.
+2024-10-31 02:51:03,481 - dbLogger - INFO - Event 'Radel Ortiz  Live From New York' added to database.
+2024-10-31 02:51:03,486 - dbLogger - INFO - Venue 'Bryce Jordan Center' added to database with city 'University Park' and state 'PA'.
+2024-10-31 02:51:03,491 - dbLogger - INFO - Artist 'Parker McCollum' added to database.
+2024-10-31 02:51:03,496 - dbLogger - INFO - Event 'Parker McCollum: What Kinda Man Tour 2025' added to database.
+2024-10-31 02:51:03,501 - dbLogger - INFO - Venue 'Ames Center' added to database with city 'Burnsville' and state 'MN'.
+2024-10-31 02:51:03,506 - dbLogger - INFO - Artist '1964 The Tribute' added to database.
+2024-10-31 02:51:03,511 - dbLogger - INFO - Event '1964 The Tribute' added to database.
+2024-10-31 02:51:03,511 - dbLogger - INFO - Venue 'La Crosse Center' added to database with city 'La Crosse' and state 'WI'.
+2024-10-31 02:51:03,516 - dbLogger - INFO - Artist 'Beartooth' added to database.
+2024-10-31 02:51:03,521 - dbLogger - INFO - Event 'Riverfront Revolt' added to database.
+2024-10-31 02:51:03,521 - dbLogger - INFO - Venue 'The Wellmont Theater' added to database with city 'Montclair' and state 'NJ'.
+2024-10-31 02:51:03,521 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,526 - dbLogger - INFO - Event 'Destroy Lonely: FOREVER TOUR' added to database.
+2024-10-31 02:51:03,526 - dbLogger - INFO - Venue 'The Moroccan Lounge' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,526 - dbLogger - INFO - Artist 'The Haunt' added to database.
+2024-10-31 02:51:03,531 - dbLogger - INFO - Event 'The Haunt' added to database.
+2024-10-31 02:51:03,531 - dbLogger - INFO - Venue 'The Echo' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,536 - dbLogger - INFO - Artist 'Lutalo' added to database.
+2024-10-31 02:51:03,541 - dbLogger - INFO - Event 'Lutalo' added to database.
+2024-10-31 02:51:03,546 - dbLogger - INFO - Venue 'Fiserv Forum' added to database with city 'Milwaukee' and state 'WI'.
+2024-10-31 02:51:03,546 - dbLogger - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,551 - dbLogger - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,555 - dbLogger - INFO - Venue 'The Sound' added to database with city 'Del Mar' and state 'CA'.
+2024-10-31 02:51:03,555 - dbLogger - INFO - Artist 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,560 - dbLogger - INFO - Event 'Greensky Bluegrass' added to database.
+2024-10-31 02:51:03,560 - dbLogger - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,560 - dbLogger - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,565 - dbLogger - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,570 - dbLogger - INFO - Venue 'Genesee Theatre' added to database with city 'Waukegan' and state 'IL'.
+2024-10-31 02:51:03,570 - dbLogger - INFO - Artist 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,575 - dbLogger - INFO - Event 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,575 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,580 - dbLogger - INFO - Artist 'Human Nature' added to database.
+2024-10-31 02:51:03,586 - dbLogger - INFO - Event 'Human Nature: Back To The Sound Of Motown' added to database.
+2024-10-31 02:51:03,586 - dbLogger - INFO - Venue 'ASU Kerr' added to database with city 'Scottsdale' and state 'AZ'.
+2024-10-31 02:51:03,586 - dbLogger - INFO - Artist 'ASU Kerr Tuesday Morning Music & Tea' added to database.
+2024-10-31 02:51:03,592 - dbLogger - INFO - Event 'ASU Kerr Tuesday Morning Music & Tea - Collaborative Piano' added to database.
+2024-10-31 02:51:03,592 - dbLogger - INFO - Venue 'White Oak Music Hall - Upstairs ' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,592 - dbLogger - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,597 - dbLogger - INFO - Event 'Dua Saleh - I SHOULD CALL THEM WORLD TOUR' added to database.
+2024-10-31 02:51:03,603 - dbLogger - INFO - Venue 'The Blue Note' added to database with city 'Columbia' and state 'MO'.
+2024-10-31 02:51:03,603 - dbLogger - INFO - Artist 'Atmosphere' added to database.
+2024-10-31 02:51:03,608 - dbLogger - INFO - Event 'Atmosphere - Imagine The Fun Tour' added to database.
+2024-10-31 02:51:03,613 - dbLogger - INFO - Venue 'Orpheum Theatre' added to database with city 'Minneapolis' and state 'MN'.
+2024-10-31 02:51:03,614 - dbLogger - INFO - Artist 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,619 - dbLogger - INFO - Event 'The Simon & Garfunkel Story (Touring)' added to database.
+2024-10-31 02:51:03,624 - dbLogger - INFO - Venue 'House of Blues San Diego' added to database with city 'San Diego' and state 'CA'.
+2024-10-31 02:51:03,630 - dbLogger - INFO - Artist 'Lauren Mayberry' added to database.
+2024-10-31 02:51:03,635 - dbLogger - INFO - Event 'Lauren Mayberry - Vicious Creature Tour' added to database.
+2024-10-31 02:51:03,635 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,635 - dbLogger - INFO - Artist 'Human Nature' added to database.
+2024-10-31 02:51:03,640 - dbLogger - INFO - Event 'Human Nature: Back To The Sound Of Motown' added to database.
+2024-10-31 02:51:03,640 - dbLogger - INFO - Venue 'The Fillmore Silver Spring' added to database with city 'Silver Spring' and state 'MD'.
+2024-10-31 02:51:03,640 - dbLogger - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,645 - dbLogger - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,645 - dbLogger - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,645 - dbLogger - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,650 - dbLogger - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,650 - dbLogger - INFO - Venue 'Antone's Nightclub' added to database with city 'Austin' and state 'TX'.
+2024-10-31 02:51:03,651 - dbLogger - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,659 - dbLogger - INFO - Event 'Dua Saleh: I SHOULD CALL THEM WORLD TOUR w/ Sam Austins' added to database.
+2024-10-31 02:51:03,664 - dbLogger - INFO - Venue 'White Oak Music Hall - Downstairs' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,668 - dbLogger - INFO - Artist 'Moon Hooch' added to database.
+2024-10-31 02:51:03,673 - dbLogger - INFO - Event 'Moon Zooz: Moon Hooch + Too Many Zooz with Honeycomb' added to database.
+2024-10-31 02:51:03,678 - dbLogger - INFO - Venue 'The Fillmore' added to database with city 'San Francisco' and state 'CA'.
+2024-10-31 02:51:03,678 - dbLogger - INFO - Artist 'Lauren Mayberry' added to database.
+2024-10-31 02:51:03,683 - dbLogger - INFO - Event 'Lauren Mayberry: Vicious Creature Tour' added to database.
+2024-10-31 02:51:03,688 - dbLogger - INFO - Venue 'Buffalo RiverWorks' added to database with city 'Buffalo' and state 'NY'.
+2024-10-31 02:51:03,689 - dbLogger - INFO - Artist 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,693 - dbLogger - INFO - Event 'Destroy Lonely' added to database.
+2024-10-31 02:51:03,698 - dbLogger - INFO - Venue 'Jefferson Theater' added to database with city 'Charlottesville' and state 'VA'.
+2024-10-31 02:51:03,703 - dbLogger - INFO - Artist 'Badfish - A Tribute To Sublime' added to database.
+2024-10-31 02:51:03,708 - dbLogger - INFO - Event 'Badfish - A Tribute To Sublime: The Gold Tour' added to database.
+2024-10-31 02:51:03,708 - dbLogger - INFO - Venue 'Echoplex' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,713 - dbLogger - INFO - Artist 'Jamie Miller' added to database.
+2024-10-31 02:51:03,718 - dbLogger - INFO - Event 'Jamie Miller' added to database.
+2024-10-31 02:51:03,723 - dbLogger - INFO - Venue 'Gas South Arena' added to database with city 'Duluth' and state 'GA'.
+2024-10-31 02:51:03,723 - dbLogger - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,728 - dbLogger - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,728 - dbLogger - INFO - Venue 'Echostage' added to database with city 'Washington' and state 'DC'.
+2024-10-31 02:51:03,733 - dbLogger - INFO - Artist 'Sullivan King' added to database.
+2024-10-31 02:51:03,738 - dbLogger - INFO - Event 'Sullivan King - Chaos Will Bring Peace 2025 US Tour' added to database.
+2024-10-31 02:51:03,738 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,738 - dbLogger - INFO - Artist 'Human Nature' added to database.
+2024-10-31 02:51:03,743 - dbLogger - INFO - Event 'Human Nature: Back To The Sound Of Motown' added to database.
+2024-10-31 02:51:03,743 - dbLogger - INFO - Venue 'House of Blues Las Vegas ' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,743 - dbLogger - INFO - Artist 'Santana' added to database.
+2024-10-31 02:51:03,748 - dbLogger - INFO - Event 'SiriusXM Presents An Intimate Evening with SANTANA Greatest Hits Live' added to database.
+2024-10-31 02:51:03,748 - dbLogger - INFO - Venue 'White Oak Music Hall - Upstairs ' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,748 - dbLogger - INFO - Artist 'Lutalo' added to database.
+2024-10-31 02:51:03,753 - dbLogger - INFO - Event 'Lutalo' added to database.
+2024-10-31 02:51:03,753 - dbLogger - INFO - Venue 'The Fillmore' added to database with city 'San Francisco' and state 'CA'.
+2024-10-31 02:51:03,753 - dbLogger - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,758 - dbLogger - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,758 - dbLogger - INFO - Venue 'Constellation Room' added to database with city 'Santa Ana' and state 'CA'.
+2024-10-31 02:51:03,758 - dbLogger - INFO - Artist 'Kill Dyll' added to database.
+2024-10-31 02:51:03,762 - dbLogger - INFO - Event 'Kill Dyll' added to database.
+2024-10-31 02:51:03,767 - dbLogger - INFO - Venue 'The Wind Creek Event Center ' added to database with city 'Bethlehem' and state 'PA'.
+2024-10-31 02:51:03,772 - dbLogger - INFO - Event 'The 3 Kings: Ultimate Elvis 90th Birthday Experience' added to database.
+2024-10-31 02:51:03,772 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,777 - dbLogger - INFO - Artist 'Serpentine Fire' added to database.
+2024-10-31 02:51:03,782 - dbLogger - INFO - Event 'SERPENTINE FIRE: Music of Earth, Wind, and Fire' added to database.
+2024-10-31 02:51:03,787 - dbLogger - INFO - Venue 'The Bronze Peacock at House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,792 - dbLogger - INFO - Artist 'Bayker Blankenship' added to database.
+2024-10-31 02:51:03,796 - dbLogger - INFO - Event 'Bayker Blankenship' added to database.
+2024-10-31 02:51:03,797 - dbLogger - INFO - Venue 'House of Blues Houston' added to database with city 'Houston' and state 'TX'.
+2024-10-31 02:51:03,801 - dbLogger - INFO - Artist 'Casey Donahew' added to database.
+2024-10-31 02:51:03,806 - dbLogger - INFO - Event 'Casey Donahew' added to database.
+2024-10-31 02:51:03,811 - dbLogger - INFO - Venue 'Crossroads Arena' added to database with city 'Corinth' and state 'MS'.
+2024-10-31 02:51:03,811 - dbLogger - INFO - Artist 'Josh Turner' added to database.
+2024-10-31 02:51:03,816 - dbLogger - INFO - Event 'Josh Turner' added to database.
+2024-10-31 02:51:03,820 - dbLogger - INFO - Venue 'Bridgestone Arena' added to database with city 'Nashville' and state 'TN'.
+2024-10-31 02:51:03,821 - dbLogger - INFO - Artist 'Kelsea Ballerini' added to database.
+2024-10-31 02:51:03,825 - dbLogger - INFO - Event 'Kelsea Ballerini - Live On Tour' added to database.
+2024-10-31 02:51:03,830 - dbLogger - INFO - Venue 'The Stone Pony' added to database with city 'Asbury Park' and state 'NJ'.
+2024-10-31 02:51:03,835 - dbLogger - INFO - Artist 'Joy Oladokun' added to database.
+2024-10-31 02:51:03,840 - dbLogger - INFO - Event 'Joy Oladokun: The Blackbird Tour' added to database.
+2024-10-31 02:51:03,840 - dbLogger - INFO - Venue 'The Fillmore Philadelphia' added to database with city 'Philadelphia' and state 'PA'.
+2024-10-31 02:51:03,840 - dbLogger - INFO - Artist 'NoCap' added to database.
+2024-10-31 02:51:03,844 - dbLogger - INFO - Event 'NOCAP - BEFORE I DISAPPEAR AGAIN TOUR' added to database.
+2024-10-31 02:51:03,852 - dbLogger - INFO - Venue 'Saint Andrew's Hall' added to database with city 'Detroit' and state 'MI'.
+2024-10-31 02:51:03,853 - dbLogger - INFO - Artist 'Muscadine Bloodline' added to database.
+2024-10-31 02:51:03,863 - dbLogger - INFO - Event 'Muscadine Bloodline- The Coastal Plain Tour' added to database.
+2024-10-31 02:51:03,871 - dbLogger - INFO - Venue 'The Bellwether' added to database with city 'Los Angeles' and state 'CA'.
+2024-10-31 02:51:03,871 - dbLogger - INFO - Artist 'Houndmouth' added to database.
+2024-10-31 02:51:03,875 - dbLogger - INFO - Event 'Houndmouth' added to database.
+2024-10-31 02:51:03,880 - dbLogger - INFO - Venue 'The Pageant' added to database with city 'Saint Louis' and state 'MO'.
+2024-10-31 02:51:03,885 - dbLogger - INFO - Artist 'Billy Gibbons' added to database.
+2024-10-31 02:51:03,889 - dbLogger - INFO - Event 'Billy F. Gibbons' added to database.
+2024-10-31 02:51:03,890 - dbLogger - INFO - Venue 'Elevation 27' added to database with city 'Virginia Beach' and state 'VA'.
+2024-10-31 02:51:03,890 - dbLogger - INFO - Artist 'Badfish - A Tribute To Sublime' added to database.
+2024-10-31 02:51:03,894 - dbLogger - INFO - Event 'Badfish - A Tribute To Sublime' added to database.
+2024-10-31 02:51:03,899 - dbLogger - INFO - Venue 'Bell Auditorium' added to database with city 'Augusta' and state 'GA'.
+2024-10-31 02:51:03,904 - dbLogger - INFO - Artist 'Alice Cooper' added to database.
+2024-10-31 02:51:03,909 - dbLogger - INFO - Event 'Alice Cooper' added to database.
+2024-10-31 02:51:03,909 - dbLogger - INFO - Venue 'Vinyl' added to database with city 'Atlanta' and state 'GA'.
+2024-10-31 02:51:03,909 - dbLogger - INFO - Artist 'Dua Saleh' added to database.
+2024-10-31 02:51:03,914 - dbLogger - INFO - Event 'Dua Saleh - I SHOULD CALL THEM WORLD TOUR' added to database.
+2024-10-31 02:51:03,918 - dbLogger - INFO - Venue 'The Theater at MGM National Harbor' added to database with city 'National Harbor' and state 'MD'.
+2024-10-31 02:51:03,923 - dbLogger - INFO - Artist 'KC & the Sunshine Band' added to database.
+2024-10-31 02:51:03,928 - dbLogger - INFO - Event 'KC & the Sunshine Band' added to database.
+2024-10-31 02:51:03,933 - dbLogger - INFO - Venue 'The Maryland Theatre' added to database with city 'Hagerstown' and state 'MD'.
+2024-10-31 02:51:03,937 - dbLogger - INFO - Artist 'The Purple Xperience' added to database.
+2024-10-31 02:51:03,942 - dbLogger - INFO - Event 'The Purple Xperience' added to database.
+2024-10-31 02:51:03,942 - dbLogger - INFO - Venue 'South Point Showroom at South Point Hotel Casino and Spa' added to database with city 'Las Vegas' and state 'NV'.
+2024-10-31 02:51:03,942 - dbLogger - INFO - Artist 'Serpentine Fire' added to database.
+2024-10-31 02:51:03,947 - dbLogger - INFO - Event 'SERPENTINE FIRE: Music of Earth, Wind, and Fire' added to database.
+2024-10-31 02:51:03,951 - INFO - Fetched today's events.
+2024-10-31 02:51:03,951 - eventLogger - INFO - Fetched today's events.
+2024-10-31 02:51:04,070 - messageLogger - INFO - Notified Discord about notable event: SOULSHINE - A BENEFIT FOR HURRICANE RELIEF AND RECOVERY by Dave Matthews
+2024-10-31 02:51:04,183 - messageLogger - INFO - Notified Discord about notable event: USHER: Past Present Future by USHER
+2024-10-31 02:51:04,400 - messageLogger - INFO - Notified Discord about notable event: USHER: Past Present Future by USHER
+2024-10-31 02:51:04,512 - messageLogger - INFO - Notified Discord about notable event: B96 Bash with Kane Brown by Kane Brown
+2024-10-31 02:51:09,070 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:09,224 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:09,351 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely by Destroy Lonely
+2024-10-31 02:51:09,497 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:09,609 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:14,194 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:14,308 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:14,399 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:14,514 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:14,626 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:19,328 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely: FOREVER TOUR by Destroy Lonely
+2024-10-31 02:51:19,431 - messageLogger - INFO - Notified Discord about notable event: Destroy Lonely by Destroy Lonely

@@ -17,7 +17,7 @@ initialize_db()
 # Set up general event logging
 event_logger = logging.getLogger("eventLogger")
 event_logger.setLevel(logging.INFO)
-event_handler = logging.FileHandler("event_log.log")
+event_handler = logging.FileHandler("logs/event_log.log")
 event_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 event_logger.addHandler(event_handler)
 

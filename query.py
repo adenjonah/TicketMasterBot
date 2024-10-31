@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 # Set up message-specific logging
 message_logger = logging.getLogger("messageLogger")
 message_logger.setLevel(logging.INFO)
-message_handler = logging.FileHandler("message_log.log")
+message_handler = logging.FileHandler("logs/message_log.log")
 message_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
 message_logger.addHandler(message_handler)
 

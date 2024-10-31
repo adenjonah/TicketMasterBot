@@ -113,3 +113,5 @@ Original ID: 3297169 - Name: hannah bahng | API ID: K8vZ917q2T7
 Original ID: 2433469 - Name: Maisie Peters | API ID: K8vZ917pq90
 Original ID: 836902 - Name: Carimi | API ID: K8vZ9174_g0
 Original ID: 1114794 - Name: Ricky Gervais | API ID: K8vZ9175M60
+Original ID: 1957114 - Name: RUFUS DU SOL | API ID: K8vZ9173ujV
+Original ID: 1542376 - Name: Monster Jam | API ID: K8vZ917uyff

@@ -14,9 +14,9 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Log file paths
 LOG_FILES = {
-    "eventlog": "event_log.log",
-    "dblog": "db_log.log",
-    "messagelog": "message_log.log"
+    "eventlog": "logs/event_log.log",
+    "dblog": "logs/db_log.log",
+    "messagelog": "logs/message_log.log"
 }
 
 # SQLite database connection
@@ -28,7 +28,7 @@ from discord.ext import commands
 import logging
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, filename="event_log.log", filemode="a",
+logging.basicConfig(level=logging.INFO, filename="logs/event_log.log", filemode="a",
                     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("commandHandler")
 
@@ -155,8 +155,8 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
             minutes = remainder // 60
             time_str = f"in {int(hours)} hours {int(minutes)} minutes"
         else:
-            # More than a day away, use full date in UTC
-            time_str = sale_start.strftime("%Y-%m-%d %H:%M UTC")
+            # More than a day away, use human-readable date with ordinal suffix
+            time_str = format_date_with_ordinal(sale_start)
 
         # Create a hyperlink format: "1. Event Name (link) sale starts: ..."
         message_lines.append(f"{idx}. [{event[1]}]({event[4]}) sale starts: {time_str}")
@@ -168,3 +168,9 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
         color=discord.Color.blue()
     )
     await ctx.send(embed=embed)
+
+# Helper function to format dates with ordinal suffixes for the day
+def format_date_with_ordinal(dt):
+    day = dt.day
+    suffix = "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+    return dt.strftime(f"%B {day}{suffix}, %Y")
