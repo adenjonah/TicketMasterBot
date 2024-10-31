@@ -198,14 +198,12 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
         sale_start = datetime.strptime(event[2], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
         time_remaining = sale_start - datetime.now(timezone.utc)
 
-        # Only proceed if time remaining is non-negative
-        if time_remaining.total_seconds() < 0:
-            continue
-
         # Format the time until sale starts
         if time_remaining.total_seconds() < 3600:
             # Less than an hour away
             time_str = f"in {int(time_remaining.total_seconds() // 60)} minutes"
+            if time_remaining.total_seconds() < 0:
+                time_str = f"{int(time_remaining.total_seconds() // (-60))} minutes ago"
         elif time_remaining.total_seconds() < 86400:
             # Less than a day away
             hours, remainder = divmod(time_remaining.total_seconds(), 3600)
@@ -216,7 +214,10 @@ async def next_events(ctx, number: int = 5):  # Default to 5 if no number is pro
             time_str = format_date_with_ordinal(sale_start)
 
         # Create a line for this event
-        event_line = f"{idx}. [{event[1]}]({event[4]}) sale starts: {time_str}\n"
+        event_line = f"{idx}. [{event[1]}]({event[4]}) sale starts {time_str}\n"
+        
+        if time_remaining.total_seconds() < 0:
+            event_line = f"{idx}. [{event[1]}]({event[4]}) sale already started {time_str}\n"
 
         # Check if adding this line would exceed the max length for description
         if total_length + len(event_line) > max_description_length:
