@@ -18,7 +18,7 @@ Artist ID: 1435919 - Imagine Dragons
 Artist ID: 2222681 - Cigarettes After Sex
 Artist ID: 2892837 - Benson Boone
 Artist ID: 2782189 - Lizzy McAlpine
-Artist ID: 1957114 - RÜFÜS DU SOL
+Artist ID: 1957114 - Rï¿½Fï¿½S DU SOL
 Artist ID: 736262 - James Taylor
 Artist ID: 2150342 - Luke Combs
 Artist ID: 1020885 - Eric Church
@@ -98,3 +98,21 @@ Artist ID: 2110227 - BTS
 Artist ID: 2281371 - SEVENTEEN
 Artist ID: 942726 - Mike Birbiglia
 Artist ID: 2842518 - Latto
+Artist ID: 1542376 - Buy Monster Jam
+Artist ID: 1319618 - Theo Von
+Artist ID: 1266616 - Whiskey Myers
+Artist ID: 1871860 - KAYTRANADA
+Artist ID: 1506392 - Jamie XX
+Artist ID: 1983434 - Shawn Mendes
+Artist ID: 1013826 - Rihanna
+Artist ID: 3008978 - Wave To Earth
+Artist ID: 2555869 - HARDY
+Artist ID: 3109542 - Diplo
+Artist ID: 1244865 - Diplo
+Artist ID: 2543736 - Conan Gray
+Artist ID: 806762 - Buy Ultimate Fighting Championship - UFC
+Artist ID: 773309 - Aaron Kwok
+Artist ID: 3297169 - hannah bahng
+Artist ID: 2433469 - Maisie Peters
+Artist ID: 836902 - Carimi
+Artist ID: 1114794 - Ricky Gervais
