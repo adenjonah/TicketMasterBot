@@ -52,13 +52,10 @@ def initialize_db():
     conn.commit()
     db_logger.info("Database initialized successfully.")
 
-    # Load notable artist IDs from artist_ids_output.txt
+    # Load notable artist IDs from artist_ids.txt
     try:
-        with open("artist_ids_output.txt", "r") as f:
+        with open("artist_ids.txt", "r") as f:
             for line in f:
-                # Print the line for debugging purposes (optional)
-                print(line)
-                
                 # Check for the expected line format with 'Original ID:', 'Name:', and 'API ID:'
                 if "Original ID:" in line and "Name:" in line and "API ID:" in line:
                     # Split the line by separators to extract values
@@ -78,9 +75,9 @@ def initialize_db():
 
         # Commit all changes to the database
         conn.commit()
-        db_logger.info("Completed adding notable artists from artist_ids_output.txt to the database.")
+        db_logger.info("Completed adding notable artists from artist_ids.txt to the database.")
     except FileNotFoundError:
-        db_logger.error("File artist_ids_output.txt not found.")
+        db_logger.error("File artist_ids.txt not found.")
 
 
 def fetch_today_events():
@@ -112,29 +109,6 @@ def fetch_today_events():
             store_event(event)
     except requests.exceptions.RequestException as e:
         db_logger.error(f"Error fetching events: {e}")
-
-# def fetch_today_events():
-#     """Fetches all events from Madison Square Garden with specific classificationId, size, and source."""
-#     # Define the API URL and parameters
-#     url = "https://app.ticketmaster.com/discovery/v2/events"
-#     params = {
-#         "apikey": TICKETMASTER_API_KEY,
-#         "venueId": "KovZpZA7AAEA",              # Madison Square Garden venue ID
-#         "classificationId": "KZFzniwnSyZfZ7v7nJ", # Specific classification ID
-#         "size": 199,                              # Max size of each response page
-#         "source": "ticketmaster"                  # Source filter for ticketmaster
-#     }
-
-#     try:
-#         response = requests.get(url, params=params)
-#         response.raise_for_status()
-#         data = response.json()
-#         events = data.get("_embedded", {}).get("events", [])
-
-#         for event in events:
-#             store_event(event)
-#     except requests.exceptions.RequestException as e:
-#         db_logger.error(f"Error fetching events for Madison Square Garden with classificationId: {e}")
 
 def store_event(event):
     """Stores a new event in the database if not already present, and ensures venue and artist data are updated."""
