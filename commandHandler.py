@@ -4,7 +4,7 @@ import sqlite3
 import logging
 from collections import deque
 from datetime import datetime, timedelta, timezone
-import requests
+import aiohttp
 import os
 from dotenv import load_dotenv
 
@@ -126,10 +126,11 @@ async def add_artist(ctx, artist_id: str):
             "locale": "*"
         }
         
-        # Make the API request
-        response = requests.get(api_url, params=params)
-        response.raise_for_status()
-        data = response.json()
+        # Make the API request asynchronously
+        async with aiohttp.ClientSession() as session:
+            async with session.get(api_url, params=params) as response:
+                response.raise_for_status()  # Raises an exception for 4XX/5XX errors
+                data = await response.json()  # Parse JSON asynchronously
         
         # Check if artist data is present
         attractions = data.get("_embedded", {}).get("attractions", [])
@@ -155,17 +156,20 @@ async def add_artist(ctx, artist_id: str):
             conn.commit()
             await ctx.send(f"Artist \"{artist_name}\" with ID: {artist_id} added and marked as notable.")
 
+        # Set sentToDiscord = 0 for all events with this artist
+        c.execute("UPDATE Events SET sentToDiscord = 0 WHERE artistID = ?", (artist_id,))
+        conn.commit()
+
         # Log this action
-        logging.getLogger("dbLogger").info(f"Artist \"{artist_name}\" with ID {artist_id} added/updated as notable.")
+        logging.getLogger("dbLogger").info(f"Artist \"{artist_name}\" with ID {artist_id} added/updated as notable, and events marked for re-sending.")
     
-    except requests.exceptions.RequestException as e:
+    except aiohttp.ClientError as e:
         await ctx.send("Error fetching artist data from Ticketmaster API.")
         logging.getLogger("dbLogger").error(f"Ticketmaster API request failed for artist ID {artist_id}: {e}")
     
     except Exception as e:
         await ctx.send("Error adding or updating notable artist.")
         logging.getLogger("dbLogger").error(f"Failed to add/update notable artist {artist_id}: {e}")
-
 @bot.command(name="next", help="Shows a list of the next notable events with ticket sales starting soon.")
 async def next_events(ctx, number: int = 5):  # Default to 5 if no number is provided
     # Cap the number to 50
