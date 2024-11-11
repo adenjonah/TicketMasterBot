@@ -170,6 +170,7 @@ async def add_artist(ctx, artist_id: str):
     except Exception as e:
         await ctx.send("Error adding or updating notable artist.")
         logging.getLogger("dbLogger").error(f"Failed to add/update notable artist {artist_id}: {e}")
+
 @bot.command(name="next", help="Shows a list of the next notable events with ticket sales starting soon.")
 async def next_events(ctx, number: int = 5):  # Default to 5 if no number is provided
     # Cap the number to 50
