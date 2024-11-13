@@ -112,7 +112,8 @@ async def fetch_events(bot):
                 "onsaleStartDateTime": current_time,
                 "countryCode": "US",
                 "classificationId": "KZFzniwnSyZfZ7v7nJ",
-                "onsaleOnAfterStartDate": current_date
+                "onsaleOnAfterStartDate": current_date,
+                "sort": "onSaleStartDate,asc"
             }
 
             try:
@@ -148,6 +149,7 @@ async def fetch_events(bot):
             except aiohttp.ClientError as e:
                 error_message = f"Error fetching events on page {page + 1}: {e}"
                 await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
+                print(error_message)
                 break
 
             # Move to the next page

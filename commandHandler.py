@@ -261,3 +261,34 @@ def format_date_with_ordinal(dt):
     day = dt.day
     suffix = "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
     return dt.strftime(f"%B {day}{suffix}, %Y")
+
+@bot.command(name="ratelimit", help="Checks the current API rate limit status")
+async def ratelimit(ctx):
+    """Checks the Ticketmaster API rate limit status and displays it."""
+    url = f"https://app.ticketmaster.com/discovery/v2/events.json?apikey={API_KEY}&size=1"
+    
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            # Retrieve response headers
+            headers = response.headers
+            
+            # Extract rate limit details
+            rate_limit = headers.get("Rate-Limit", "Unknown")
+            rate_limit_available = headers.get("Rate-Limit-Available", "Unknown")
+            rate_limit_reset = headers.get("Rate-Limit-Reset", "Unknown")
+            
+            # Convert the reset timestamp to a human-readable format if it's available
+            reset_time = "Unknown"
+            if rate_limit_reset.isdigit():
+                reset_time = datetime.fromtimestamp(int(rate_limit_reset) / 1000).strftime("%Y-%m-%d %H:%M:%S UTC")
+            
+            # Create and send an embedded message with rate limit info to Discord
+            embed = discord.Embed(
+                title="API Rate Limit Status",
+                description=f"**Rate Limit**: {rate_limit}\n"
+                            f"**Available Requests**: {rate_limit_available}\n"
+                            f"**Reset Time**: {reset_time}",
+                color=discord.Color.blue()
+            )
+            await ctx.send(embed=embed)
+            logger.info("Displayed API rate limit information to user.")
