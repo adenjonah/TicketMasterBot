@@ -1,15 +1,8 @@
-
 .env
 /venv
 events.db
-/__pycache__
 /__pycache__
 *.pyc
 *.db
 *.log
 *.db
-/logs
-*.db
-/logs
-/__pycache__
-/__pycache__
