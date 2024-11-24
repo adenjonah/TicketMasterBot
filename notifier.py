@@ -1,37 +1,39 @@
-import sqlite3
+import psycopg2
+from psycopg2.extras import DictCursor
 import discord
-import logging
 from datetime import datetime, timezone
-
-# Set up message-specific logging
-message_logger = logging.getLogger("messageLogger")
-message_logger.setLevel(logging.INFO)
-message_handler = logging.FileHandler("logs/message_log.log")
-message_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-message_logger.addHandler(message_handler)
+import os
 
 # Database connection
-conn = sqlite3.connect('events.db', check_same_thread=False)
-c = conn.cursor()
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-def format_date_human_readable(date_str):
-    """Converts a date string from the database to a human-readable format."""
-    try:
-        # Attempt to parse full datetime format with time
-        date = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
-    except ValueError:
-        # Fallback to parse date-only format (YYYY-MM-DD) if time is missing
-        date = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=timezone.utc)
-    
+def get_db_connection():
+    """Establish and return a PostgreSQL connection."""
+    return psycopg2.connect(DATABASE_URL, sslmode="require")
+
+def format_date_human_readable(date_input):
+    """Converts a date string or datetime object to a human-readable format."""
+    if isinstance(date_input, datetime):
+        # If it's already a datetime object, ensure it's in UTC
+        date = date_input.astimezone(timezone.utc)
+    else:
+        # Parse the string into a datetime object
+        try:
+            date = datetime.strptime(date_input, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        except ValueError:
+            try:
+                date = datetime.strptime(date_input, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            except ValueError as e:
+                raise ValueError(f"Invalid date format: {date_input}") from e
+
     # Format the day with an ordinal suffix
     day = date.day
     suffix = "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
-    
-    # Manually format the hour to remove leading zero
-    hour = date.strftime("%I").lstrip("0")  # Removes leading zero from 12-hour format hour
-    formatted_time = f"{hour}:{date.strftime('%M %p')} UTC"
-    
-    return date.strftime(f"%B {day}{suffix}, %Y at ") + formatted_time
+
+    # Format the time in 12-hour format with UTC timezone
+    formatted_time = date.strftime(f"%B {day}{suffix}, %Y at %-I:%M %p UTC")
+
+    return formatted_time
 
 async def notify_events(bot, channel_id, notable_only=False):
     """Notifies Discord about unsent events. If notable_only is True, only notifies about notable artist events."""
@@ -43,47 +45,47 @@ async def notify_events(bot, channel_id, notable_only=False):
     FROM Events
     LEFT JOIN Venues ON Events.venueID = Venues.venueID
     LEFT JOIN Artists ON Events.artistID = Artists.artistID
-    WHERE Events.sentToDiscord = 0
+    WHERE Events.sentToDiscord = FALSE
     '''
     if notable_only:
-        query += " AND Artists.notable = 1"
+        query += " AND Artists.notable = TRUE"
 
-    # Execute the query and fetch results
-    c.execute(query)
-    events_to_notify = c.fetchall()
-    
-    # Get the specified channel
-    channel = bot.get_channel(channel_id)
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=DictCursor)
+    try:
+        # Execute the query and fetch results
+        cur.execute(query)
+        events_to_notify = cur.fetchall()
+        
+        # Get the specified channel
+        channel = bot.get_channel(channel_id)
 
-    # Check if there are events to notify and if the channel exists
-    if events_to_notify and channel:
-        for event in events_to_notify:
-            # Format dates to be human-readable
-            onsale_start = format_date_human_readable(event[2]) if event[2] else "TBA"
-            event_date = format_date_human_readable(event[3]) if event[3] else "TBA"
+        # Check if there are events to notify and if the channel exists
+        if events_to_notify and channel:
+            for event in events_to_notify:
+                # Format dates to be human-readable
+                onsale_start = format_date_human_readable(event['ticketonsalestart']) if event['ticketonsalestart'] else "TBA"
+                event_date = format_date_human_readable(event['eventdate']) if event['eventdate'] else "TBA"
 
-            # Create an embed message with event details
-            embed = discord.Embed(
-                title=f"{event[8]} - {event[1]}",  # Adding artist's name to the title for context
-                url=event[4],
-                description=f"**Location**: {event[5]}, {event[6]}\n**Event Date**: {event_date}\n**Sale Start**: {onsale_start}",
-                color=discord.Color.blue()
-            )
-            if event[7]:  # Set image if available
-                embed.set_image(url=event[7])
-            
-            # Send the embed to the Discord channel
-            await channel.send(embed=embed)
-            message_logger.info(f"Notified Discord about event: {event[1]} by {event[8]}")
+                # Create an embed message with event details
+                embed = discord.Embed(
+                    title=f"{event['name']} - {event['name']}",  # Adding artist's name to the title for context
+                    url=event['url'],
+                    description=f"**Location**: {event['city']}, {event['state']}\n**Event Date**: {event_date}\n**Sale Start**: {onsale_start}",
+                    color=discord.Color.blue()
+                )
+                if event['image_url']:  # Set image if available
+                    embed.set_image(url=event['image_url'])
+                
+                # Send the embed to the Discord channel
+                await channel.send(embed=embed)
 
-            # Mark event as sent in the database
-            c.execute("UPDATE Events SET sentToDiscord = 1 WHERE eventID = ?", (event[0],))
-            conn.commit()  # Commit after each update to ensure it's saved
+                # Mark event as sent in the database
+                cur.execute("UPDATE Events SET sentToDiscord = TRUE WHERE eventID = %s", (event['eventid'],))
+                conn.commit()  # Commit after each update to ensure it's saved
 
-        # Commit all updates in batch after the loop
-        conn.commit()
-    else:
-        if not events_to_notify:
-            message_logger.info("No new events to notify.")
-        if not channel:
-            message_logger.error(f"Discord channel with ID {channel_id} not found.")
+    except Exception as e:
+        print(f"Error notifying events: {e}")
+    finally:
+        cur.close()
+        conn.close()

@@ -1,108 +1,93 @@
-import aiohttp  # New import for async HTTP requests
-import sqlite3
+import aiohttp  # For async HTTP requests
+import psycopg2
+import discord
+from psycopg2.extras import DictCursor
 import logging
 from datetime import datetime, timezone
 import os
 from dotenv import load_dotenv
-import discord
-import asyncio  # Required for async database transactions if needed
+import asyncpg
+from dateutil import parser
+import asyncio
+
+now = datetime.now(timezone.utc)
 
 # Load environment variables
 load_dotenv()
 TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
 DISCORD_CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID"))
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Set up database-specific logging
-db_logger = logging.getLogger("dbLogger")
-db_logger.setLevel(logging.INFO)
-db_handler = logging.FileHandler("logs/db_log.log")
-db_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-db_logger.addHandler(db_handler)
+async def get_db_connection():
+    """Establish and return an async PostgreSQL connection."""
+    return await asyncpg.connect(DATABASE_URL)
 
-# Set up API-specific logging
-api_logger = logging.getLogger("apiLogger")
-api_logger.setLevel(logging.INFO)
-api_handler = logging.FileHandler("logs/api_log.log")
-api_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-api_logger.addHandler(api_handler)
-
-# Connect to SQLite
-conn = sqlite3.connect('events.db')
-c = conn.cursor()
-
-def initialize_db():
-    """Create tables if they do not exist and add notable artists from artist_ids_output.txt."""
-    # Create tables
-    c.execute('''
-    CREATE TABLE IF NOT EXISTS Events (
-        eventID TEXT PRIMARY KEY,
-        name TEXT,
-        artistID TEXT,
-        venueID TEXT,
-        eventDate TEXT,
-        ticketOnsaleStart TEXT,
-        url TEXT,
-        image_url TEXT,
-        sentToDiscord BOOLEAN DEFAULT 0,
-        lastUpdated TEXT
-    )''')
-    c.execute('''
-    CREATE TABLE IF NOT EXISTS Venues (
-        venueID TEXT PRIMARY KEY,
-        name TEXT,
-        city TEXT,
-        state TEXT
-    )''')
-    c.execute('''
-    CREATE TABLE IF NOT EXISTS Artists (
-        artistID TEXT PRIMARY KEY,
-        name TEXT,
-        notable BOOLEAN DEFAULT 0
-    )''')
-    conn.commit()
-    db_logger.info("Database initialized successfully.")
-
-    # Load notable artist IDs from artist_ids.txt
+async def initialize_db():
+    """Create tables if they do not exist and ensure schema compatibility."""
+    print("Initializing the database...")
+    conn = await get_db_connection()
     try:
-        with open("artist_ids.txt", "r") as f:
-            for line in f:
-                # Check for the expected line format with 'Original ID:', 'Name:', and 'API ID:'
-                if "Original ID:" in line and "Name:" in line and "API ID:" in line:
-                    # Split the line by separators to extract values
-                    original_id_part = line.split("Original ID:")[1].split(" - ")[0].strip()
-                    name_part = line.split("Name:")[1].split("|")[0].strip()
-                    api_id_part = line.split("API ID:")[1].strip()
+        # Create tables with correct data types
+        print("Creating tables if they do not exist...")
+        await conn.execute('''
+        CREATE TABLE IF NOT EXISTS Events (
+            eventID TEXT PRIMARY KEY,
+            name TEXT,
+            artistID TEXT,
+            venueID TEXT,
+            eventDate TIMESTAMPTZ,
+            ticketOnsaleStart TIMESTAMPTZ,
+            url TEXT,
+            image_url TEXT,
+            sentToDiscord BOOLEAN DEFAULT FALSE,
+            lastUpdated TIMESTAMPTZ
+        )''')
+        await conn.execute('''
+        CREATE TABLE IF NOT EXISTS Venues (
+            venueID TEXT PRIMARY KEY,
+            name TEXT,
+            city TEXT,
+            state TEXT
+        )''')
+        await conn.execute('''
+        CREATE TABLE IF NOT EXISTS Artists (
+            artistID TEXT PRIMARY KEY,
+            name TEXT,
+            notable BOOLEAN DEFAULT FALSE
+        )''')
+        print("Tables created successfully.")
 
-                    # Insert parsed data into the Artists table
-                    c.execute('INSERT OR IGNORE INTO Artists (artistID, name, notable) VALUES (?, ?, ?)',
-                            (api_id_part, name_part, 1))  # 'artistID' is the API ID, 'name' is the artist name
-                    
-                    # Log successful insertion
-                    db_logger.info(f"Added notable artist '{name_part}' with API ID '{api_id_part}' to the database.")
-                else:
-                    # Log if the line does not match the expected format
-                    db_logger.warning(f"Line did not match expected format: {line.strip()}")
+        # Alter existing columns to TIMESTAMPTZ if necessary
+        print("Altering Events table columns to TIMESTAMPTZ if necessary...")
+        await conn.execute('''
+        ALTER TABLE Events
+        ALTER COLUMN eventDate TYPE TIMESTAMPTZ USING eventDate AT TIME ZONE 'UTC',
+        ALTER COLUMN ticketOnsaleStart TYPE TIMESTAMPTZ USING ticketOnsaleStart AT TIME ZONE 'UTC',
+        ALTER COLUMN lastUpdated TYPE TIMESTAMPTZ USING lastUpdated AT TIME ZONE 'UTC';
+        ''')
+        print("Database schema updated successfully.")
 
-        # Commit all changes to the database
-        conn.commit()
-        db_logger.info("Completed adding notable artists from artist_ids.txt to the database.")
-    except FileNotFoundError:
-        db_logger.error("File artist_ids.txt not found.")
+        # Load notable artist IDs from artist_ids.txt
+        # ... rest of your existing code ...
 
+    except Exception as e:
+        print(f"Error during database initialization: {e}")
+    finally:
+        await conn.close()
 
 async def fetch_events(bot):
     """Fetches events asynchronously from Ticketmaster API and handles errors."""
+    print("Fetching events from Ticketmaster API...")
     current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     url = "https://app.ticketmaster.com/discovery/v2/events"
     page = 0
-    total_events_available = 0
     max_pages = 5
-    total_new_events = 0
 
     async with aiohttp.ClientSession() as session:
         while page < max_pages:
+            print(f"Fetching page {page + 1}...")
             params = {
                 "apikey": TICKETMASTER_API_KEY,
                 "source": "ticketmaster",
@@ -121,29 +106,16 @@ async def fetch_events(bot):
                     response.raise_for_status()
                     data = await response.json()
 
-                    if page == 0:
-                        total_events_available = data.get("page", {}).get("totalElements", 0)
-                        if total_events_available > 999:
-                            error_message = "Error: Total events exceed 999. Stopping further requests."
-                            await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
-                            return
-
                     events = data.get("_embedded", {}).get("events", [])
-                    received_events_count = len(events)
-                    new_events_count = 0
+                    print(f"Page {page + 1}: Received {len(events)} events.")
 
                     for event in events:
-                        if store_event(event):
-                            new_events_count += 1
+                        await store_event(event)  # Ensure async compatibility
+                        await asyncio.sleep(0)  # Yield control back to the loop
 
-                    total_new_events += new_events_count
-
-                    # Log request details for each page
-                    api_logger.info(f"Page {page + 1}: Total possible events = {total_events_available}, "
-                                    f"Received = {received_events_count}, New events added = {new_events_count}")
-
-                    # Stop fetching if there are no more events
-                    if received_events_count < 199:
+                    # Stop fetching if fewer events than page size
+                    if len(events) < 199:
+                        print("No more events to fetch. Stopping.")
                         break
 
             except aiohttp.ClientError as e:
@@ -154,11 +126,91 @@ async def fetch_events(bot):
 
             # Move to the next page
             page += 1
+            await asyncio.sleep(1)  # Avoid hitting rate limits
 
-    # Log the final summary after fetching all pages
-    api_logger.info(f"Completed fetching events. Total possible events = {total_events_available}, "
-                    f"Total new events added = {total_new_events}")
+async def store_event(event):
+    """Stores a new event in the database if not already present."""
+    print(f"Storing event: {event['name']} (ID: {event['id']})")
+    conn = await get_db_connection()
 
+    try:
+        # Extract event details
+        event_id = event['id']
+        event_name = event['name']
+        event_date = parser.parse(event['dates']['start']['localDate']).astimezone(timezone.utc).replace(tzinfo=None)
+        onsale_start = parser.parse(event['sales']['public']['startDateTime']).astimezone(timezone.utc).replace(tzinfo=None)
+        last_updated = datetime.now(timezone.utc).replace(tzinfo=None)
+
+        # Extract URL
+        url = event.get('url', '')
+
+        # Extract image URL (prefer high-resolution)
+        image_url = next(
+            (img['url'] for img in event.get('images', []) if img.get('width', 0) >= 1024),
+            None
+        )
+
+        # Extract venue details
+        venue_data = event['_embedded'].get('venues', [{}])[0]
+        venue_id = venue_data.get('id')
+        venue_name = venue_data.get('name', 'Unknown Venue')
+        venue_city = venue_data.get('city', {}).get('name', 'Unknown City')
+        venue_state = venue_data.get('state', {}).get('stateCode', 'Unknown State')
+
+        # Extract artist details
+        artist_data = event['_embedded'].get('attractions', [{}])[0]
+        artist_id = artist_data.get('id')
+        artist_name = artist_data.get('name', 'Unknown Artist')
+
+        # Insert venue into the database
+        await conn.execute(
+            '''
+            INSERT INTO Venues (venueID, name, city, state)
+            VALUES ($1, $2, $3, $4)
+            ON CONFLICT (venueID) DO NOTHING
+            ''',
+            venue_id, venue_name, venue_city, venue_state
+        )
+        print(f"Inserted/Updated venue: {venue_name} (ID: {venue_id})")
+
+        # Insert artist into the database (if available)
+        if artist_id:
+            await conn.execute(
+                '''
+                INSERT INTO Artists (artistID, name, notable)
+                VALUES ($1, $2, $3)
+                ON CONFLICT (artistID) DO NOTHING
+                ''',
+                artist_id, artist_name, False
+            )
+            print(f"Inserted/Updated artist: {artist_name} (ID: {artist_id})")
+
+        # Insert event into the database
+        print(f"event_date: {event_date}, tzinfo: {event_date.tzinfo}")
+        print(f"onsale_start: {onsale_start}, tzinfo: {onsale_start.tzinfo}")
+        print(f"last_updated: {last_updated}, tzinfo: {last_updated.tzinfo}")
+        
+        await conn.execute(
+            '''
+            INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            ON CONFLICT (eventID) DO NOTHING
+            ''',
+            event_id, event_name, artist_id, venue_id, event_date, onsale_start, url, image_url,
+            False, last_updated
+        )
+        print(f"Event stored: {event_name} (ID: {event_id})")
+
+        return True
+
+    except Exception as e:
+        print(f"Error storing event: {e}")
+        return False
+
+    finally:
+        # Ensure connection is closed
+        await conn.close()
+         
 async def notify_discord_error(bot, channel_id, error_message):
     """Send an error notification to a Discord channel."""
     channel = bot.get_channel(channel_id)
@@ -169,46 +221,3 @@ async def notify_discord_error(bot, channel_id, error_message):
             color=discord.Color.red()
         )
         await channel.send(embed=embed)
-    api_logger.error(error_message)
-
-def store_event(event):
-    """Stores a new event in the database if not already present, and ensures venue and artist data are updated."""
-    event_id = event['id']
-    event_name = event['name']
-    event_date = event['dates']['start']['localDate']
-    onsale_start = event['sales']['public']['startDateTime']
-    url = event['url']
-
-    # Handle images
-    image_url = next((img['url'] for img in event.get('images', []) if img.get('width', 0) >= 1024), None)
-
-    # Handle venue data
-    venue_data = event['_embedded']['venues'][0]
-    venue_id = venue_data['id']
-    venue_name = venue_data['name']
-    venue_city = venue_data['city']['name']
-    venue_state = venue_data['state']['stateCode']
-
-    # Handle artist data
-    artist_data = event['_embedded'].get('attractions', [{}])[0]
-    artist_id = artist_data.get('id')
-    artist_name = artist_data.get('name')
-
-    # Insert venue data
-    c.execute('INSERT OR IGNORE INTO Venues (venueID, name, city, state) VALUES (?, ?, ?, ?)',
-              (venue_id, venue_name, venue_city, venue_state))
-    conn.commit()
-    db_logger.info(f"Venue '{venue_name}' added to database with city '{venue_city}' and state '{venue_state}'.")
-
-    # Insert artist data if available
-    if artist_id:
-        c.execute('INSERT OR IGNORE INTO Artists (artistID, name, notable) VALUES (?, ?, ?)',
-                  (artist_id, artist_name, False))
-        conn.commit()
-        db_logger.info(f"Artist '{artist_name}' added to database.")
-
-    # Insert event data
-    c.execute('INSERT OR IGNORE INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)',
-              (event_id, event_name, artist_id, venue_id, event_date, onsale_start, url, image_url, datetime.now(timezone.utc).isoformat()))
-    conn.commit()
-    db_logger.info(f"Event '{event_name}' added to database.")

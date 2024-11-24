@@ -1,6 +1,5 @@
 import discord
 from discord.ext import tasks
-import logging
 from dbEditor import fetch_events, initialize_db
 from notifier import notify_events
 from commandHandler import bot
@@ -13,47 +12,43 @@ DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 MAIN_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))  # Channel for notable artist events only
 SECONDARY_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID_TWO'))  # Channel for all unsent events
 
-# Clear log files on startup
-def clear_log_files():
-    log_files = ["logs/event_log.log", "logs/db_log.log", "logs/message_log.log", "logs/api_log.log"]
-    for log_file in log_files:
-        with open(log_file, 'w'):
-            pass  # Open in write mode to clear the file
-
-clear_log_files()  # Clear logs
-
-# Initialize database
-initialize_db()
-
-# Set up general event logging
-event_logger = logging.getLogger("eventLogger")
-event_logger.setLevel(logging.INFO)
-event_handler = logging.FileHandler("logs/event_log.log")
-event_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-event_logger.addHandler(event_handler)
+async def initialize_bot():
+    """Initialize the bot, including the database and loop tasks."""
+    print("Initializing database...")
+    await initialize_db()  # Assuming `initialize_db` is async
 
 @tasks.loop(minutes=1)
 async def fetch_and_notify_events():
-    """Fetches events and notifies Discord of unsent events, differentiating by channel."""
+    """Fetch events and send notifications to respective Discord channels."""
+    print("Starting event fetch and notification process...")
     
-    # Fetch all events, unsent notable events, and send to respective channels
-    await fetch_events(bot)  # Pass bot and MAIN_CHANNEL_ID for fetching notable events
-    event_logger.info("Fetched events.")
+    # Fetch unsent events
+    print("Fetching events...")
+    await fetch_events(bot)  
+    print("Completed event fetch.")
 
-    # Notify notable events to MAIN_CHANNEL_ID
+    # Notify notable events
+    print("Notifying MAIN_CHANNEL_ID (notable events)...")
     await notify_events(bot, MAIN_CHANNEL_ID, notable_only=True)
-    
-    # Notify all unsent events to SECONDARY_CHANNEL_ID
+    print("Notified MAIN_CHANNEL_ID.")
+
+    # Notify all unsent events
+    print("Notifying SECONDARY_CHANNEL_ID (all unsent events)...")
     await notify_events(bot, SECONDARY_CHANNEL_ID, notable_only=False)
+    print("Notified SECONDARY_CHANNEL_ID.")
 
 @bot.event
 async def on_ready():
-    # Check if the task is already running
+    """Event triggered when the bot connects to Discord."""
+    print("Bot is ready.")
     if not fetch_and_notify_events.is_running():
+        print("Starting scheduled fetch_and_notify_events loop.")
         fetch_and_notify_events.start()
-        event_logger.info("Bot connected and task started.")
-    else:
-        event_logger.info("Bot reconnected; fetch_and_notify_events task is already running.")
 
 if __name__ == "__main__":
-    bot.run(DISCORD_BOT_TOKEN)
+    # Run the bot
+    try:
+        print("Starting bot...")
+        bot.run(DISCORD_BOT_TOKEN)
+    except Exception as e:
+        print(f"Failed to start bot: {e}")
