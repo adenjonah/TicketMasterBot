@@ -7,7 +7,6 @@ events.db
 *.pyc
 *.db
 *.log
-/logs
 *.db
 /logs
 *.db
