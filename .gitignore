@@ -4,5 +4,3 @@ events.db
 /__pycache__
 *.pyc
 *.db
-*.log
-*.db
