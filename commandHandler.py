@@ -142,7 +142,7 @@ def format_date_with_ordinal(dt):
 @bot.command(name="ratelimit", help="Checks the current API rate limit status")
 async def ratelimit(ctx):
     """Checks the Ticketmaster API rate limit status and displays it."""
-    url = f"https://app.ticketmaster.com/discovery/v2/events.json?apikey={API_KEY}&size=1"
+    url = f"https://app.ticketmaster.com/discovery/v2/events.json?apikey={TICKETMASTER_API_KEY}&size=1"
     
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
