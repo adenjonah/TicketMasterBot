@@ -4,8 +4,15 @@ import discord
 from datetime import datetime, timezone
 import os
 
-# Database connection
-DATABASE_URL = os.getenv("DATABASE_URL")
+from config.config import (
+    DISCORD_BOT_TOKEN,
+    DISCORD_CHANNEL_ID,
+    DISCORD_CHANNEL_ID_TWO,
+    TICKETMASTER_API_KEY,
+    REDIRECT_URI,
+    DATABASE_URL,
+    DEBUG,
+)
 
 def get_db_connection():
     """Establish and return a PostgreSQL connection."""

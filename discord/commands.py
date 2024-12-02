@@ -1,17 +1,19 @@
+from config.config import (
+    DISCORD_BOT_TOKEN,
+    DISCORD_CHANNEL_ID,
+    DISCORD_CHANNEL_ID_TWO,
+    TICKETMASTER_API_KEY,
+    REDIRECT_URI,
+    DATABASE_URL,
+    DEBUG,
+)
+
 import discord
 from discord.ext import commands
 import psycopg2
 from psycopg2.extras import DictCursor
 from datetime import datetime, timezone
 import aiohttp
-import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
-DISCORD_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
-DATABASE_URL = os.getenv('DATABASE_URL')
 
 # Set up intents
 intents = discord.Intents.default()
