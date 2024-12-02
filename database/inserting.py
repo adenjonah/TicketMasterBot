@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 import asyncpg
 from dateutil import parser
 import asyncio
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -25,13 +24,11 @@ from config.config import (
     DEBUG,
 )
 
-async def get_db_connection():
-    """Establish and return an async PostgreSQL connection."""
-    return await asyncpg.connect(DATABASE_URL)
-
-
-async def store_event(event, db_pool):
+async def store_event(event):
     """Stores a new event in the database if not already present."""
+    # Dynamically import db_pool at runtime to ensure it's initialized
+    from config.db_pool import db_pool
+
     async with db_pool.acquire() as conn:
         try:
             # Extract event details
