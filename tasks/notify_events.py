@@ -1,6 +1,7 @@
 import discord
 from config.logging import logger
 from helpers.formatting import format_date_human_readable
+import pytz
 
 async def notify_events(bot, channel_id, notable_only=False):
     from config.db_pool import db_pool  # Import shared db_pool here
@@ -44,27 +45,54 @@ async def notify_events(bot, channel_id, notable_only=False):
                 logger.error(f"Discord channel with ID {channel_id} not found.")
                 return
 
+            utc_tz = pytz.utc
+            est_tz = pytz.timezone('America/New_York')
+
             for event in events_to_notify:
                 logger.debug(f"Processing event: {event}")
-                onsale_start = format_date_human_readable(event['ticketonsalestart']) if event['ticketonsalestart'] else "TBA"
-                event_date = format_date_human_readable(event['eventdate']) if event['eventdate'] else "TBA"
 
+                # Extract and manually convert ticketOnsaleStart to EST
+                onsale_start = "TBA"
+                if event['ticketonsalestart']:
+                    onsale_start_utc = event['ticketonsalestart']
+                    onsale_start_est = onsale_start_utc.astimezone(est_tz)
+                    onsale_start = onsale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
+
+                # Extract and manually convert eventDate to EST
+                event_date = "TBA"
+                if event['eventdate']:
+                    event_date_utc = event['eventdate']
+                    event_date_est = event_date_utc.astimezone(est_tz)
+                    event_date = event_date_est.strftime("%B %d, %Y at %I:%M %p EST")
+
+                # Log the converted values
+                logger.debug(f"Converted onsale_start to EST: {onsale_start}")
+                logger.debug(f"Converted event_date to EST: {event_date}")
+
+
+                # Create Discord embed
                 embed = discord.Embed(
                     title=f"{event['artist_name']} - {event['name']}",
                     url=event['url'],
-                    description=f"**Location**: {event['city']}, {event['state']}\n"
-                                f"**Event Date**: {event_date}\n"
-                                f"**Sale Start**: {onsale_start}",
+                    description=(
+                        f"**Location**: {event['city']}, {event['state']}\n"
+                        f"**Event Date**: {event_date}\n"
+                        f"**Sale Start**: {onsale_start}"
+                    ),
                     color=discord.Color.blue()
                 )
                 if event['image_url']:
                     embed.set_image(url=event['image_url'])
 
+                # Send notification to Discord channel
                 logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")
                 await channel.send(embed=embed)
 
-                # Fix the issue with tuple
-                await conn.execute("UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1", event['eventid'])
+                # Mark event as sent in the database
+                await conn.execute(
+                    "UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1",
+                    event['eventid']
+                )
                 logger.info(f"Notified and marked event as sent: {event['name']} (ID: {event['eventid']})")
         except Exception as e:
             logger.error(f"Error notifying events: {e}", exc_info=True)
