@@ -13,7 +13,6 @@ from config.config import (
     TICKETMASTER_API_KEY,
     REDIRECT_URI,
     DATABASE_URL,
-    DEBUG,
 )
 
 async def fetch_events():
@@ -89,8 +88,7 @@ async def process_event(event):
                     logger.error(f"Error storing event: {event['id']}, name: {event['name']}, error: {e}")
                     return False  # Failed to store event
             else:
-                if DEBUG:
-                    logger.debug(f"Event already exists in DB: {event['id']} - {event['name']}")
+                logger.debug(f"Event already exists in DB: {event['id']} - {event['name']}")
                 return False  # Event already exists
     except Exception as e:
         logger.error(f"Failed to acquire DB connection for event: {event['id']}, error: {e}")

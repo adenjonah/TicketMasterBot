@@ -1,13 +1,9 @@
 import logging
-import os
-from datetime import datetime, timezone
-
-# Load DEBUG flag from the environment
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+from config.config import DEBUG_LOGS  # Import DEBUG from config.py
 
 # Set logging level based on DEBUG flag
-logging_level = logging.DEBUG if DEBUG == "True" else logging.INFO
+logging_level = logging.DEBUG if DEBUG_LOGS == '1' else logging.INFO
 
 # Configure logging
 logging.basicConfig(level=logging_level, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger("ticketmaster_bot")  # Use a global logger name
+logger = logging.getLogger("ticketmaster_bot")

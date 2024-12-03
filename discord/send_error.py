@@ -5,5 +5,4 @@ from config.config import (
     TICKETMASTER_API_KEY,
     REDIRECT_URI,
     DATABASE_URL,
-    DEBUG,
 )

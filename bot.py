@@ -12,7 +12,6 @@ from config.config import (
     DISCORD_CHANNEL_ID,
     DISCORD_CHANNEL_ID_TWO,
     DATABASE_URL,
-    DEBUG,
 )
 
 # Define intents for the bot
@@ -34,69 +33,65 @@ async def on_ready():
 
     # Initialize database and start periodic tasks
     logger.info("Initializing database and starting tasks...")
-    await initialize_db_pool(DATABASE_URL, min_size=1, max_size=10)
-    await initialize_db()
-    fetch_events_task.start()
-    notify_events_task.start()
-    logger.info("Tasks started.")
-    
-# async def initialize_bot():
-#     """Initialize the bot, including database and tasks."""
-#     logger.info("Initializing bot and database...")
-    
-#     # Initialize database connection pool
-#     await initialize_db_pool(DATABASE_URL, min_size=1, max_size=10)
-#     await initialize_db()
-#     logger.info("Database initialized.")
-
-#     # Start the periodic event fetch and notification tasks
-#     logger.info("Starting event fetch and notification loops...")
-#     fetch_events_task.start()
-#     notify_events_task.start()
+    try:
+        logger.debug("Starting database pool initialization...")
+        await initialize_db_pool(DATABASE_URL, min_size=1, max_size=100)
+        logger.debug("Database pool initialized.")
+        logger.debug("Initializing database schema...")
+        await initialize_db()
+        logger.debug("Database schema initialized.")
+        logger.debug("Starting periodic tasks...")
+        fetch_events_task.start()
+        notify_events_task.start()
+        logger.info("Tasks started.")
+    except Exception as e:
+        logger.error(f"Error during initialization in on_ready: {e}", exc_info=True)
 
 @tasks.loop(minutes=1)
 async def fetch_events_task():
     """Periodic task to fetch events."""
     logger.info("Starting event fetch process...")
     try:
+        logger.debug("Calling fetch_events...")
         await fetch_events()
+        logger.debug("fetch_events completed successfully.")
     except Exception as e:
         logger.error(f"Error during event fetch: {e}", exc_info=True)
 
 @tasks.loop(minutes=1)
 async def notify_events_task():
     """Periodic task to notify Discord about events."""
-        
     logger.info("Starting event notification process...")
     try:
-        logger.info("Notifying notable events...")
+        logger.debug("Notifying notable events...")
         await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True)
-        logger.info("Notifying non-notable events...")
+        logger.debug("Notifying non-notable events...")
         await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False)
+        logger.debug("Event notifications completed.")
     except Exception as e:
         logger.error(f"Error during event notification: {e}", exc_info=True)
 
 async def shutdown(loop):
     """Shutdown function to cancel tasks and close the loop."""
     logger.info("Shutting down bot...")
-    
-    # Stop periodic tasks
-    fetch_events_task.stop()
-    notify_events_task.stop()
-
-    # Cancel all running tasks
-    tasks = [t for t in asyncio.all_tasks(loop) if t is not asyncio.current_task()]
-    for task in tasks:
-        task.cancel()
-        try:
-            await task
-        except asyncio.CancelledError:
-            pass
-
-    # Close the database pool
-    await close_db_pool()
-
-    logger.info("Shutdown complete.")
+    try:
+        logger.debug("Stopping periodic tasks...")
+        fetch_events_task.stop()
+        notify_events_task.stop()
+        logger.debug("Periodic tasks stopped.")
+        logger.debug("Cancelling all running tasks...")
+        tasks = [t for t in asyncio.all_tasks(loop) if t is not asyncio.current_task()]
+        for task in tasks:
+            task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                logger.debug(f"Task {task.get_name()} cancelled.")
+        logger.debug("Closing database pool...")
+        await close_db_pool()
+        logger.info("Shutdown complete.")
+    except Exception as e:
+        logger.error(f"Error during shutdown: {e}", exc_info=True)
 
 
 if __name__ == "__main__":
@@ -109,4 +104,5 @@ if __name__ == "__main__":
         logger.error(f"Error occurred: {e}", exc_info=True)
     finally:
         # Ensure cleanup happens before exiting
-        asyncio.run(shutdown())
+        logger.debug("Running shutdown sequence...")
+        asyncio.run(shutdown(asyncio.get_event_loop()))

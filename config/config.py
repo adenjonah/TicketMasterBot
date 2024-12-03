@@ -9,6 +9,8 @@ DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 DISCORD_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID', 0))  # Main notable events channel
 DISCORD_CHANNEL_ID_TWO = int(os.getenv('DISCORD_CHANNEL_ID_TWO', 0))  # Secondary channel for all unsent events
 
+
+DEBUG_LOGS = os.getenv('DEBUG_LOGS')
 # Ticketmaster API Key
 TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
 
@@ -17,9 +19,6 @@ REDIRECT_URI = os.getenv('REDIRECT_URI', 'http://localhost')  # Default to local
 
 # Database Configuration
 DATABASE_URL = os.getenv('DATABASE_URL')
-
-# Testing
-DEBUG = os.getenv("DEBUG", "false").lower()
 
 # Validation to ensure critical environment variables are set
 if not DISCORD_BOT_TOKEN:

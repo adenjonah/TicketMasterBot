@@ -1,7 +1,6 @@
 import discord
 from config.logging import logger
 from helpers.formatting import format_date_human_readable
-from config.config import DEBUG
 
 async def notify_events(bot, channel_id, notable_only=False):
     from config.db_pool import db_pool  # Import shared db_pool here
@@ -37,7 +36,7 @@ async def notify_events(bot, channel_id, notable_only=False):
             logger.debug(f"Fetched {len(events_to_notify)} events to notify.")
 
             if not events_to_notify:
-                logger.info("No new events to notify.")
+                logger.info(f"No new {"notable" if notable_only else "non-notable"} events to notify.")
                 return
 
             channel = bot.get_channel(channel_id)

@@ -5,7 +5,6 @@ from config.config import (
     TICKETMASTER_API_KEY,
     REDIRECT_URI,
     DATABASE_URL,
-    DEBUG,
 )
 
 async def event_exists(conn, event_id):
