@@ -1,19 +1,20 @@
 import discord
-from config.db_pool import db_pool
-from helpers.formatting import format_date_human_readable
 from config.logging import logger
+from helpers.formatting import format_date_human_readable
+from config.config import DEBUG
 
 async def notify_events(bot, channel_id, notable_only=False):
+    from config.db_pool import db_pool  # Import shared db_pool here
     """
     Notifies Discord about unsent events. If notable_only is True, only notifies about notable artist events.
-    
+
     Parameters:
         bot (discord.Client): The Discord bot instance.
         channel_id (int): The Discord channel ID to send notifications to.
         notable_only (bool): Whether to only notify events with notable artists.
     """
     logger.debug(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}")
-    
+
     query = '''
     SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
            Venues.city, Venues.state, Events.image_url, Artists.name
@@ -28,7 +29,7 @@ async def notify_events(bot, channel_id, notable_only=False):
         query += " AND Artists.notable = FALSE"
 
     logger.debug(f"Database query prepared: {query}")
-    
+
     async with db_pool.acquire() as conn:
         try:
             logger.debug("Acquired database connection.")
@@ -62,7 +63,9 @@ async def notify_events(bot, channel_id, notable_only=False):
 
                 logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")
                 await channel.send(embed=embed)
-                await conn.execute("UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1", (event['eventid'],))
+
+                # Fix the issue with tuple
+                await conn.execute("UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1", event['eventid'])
                 logger.info(f"Notified and marked event as sent: {event['name']} (ID: {event['eventid']})")
         except Exception as e:
             logger.error(f"Error notifying events: {e}", exc_info=True)
