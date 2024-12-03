@@ -53,12 +53,12 @@ async def fetch_events_task():
     logger.info("Starting event fetch process...")
     try:
         
-        from config.db_pool import db_pool  # Ensure db_pool is imported
+        # from config.db_pool import db_pool  # Ensure db_pool is imported
 
-        async with db_pool.acquire() as conn:
-            logger.debug("Deleting event with ID 'G5dIZb99QrFCb' before fetching events...")
-            await conn.execute("DELETE FROM Events WHERE eventID = $1", 'G5dIZb99QrFCb')
-            logger.info("Event with ID 'G5dIZb99QrFCb' deleted successfully.")
+        # async with db_pool.acquire() as conn:
+        #     logger.debug("Deleting event with ID 'G5dIZb99QrFCb' before fetching events...")
+        #     await conn.execute("DELETE FROM Events WHERE eventID = $1", 'G5dIZb99QrFCb')
+        #     logger.info("Event with ID 'G5dIZb99QrFCb' deleted successfully.")
 
 
         logger.debug("Calling fetch_events...")
