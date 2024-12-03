@@ -59,4 +59,4 @@ for artist_line in artists:
             print(f"Error fetching data for artist {artist_name}: {e}")
         
         # Delay of half a second between requests
-        time.sleep(0.5)
+        time.sleep(0.1)

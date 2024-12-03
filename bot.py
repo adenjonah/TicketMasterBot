@@ -7,6 +7,7 @@ from tasks.fetch_and_process import fetch_events
 from tasks.notify_events import notify_events
 from database.init import initialize_db
 from config.logging import logger
+import time
 from config.config import (
     DISCORD_BOT_TOKEN,
     DISCORD_CHANNEL_ID,
@@ -42,6 +43,7 @@ async def on_ready():
         logger.debug("Database schema initialized.")
         logger.debug("Starting periodic tasks...")
         fetch_events_task.start()
+        time.sleep(5)
         notify_events_task.start()
         logger.info("Tasks started.")
     except Exception as e:
@@ -53,12 +55,12 @@ async def fetch_events_task():
     logger.info("Starting event fetch process...")
     try:
         
-        # from config.db_pool import db_pool  # Ensure db_pool is imported
+        from config.db_pool import db_pool  # Ensure db_pool is imported
 
-        # async with db_pool.acquire() as conn:
-        #     logger.debug("Deleting event with ID 'G5dIZb99QrFCb' before fetching events...")
-        #     await conn.execute("DELETE FROM Events WHERE eventID = $1", 'G5dIZb99QrFCb')
-        #     logger.info("Event with ID 'G5dIZb99QrFCb' deleted successfully.")
+        async with db_pool.acquire() as conn:
+            logger.debug("Deleting event with ID 'G5dIZb99QrFCb' before fetching events...")
+            await conn.execute("DELETE FROM Events WHERE eventID = $1", 'G5dIZb99QrFCb')
+            logger.info("Event with ID 'G5dIZb99QrFCb' deleted successfully.")
 
 
         logger.debug("Calling fetch_events...")

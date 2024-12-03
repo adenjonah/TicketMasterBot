@@ -16,7 +16,7 @@ async def notify_events(bot, channel_id, notable_only=False):
 
     query = '''
     SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
-           Venues.city, Venues.state, Events.image_url, Artists.name
+        Venues.city, Venues.state, Events.image_url, Artists.name AS artist_name
     FROM Events
     LEFT JOIN Venues ON Events.venueID = Venues.venueID
     LEFT JOIN Artists ON Events.artistID = Artists.artistID
@@ -50,7 +50,7 @@ async def notify_events(bot, channel_id, notable_only=False):
                 event_date = format_date_human_readable(event['eventdate']) if event['eventdate'] else "TBA"
 
                 embed = discord.Embed(
-                    title=f"{event['name']} - {event['name']}",
+                    title=f"{event['artist_name']} - {event['name']}",
                     url=event['url'],
                     description=f"**Location**: {event['city']}, {event['state']}\n"
                                 f"**Event Date**: {event_date}\n"

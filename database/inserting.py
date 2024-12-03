@@ -49,15 +49,16 @@ async def store_event(event):
             venue_state = venue_data.get('state', {}).get('stateCode', 'Unknown State')
 
             # Artist data
-            artist_data = event['_embedded'].get('attractions', [{}])[0]
-            artist_id = artist_data.get('id')
-            artist_name = artist_data.get('name', 'Unknown Artist')
+            attractions = event['_embedded'].get('attractions', [])
+            artist_ids = [artist.get('id') for artist in attractions if 'id' in artist]
+            artist_names = [artist.get('name', 'Unknown Artist') for artist in attractions]
+            artist_name = ", ".join(artist_names) if artist_names else "Unknown Artist"
 
             # Check for missing IDs
             if not venue_id:
                 logger.warning(f"Event {event_name} (ID: {event_id}) has no associated venue.")
                 return False
-            if not artist_id:
+            if not artist_ids:
                 logger.warning(f"Event {event_name} (ID: {event_id}) has no associated artist.")
 
             # Check if event already exists
@@ -83,8 +84,8 @@ async def store_event(event):
             )
             logger.debug(f"Ensured venue exists: {venue_name} (ID: {venue_id})")
 
-            # Insert artist into the database (if available)
-            if artist_id:
+            # Insert artists into the database
+            for artist_id, artist_name in zip(artist_ids, artist_names):
                 await conn.execute(
                     '''
                     INSERT INTO Artists (artistID, name, notable)
@@ -101,7 +102,7 @@ async def store_event(event):
                 INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated)
                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
                 ''',
-                event_id, event_name, artist_id, venue_id, event_date, onsale_start, url, image_url,
+                event_id, event_name, artist_ids[0] if artist_ids else None, venue_id, event_date, onsale_start, url, image_url,
                 False, last_updated
             )
 
