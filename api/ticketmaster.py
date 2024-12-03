@@ -5,6 +5,10 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 from dateutil import parser
 import asyncio
+import urllib.parse
+from config.logging import logger
+import urllib.parse  # Import for URL encoding
+
 from config.config import (
     DISCORD_BOT_TOKEN,
     DISCORD_CHANNEL_ID,
@@ -16,67 +20,9 @@ from config.config import (
 
 now = datetime.now(timezone.utc)
 
-
-# async def fetch_events(bot):
-#     """Fetches events asynchronously from Ticketmaster API and handles errors."""
-#     print("Fetching events from Ticketmaster API...")
-#     current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-#     current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
-#     url = "https://app.ticketmaster.com/discovery/v2/events"
-#     page = 0
-#     max_pages = 5
-
-#     try:
-#         async with aiohttp.ClientSession() as session:
-#             while page < max_pages:
-#                 print(f"Fetching page {page + 1}...")
-#                 params = {
-#                     "apikey": TICKETMASTER_API_KEY,
-#                     "source": "ticketmaster",
-#                     "locale": "*",
-#                     "size": 199,
-#                     "page": page,
-#                     "onsaleStartDateTime": current_time,
-#                     "countryCode": "US",
-#                     "classificationId": "KZFzniwnSyZfZ7v7nJ",
-#                     "onsaleOnAfterStartDate": current_date,
-#                     "sort": "onSaleStartDate,asc"
-#                 }
-
-#                 try:
-#                     async with session.get(url, params=params) as response:
-#                         response.raise_for_status()
-#                         data = await response.json()
-
-#                         events = data.get("_embedded", {}).get("events", [])
-#                         print(f"Page {page + 1}: Received {len(events)} events.")
-
-#                     # Process each event
-#                     tasks = [process_event(event) for event in events]
-#                     await asyncio.gather(*tasks)
-
-#                     # Stop fetching if fewer events than page size
-#                     if len(events) < 199:
-#                         print("No more events to fetch. Stopping.")
-#                         break
-
-#                 except aiohttp.ClientError as e:
-#                     error_message = f"Error fetching events on page {page + 1}: {e}"
-#                     await notify_discord_error(bot, DISCORD_CHANNEL_ID, error_message)
-#                     print(error_message)
-#                     break
-
-#                 # Move to the next page
-#                 page += 1
-#                 await asyncio.sleep(1)  # Avoid hitting rate limits
-#     except Exception as e:
-#         print(f"Unexpected error in fetch_events: {e}")
-
-
 async def fetch_events_from_api(session, page, current_time, current_date):
     """Fetch events from the Ticketmaster API."""
-    url = "https://app.ticketmaster.com/discovery/v2/events"
+    base_url = "https://app.ticketmaster.com/discovery/v2/events"
     params = {
         "apikey": TICKETMASTER_API_KEY,
         "source": "ticketmaster",
@@ -89,24 +35,44 @@ async def fetch_events_from_api(session, page, current_time, current_date):
         "onsaleOnAfterStartDate": current_date,
         "sort": "onSaleStartDate,asc"
     }
-    async with session.get(url, params=params) as response:
-        response.raise_for_status()
-        data = await response.json()
-        return data.get("_embedded", {}).get("events", [])
+
+    # Construct the full URL with encoded parameters
+    full_url = f"{base_url}?{urllib.parse.urlencode(params)}"
+
+    logger.info(f"Request made to {full_url}")
+    async with session.get(full_url) as response:
+        try:
+            response.raise_for_status()
+            data = await response.json()
+            logger.debug(f"Response data (first 500 chars): {str(data)[:500]}")
+            return data.get("_embedded", {}).get("events", [])
+        except Exception as e:
+            logger.error(f"Error fetching data from {full_url}: {e}")
+            raise
 
 
 async def process_event(event):
     """Check if an event exists and store it if not."""
     from config.db_pool import db_pool  # Ensure the pool is initialized during runtime
 
-    async with db_pool.acquire() as conn:
-        event_exists = await conn.fetchval(
-            '''
-            SELECT 1 FROM Events WHERE eventID = $1
-            ''',
-            event["id"]
-        )
-        if not event_exists:
-            await store_event(event, conn)
-        else:
-            print(f"Event already exists: {event['name']} (ID: {event['id']})")
+    logger.debug(f"Processing event: {event['name']} (ID: {event['id']})")
+
+    try:
+        async with db_pool.acquire() as conn:
+            event_exists = await conn.fetchval(
+                '''
+                SELECT 1 FROM Events WHERE eventID = $1
+                ''',
+                event["id"]
+            )
+            if not event_exists:
+                logger.info(f"Storing new event: {event['id']} - {event['name']}")
+                try:
+                    await store_event(event, conn)
+                    logger.debug(f"Successfully stored event: {event['id']} - {event['name']}")
+                except Exception as e:
+                    logger.error(f"Error storing event: {event['id']}, name: {event['name']}, error: {e}")
+            else:
+                logger.debug(f"Event already exists in DB: {event['id']} - {event['name']}")
+    except Exception as e:
+        logger.error(f"Failed to acquire DB connection for event: {event['id']}, name: {event['name']}, error: {e}")
