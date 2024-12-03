@@ -1,51 +1,19 @@
-import psycopg2
-from psycopg2.extras import DictCursor
 import discord
-from datetime import datetime, timezone
-import os
-
-from config.config import (
-    DISCORD_BOT_TOKEN,
-    DISCORD_CHANNEL_ID,
-    DISCORD_CHANNEL_ID_TWO,
-    TICKETMASTER_API_KEY,
-    REDIRECT_URI,
-    DATABASE_URL,
-    DEBUG,
-)
-
-def get_db_connection():
-    """Establish and return a PostgreSQL connection."""
-    return psycopg2.connect(DATABASE_URL, sslmode="require")
-
-def format_date_human_readable(date_input):
-    """Converts a date string or datetime object to a human-readable format."""
-    if isinstance(date_input, datetime):
-        # If it's already a datetime object, ensure it's in UTC
-        date = date_input.astimezone(timezone.utc)
-    else:
-        # Parse the string into a datetime object
-        try:
-            date = datetime.strptime(date_input, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
-        except ValueError:
-            try:
-                date = datetime.strptime(date_input, "%Y-%m-%d").replace(tzinfo=timezone.utc)
-            except ValueError as e:
-                raise ValueError(f"Invalid date format: {date_input}") from e
-
-    # Format the day with an ordinal suffix
-    day = date.day
-    suffix = "th" if 11 <= day <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
-
-    # Format the time in 12-hour format with UTC timezone
-    formatted_time = date.strftime(f"%B {day}{suffix}, %Y at %-I:%M %p UTC")
-
-    return formatted_time
+from config.db_pool import db_pool
+from helpers.formatting import format_date_human_readable
+from config.logging import logger
 
 async def notify_events(bot, channel_id, notable_only=False):
-    """Notifies Discord about unsent events. If notable_only is True, only notifies about notable artist events."""
+    """
+    Notifies Discord about unsent events. If notable_only is True, only notifies about notable artist events.
     
-    # Build query based on notable_only flag
+    Parameters:
+        bot (discord.Client): The Discord bot instance.
+        channel_id (int): The Discord channel ID to send notifications to.
+        notable_only (bool): Whether to only notify events with notable artists.
+    """
+    logger.debug(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}")
+    
     query = '''
     SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
            Venues.city, Venues.state, Events.image_url, Artists.name
@@ -56,43 +24,47 @@ async def notify_events(bot, channel_id, notable_only=False):
     '''
     if notable_only:
         query += " AND Artists.notable = TRUE"
+    else:
+        query += " AND Artists.notable = FALSE"
 
-    conn = get_db_connection()
-    cur = conn.cursor(cursor_factory=DictCursor)
-    try:
-        # Execute the query and fetch results
-        cur.execute(query)
-        events_to_notify = cur.fetchall()
-        
-        # Get the specified channel
-        channel = bot.get_channel(channel_id)
+    logger.debug(f"Database query prepared: {query}")
+    
+    async with db_pool.acquire() as conn:
+        try:
+            logger.debug("Acquired database connection.")
+            events_to_notify = await conn.fetch(query)
+            logger.debug(f"Fetched {len(events_to_notify)} events to notify.")
 
-        # Check if there are events to notify and if the channel exists
-        if events_to_notify and channel:
+            if not events_to_notify:
+                logger.info("No new events to notify.")
+                return
+
+            channel = bot.get_channel(channel_id)
+            if not channel:
+                logger.error(f"Discord channel with ID {channel_id} not found.")
+                return
+
             for event in events_to_notify:
-                # Format dates to be human-readable
+                logger.debug(f"Processing event: {event}")
                 onsale_start = format_date_human_readable(event['ticketonsalestart']) if event['ticketonsalestart'] else "TBA"
                 event_date = format_date_human_readable(event['eventdate']) if event['eventdate'] else "TBA"
 
-                # Create an embed message with event details
                 embed = discord.Embed(
-                    title=f"{event['name']} - {event['name']}",  # Adding artist's name to the title for context
+                    title=f"{event['name']} - {event['name']}",
                     url=event['url'],
-                    description=f"**Location**: {event['city']}, {event['state']}\n**Event Date**: {event_date}\n**Sale Start**: {onsale_start}",
+                    description=f"**Location**: {event['city']}, {event['state']}\n"
+                                f"**Event Date**: {event_date}\n"
+                                f"**Sale Start**: {onsale_start}",
                     color=discord.Color.blue()
                 )
-                if event['image_url']:  # Set image if available
+                if event['image_url']:
                     embed.set_image(url=event['image_url'])
-                
-                # Send the embed to the Discord channel
+
+                logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")
                 await channel.send(embed=embed)
-
-                # Mark event as sent in the database
-                cur.execute("UPDATE Events SET sentToDiscord = TRUE WHERE eventID = %s", (event['eventid'],))
-                conn.commit()  # Commit after each update to ensure it's saved
-
-    except Exception as e:
-        print(f"Error notifying events: {e}")
-    finally:
-        cur.close()
-        conn.close()
+                await conn.execute("UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1", (event['eventid'],))
+                logger.info(f"Notified and marked event as sent: {event['name']} (ID: {event['eventid']})")
+        except Exception as e:
+            logger.error(f"Error notifying events: {e}", exc_info=True)
+        finally:
+            logger.debug("Database connection released.")

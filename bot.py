@@ -4,6 +4,7 @@ import logging
 from config.db_pool import initialize_db_pool, close_db_pool, db_pool
 from tasks.fetch_and_process import fetch_events
 from database.init import initialize_db
+from config.logging import logger
 from config.config import (
     DISCORD_BOT_TOKEN,
     DISCORD_CHANNEL_ID,
@@ -13,13 +14,6 @@ from config.config import (
     DATABASE_URL,
     DEBUG,
 )
-
-# Set logging level based on DEBUG flag
-logging_level = logging.DEBUG if DEBUG == "True" else logging.INFO
-print(f"DEBUG: {DEBUG}")
-# Configure logging
-logging.basicConfig(level=logging_level, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger(__name__)
 
 async def initialize_bot():
     """Initialize the bot, including database and tasks."""

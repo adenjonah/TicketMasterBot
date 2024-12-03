@@ -4,7 +4,7 @@ import aiohttp
 from database.inserting import store_event
 from database.queries import event_exists
 from api.ticketmaster import fetch_events_from_api
-import logging
+from config.logging import logger
 
 from config.config import (
     DISCORD_BOT_TOKEN,
@@ -15,8 +15,6 @@ from config.config import (
     DATABASE_URL,
     DEBUG,
 )
-
-logger = logging.getLogger(__name__)
 
 async def fetch_events():
     """Fetch events asynchronously from Ticketmaster API and process them."""
@@ -59,8 +57,10 @@ async def fetch_events():
         logger.error(f"Unexpected error in fetch_events: {e}", exc_info=True)
 
 async def process_event(event):
-    """Check if an event exists and store it if not."""
+    """Check if an event exists and store it if not. If the artist is notable, trigger notifications for notable events."""
     from config.db_pool import db_pool  # Import shared db_pool here
+    from helpers.formatting import format_date_human_readable
+    from tasks.notify_events import notify_events  # Import notify_events here to avoid circular imports
 
     try:
         async with db_pool.acquire() as conn:
@@ -69,7 +69,22 @@ async def process_event(event):
                 try:
                     await store_event(event)
                     logger.debug(f"Successfully stored event: {event['id']}")
+
+                    # Check if the artist is notable after storing
+                    notable_artist_query = '''
+                    SELECT Artists.notable
+                    FROM Artists
+                    WHERE Artists.artistID = $1
+                    '''
+                    artist_notable = await conn.fetchval(notable_artist_query, event.get("artistID"))
+
+                    if artist_notable:
+                        logger.info(f"Event {event['id']} associated with notable artist. Triggering notifications.")
+                        # Call notify_events with notable_only set to True
+                        await notify_events(event["bot"], DISCORD_CHANNEL_ID, notable_only=True)
+
                     return True  # New event added
+
                 except Exception as e:
                     logger.error(f"Error storing event: {event['id']}, name: {event['name']}, error: {e}")
                     return False  # Failed to store event

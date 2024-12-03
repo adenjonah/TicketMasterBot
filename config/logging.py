@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 # Set logging level based on DEBUG flag
-logging_level = logging.DEBUG if DEBUG else logging.INFO
+logging_level = logging.DEBUG if DEBUG == "True" else logging.INFO
 
 # Configure logging
 logging.basicConfig(level=logging_level, format="%(asctime)s [%(levelname)s] %(message)s")
