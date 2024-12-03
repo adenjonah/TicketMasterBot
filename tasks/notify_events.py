@@ -15,18 +15,29 @@ async def notify_events(bot, channel_id, notable_only=False):
     """
     logger.debug(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}")
 
-    query = '''
-    SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
-        Venues.city, Venues.state, Events.image_url, Artists.name AS artist_name
-    FROM Events
-    LEFT JOIN Venues ON Events.venueID = Venues.venueID
-    LEFT JOIN Artists ON Events.artistID = Artists.artistID
-    WHERE Events.sentToDiscord = FALSE
+    base_query = '''
+        SELECT 
+            Events.eventID, 
+            Events.name, 
+            Events.ticketOnsaleStart, 
+            Events.eventDate, 
+            Events.url, 
+            Venues.city, 
+            Venues.state, 
+            Events.image_url, 
+            Artists.name AS artist_name
+        FROM Events
+        LEFT JOIN Venues ON Events.venueID = Venues.venueID
+        LEFT JOIN Artists ON Events.artistID = Artists.artistID
+        WHERE Events.sentToDiscord = FALSE
     '''
+
     if notable_only:
-        query += " AND Artists.notable = TRUE"
+        notable_filter = "AND Artists.notable = TRUE"
     else:
-        query += " AND Artists.notable = FALSE"
+        notable_filter = "AND (Artists.notable = FALSE OR Artists.artistID IS NULL)"
+
+    query = f"{base_query} {notable_filter}"
 
     logger.debug(f"Database query prepared: {query}")
 
