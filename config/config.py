@@ -20,6 +20,10 @@ REDIRECT_URI = os.getenv('REDIRECT_URI', 'http://localhost')  # Default to local
 # Database Configuration
 DATABASE_URL = os.getenv('DATABASE_URL')
 
+CENTER_POINT = os.getenv('CENTER_POINT')
+RADIUS = os.getenv('RADIUS')
+UNIT = os.getenv('UNIT')
+
 # Validation to ensure critical environment variables are set
 if not DISCORD_BOT_TOKEN:
     raise ValueError("DISCORD_BOT_TOKEN is not set in the environment variables.")

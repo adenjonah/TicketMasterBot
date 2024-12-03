@@ -1,1 +1,2 @@
-worker: python bot.py
+bot: python newbot.py
+crawler: python crawler.py
