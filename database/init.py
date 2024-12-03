@@ -1,25 +1,7 @@
-import aiohttp  # For async HTTP requests
-import psycopg2
-import discord
-from psycopg2.extras import DictCursor
 import logging
 from datetime import datetime, timezone
-import os
-from dotenv import load_dotenv
-import asyncpg
-from dateutil import parser
-import asyncio
 
 now = datetime.now(timezone.utc)
-
-from config.config import (
-    DISCORD_BOT_TOKEN,
-    DISCORD_CHANNEL_ID,
-    DISCORD_CHANNEL_ID_TWO,
-    TICKETMASTER_API_KEY,
-    REDIRECT_URI,
-    DATABASE_URL,
-)
 
 # Configure logging
 logger = logging.getLogger(__name__)

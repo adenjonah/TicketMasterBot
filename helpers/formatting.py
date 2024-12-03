@@ -1,15 +1,6 @@
 from datetime import datetime, timezone
 from config.logging import logger
 
-from config.config import (
-    DISCORD_BOT_TOKEN,
-    DISCORD_CHANNEL_ID,
-    DISCORD_CHANNEL_ID_TWO,
-    TICKETMASTER_API_KEY,
-    REDIRECT_URI,
-    DATABASE_URL,
-)
-
 
 def format_date_human_readable(date_input):
     """

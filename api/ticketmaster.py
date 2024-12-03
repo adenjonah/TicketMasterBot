@@ -1,20 +1,10 @@
-import aiohttp  # For async HTTP requests
-import discord
-import logging
 from datetime import datetime, timezone
-from dotenv import load_dotenv
-from dateutil import parser
-import asyncio
 import urllib.parse
 from config.logging import logger
 import urllib.parse  # Import for URL encoding
 
 from config.config import (
-    DISCORD_BOT_TOKEN,
-    DISCORD_CHANNEL_ID,
-    DISCORD_CHANNEL_ID_TWO,
     TICKETMASTER_API_KEY,
-    DATABASE_URL,
     CENTER_POINT,
     RADIUS,
     UNIT

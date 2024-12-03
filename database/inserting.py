@@ -1,27 +1,9 @@
-import aiohttp  # For async HTTP requests
-import psycopg2
-import discord
-from psycopg2.extras import DictCursor
-import logging
 from datetime import datetime, timezone
-import os
-from dotenv import load_dotenv
 import asyncpg
 from dateutil import parser
-import asyncio
-
-logger = logging.getLogger(__name__)
+from config.logging import logger
 
 now = datetime.now(timezone.utc)
-
-from config.config import (
-    DISCORD_BOT_TOKEN,
-    DISCORD_CHANNEL_ID,
-    DISCORD_CHANNEL_ID_TWO,
-    TICKETMASTER_API_KEY,
-    REDIRECT_URI,
-    DATABASE_URL,
-)
 
 async def store_event(event):
     """Stores a new event in the database if not already present."""
