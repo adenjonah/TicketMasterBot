@@ -83,7 +83,7 @@ async def notify_events(bot, channel_id, notable_only=False):
 
                 # Create Discord embed
                 embed = discord.Embed(
-                    title=f"{event['artist_name']} - {event['name']}",
+                    title = f"{event['name']}" if event['artist_name'] is None else f"{event['artist_name']} - {event['name']}",
                     url=event['url'],
                     description=(
                         f"**Location**: {event['city']}, {event['state']}\n"
