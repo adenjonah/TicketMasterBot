@@ -5,8 +5,8 @@ from tasks.notify_events import notify_events
 from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, DATABASE_URL
 from config.logging import logger
 import asyncio
+import os
 
-# Define intents for the bot
 intents = discord.Intents.default()
 intents.typing = False
 intents.presences = False
@@ -17,7 +17,6 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    """Event triggered when the bot is ready."""
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
     await initialize_db_pool(DATABASE_URL)
     logger.info("Database pool initialized.")
@@ -25,7 +24,6 @@ async def on_ready():
 
 @tasks.loop(minutes=1)
 async def notify_events_task():
-    """Periodic task to notify Discord about events."""
     logger.info("Starting event notification process...")
     try:
         await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True)
@@ -34,15 +32,20 @@ async def notify_events_task():
         logger.error(f"Error during event notification: {e}", exc_info=True)
 
 async def shutdown():
-    """Shutdown function."""
     logger.info("Shutting down bot...")
     notify_events_task.stop()
     await close_db_pool()
 
+async def main():
+    logger.info("Starting bot...")
+    for filename in os.listdir("./discord/commands"):
+        if filename.endswith(".py") and filename != "__init__.py":
+            await bot.load_extension(f"discord.commands.{filename[:-3]}")
+    await bot.start(DISCORD_BOT_TOKEN)
+
 if __name__ == "__main__":
     try:
-        logger.info("Starting bot...")
-        bot.run(DISCORD_BOT_TOKEN)
+        asyncio.run(main())
     except KeyboardInterrupt:
         logger.warning("Shutting down bot.")
     finally:
