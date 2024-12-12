@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import aiohttp
 from database.inserting import store_event
 from database.queries import event_exists
-from api.ticketmaster import fetch_events_from_api
+from api.event_req import fetch_events_from_api
 from config.logging import logger
 
 from config.config import (

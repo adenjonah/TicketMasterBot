@@ -38,9 +38,9 @@ async def shutdown():
 
 async def main():
     logger.info("Starting bot...")
-    for filename in os.listdir("./discord/commands"):
+    for filename in os.listdir("./commands"):
         if filename.endswith(".py") and filename != "__init__.py":
-            await bot.load_extension(f"discord.commands.{filename[:-3]}")
+            await bot.load_extension(f"commands.{filename[:-3]}")
     await bot.start(DISCORD_BOT_TOKEN)
 
 if __name__ == "__main__":

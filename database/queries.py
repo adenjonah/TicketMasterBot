@@ -14,3 +14,19 @@ async def event_exists(conn, event_id):
         ''',
         event_id
     )
+    
+async def artist_exists(conn, artist_id):
+    """
+    Check if an event exists in the database.
+    Args:
+        conn: The database connection.
+        event_id: The ID of the event to check.
+    Returns:
+        bool: True if the event exists, False otherwise.
+    """
+    return await conn.fetchval(
+        '''
+        SELECT 1 FROM artists WHERE artistID = $1
+        ''',
+        artist_id
+    )
