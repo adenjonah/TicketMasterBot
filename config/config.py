@@ -14,15 +14,30 @@ DEBUG_LOGS = os.getenv('DEBUG_LOGS')
 # Ticketmaster API Key
 TICKETMASTER_API_KEY = os.getenv('TICKETMASTER_API_KEY')
 
-# Redirect URI for OAuth or Webhooks
-REDIRECT_URI = os.getenv('REDIRECT_URI', 'http://localhost')  # Default to localhost if not set
-
 # Database Configuration
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 CENTER_POINT = os.getenv('CENTER_POINT')
 RADIUS = os.getenv('RADIUS')
-UNIT = os.getenv('UNIT')
+
+#General
+REDIRECT_URI='http://localhost'
+UNIT='miles'
+
+REGION=os.getenv('REGION')
+
+if REGION == 'east':
+    CENTER_POINT='43.58785,-64.72599'
+    RADIUS='950'
+elif REGION == 'north': 
+    CENTER_POINT='62.41709,-108.42529'
+    RADIUS='1717'
+elif REGION == 'south':
+    CENTER_POINT='29.74590,-92.86707'
+    RADIUS='1094' 
+elif REGION == 'west': 
+    CENTER_POINT='15.42661,-133.61964'
+    RADIUS='2171'
 
 # Validation to ensure critical environment variables are set
 if not DISCORD_BOT_TOKEN:
