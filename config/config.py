@@ -38,6 +38,13 @@ elif REGION == 'south':
 elif REGION == 'west': 
     CENTER_POINT='15.42661,-133.61964'
     RADIUS='2171'
+    
+if REGION != 'comedy':
+    CLASSIFICATION_ID='KnvZfZ7vAeA'
+else:
+    CENTER_POINT='44.69209,-99.95477'
+    RADIUS='3016'
+    CLASSIFICATION_ID='KnvZfZ7vAe1'
 
 # Validation to ensure critical environment variables are set
 if not DISCORD_BOT_TOKEN:
