@@ -7,7 +7,9 @@ from config.config import (
     TICKETMASTER_API_KEY,
     CENTER_POINT,
     RADIUS,
-    UNIT
+    UNIT,
+    CLASSIFICATION_ID,
+    GENRE_ID,
 )
 
 now = datetime.now(timezone.utc)
@@ -23,13 +25,15 @@ async def fetch_events_from_api(session, page, current_time, current_date):
         "page": page,
         "onsaleStartDateTime": current_time,
         # "countryCode": "US",
-        "classificationId": "KZFzniwnSyZfZ7v7nJ",
+        "classificationId": CLASSIFICATION_ID,
         "onsaleOnAfterStartDate": current_date,
         "sort": "onSaleStartDate,asc",
         "latlong": CENTER_POINT,  # Latitude and Longitude
         "radius": RADIUS,         # Radius around the center point
         "unit": UNIT              # Unit for radius
     }
+    if GENRE_ID:
+        params["genreId"] = GENRE_ID
 
     # Construct the full URL with encoded parameters
     full_url = f"{base_url}?{urllib.parse.urlencode(params)}"
