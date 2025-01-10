@@ -45,8 +45,8 @@ if REGION != 'comedy':
 else:
     CENTER_POINT='44.69209,-99.95477'
     RADIUS='3016'
-    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7n1'
-    GENRE_ID='KnvZfZ7vAA1'
+    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7na'
+    GENRE_ID='KnvZfZ7vAe1'
 
 # Validation to ensure critical environment variables are set
 if not DISCORD_BOT_TOKEN:
