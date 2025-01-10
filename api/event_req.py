@@ -32,8 +32,8 @@ async def fetch_events_from_api(session, page, current_time, current_date):
         "radius": RADIUS,         # Radius around the center point
         "unit": UNIT              # Unit for radius
     }
-    # if GENRE_ID:
-    #     params["genreId"] = GENRE_ID
+    if GENRE_ID:
+        params["genreId"] = GENRE_ID
 
     # Construct the full URL with encoded parameters
     full_url = f"{base_url}?{urllib.parse.urlencode(params)}"
