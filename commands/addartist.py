@@ -19,20 +19,28 @@ class AddArtist(commands.Cog):
 
         for kw in keywords_list:
             artist_info = await find_artist_and_id(kw)
-            artist_id, artist_name = artist_info[0], artist_info[1]
-            print(artist_id, artist_name)
             if artist_info:
+                artist_id, artist_name = artist_info
                 await mark_artist_notable(artist_id, artist_name)
                 successful.append(f"\"{artist_name}\" (ID: {artist_id})")
             else:
                 failed.append(kw)
 
+        embed = discord.Embed(title="Add Artist Results")
+
         if successful and not failed:
-            await ctx.send(f"Artist{"s" if len(successful) > 1 else ""} {', '.join(successful)} marked as notable.")
+            embed.description = f"Successfully marked {', '.join(successful)} as notable."
+            embed.colour = discord.Colour.green()
         elif successful and failed:
-            await ctx.send(f"Artist{"s" if len(successful) > 1 else ""} {', '.join(successful)} marked as notable, but keyword(s) {', '.join(failed)} not found.")
+            embed.description = (
+                f"Marked {', '.join(successful)} as notable, but could not find {', '.join(failed)}."
+            )
+            embed.colour = discord.Colour.orange()
         else:
-            await ctx.send(f"No artists found for keyword(s): {', '.join(failed)}.")
+            embed.description = f"No artists found for {', '.join(failed)}."
+            embed.colour = discord.Colour.red()
+
+        await ctx.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(AddArtist(bot))
