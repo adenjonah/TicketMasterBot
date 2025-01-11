@@ -33,7 +33,7 @@ class Status(commands.Cog):
         now_local = datetime.now(self.utc).astimezone(self.eastern)
         current_time = now_local.strftime("%H:%M")
 
-        header = "  Status Last Events New"
+        header = "  Status  Last  Events New"
         lines = []
 
         for row in rows:
@@ -46,8 +46,8 @@ class Status(commands.Cog):
             else:
                 last_str = "N/A"
 
-            ev = str(row["events_returned"])
-            n = str(row["new_events"])
+            ev = "  " + str(row["events_returned"]) + "  "
+            n = "  " + str(row["new_events"])
 
             lines.append(f"{s_char} {stat_emoji} {last_str} {ev} {n}")
             emsg = row["error_messages"]
