@@ -8,12 +8,13 @@ from config.logging import logger
 async def main():
     """Main function for the API crawler."""
     try:
-        logger.info("Initializing database...")
-        await initialize_db()
-        logger.info("Database initialized.")
         logger.info("Initializing database pool...")
         await initialize_db_pool(DATABASE_URL)
         logger.info("Database pool initialized.")
+        
+        logger.info("Initializing database...")
+        await initialize_db()
+        logger.info("Database initialized.")
 
         while True:
             logger.info("Fetching events...")
