@@ -26,43 +26,39 @@ class Status(commands.Cog):
         total_running = sum(1 for row in rows if row["status"] == "Running")
         total_events_returned = sum(row["events_returned"] for row in rows)
         total_new_events = sum(row["new_events"] for row in rows)
-        current_time = datetime.now(self.utc).astimezone(self.eastern).strftime("%I:%M %p")
+        now_local = datetime.now(self.utc).astimezone(self.eastern)
+        current_time = f"{now_local.hour}:{now_local.minute}"  # Drop leading zero/AM/PM
 
-        # Build table header
-        header = (
-            f"{'Server':<10} | {'Status':<7} | {'Last Req':<8} | "
-            f"{'Events':<7} | {'New':<4} | {'Errors':<20}"
-        )
+        header = f"{'S':<1} {'St':<2} {'Last':<5} {'Ev':>3} {'N':>3} {'E':<10}"
+        lines = []
 
-        # Build table rows
-        table_lines = []
         for row in rows:
-            server_id = row["serverid"].capitalize()
-            status = row["status"]
-            last_request = (
-                row["last_request"].astimezone(self.eastern).strftime("%I:%M%p")
-                if row["last_request"]
-                else "N/A"
-            )
-            events_returned = row["events_returned"]
-            new_events = row["new_events"]
-            error_messages = row["error_messages"] or "None"
+            s_char = row["serverid"].capitalize()[0] if row["serverid"] else "?"
+            stat_emoji = "👍" if row["status"] == "Running" else "👎"
 
-            line = (
-                f"{server_id:<10} | {status:<7} | {last_request:<8} | "
-                f"{str(events_returned):<7} | {str(new_events):<4} | {error_messages:<20}"
-            )
-            table_lines.append(line)
+            if row["last_request"]:
+                local_req = row["last_request"].astimezone(self.eastern)
+                h = local_req.hour % 12 or 12
+                m = local_req.minute
+                last_str = f"{h}:{m}"
+            else:
+                last_str = "N/A"
 
-        # Build summary line
+            ev = row["events_returned"]
+            n = row["new_events"]
+            emsg = row["error_messages"] or "None"
+            emsg = emsg[:10]  # Truncate to fit
+
+            line = f"{s_char:<1} {stat_emoji:<2} {last_str:<5} {ev:>3} {n:>3} {emsg:<10}"
+            lines.append(line)
+
         summary = (
-            f"Total: {total_running}/{len(rows)} Running | {current_time} | "
-            f"{total_events_returned} | {total_new_events}"
+            f"Tot:{total_running}/{len(rows)} {current_time} "
+            f"Ev:{total_events_returned} N:{total_new_events}"
         )
 
-        # Send as a code block
-        message = "```\n" + header + "\n" + "\n".join(table_lines) + "\n\n" + summary + "\n```"
-        await ctx.send(message)
+        table = "```\n" + header + "\n" + "\n".join(lines) + "\n\n" + summary + "\n```"
+        await ctx.send(table)
 
 async def setup(bot):
     await bot.add_cog(Status(bot))
