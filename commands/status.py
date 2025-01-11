@@ -27,34 +27,39 @@ class Status(commands.Cog):
         total_events_returned = sum(row["events_returned"] for row in rows)
         total_new_events = sum(row["new_events"] for row in rows)
         now_local = datetime.now(self.utc).astimezone(self.eastern)
-        current_time = f"{now_local.hour}:{now_local.minute}"  # Drop leading zero/AM/PM
+        # Keep leading zero, drop AM/PM -> 24-hour HH:MM
+        current_time = now_local.strftime("%H:%M")
 
-        header = f"{'S':<1} {'St':<2} {'Last':<5} {'Ev':>3} {'N':>3} {'E':<10}"
+        header = "  St Last Ev N"
         lines = []
 
         for row in rows:
+            # First char of server name
             s_char = row["serverid"].capitalize()[0] if row["serverid"] else "?"
             stat_emoji = "👍" if row["status"] == "Running" else "👎"
 
             if row["last_request"]:
                 local_req = row["last_request"].astimezone(self.eastern)
-                h = local_req.hour % 12 or 12
-                m = local_req.minute
-                last_str = f"{h}:{m}"
+                last_str = local_req.strftime("%H:%M")  # e.g. 06:09
             else:
                 last_str = "N/A"
 
-            ev = row["events_returned"]
-            n = row["new_events"]
-            emsg = row["error_messages"] or "None"
-            emsg = emsg[:10]  # Truncate to fit
+            ev = str(row["events_returned"])
+            n = str(row["new_events"])
 
-            line = f"{s_char:<1} {stat_emoji:<2} {last_str:<5} {ev:>3} {n:>3} {emsg:<10}"
+            line = f"{s_char} {stat_emoji} {last_str} {ev} {n}"
             lines.append(line)
 
+            # If there's an actual error message, put it on a new line
+            emsg = row["error_messages"]
+            if emsg and emsg.lower() != "none":
+                lines.append(f"  E: {emsg}")
+
         summary = (
-            f"Tot:{total_running}/{len(rows)} {current_time} "
-            f"Ev:{total_events_returned} N:{total_new_events}"
+            f"Total Running: {total_running}/{len(rows)}  "
+            f"Time: {current_time}  "
+            f"Returned: {total_events_returned}  "
+            f"New: {total_new_events}"
         )
 
         table = "```\n" + header + "\n" + "\n".join(lines) + "\n\n" + summary + "\n```"
