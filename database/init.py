@@ -43,7 +43,28 @@ async def initialize_db():
                 name TEXT,
                 notable BOOLEAN DEFAULT FALSE
             )''')
+            await conn.execute('''
+            CREATE TABLE IF NOT EXISTS Server (
+                ServerID TEXT PRIMARY KEY,
+                status TEXT,
+                last_request TIMESTAMPTZ,
+                events_returned INTEGER DEFAULT 0,
+                new_events INTEGER DEFAULT 0,
+                error_messages TEXT
+            )''')
             logger.info("Tables created successfully.")
+            
+            logger.info("Initializing Server table with default ServerIDs...")
+            await conn.execute('''
+            INSERT INTO Server (ServerID) VALUES
+            ('north'),
+            ('east'),
+            ('south'),
+            ('west'),
+            ('comedy')
+            ON CONFLICT (ServerID) DO NOTHING
+            ''')
+            logger.info("Server table initialized with default ServerIDs.")
 
             # Alter existing columns to TIMESTAMPTZ if necessary
             logger.info("Altering Events table columns to TIMESTAMPTZ if necessary...")
