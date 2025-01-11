@@ -33,12 +33,12 @@ class Status(commands.Cog):
         now_local = datetime.now(self.utc).astimezone(self.eastern)
         current_time = now_local.strftime("%H:%M")
 
-        header = "  St Last Ev N"
+        header = "  Status Last Events New"
         lines = []
 
         for row in rows:
             s_char = row["serverid"].capitalize()[0] if row["serverid"] else "?"
-            stat_emoji = "👍" if row["status"] == "Running" else "👎"
+            stat_emoji = "  👍  " if row["status"] == "Running" else "  👎  "
 
             if row["last_request"]:
                 local_req = row["last_request"].astimezone(self.eastern)
