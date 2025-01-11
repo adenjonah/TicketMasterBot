@@ -4,7 +4,7 @@ from datetime import datetime
 from config import db_pool
 import zoneinfo
 
-class NextEvents(commands.Cog):
+class Status(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.eastern = zoneinfo.ZoneInfo("America/New_York")
@@ -67,4 +67,4 @@ class NextEvents(commands.Cog):
         await ctx.send(embed=embed)
 
 async def setup(bot):
-    await bot.add_cog(NextEvents(bot))
+    await bot.add_cog(Status(bot))
