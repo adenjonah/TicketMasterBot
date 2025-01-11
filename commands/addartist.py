@@ -19,7 +19,7 @@ class AddArtist(commands.Cog):
             if artist_info:
                 artist_id, artist_name = artist_info
                 await mark_artist_notable(artist_id, artist_name)
-                successful.append(f"`{artist_name}` (ID: `{artist_id}`)")
+                successful.append(f"{artist_name} (ID: `{artist_id}`)")
             else:
                 failed.append(f"`{kw}`")
 
