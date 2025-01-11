@@ -98,3 +98,57 @@ async def store_event(event):
         except Exception as e:
             logger.error(f"Error storing event: {e}", exc_info=True)
             return False
+        
+
+async def update_status(region, last_request=None, events_returned=None, new_events=None, error_messages=None):
+        """
+        Update the status of a server in the database.
+        
+        Parameters:
+            region (str): The ServerID (region).
+            last_request (datetime, optional): The timestamp of the last request.
+            events_returned (int, optional): The number of events returned.
+            new_events (int, optional): The number of new events.
+            error_messages (str, optional): Error messages, if any.
+        """
+        from config.db_pool import db_pool  # Import dynamically to ensure it's initialized
+
+        # Determine the status based on the presence of error messages
+        if error_messages is not None:
+            status = "Error"
+        else:
+            status = "Running"
+
+        async with db_pool.acquire() as conn:
+            try:
+                if error_messages is not None and all(arg is None for arg in [last_request, events_returned, new_events]):
+                    # Only update error_messages and status
+                    await conn.execute(
+                        '''
+                        INSERT INTO Server (ServerID, status, error_messages)
+                        VALUES ($1, $2, $3)
+                        ON CONFLICT (ServerID) DO UPDATE
+                        SET status = EXCLUDED.status,
+                            error_messages = EXCLUDED.error_messages
+                        ''',
+                        region, status, error_messages
+                    )
+                    logger.info(f"Error status updated for server: {region} (Status: {status})")
+                else:
+                    # Perform a full update
+                    await conn.execute(
+                        '''
+                        INSERT INTO Server (ServerID, status, last_request, events_returned, new_events, error_messages)
+                        VALUES ($1, $2, $3, $4, $5, $6)
+                        ON CONFLICT (ServerID) DO UPDATE
+                        SET status = EXCLUDED.status,
+                            last_request = EXCLUDED.last_request,
+                            events_returned = EXCLUDED.events_returned,
+                            new_events = EXCLUDED.new_events,
+                            error_messages = EXCLUDED.error_messages
+                        ''',
+                        region, status, last_request, events_returned, new_events, error_messages
+                    )
+                    logger.info(f"Server status updated: {region} (Status: {status})")
+            except Exception as e:
+                logger.error(f"Error updating server status for region '{region}': {e}", exc_info=True)

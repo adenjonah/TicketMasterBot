@@ -1,7 +1,7 @@
 import asyncio
 from datetime import datetime, timezone
 import aiohttp
-from database.inserting import store_event
+from database.inserting import store_event, update_status
 from database.queries import event_exists
 from api.event_req import fetch_events_from_api
 from config.logging import logger
@@ -13,6 +13,7 @@ from config.config import (
     TICKETMASTER_API_KEY,
     REDIRECT_URI,
     DATABASE_URL,
+    REGION
 )
 
 async def fetch_events():
@@ -30,7 +31,6 @@ async def fetch_events():
     try:
         async with aiohttp.ClientSession() as session:
             while page < max_pages:
-
                 events = await fetch_events_from_api(session, page, current_time, current_date)
                 events_count = len(events)
                 total_events_received += events_count
@@ -51,9 +51,15 @@ async def fetch_events():
         logger.info(f"Total events received: {total_events_received}, "
                     f"Total events processed: {total_events_processed}, "
                     f"New events added: {new_events_count}")
+        
+        await update_status(REGION, datetime.now(timezone.utc), total_events_received, new_events_count, None)
 
     except Exception as e:
         logger.error(f"Unexpected error in fetch_events: {e}", exc_info=True)
+        await update_status(
+            REGION,
+            error_messages=str(e)
+        )
 
 async def process_event(event):
     """Check if an event exists and store it if not. If the artist is notable, trigger notifications for notable events."""
