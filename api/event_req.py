@@ -24,7 +24,6 @@ async def fetch_events_from_api(session, page, current_time, current_date):
         "size": 199,
         "page": page,
         "onsaleStartDateTime": current_time,
-        # "countryCode": "US",
         "classificationId": CLASSIFICATION_ID,
         "onsaleOnAfterStartDate": current_date,
         "sort": "onSaleStartDate,asc",
