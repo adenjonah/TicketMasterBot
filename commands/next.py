@@ -82,7 +82,7 @@ class NextEvents(commands.Cog):
                             
                             presale_info = f" (Earliest presale: {earliest_presale['name']} - {presale_time})"
                     except Exception as e:
-                        logger.error(f"Error processing presale data for event {event['eventid']}: {e}", exc_info=True)
+                        logger.error(f"Error processing presale data for event {event['eventID']}: {e}", exc_info=True)
                 
                 event_line = f"{idx}. [{title}]({event['url']}) sale starts {time_str}{presale_info}\n"
                 message_lines.append(event_line)
