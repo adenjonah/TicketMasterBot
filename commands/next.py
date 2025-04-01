@@ -121,4 +121,14 @@ class NextEvents(commands.Cog):
 async def setup(bot):
     await bot.add_cog(NextEvents(bot))
     # Register the slash commands with the bot
-    bot.tree.add_command(app_commands.CommandGroup(name="events", description="Event-related commands"))
+    try:
+        # Try the newer Discord.py version way (AppCommandGroup)
+        try:
+            bot.tree.add_command(app_commands.AppCommandGroup(name="events", description="Event-related commands"))
+            logger.info("Added events command group using AppCommandGroup")
+        except AttributeError:
+            # Fall back to older Discord.py versions (CommandGroup)
+            bot.tree.add_command(app_commands.Group(name="events", description="Event-related commands"))
+            logger.info("Added events command group using Group")
+    except Exception as e:
+        logger.error(f"Failed to add events command group: {e}", exc_info=True)
