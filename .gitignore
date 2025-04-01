@@ -4,3 +4,4 @@ events.db
 /__pycache__
 *.pyc
 *.db
+.cursor/rules/file-length.mdc
