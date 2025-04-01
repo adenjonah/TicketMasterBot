@@ -70,7 +70,7 @@ async def on_raw_reaction_add(payload):
             
             # Set the reminder
             await conn.execute(
-                "UPDATE Events SET reminder = $1 WHERE eventID = $2",
+                "UPDATE Events SET reminder = $1::TIMESTAMPTZ WHERE eventID = $2",
                 reminder_time, event['eventid']
             )
             
@@ -133,9 +133,13 @@ async def check_reminders_task():
             # Process each event with a reminder
             for event in events:
                 # Get the appropriate channel based on whether the artist is notable
-                channel_id = DISCORD_CHANNEL_ID if event['artist_name'] and await conn.fetchval(
-                    "SELECT notable FROM Artists WHERE name = $1", event['artist_name']
-                ) else DISCORD_CHANNEL_ID_TWO
+                is_notable = False
+                if event['artist_name']:
+                    is_notable = await conn.fetchval(
+                        "SELECT notable FROM Artists WHERE name = $1",
+                        event['artist_name']
+                    )
+                channel_id = DISCORD_CHANNEL_ID if is_notable else DISCORD_CHANNEL_ID_TWO
                 
                 channel = bot.get_channel(channel_id)
                 if not channel:
