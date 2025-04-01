@@ -87,6 +87,27 @@ async def store_event(event):
                 event_id, event_name, artist_ids[0] if artist_ids else None, venue_id, event_date, onsale_start, url, image_url,
                 False, last_updated, None
             )
+            
+            # Process and store presale information if available
+            if 'sales' in event and 'presales' in event['sales']:
+                for presale in event['sales']['presales']:
+                    try:
+                        presale_name = presale.get('name', 'Unnamed Presale')
+                        presale_start = parser.parse(presale.get('startDateTime')).astimezone(timezone.utc).replace(tzinfo=None)
+                        presale_end = parser.parse(presale.get('endDateTime')).astimezone(timezone.utc).replace(tzinfo=None)
+                        presale_url = event.get('url', '')  # Use event URL as presale URL
+
+                        # Insert presale into the database
+                        await conn.execute(
+                            '''
+                            INSERT INTO EventPresales (eventID, presaleName, startDateTime, endDateTime, url)
+                            VALUES ($1, $2, $3, $4, $5)
+                            ''',
+                            event_id, presale_name, presale_start, presale_end, presale_url
+                        )
+                        logger.debug(f"Added presale '{presale_name}' for event: {event_name} (ID: {event_id})")
+                    except Exception as presale_error:
+                        logger.error(f"Error storing presale for event {event_id}: {presale_error}", exc_info=True)
 
             logger.info(f"New event added: {event_name} (ID: {event_id})")
             return True

@@ -45,6 +45,15 @@ async def initialize_db():
                 notable BOOLEAN DEFAULT FALSE
             )''')
             await conn.execute('''
+            CREATE TABLE IF NOT EXISTS EventPresales (
+                presaleID SERIAL PRIMARY KEY,
+                eventID TEXT REFERENCES Events(eventID) ON DELETE CASCADE,
+                presaleName TEXT,
+                startDateTime TIMESTAMPTZ,
+                endDateTime TIMESTAMPTZ,
+                url TEXT
+            )''')
+            await conn.execute('''
             CREATE TABLE IF NOT EXISTS Server (
                 ServerID TEXT PRIMARY KEY,
                 status TEXT,

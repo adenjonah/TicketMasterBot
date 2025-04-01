@@ -31,34 +31,70 @@ class NextEvents(commands.Cog):
         async with db_pool.db_pool.acquire() as conn:
             rows = await conn.fetch(query, number)
 
-        if not rows:
-            message = ("No upcoming notable events with ticket sales starting soon."
-                       if notable_only 
-                       else "No upcoming events with ticket sales starting soon.")
-            await ctx.send(message)
-            return
+            if not rows:
+                message = ("No upcoming notable events with ticket sales starting soon."
+                          if notable_only 
+                          else "No upcoming events with ticket sales starting soon.")
+                await ctx.send(message)
+                return
 
-        message_lines = []
-        for idx, event in enumerate(rows, start=1):
-            utc_time = event['ticketonsalestart'].replace(tzinfo=self.utc)
-            eastern_time = utc_time.astimezone(self.eastern)
-
-            # Manually format time to remove leading zero from hour and exclude seconds
-            hour = int(eastern_time.strftime("%I"))  # convert to int to remove leading zero
-            minute = eastern_time.strftime("%M")
-            ampm = eastern_time.strftime("%p")
-            date_str = eastern_time.strftime("%Y-%m-%d")
-            time_str = f"{date_str} {hour}:{minute} {ampm} EST"
-
-            event_line = f"{idx}. [{event['name']}]({event['url']}) sale starts {time_str}\n"
-            message_lines.append(event_line)
-
-        embed = discord.Embed(
-            title="Next Events",
-            description="".join(message_lines),
-            color=discord.Color.blue()
-        )
-        await ctx.send(embed=embed)
+            # Fetch each event's information and create a Discord embed
+            for event in rows:
+                event_id = event['eventid']
+                event_name = event['name']
+                artist_name = event['artist_name']
+                
+                # Format title based on whether artist name is available
+                title = f"{event_name}" if artist_name is None else f"{artist_name} - {event_name}"
+                
+                # Get location details
+                location = f"{event['city']}, {event['state']}"
+                
+                # Format dates in human-readable format for eastern time
+                event_date_est = event['eventdate'].astimezone(self.eastern)
+                event_date_str = event_date_est.strftime("%B %d, %Y at %I:%M %p EST")
+                
+                onsale_start_est = event['ticketonsalestart'].astimezone(self.eastern)
+                onsale_start_str = onsale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
+                
+                # Get presale information for this event
+                presales = await conn.fetch(
+                    '''
+                    SELECT presaleName, startDateTime, endDateTime
+                    FROM EventPresales
+                    WHERE eventID = $1
+                    ORDER BY startDateTime ASC
+                    ''',
+                    event_id
+                )
+                
+                # Create embed
+                embed = discord.Embed(
+                    title=title,
+                    url=event['url'],
+                    color=discord.Color.blue()
+                )
+                
+                # Add event details
+                embed.add_field(name="📍 Location", value=location, inline=True)
+                embed.add_field(name="📅 Event Date", value=event_date_str, inline=True)
+                embed.add_field(name="🎫 Public Sale", value=onsale_start_str, inline=True)
+                
+                # Add presale information if available
+                if presales:
+                    presale_info = []
+                    for presale in presales:
+                        presale_start_est = presale['startdatetime'].astimezone(self.eastern)
+                        presale_start_str = presale_start_est.strftime("%b %d, %I:%M %p")
+                        
+                        presale_end_est = presale['enddatetime'].astimezone(self.eastern)
+                        presale_end_str = presale_end_est.strftime("%b %d, %I:%M %p")
+                        
+                        presale_info.append(f"**{presale['presalename']}**: {presale_start_str} - {presale_end_str}")
+                    
+                    embed.add_field(name="🔑 Presales", value="\n".join(presale_info), inline=False)
+                
+                await ctx.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(NextEvents(bot))

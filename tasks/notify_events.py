@@ -96,6 +96,33 @@ async def notify_events(bot, channel_id, notable_only=False):
                 if event['image_url']:
                     embed.set_image(url=event['image_url'])
 
+                # Get presale information for this event
+                presales = await conn.fetch(
+                    '''
+                    SELECT presaleName, startDateTime, endDateTime
+                    FROM EventPresales
+                    WHERE eventID = $1
+                    ORDER BY startDateTime ASC
+                    ''',
+                    event['eventid']
+                )
+
+                # Add presale information to the embed if available
+                if presales:
+                    presale_info = []
+                    for presale in presales:
+                        presale_start_utc = presale['startdatetime']
+                        presale_start_est = presale_start_utc.astimezone(est_tz)
+                        presale_start = presale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
+                        
+                        presale_end_utc = presale['enddatetime']
+                        presale_end_est = presale_end_utc.astimezone(est_tz)
+                        presale_end = presale_end_est.strftime("%B %d, %Y at %I:%M %p EST")
+                        
+                        presale_info.append(f"**{presale['presalename']}**\nStart: {presale_start}\nEnd: {presale_end}")
+                    
+                    embed.add_field(name="📅 Presales", value="\n\n".join(presale_info), inline=False)
+
                 # Send notification to Discord channel
                 logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")
                 await channel.send(embed=embed)
