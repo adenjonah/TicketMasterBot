@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import aiohttp
 from database.inserting import store_event, update_status
 from database.queries import event_exists
-from api.event_req import fetch_events_from_api
+from api.event_req import fetch_events_from_api, fetch_event_details
 from config.logging import logger
 
 from config.config import (
@@ -62,18 +62,35 @@ async def fetch_events():
         )
 
 async def process_event(event):
-    """Check if an event exists and store it if not. If the artist is notable, trigger notifications for notable events."""
+    """
+    Check if an event exists and store it if not. For new events, fetch detailed information 
+    including presale data before storing.
+    """
     from config.db_pool import db_pool  # Import shared db_pool here
     from helpers.formatting import format_date_human_readable
     from tasks.notify_events import notify_events  # Import notify_events here to avoid circular imports
 
     try:
         async with db_pool.acquire() as conn:
-            if not await event_exists(conn, event["id"]):
-                logger.info(f"Storing new event: {event['id']} - {event['name']}")
+            event_id = event["id"]
+            if not await event_exists(conn, event_id):
+                logger.info(f"Found new event: {event_id} - {event['name']}")
+                
+                # For new events, fetch detailed information to get complete presale data
+                async with aiohttp.ClientSession() as session:
+                    detailed_event = await fetch_event_details(session, event_id)
+                    
+                # If detailed event fetch was successful, use that instead of the list event data
+                if detailed_event:
+                    logger.info(f"Successfully fetched detailed information for event: {event_id}")
+                    event_to_store = detailed_event
+                else:
+                    logger.warn(f"Could not fetch detailed information for event: {event_id}. Using summary data.")
+                    event_to_store = event
+                
                 try:
-                    await store_event(event)
-                    logger.debug(f"Successfully stored event: {event['id']}")
+                    await store_event(event_to_store)
+                    logger.debug(f"Successfully stored event: {event_id}")
 
                     # Check if the artist is notable after storing
                     notable_artist_query = '''
@@ -81,21 +98,21 @@ async def process_event(event):
                     FROM Artists
                     WHERE Artists.artistID = $1
                     '''
-                    artist_notable = await conn.fetchval(notable_artist_query, event.get("artistID"))
+                    artist_notable = await conn.fetchval(notable_artist_query, event_to_store.get("artistID"))
 
                     if artist_notable:
-                        logger.info(f"Event {event['id']} associated with notable artist. Triggering notifications.")
+                        logger.info(f"Event {event_id} associated with notable artist. Triggering notifications.")
                         # Call notify_events with notable_only set to True
-                        await notify_events(event["bot"], DISCORD_CHANNEL_ID, notable_only=True)
+                        await notify_events(event_to_store["bot"], DISCORD_CHANNEL_ID, notable_only=True)
 
                     return True  # New event added
 
                 except Exception as e:
-                    logger.error(f"Error storing event: {event['id']}, name: {event['name']}, error: {e}")
+                    logger.error(f"Error storing event: {event_id}, name: {event['name']}, error: {e}")
                     return False  # Failed to store event
             else:
-                logger.debug(f"Event already exists in DB: {event['id']} - {event['name']}")
+                logger.debug(f"Event already exists in DB: {event_id} - {event['name']}")
                 return False  # Event already exists
     except Exception as e:
-        logger.error(f"Failed to acquire DB connection for event: {event['id']}, error: {e}")
+        logger.error(f"Failed to acquire DB connection for event: {event_id}, error: {e}")
         return False  # Failed to process event
