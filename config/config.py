@@ -46,7 +46,7 @@ else:
     CENTER_POINT='44.69209,-99.95477'
     RADIUS='3016'
     CLASSIFICATION_ID='KZFzniwnSyZfZ7v7na'
-    GENRE_ID='KnvZfZ7vAe1'
+    GENRE_ID=''
 
 # Validation to ensure critical environment variables are set
 if not DISCORD_BOT_TOKEN:
