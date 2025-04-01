@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord import app_commands
 from datetime import datetime, timezone, timedelta
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -17,7 +16,6 @@ from database.analytics import (
     compare_notable_vs_all_events
 )
 from config.logging import logger
-from commands.utils import respond_to_context, ContextLike
 
 class RegionStats(commands.Cog):
     def __init__(self, bot):
@@ -26,34 +24,17 @@ class RegionStats(commands.Cog):
     @commands.command(name="region_hours", help="Shows hourly activity for a region")
     async def region_hours_command(self, ctx, region: str = None, days: int = 30):
         """Display hourly event activity for a specific region or all regions."""
-        await self.show_region_hours(ctx, region, days)
-    
-    @app_commands.command(name="region_hours", description="Shows hourly activity for a region")
-    @app_commands.describe(
-        region="Region to show (leave empty for all regions)",
-        days="Number of days to look back (max 90)"
-    )
-    async def region_hours_slash(self, interaction: discord.Interaction, region: str = None, days: int = 30):
-        await self.show_region_hours(interaction, region, days)
-        
-    async def show_region_hours(self, ctx_or_interaction: ContextLike, region: str = None, days: int = 30):
-        """Display hourly event activity for a specific region or all regions."""
         days = min(days, 90)  # Limit to 90 days max for performance
         
-        # Show "thinking" indicator for slash commands
-        if isinstance(ctx_or_interaction, discord.Interaction):
-            await ctx_or_interaction.response.defer(thinking=True)
-            
+        # Let user know we're working on it
+        msg = await ctx.send(f"Fetching hourly stats for {region or 'all regions'} over the past {days} days...")
+        
         async with db_pool.db_pool.acquire() as conn:
             # Get the data
             data = await get_region_activity_by_hour(conn, region, days)
             
             if not data:
-                message = f"No data available for {region or 'all regions'} in the past {days} days."
-                if isinstance(ctx_or_interaction, discord.Interaction):
-                    await ctx_or_interaction.followup.send(content=message)
-                else:
-                    await ctx_or_interaction.send(message)
+                await msg.edit(content=f"No data available for {region or 'all regions'} in the past {days} days.")
                 return
             
             # Create a plot
@@ -83,48 +64,29 @@ class RegionStats(commands.Cog):
             
             # Send the plot
             file = discord.File(buf, filename="region_hours.png")
-            message = f"Hourly activity for {region or 'all regions'} over the past {days} days:"
-            
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(content=message, file=file)
-            else:
-                await ctx_or_interaction.send(content=message, file=file)
-                
+            await msg.delete()
+            await ctx.send(
+                f"Hourly activity for {region or 'all regions'} over the past {days} days:", 
+                file=file
+            )
             plt.close(fig)
     
     @commands.command(name="region_days", help="Shows daily activity for a region")
     async def region_days_command(self, ctx, region: str = None, days: int = 30):
         """Display daily event activity for a specific region or all regions."""
-        await self.show_region_days(ctx, region, days)
-    
-    @app_commands.command(name="region_days", description="Shows daily activity for a region")
-    @app_commands.describe(
-        region="Region to show (leave empty for all regions)",
-        days="Number of days to look back (max 90)"
-    )
-    async def region_days_slash(self, interaction: discord.Interaction, region: str = None, days: int = 30):
-        await self.show_region_days(interaction, region, days)
-    
-    async def show_region_days(self, ctx_or_interaction: ContextLike, region: str = None, days: int = 30):
-        """Display daily event activity for a specific region or all regions."""
         days = min(days, 90)  # Limit to 90 days max for performance
         
-        # Show "thinking" indicator for slash commands
-        if isinstance(ctx_or_interaction, discord.Interaction):
-            await ctx_or_interaction.response.defer(thinking=True)
-        
         day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        
+        # Let user know we're working on it
+        msg = await ctx.send(f"Fetching daily stats for {region or 'all regions'} over the past {days} days...")
         
         async with db_pool.db_pool.acquire() as conn:
             # Get the data
             data = await get_region_activity_by_day(conn, region, days)
             
             if not data:
-                message = f"No data available for {region or 'all regions'} in the past {days} days."
-                if isinstance(ctx_or_interaction, discord.Interaction):
-                    await ctx_or_interaction.followup.send(content=message)
-                else:
-                    await ctx_or_interaction.send(message)
+                await msg.edit(content=f"No data available for {region or 'all regions'} in the past {days} days.")
                 return
             
             # Create a plot
@@ -159,43 +121,27 @@ class RegionStats(commands.Cog):
             
             # Send the plot
             file = discord.File(buf, filename="region_days.png")
-            message = f"Daily activity for {region or 'all regions'} over the past {days} days:"
-            
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(content=message, file=file)
-            else:
-                await ctx_or_interaction.send(content=message, file=file)
-                
+            await msg.delete()
+            await ctx.send(
+                f"Daily activity for {region or 'all regions'} over the past {days} days:", 
+                file=file
+            )
             plt.close(fig)
     
     @commands.command(name="region_heatmap", help="Shows a heatmap of regional activity")
     async def region_heatmap_command(self, ctx, days: int = 30):
         """Display a heatmap of regional activity by hour."""
-        await self.show_region_heatmap(ctx, days)
-    
-    @app_commands.command(name="region_heatmap", description="Shows a heatmap of regional activity")
-    @app_commands.describe(days="Number of days to look back (max 90)")
-    async def region_heatmap_slash(self, interaction: discord.Interaction, days: int = 30):
-        await self.show_region_heatmap(interaction, days)
-    
-    async def show_region_heatmap(self, ctx_or_interaction: ContextLike, days: int = 30):
-        """Display a heatmap of regional activity by hour."""
         days = min(days, 90)  # Limit to 90 days max for performance
         
-        # Show "thinking" indicator for slash commands
-        if isinstance(ctx_or_interaction, discord.Interaction):
-            await ctx_or_interaction.response.defer(thinking=True)
+        # Let user know we're working on it
+        msg = await ctx.send(f"Generating activity heatmap for all regions over the past {days} days...")
         
         async with db_pool.db_pool.acquire() as conn:
             # Get the data
             data = await get_hourly_heatmap_data(conn, days)
             
             if not data:
-                message = f"No data available for heatmap in the past {days} days."
-                if isinstance(ctx_or_interaction, discord.Interaction):
-                    await ctx_or_interaction.followup.send(content=message)
-                else:
-                    await ctx_or_interaction.send(message)
+                await msg.edit(content=f"No data available for heatmap in the past {days} days.")
                 return
             
             # Reshape data for heatmap
@@ -209,8 +155,8 @@ class RegionStats(commands.Cog):
             for item in data:
                 region_idx = regions.index(item['serverid'])
                 hour = item['hour_of_day']
-                avg_events = item['total_new_events']
-                heatmap_data[region_idx, hour] = avg_events
+                total_events = item['total_new_events']
+                heatmap_data[region_idx, hour] = total_events
             
             # Create a plot
             fig, ax = plt.subplots(figsize=(12, 8))
@@ -247,43 +193,27 @@ class RegionStats(commands.Cog):
             
             # Send the plot
             file = discord.File(buf, filename="region_heatmap.png")
-            message = f"Regional activity heatmap for the past {days} days:"
-            
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(content=message, file=file)
-            else:
-                await ctx_or_interaction.send(content=message, file=file)
-                
+            await msg.delete()
+            await ctx.send(
+                f"Regional activity heatmap for the past {days} days:", 
+                file=file
+            )
             plt.close(fig)
     
     @commands.command(name="region_trends", help="Shows trending activity for regions")
     async def region_trends_command(self, ctx, days: int = 14):
         """Display trending activity data comparing recent vs past periods."""
-        await self.show_region_trends(ctx, days)
-    
-    @app_commands.command(name="region_trends", description="Shows trending activity for regions")
-    @app_commands.describe(days="Number of days to analyze (max 90)")
-    async def region_trends_slash(self, interaction: discord.Interaction, days: int = 14):
-        await self.show_region_trends(interaction, days)
-    
-    async def show_region_trends(self, ctx_or_interaction: ContextLike, days: int = 14):
-        """Display trending activity data comparing recent vs past periods."""
         days = min(days, 90)  # Limit to 90 days max for performance
         
-        # Show "thinking" indicator for slash commands
-        if isinstance(ctx_or_interaction, discord.Interaction):
-            await ctx_or_interaction.response.defer(thinking=True)
+        # Let user know we're working on it
+        msg = await ctx.send(f"Analyzing regional trends over the past {days} days...")
         
         async with db_pool.db_pool.acquire() as conn:
             # Get the data
             trend_data = await get_region_trending_data(conn, None, days)
             
             if not trend_data:
-                message = f"No trend data available for the past {days} days."
-                if isinstance(ctx_or_interaction, discord.Interaction):
-                    await ctx_or_interaction.followup.send(content=message)
-                else:
-                    await ctx_or_interaction.send(message)
+                await msg.edit(content=f"No trend data available for the past {days} days.")
                 return
             
             # Create an embed to display the trend data
@@ -321,42 +251,23 @@ class RegionStats(commands.Cog):
             embed.timestamp = datetime.now(timezone.utc)
             
             # Send the embed
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(embed=embed)
-            else:
-                await ctx_or_interaction.send(embed=embed)
-    
+            await msg.delete()
+            await ctx.send(embed=embed)
+            
     @commands.command(name="notable_hours", help="Shows hourly activity for notable artist events")
     async def notable_hours_command(self, ctx, region: str = None, days: int = 30):
         """Display hourly notable event activity for a specific region or all regions."""
-        await self.show_notable_hours(ctx, region, days)
-        
-    @app_commands.command(name="notable_hours", description="Shows hourly activity for notable artist events")
-    @app_commands.describe(
-        region="Region to show (leave empty for all regions)",
-        days="Number of days to look back (max 90)"
-    )
-    async def notable_hours_slash(self, interaction: discord.Interaction, region: str = None, days: int = 30):
-        await self.show_notable_hours(interaction, region, days)
-    
-    async def show_notable_hours(self, ctx_or_interaction: ContextLike, region: str = None, days: int = 30):
-        """Display hourly notable event activity for a specific region or all regions."""
         days = min(days, 90)  # Limit to 90 days max for performance
         
-        # Show "thinking" indicator for slash commands
-        if isinstance(ctx_or_interaction, discord.Interaction):
-            await ctx_or_interaction.response.defer(thinking=True)
+        # Let user know we're working on it
+        msg = await ctx.send(f"Fetching hourly notable events stats for {region or 'all regions'} over the past {days} days...")
         
         async with db_pool.db_pool.acquire() as conn:
             # Get the data
             data = await get_notable_events_by_hour(conn, region, days)
             
             if not data:
-                message = f"No notable events data available for {region or 'all regions'} in the past {days} days."
-                if isinstance(ctx_or_interaction, discord.Interaction):
-                    await ctx_or_interaction.followup.send(content=message)
-                else:
-                    await ctx_or_interaction.send(message)
+                await msg.edit(content=f"No notable events data available for {region or 'all regions'} in the past {days} days.")
                 return
             
             # Create a plot
@@ -386,48 +297,29 @@ class RegionStats(commands.Cog):
             
             # Send the plot
             file = discord.File(buf, filename="notable_hours.png")
-            message = f"Hourly notable artist activity for {region or 'all regions'} over the past {days} days:"
-            
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(content=message, file=file)
-            else:
-                await ctx_or_interaction.send(content=message, file=file)
-                
+            await msg.delete()
+            await ctx.send(
+                f"Hourly notable artist activity for {region or 'all regions'} over the past {days} days:", 
+                file=file
+            )
             plt.close(fig)
     
     @commands.command(name="notable_days", help="Shows daily activity for notable artist events")
     async def notable_days_command(self, ctx, region: str = None, days: int = 30):
         """Display daily notable event activity for a specific region or all regions."""
-        await self.show_notable_days(ctx, region, days)
-        
-    @app_commands.command(name="notable_days", description="Shows daily activity for notable artist events")
-    @app_commands.describe(
-        region="Region to show (leave empty for all regions)",
-        days="Number of days to look back (max 90)"
-    )
-    async def notable_days_slash(self, interaction: discord.Interaction, region: str = None, days: int = 30):
-        await self.show_notable_days(interaction, region, days)
-    
-    async def show_notable_days(self, ctx_or_interaction: ContextLike, region: str = None, days: int = 30):
-        """Display daily notable event activity for a specific region or all regions."""
         days = min(days, 90)  # Limit to 90 days max for performance
         
-        # Show "thinking" indicator for slash commands
-        if isinstance(ctx_or_interaction, discord.Interaction):
-            await ctx_or_interaction.response.defer(thinking=True)
-        
         day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        
+        # Let user know we're working on it
+        msg = await ctx.send(f"Fetching daily notable events stats for {region or 'all regions'} over the past {days} days...")
         
         async with db_pool.db_pool.acquire() as conn:
             # Get the data
             data = await get_notable_events_by_day(conn, region, days)
             
             if not data:
-                message = f"No notable events data available for {region or 'all regions'} in the past {days} days."
-                if isinstance(ctx_or_interaction, discord.Interaction):
-                    await ctx_or_interaction.followup.send(content=message)
-                else:
-                    await ctx_or_interaction.send(message)
+                await msg.edit(content=f"No notable events data available for {region or 'all regions'} in the past {days} days.")
                 return
             
             # Create a plot
@@ -462,46 +354,27 @@ class RegionStats(commands.Cog):
             
             # Send the plot
             file = discord.File(buf, filename="notable_days.png")
-            message = f"Daily notable artist activity for {region or 'all regions'} over the past {days} days:"
-            
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(content=message, file=file)
-            else:
-                await ctx_or_interaction.send(content=message, file=file)
-                
+            await msg.delete()
+            await ctx.send(
+                f"Daily notable artist activity for {region or 'all regions'} over the past {days} days:", 
+                file=file
+            )
             plt.close(fig)
     
     @commands.command(name="notable_comparison", help="Shows comparison between notable and all events")
     async def notable_comparison_command(self, ctx, region: str = None, days: int = 30):
         """Display comparison between notable and all events for a specific region or all regions."""
-        await self.show_notable_comparison(ctx, region, days)
-        
-    @app_commands.command(name="notable_comparison", description="Shows comparison between notable and all events")
-    @app_commands.describe(
-        region="Region to show (leave empty for all regions)",
-        days="Number of days to look back (max 90)"
-    )
-    async def notable_comparison_slash(self, interaction: discord.Interaction, region: str = None, days: int = 30):
-        await self.show_notable_comparison(interaction, region, days)
-    
-    async def show_notable_comparison(self, ctx_or_interaction: ContextLike, region: str = None, days: int = 30):
-        """Display comparison between notable and all events for a specific region or all regions."""
         days = min(days, 90)  # Limit to 90 days max for performance
         
-        # Show "thinking" indicator for slash commands
-        if isinstance(ctx_or_interaction, discord.Interaction):
-            await ctx_or_interaction.response.defer(thinking=True)
+        # Let user know we're working on it
+        msg = await ctx.send(f"Analyzing notable vs all events for {region or 'all regions'} over the past {days} days...")
         
         async with db_pool.db_pool.acquire() as conn:
             # Get the data
             comparison_data = await compare_notable_vs_all_events(conn, region, days)
             
             if not comparison_data:
-                message = f"No comparison data available for {region or 'all regions'} in the past {days} days."
-                if isinstance(ctx_or_interaction, discord.Interaction):
-                    await ctx_or_interaction.followup.send(content=message)
-                else:
-                    await ctx_or_interaction.send(message)
+                await msg.edit(content=f"No comparison data available for {region or 'all regions'} in the past {days} days.")
                 return
             
             # Create an embed to display the comparison data
@@ -533,10 +406,8 @@ class RegionStats(commands.Cog):
             embed.timestamp = datetime.now(timezone.utc)
             
             # Send the embed
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(embed=embed)
-            else:
-                await ctx_or_interaction.send(embed=embed)
+            await msg.delete()
+            await ctx.send(embed=embed)
             
             # Create a bar chart showing the percentage of notable events by region
             fig, ax = plt.subplots(figsize=(10, 6))
@@ -564,22 +435,8 @@ class RegionStats(commands.Cog):
             
             # Send the plot
             file = discord.File(buf, filename="notable_comparison.png")
-            if isinstance(ctx_or_interaction, discord.Interaction):
-                await ctx_or_interaction.followup.send(file=file)
-            else:
-                await ctx_or_interaction.send(file=file)
-                
+            await ctx.send(file=file)
             plt.close(fig)
 
 async def setup(bot):
-    await bot.add_cog(RegionStats(bot))
-    
-    # Register the stats command group
-    stats_group = app_commands.Group(name="stats", description="Statistics and analytics commands")
-    
-    # Add the commands to the stats group
-    # We could add them individually here if we wanted custom groups
-    # But the individual commands are already registered
-    
-    # Add the group to the bot's command tree
-    bot.tree.add_command(stats_group) 
+    await bot.add_cog(RegionStats(bot)) 
