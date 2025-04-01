@@ -23,7 +23,7 @@ async def get_region_activity_by_hour(conn, region_id=None, days_ago=30):
         ServerID, 
         hour_of_day,
         AVG(events_returned) as avg_events,
-        AVG(new_events) as avg_new_events,
+        SUM(new_events) as total_new_events,
         COUNT(*) as sample_count
     FROM 
         ServerTimeSeries
@@ -71,7 +71,7 @@ async def get_region_activity_by_day(conn, region_id=None, days_ago=30):
         ServerID, 
         day_of_week,
         AVG(events_returned) as avg_events,
-        AVG(new_events) as avg_new_events,
+        SUM(new_events) as total_new_events,
         COUNT(*) as sample_count
     FROM 
         ServerTimeSeries
@@ -203,7 +203,7 @@ async def get_hourly_heatmap_data(conn, days_ago=30):
     SELECT 
         ServerID,
         hour_of_day,
-        AVG(new_events) as avg_new_events
+        SUM(new_events) as total_new_events
     FROM 
         ServerTimeSeries
     WHERE 
@@ -240,7 +240,7 @@ async def get_notable_events_by_hour(conn, region_id=None, days_ago=30):
         region, 
         hour_of_day,
         AVG(total_events) as avg_events,
-        AVG(new_events) as avg_new_events,
+        SUM(new_events) as total_new_events,
         COUNT(*) as sample_count
     FROM 
         NotableEventsTimeSeries
@@ -288,7 +288,7 @@ async def get_notable_events_by_day(conn, region_id=None, days_ago=30):
         region, 
         day_of_week,
         AVG(total_events) as avg_events,
-        AVG(new_events) as avg_new_events,
+        SUM(new_events) as total_new_events,
         COUNT(*) as sample_count
     FROM 
         NotableEventsTimeSeries

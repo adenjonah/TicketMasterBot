@@ -45,13 +45,13 @@ class RegionStats(commands.Cog):
             for r in regions:
                 region_data = [item for item in data if item['serverid'] == r]
                 hours = [item['hour_of_day'] for item in region_data]
-                new_events = [item['avg_new_events'] for item in region_data]
+                new_events = [item['total_new_events'] for item in region_data]
                 ax.plot(hours, new_events, 'o-', label=r)
             
             # Format the plot
-            ax.set_title(f"Average New Events by Hour of Day (Past {days} Days)")
+            ax.set_title(f"Total New Events by Hour of Day (Past {days} Days)")
             ax.set_xlabel("Hour of Day (UTC)")
-            ax.set_ylabel("Average New Events")
+            ax.set_ylabel("Total New Events")
             ax.set_xticks(range(0, 24))
             ax.grid(True, linestyle='--', alpha=0.7)
             ax.legend()
@@ -99,7 +99,7 @@ class RegionStats(commands.Cog):
                 # Sort by day of week (0 = Monday, 6 = Sunday)
                 region_data.sort(key=lambda x: x['day_of_week'])
                 days_of_week = [item['day_of_week'] for item in region_data]
-                new_events = [item['avg_new_events'] for item in region_data]
+                new_events = [item['total_new_events'] for item in region_data]
                 
                 # Convert day numbers to day names for x-axis
                 day_labels = [day_names[d] for d in days_of_week]
@@ -107,9 +107,9 @@ class RegionStats(commands.Cog):
                 ax.plot(day_labels, new_events, 'o-', label=r)
             
             # Format the plot
-            ax.set_title(f"Average New Events by Day of Week (Past {days} Days)")
+            ax.set_title(f"Total New Events by Day of Week (Past {days} Days)")
             ax.set_xlabel("Day of Week")
-            ax.set_ylabel("Average New Events")
+            ax.set_ylabel("Total New Events")
             ax.grid(True, linestyle='--', alpha=0.7)
             ax.legend()
             
@@ -155,7 +155,7 @@ class RegionStats(commands.Cog):
             for item in data:
                 region_idx = regions.index(item['serverid'])
                 hour = item['hour_of_day']
-                avg_events = item['avg_new_events']
+                avg_events = item['total_new_events']
                 heatmap_data[region_idx, hour] = avg_events
             
             # Create a plot
@@ -166,7 +166,7 @@ class RegionStats(commands.Cog):
             
             # Add colorbar
             cbar = ax.figure.colorbar(im, ax=ax)
-            cbar.ax.set_ylabel("Average New Events", rotation=-90, va="bottom")
+            cbar.ax.set_ylabel("Total New Events", rotation=-90, va="bottom")
             
             # Set ticks and labels
             ax.set_xticks(np.arange(24))
@@ -175,7 +175,7 @@ class RegionStats(commands.Cog):
             ax.set_yticklabels(regions)
             
             # Label the chart
-            ax.set_title(f"New Event Activity Heatmap by Region and Hour (Past {days} Days)")
+            ax.set_title(f"Total New Event Activity Heatmap by Region and Hour (Past {days} Days)")
             ax.set_xlabel("Hour of Day (UTC)")
             ax.set_ylabel("Region")
             
@@ -278,13 +278,13 @@ class RegionStats(commands.Cog):
             for r in regions:
                 region_data = [item for item in data if item['region'] == r]
                 hours = [item['hour_of_day'] for item in region_data]
-                new_events = [item['avg_new_events'] for item in region_data]
+                new_events = [item['total_new_events'] for item in region_data]
                 ax.plot(hours, new_events, 'o-', label=r)
             
             # Format the plot
-            ax.set_title(f"Average New Notable Events by Hour of Day (Past {days} Days)")
+            ax.set_title(f"Total New Notable Events by Hour of Day (Past {days} Days)")
             ax.set_xlabel("Hour of Day (UTC)")
-            ax.set_ylabel("Average New Notable Events")
+            ax.set_ylabel("Total New Notable Events")
             ax.set_xticks(range(0, 24))
             ax.grid(True, linestyle='--', alpha=0.7)
             ax.legend()
@@ -332,7 +332,7 @@ class RegionStats(commands.Cog):
                 # Sort by day of week (0 = Monday, 6 = Sunday)
                 region_data.sort(key=lambda x: x['day_of_week'])
                 days_of_week = [item['day_of_week'] for item in region_data]
-                new_events = [item['avg_new_events'] for item in region_data]
+                new_events = [item['total_new_events'] for item in region_data]
                 
                 # Convert day numbers to day names for x-axis
                 day_labels = [day_names[d] for d in days_of_week]
@@ -340,9 +340,9 @@ class RegionStats(commands.Cog):
                 ax.plot(day_labels, new_events, 'o-', label=r)
             
             # Format the plot
-            ax.set_title(f"Average New Notable Events by Day of Week (Past {days} Days)")
+            ax.set_title(f"Total New Notable Events by Day of Week (Past {days} Days)")
             ax.set_xlabel("Day of Week")
-            ax.set_ylabel("Average New Notable Events")
+            ax.set_ylabel("Total New Notable Events")
             ax.grid(True, linestyle='--', alpha=0.7)
             ax.legend()
             
