@@ -41,7 +41,8 @@ async def initialize_db():
             CREATE TABLE IF NOT EXISTS Artists (
                 artistID TEXT PRIMARY KEY,
                 name TEXT,
-                notable BOOLEAN DEFAULT FALSE
+                notable BOOLEAN DEFAULT FALSE,
+                reminder BOOLEAN DEFAULT FALSE
             )''')
             logger.info("Tables created successfully.")
 

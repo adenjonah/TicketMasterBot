@@ -70,11 +70,11 @@ async def store_event(event):
             for artist_id, artist_name in zip(artist_ids, artist_names):
                 await conn.execute(
                     '''
-                    INSERT INTO Artists (artistID, name, notable)
-                    VALUES ($1, $2, $3)
+                    INSERT INTO Artists (artistID, name, notable, reminder)
+                    VALUES ($1, $2, $3, $4)
                     ON CONFLICT (artistID) DO NOTHING
                     ''',
-                    artist_id, artist_name, False
+                    artist_id, artist_name, False, False
                 )
                 logger.debug(f"Ensured artist exists: {artist_name} (ID: {artist_id})")
 
