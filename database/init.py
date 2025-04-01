@@ -77,22 +77,37 @@ async def initialize_db():
             ''')
             logger.info("Database schema updated successfully.")
 
-            # Add reminder column if it doesn't exist
-            logger.info("Adding reminder column if it doesn't exist...")
+            # Drop and recreate reminder column if it exists with the wrong type
+            logger.info("Ensuring reminder column has the correct type...")
             await conn.execute('''
             DO $$
             BEGIN
-                IF NOT EXISTS (
+                -- Check if reminder column exists and is boolean type
+                IF EXISTS (
+                    SELECT 1 
+                    FROM information_schema.columns 
+                    WHERE table_name = 'events' 
+                    AND column_name = 'reminder'
+                    AND data_type = 'boolean'
+                ) THEN
+                    -- Drop the existing boolean column
+                    ALTER TABLE Events DROP COLUMN reminder;
+                    -- Add it back with the correct type
+                    ALTER TABLE Events ADD COLUMN reminder TIMESTAMPTZ DEFAULT NULL;
+                    RAISE NOTICE 'Dropped and recreated reminder column with TIMESTAMPTZ type';
+                ELSIF NOT EXISTS (
                     SELECT 1
                     FROM information_schema.columns
                     WHERE table_name = 'events'
                     AND column_name = 'reminder'
                 ) THEN
+                    -- Add the column if it doesn't exist
                     ALTER TABLE Events ADD COLUMN reminder TIMESTAMPTZ DEFAULT NULL;
+                    RAISE NOTICE 'Added reminder column with TIMESTAMPTZ type';
                 END IF;
             END $$;
             ''')
-            logger.info("Reminder column added or already exists.")
+            logger.info("Reminder column type corrected.")
 
         except Exception as e:
             logger.error(f"Error during database initialization: {e}", exc_info=True)

@@ -68,7 +68,7 @@ async def on_raw_reaction_add(payload):
             from datetime import timedelta
             reminder_time = event['ticketonsalestart'] - timedelta(hours=12)
             
-            # Set the reminder
+            # Set the reminder - explicitly cast to TIMESTAMPTZ to avoid type issues
             await conn.execute(
                 "UPDATE Events SET reminder = $1::TIMESTAMPTZ WHERE eventID = $2",
                 reminder_time, event['eventid']
