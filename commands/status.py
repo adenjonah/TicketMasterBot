@@ -1,8 +1,10 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 from datetime import datetime
 from config import db_pool
 import zoneinfo
+from commands.utils import respond_to_context, ContextLike
 
 class Status(commands.Cog):
     def __init__(self, bot):
@@ -12,6 +14,17 @@ class Status(commands.Cog):
 
     @commands.command(name="status", help="Displays the status of all servers.")
     async def status_command(self, ctx):
+        await self.show_server_status(ctx)
+
+    @app_commands.command(name="status", description="Displays the status of all servers")
+    async def status_slash(self, interaction: discord.Interaction):
+        await self.show_server_status(interaction)
+
+    async def show_server_status(self, ctx_or_interaction: ContextLike):
+        # Show "thinking" indicator for slash commands since database query might take time
+        if isinstance(ctx_or_interaction, discord.Interaction) and not ctx_or_interaction.response.is_done():
+            await ctx_or_interaction.response.defer(thinking=True)
+            
         query = """
             SELECT ServerID, status, last_request, events_returned, new_events, error_messages
             FROM Server
@@ -20,7 +33,7 @@ class Status(commands.Cog):
             rows = await conn.fetch(query)
 
         if not rows:
-            await ctx.send("No server status information found.")
+            await respond_to_context(ctx_or_interaction, content="No server status information found.")
             return
 
         total_running = sum(1 for row in rows if row["status"] == "Running")
@@ -69,7 +82,7 @@ class Status(commands.Cog):
             color=color
         )
 
-        await ctx.send(embed=embed)
+        await respond_to_context(ctx_or_interaction, embed=embed)
 
 async def setup(bot):
     await bot.add_cog(Status(bot))

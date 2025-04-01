@@ -9,19 +9,33 @@ from config.logging import logger
 import asyncio
 import os
 
+# Update to include message_content intent (explicitly required for 2023+ API)
 intents = discord.Intents.default()
 intents.typing = False
 intents.presences = False
 intents.messages = True
-intents.message_content = True
+intents.message_content = True  # Required for accessing message content
+intents.reactions = True  # Required for reaction handlers
 
+# Use the commands.Bot with discord.app_commands support
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+# Sync slash commands on ready
 @bot.event
 async def on_ready():
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
     await initialize_db_pool(DATABASE_URL)
     logger.info("Database pool initialized.")
+    
+    # Sync slash commands
+    logger.info("Syncing slash commands...")
+    try:
+        synced = await bot.tree.sync()
+        logger.info(f"Synced {len(synced)} command(s)")
+    except Exception as e:
+        logger.error(f"Failed to sync commands: {e}", exc_info=True)
+    
+    # Start tasks
     notify_events_task.start()
     check_reminders_task.start()
 
@@ -33,7 +47,7 @@ async def on_raw_reaction_add(payload):
     
     if emoji == "🔔":
         await handle_bell_reaction(bot, payload)
-    elif emoji == "🗑️":
+    elif emoji == "❌":
         await handle_trash_reaction(bot, payload)
 
 @bot.event

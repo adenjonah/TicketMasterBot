@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 from config.config import DISCORD_CHANNEL_ID
 from datetime import datetime
 from config import db_pool
@@ -14,10 +15,25 @@ class NextEvents(commands.Cog):
         self.eastern = zoneinfo.ZoneInfo("America/New_York")
         self.utc = zoneinfo.ZoneInfo("UTC")
 
+    # Keep the traditional command for backward compatibility
     @commands.command(name="next", help="Shows a list of the next notable events with ticket sales starting soon.")
     async def next_events_command(self, ctx, number: int = 5):
+        await self.show_next_events(ctx, number)
+
+    # Add slash command support
+    @app_commands.command(name="next", description="Shows a list of the next notable events with ticket sales starting soon")
+    @app_commands.describe(number="Number of events to show (max 50)")
+    async def next_events_slash(self, interaction: discord.Interaction, number: int = 5):
+        # Create a context-like object for compatibility with the existing code
+        ctx = await self.bot.get_context(interaction.message) if interaction.message else interaction.channel
+        await self.show_next_events(ctx, number, interaction)
+
+    # Shared implementation that can work with both traditional and slash commands
+    async def show_next_events(self, ctx, number: int = 5, interaction: discord.Interaction = None):
         number = min(number, 50)
-        notable_only = ctx.channel.id == DISCORD_CHANNEL_ID
+        # Check if this is in the notable channel
+        channel_id = interaction.channel_id if interaction else ctx.channel.id
+        notable_only = channel_id == DISCORD_CHANNEL_ID
 
         query = '''
             SELECT DISTINCT e.eventID, e.name, e.ticketOnsaleStart, e.eventDate, e.url, 
@@ -38,7 +54,11 @@ class NextEvents(commands.Cog):
                 message = ("No upcoming notable events with ticket sales starting soon."
                           if notable_only 
                           else "No upcoming events with ticket sales starting soon.")
-                await ctx.send(message)
+                
+                if interaction:
+                    await interaction.response.send_message(message)
+                else:
+                    await ctx.send(message)
                 return
 
             message_lines = []
@@ -82,7 +102,7 @@ class NextEvents(commands.Cog):
                             
                             presale_info = f" (Earliest presale: {earliest_presale['name']} - {presale_time})"
                     except Exception as e:
-                        logger.error(f"Error processing presale data for event {event['eventid']}: {e}", exc_info=True)
+                        logger.error(f"Error processing presale data for event {event['eventID']}: {e}", exc_info=True)
                 
                 event_line = f"{idx}. [{title}]({event['url']}) sale starts {time_str}{presale_info}\n"
                 message_lines.append(event_line)
@@ -92,7 +112,13 @@ class NextEvents(commands.Cog):
                 description="".join(message_lines),
                 color=discord.Color.blue()
             )
-            await ctx.send(embed=embed)
+            
+            if interaction and not interaction.response.is_done():
+                await interaction.response.send_message(embed=embed)
+            else:
+                await ctx.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(NextEvents(bot))
+    # Register the slash commands with the bot
+    bot.tree.add_command(app_commands.CommandGroup(name="events", description="Event-related commands"))
