@@ -143,6 +143,13 @@ async def update_status(region, last_request=None, events_returned=None, new_eve
         else:
             status = "Running"
 
+        # Use current time if last_request is not provided
+        timestamp = last_request if last_request else datetime.now(timezone.utc)
+        
+        # Calculate hour of day and day of week for time pattern analysis
+        hour_of_day = timestamp.hour
+        day_of_week = timestamp.weekday()  # Monday is 0, Sunday is 6
+
         async with db_pool.acquire() as conn:
             try:
                 if error_messages is not None and all(arg is None for arg in [last_request, events_returned, new_events]):
@@ -171,8 +178,22 @@ async def update_status(region, last_request=None, events_returned=None, new_eve
                             new_events = EXCLUDED.new_events,
                             error_messages = EXCLUDED.error_messages
                         ''',
-                        region, status, last_request, events_returned, new_events, error_messages
+                        region, status, timestamp, events_returned, new_events, error_messages
                     )
                     logger.info(f"Server status updated: {region} (Status: {status})")
+                
+                # Always add a time series entry regardless of the update type
+                await conn.execute(
+                    '''
+                    INSERT INTO ServerTimeSeries 
+                    (ServerID, timestamp, status, events_returned, new_events, hour_of_day, day_of_week, error_messages)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                    ''',
+                    region, timestamp, status, 
+                    events_returned or 0, new_events or 0, 
+                    hour_of_day, day_of_week, error_messages
+                )
+                logger.info(f"Time series data recorded for region {region} at hour {hour_of_day}")
+                
             except Exception as e:
                 logger.error(f"Error updating server status for region '{region}': {e}", exc_info=True)

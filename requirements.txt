@@ -10,7 +10,9 @@ discord==2.3.2
 discord.py==2.4.0
 frozenlist==1.4.1
 idna==3.10
+matplotlib==3.8.3
 multidict==6.1.0
+numpy==1.26.4
 propcache==0.2.0
 psycopg2-binary==2.9.10
 python-dateutil==2.9.0.post0

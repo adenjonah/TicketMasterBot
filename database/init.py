@@ -54,6 +54,36 @@ async def initialize_db():
                 new_events INTEGER DEFAULT 0,
                 error_messages TEXT
             )''')
+            
+            # Create a time series table for server status metrics
+            await conn.execute('''
+            CREATE TABLE IF NOT EXISTS ServerTimeSeries (
+                id SERIAL PRIMARY KEY,
+                ServerID TEXT NOT NULL,
+                timestamp TIMESTAMPTZ NOT NULL,
+                status TEXT,
+                events_returned INTEGER DEFAULT 0,
+                new_events INTEGER DEFAULT 0,
+                hour_of_day INTEGER,
+                day_of_week INTEGER,
+                error_messages TEXT,
+                CONSTRAINT fk_server
+                    FOREIGN KEY(ServerID)
+                    REFERENCES Server(ServerID)
+            )''')
+            
+            # Create index on ServerID and timestamp for efficient time-based queries
+            await conn.execute('''
+            CREATE INDEX IF NOT EXISTS idx_server_timeseries_serverid_timestamp
+            ON ServerTimeSeries (ServerID, timestamp);
+            ''')
+            
+            # Create index on hour_of_day for time pattern analysis
+            await conn.execute('''
+            CREATE INDEX IF NOT EXISTS idx_server_timeseries_hour
+            ON ServerTimeSeries (hour_of_day);
+            ''')
+            
             logger.info("Tables created successfully.")
             
             logger.info("Initializing Server table with default ServerIDs...")
