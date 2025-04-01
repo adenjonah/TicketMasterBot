@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 import asyncpg
 from dateutil import parser
 from config.logging import logger
+import json
 
 now = datetime.now(timezone.utc)
 
@@ -22,6 +23,29 @@ async def store_event(event):
                 (img['url'] for img in event.get('images', []) if img.get('width', 0) >= 1024),
                 None
             )
+            
+            # Process presale information if available
+            presale_data = None
+            if 'sales' in event and 'presales' in event['sales']:
+                presales = []
+                for presale in event['sales']['presales']:
+                    try:
+                        presale_name = presale.get('name', 'Unnamed Presale')
+                        presale_start = parser.parse(presale.get('startDateTime')).astimezone(timezone.utc).isoformat()
+                        presale_end = parser.parse(presale.get('endDateTime')).astimezone(timezone.utc).isoformat()
+                        
+                        presales.append({
+                            'name': presale_name,
+                            'startDateTime': presale_start,
+                            'endDateTime': presale_end,
+                            'url': url
+                        })
+                    except Exception as presale_error:
+                        logger.error(f"Error processing presale for event {event_id}: {presale_error}", exc_info=True)
+                
+                if presales:
+                    presale_data = json.dumps(presales)
+                    logger.debug(f"Processed {len(presales)} presales for event: {event_name} (ID: {event_id})")
 
             # Venue data
             venue_data = event['_embedded'].get('venues', [{}])[0]
@@ -78,36 +102,15 @@ async def store_event(event):
                 )
                 logger.debug(f"Ensured artist exists: {artist_name} (ID: {artist_id})")
 
-            # Insert new event into the database
+            # Insert new event into the database with presale data
             await conn.execute(
                 '''
-                INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated, reminder)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated, reminder, presaleData)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
                 ''',
                 event_id, event_name, artist_ids[0] if artist_ids else None, venue_id, event_date, onsale_start, url, image_url,
-                False, last_updated, None
+                False, last_updated, None, presale_data
             )
-            
-            # Process and store presale information if available
-            if 'sales' in event and 'presales' in event['sales']:
-                for presale in event['sales']['presales']:
-                    try:
-                        presale_name = presale.get('name', 'Unnamed Presale')
-                        presale_start = parser.parse(presale.get('startDateTime')).astimezone(timezone.utc).replace(tzinfo=None)
-                        presale_end = parser.parse(presale.get('endDateTime')).astimezone(timezone.utc).replace(tzinfo=None)
-                        presale_url = event.get('url', '')  # Use event URL as presale URL
-
-                        # Insert presale into the database
-                        await conn.execute(
-                            '''
-                            INSERT INTO EventPresales (eventID, presaleName, startDateTime, endDateTime, url)
-                            VALUES ($1, $2, $3, $4, $5)
-                            ''',
-                            event_id, presale_name, presale_start, presale_end, presale_url
-                        )
-                        logger.debug(f"Added presale '{presale_name}' for event: {event_name} (ID: {event_id})")
-                    except Exception as presale_error:
-                        logger.error(f"Error storing presale for event {event_id}: {presale_error}", exc_info=True)
 
             logger.info(f"New event added: {event_name} (ID: {event_id})")
             return True

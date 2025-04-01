@@ -2,6 +2,9 @@ import discord
 from config.logging import logger
 from helpers.formatting import format_date_human_readable
 import pytz
+import json
+from dateutil import parser
+from datetime import datetime
 
 async def notify_events(bot, channel_id, notable_only=False):
     from config.db_pool import db_pool  # Import shared db_pool here
@@ -22,6 +25,7 @@ async def notify_events(bot, channel_id, notable_only=False):
             Events.ticketOnsaleStart, 
             Events.eventDate, 
             Events.url, 
+            Events.presaleData,
             Venues.city, 
             Venues.state, 
             Events.image_url, 
@@ -96,32 +100,26 @@ async def notify_events(bot, channel_id, notable_only=False):
                 if event['image_url']:
                     embed.set_image(url=event['image_url'])
 
-                # Get presale information for this event
-                presales = await conn.fetch(
-                    '''
-                    SELECT presaleName, startDateTime, endDateTime
-                    FROM EventPresales
-                    WHERE eventID = $1
-                    ORDER BY startDateTime ASC
-                    ''',
-                    event['eventid']
-                )
-
-                # Add presale information to the embed if available
-                if presales:
-                    presale_info = []
-                    for presale in presales:
-                        presale_start_utc = presale['startdatetime']
-                        presale_start_est = presale_start_utc.astimezone(est_tz)
-                        presale_start = presale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
-                        
-                        presale_end_utc = presale['enddatetime']
-                        presale_end_est = presale_end_utc.astimezone(est_tz)
-                        presale_end = presale_end_est.strftime("%B %d, %Y at %I:%M %p EST")
-                        
-                        presale_info.append(f"**{presale['presalename']}**\nStart: {presale_start}\nEnd: {presale_end}")
-                    
-                    embed.add_field(name="📅 Presales", value="\n\n".join(presale_info), inline=False)
+                # Process presale information from the JSON data
+                if event['presaledata']:
+                    try:
+                        presales = json.loads(event['presaledata'])
+                        if presales:
+                            presale_info = []
+                            for presale in presales:
+                                presale_start_utc = parser.parse(presale['startDateTime'])
+                                presale_start_est = presale_start_utc.astimezone(est_tz)
+                                presale_start = presale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
+                                
+                                presale_end_utc = parser.parse(presale['endDateTime'])
+                                presale_end_est = presale_end_utc.astimezone(est_tz)
+                                presale_end = presale_end_est.strftime("%B %d, %Y at %I:%M %p EST")
+                                
+                                presale_info.append(f"**{presale['name']}**\nStart: {presale_start}\nEnd: {presale_end}")
+                            
+                            embed.add_field(name="📅 Presales", value="\n\n".join(presale_info), inline=False)
+                    except Exception as e:
+                        logger.error(f"Error processing presale data for event {event['eventid']}: {e}", exc_info=True)
 
                 # Send notification to Discord channel
                 logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")

@@ -4,6 +4,9 @@ from config.config import DISCORD_CHANNEL_ID
 from datetime import datetime
 from config import db_pool
 import zoneinfo
+import json
+from dateutil import parser
+from config.logging import logger
 
 class NextEvents(commands.Cog):
     def __init__(self, bot):
@@ -18,7 +21,7 @@ class NextEvents(commands.Cog):
 
         query = '''
             SELECT DISTINCT e.eventID, e.name, e.ticketOnsaleStart, e.eventDate, e.url, 
-                            v.city, v.state, a.name AS artist_name
+                            e.presaleData, v.city, v.state, a.name AS artist_name
             FROM Events e
             LEFT JOIN Venues v ON e.venueID = v.venueID
             LEFT JOIN Artists a ON e.artistID = a.artistID
@@ -57,17 +60,6 @@ class NextEvents(commands.Cog):
                 onsale_start_est = event['ticketonsalestart'].astimezone(self.eastern)
                 onsale_start_str = onsale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
                 
-                # Get presale information for this event
-                presales = await conn.fetch(
-                    '''
-                    SELECT presaleName, startDateTime, endDateTime
-                    FROM EventPresales
-                    WHERE eventID = $1
-                    ORDER BY startDateTime ASC
-                    ''',
-                    event_id
-                )
-                
                 # Create embed
                 embed = discord.Embed(
                     title=title,
@@ -80,19 +72,26 @@ class NextEvents(commands.Cog):
                 embed.add_field(name="📅 Event Date", value=event_date_str, inline=True)
                 embed.add_field(name="🎫 Public Sale", value=onsale_start_str, inline=True)
                 
-                # Add presale information if available
-                if presales:
-                    presale_info = []
-                    for presale in presales:
-                        presale_start_est = presale['startdatetime'].astimezone(self.eastern)
-                        presale_start_str = presale_start_est.strftime("%b %d, %I:%M %p")
-                        
-                        presale_end_est = presale['enddatetime'].astimezone(self.eastern)
-                        presale_end_str = presale_end_est.strftime("%b %d, %I:%M %p")
-                        
-                        presale_info.append(f"**{presale['presalename']}**: {presale_start_str} - {presale_end_str}")
-                    
-                    embed.add_field(name="🔑 Presales", value="\n".join(presale_info), inline=False)
+                # Process presale information if available
+                if event['presaledata']:
+                    try:
+                        presales = json.loads(event['presaledata'])
+                        if presales:
+                            presale_info = []
+                            for presale in presales:
+                                presale_start_utc = parser.parse(presale['startDateTime'])
+                                presale_start_est = presale_start_utc.astimezone(self.eastern)
+                                presale_start_str = presale_start_est.strftime("%b %d, %I:%M %p")
+                                
+                                presale_end_utc = parser.parse(presale['endDateTime'])
+                                presale_end_est = presale_end_utc.astimezone(self.eastern)
+                                presale_end_str = presale_end_est.strftime("%b %d, %I:%M %p")
+                                
+                                presale_info.append(f"**{presale['name']}**: {presale_start_str} - {presale_end_str}")
+                            
+                            embed.add_field(name="🔑 Presales", value="\n".join(presale_info), inline=False)
+                    except Exception as e:
+                        logger.error(f"Error processing presale data for event {event_id}: {e}", exc_info=True)
                 
                 await ctx.send(embed=embed)
 

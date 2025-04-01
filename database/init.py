@@ -29,7 +29,8 @@ async def initialize_db():
                 image_url TEXT,
                 sentToDiscord BOOLEAN DEFAULT FALSE,
                 lastUpdated TIMESTAMPTZ,
-                reminder TIMESTAMPTZ DEFAULT NULL
+                reminder TIMESTAMPTZ DEFAULT NULL,
+                presaleData JSONB DEFAULT NULL
             )''')
             await conn.execute('''
             CREATE TABLE IF NOT EXISTS Venues (
@@ -43,15 +44,6 @@ async def initialize_db():
                 artistID TEXT PRIMARY KEY,
                 name TEXT,
                 notable BOOLEAN DEFAULT FALSE
-            )''')
-            await conn.execute('''
-            CREATE TABLE IF NOT EXISTS EventPresales (
-                presaleID SERIAL PRIMARY KEY,
-                eventID TEXT REFERENCES Events(eventID) ON DELETE CASCADE,
-                presaleName TEXT,
-                startDateTime TIMESTAMPTZ,
-                endDateTime TIMESTAMPTZ,
-                url TEXT
             )''')
             await conn.execute('''
             CREATE TABLE IF NOT EXISTS Server (
@@ -117,6 +109,27 @@ async def initialize_db():
             END $$;
             ''')
             logger.info("Reminder column type corrected.")
+
+            # Drop EventPresales table if it exists
+            await conn.execute('''
+            DROP TABLE IF EXISTS EventPresales CASCADE;
+            ''')
+            
+            # Add presaleData column to Events table if it doesn't exist
+            await conn.execute('''
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'presaledata'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN presaleData JSONB DEFAULT NULL;
+                    RAISE NOTICE 'Added presaleData column to Events table';
+                END IF;
+            END $$;
+            ''')
 
         except Exception as e:
             logger.error(f"Error during database initialization: {e}", exc_info=True)
