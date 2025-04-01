@@ -62,4 +62,10 @@ def register_commands(bot) -> None:
         # You could add guild-specific commands here if needed
         # Example: bot.tree.add_command(some_command, guild=discord.Object(id=GUILD_ID))
     except Exception as e:
-        print(f"Failed to register commands: {e}") 
+        print(f"Failed to register commands: {e}")
+
+# Required setup function for discord.py extension loading system
+# This is an empty setup function since this module doesn't define any commands or cogs
+async def setup(bot):
+    # This is a utility module, not a command cog, so we don't need to add anything to the bot
+    pass 
