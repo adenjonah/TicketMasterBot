@@ -224,8 +224,8 @@ async def handle_bell_reaction_remove(bot, payload):
     except Exception as e:
         logger.error(f"Error processing reaction removal: {e}", exc_info=True)
 
-async def handle_trash_reaction(bot, payload):
-    """Handle trash emoji reactions to delete bot messages"""
+async def handle_x_reaction(bot, payload):
+    """Handle x emoji reactions to delete bot messages"""
     # Get the channel and message
     channel = bot.get_channel(payload.channel_id)
     if not channel:
@@ -242,7 +242,7 @@ async def handle_trash_reaction(bot, payload):
         if payload.user_id != bot.user.id:
             # Delete the message
             await message.delete()
-            logger.info(f"Deleted message {message.id} in response to trash emoji reaction")
+            logger.info(f"Deleted message {message.id} in response to x emoji reaction")
             
     except Exception as e:
         logger.error(f"Error processing reaction removal: {e}", exc_info=True) 

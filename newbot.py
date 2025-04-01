@@ -3,7 +3,7 @@ from discord.ext import tasks, commands
 from config.db_pool import initialize_db_pool, close_db_pool
 from tasks.notify_events import notify_events
 from tasks.check_reminders import check_reminders
-from handlers.reaction_handlers import handle_bell_reaction, handle_bell_reaction_remove, handle_trash_reaction
+from handlers.reaction_handlers import handle_bell_reaction, handle_bell_reaction_remove, handle_x_reaction
 from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, DATABASE_URL
 from config.logging import logger
 import asyncio
@@ -38,8 +38,8 @@ async def on_raw_reaction_add(payload):
     
     if emoji == "🔔":
         await handle_bell_reaction(bot, payload)
-    elif emoji == "🗑️":
-        await handle_trash_reaction(bot, payload)
+    elif emoji == "❌":
+        await handle_x_reaction(bot, payload)
 
 @bot.event
 async def on_raw_reaction_remove(payload):
