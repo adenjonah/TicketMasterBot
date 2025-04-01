@@ -54,6 +54,18 @@ async def initialize_db():
             ALTER COLUMN ticketOnsaleStart TYPE TIMESTAMPTZ USING ticketOnsaleStart AT TIME ZONE 'UTC',
             ALTER COLUMN lastUpdated TYPE TIMESTAMPTZ USING lastUpdated AT TIME ZONE 'UTC';
             ''')
+            
+            # Check if reminder column exists in Artists table, add it if not
+            logger.info("Checking if reminder column exists in Artists table...")
+            try:
+                await conn.execute('''
+                ALTER TABLE Artists
+                ADD COLUMN IF NOT EXISTS reminder BOOLEAN DEFAULT FALSE;
+                ''')
+                logger.info("Reminder column added to Artists table or already exists.")
+            except Exception as e:
+                logger.error(f"Error adding reminder column to Artists table: {e}", exc_info=True)
+                
             logger.info("Database schema updated successfully.")
 
         except Exception as e:

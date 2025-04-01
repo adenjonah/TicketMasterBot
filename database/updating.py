@@ -16,11 +16,11 @@ async def mark_artist_notable(artist_id, artist_name):
                 # Insert new artist if not exists
                 await conn.execute(
                     '''
-                    INSERT INTO Artists (artistID, name, notable)
-                    VALUES ($1, $2, $3)
+                    INSERT INTO Artists (artistID, name, notable, reminder)
+                    VALUES ($1, $2, $3, $4)
                     ON CONFLICT (artistID) DO NOTHING
                     ''',
-                    artist_id, artist_name, True
+                    artist_id, artist_name, True, False
                 )
             else:
                 # Update existing artist to mark as notable
@@ -51,11 +51,11 @@ async def mark_artist_notnotable(artist_id, artist_name):
                 # Insert new artist if not exists
                 await conn.execute(
                     '''
-                    INSERT INTO Artists (artistID, name, notable)
-                    VALUES ($1, $2, $3)
+                    INSERT INTO Artists (artistID, name, notable, reminder)
+                    VALUES ($1, $2, $3, $4)
                     ON CONFLICT (artistID) DO NOTHING
                     ''',
-                    artist_id, artist_name, False
+                    artist_id, artist_name, False, False
                 )
             else:
                 # Update existing artist to mark as notable
@@ -110,12 +110,13 @@ async def set_artist_reminder(artist_id, artist_name):
             return True
     
     except Exception as e:
-        # Log the error (you might want to add proper logging)
-        print(f"Error setting artist reminder: {e}")
+        # Use logger instead of print for consistent logging
+        logger.error(f"Error setting artist reminder: {e}", exc_info=True)
         return False
     
 async def clear_artist_reminder(artist_id, artist_name):
     from config.db_pool import db_pool
+    from config.logging import logger
     
     try:
         async with db_pool.acquire() as conn:
@@ -130,6 +131,7 @@ async def clear_artist_reminder(artist_id, artist_name):
                     ''',
                     artist_id, artist_name, False, False
                 )
+                logger.info(f"Created new artist {artist_name} (ID: {artist_id}) with reminder not set")
             else:
                 # Update existing artist to clear reminder flag
                 await conn.execute(
@@ -140,11 +142,12 @@ async def clear_artist_reminder(artist_id, artist_name):
                     """,
                     artist_id
                 )
+                logger.info(f"Cleared reminder for existing artist {artist_name} (ID: {artist_id})")
             
             # Return True to indicate successful operation
             return True
     
     except Exception as e:
-        # Log the error (you might want to add proper logging)
-        print(f"Error clearing artist reminder: {e}")
+        # Use logger instead of print for consistent logging
+        logger.error(f"Error clearing artist reminder: {e}", exc_info=True)
         return False
