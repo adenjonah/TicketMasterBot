@@ -81,11 +81,11 @@ async def store_event(event):
             # Insert new event into the database
             await conn.execute(
                 '''
-                INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+                INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated, reminder)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
                 ''',
                 event_id, event_name, artist_ids[0] if artist_ids else None, venue_id, event_date, onsale_start, url, image_url,
-                False, last_updated
+                False, last_updated, None
             )
 
             logger.info(f"New event added: {event_name} (ID: {event_id})")

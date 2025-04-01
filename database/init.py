@@ -28,7 +28,8 @@ async def initialize_db():
                 url TEXT,
                 image_url TEXT,
                 sentToDiscord BOOLEAN DEFAULT FALSE,
-                lastUpdated TIMESTAMPTZ
+                lastUpdated TIMESTAMPTZ,
+                reminder TIMESTAMPTZ DEFAULT NULL
             )''')
             await conn.execute('''
             CREATE TABLE IF NOT EXISTS Venues (
@@ -75,6 +76,23 @@ async def initialize_db():
             ALTER COLUMN lastUpdated TYPE TIMESTAMPTZ USING lastUpdated AT TIME ZONE 'UTC';
             ''')
             logger.info("Database schema updated successfully.")
+
+            # Add reminder column if it doesn't exist
+            logger.info("Adding reminder column if it doesn't exist...")
+            await conn.execute('''
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'reminder'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN reminder TIMESTAMPTZ DEFAULT NULL;
+                END IF;
+            END $$;
+            ''')
+            logger.info("Reminder column added or already exists.")
 
         except Exception as e:
             logger.error(f"Error during database initialization: {e}", exc_info=True)
