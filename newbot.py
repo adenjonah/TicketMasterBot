@@ -64,11 +64,23 @@ async def on_raw_reaction_add(payload):
                 logger.warning(f"No event found with URL: {event_url}")
                 return
                 
-            # Calculate reminder time (12 hours before ticket sale)
+            # Calculate reminder time based on the type of message
             from datetime import timedelta
             import pytz
             
-            reminder_time = event['ticketonsalestart'] - timedelta(hours=12)
+            # Check if this is a reaction to a reminder message (title starts with 🔔 REMINDER:)
+            is_reminder_message = embed.title and embed.title.startswith("🔔 REMINDER:")
+            
+            if is_reminder_message:
+                # For reactions to reminder messages, set a reminder for 1 hour before sale
+                reminder_time = event['ticketonsalestart'] - timedelta(hours=1)
+                reminder_text = "1 hour"
+                logger.info(f"Setting 1-hour reminder for event {event['eventid']}")
+            else:
+                # For reactions to normal event notifications, set the standard 12-hour reminder
+                reminder_time = event['ticketonsalestart'] - timedelta(hours=12)
+                reminder_text = "12 hours"
+                logger.info(f"Setting 12-hour reminder for event {event['eventid']}")
             
             # Set the reminder - explicitly cast to TIMESTAMPTZ to avoid type issues
             await conn.execute(
@@ -89,9 +101,9 @@ async def on_raw_reaction_add(payload):
             if "**Reminder set**" not in description:
                 # Add the reminder note to the description
                 if description.endswith('\n\n'):
-                    new_description = f"{description}**Reminder set for: {reminder_time_str}**"
+                    new_description = f"{description}**Reminder set for {reminder_text} before sale: {reminder_time_str}**"
                 else:
-                    new_description = f"{description}\n\n**Reminder set for: {reminder_time_str}**"
+                    new_description = f"{description}\n\n**Reminder set for {reminder_text} before sale: {reminder_time_str}**"
                 
                 # Create a new embed with the updated description
                 new_embed = discord.Embed(
@@ -189,15 +201,26 @@ async def check_reminders_task():
                 # Check if reminder is past-due
                 is_past_due = event['reminder'] < now
                 
-                # Adjust message for past-due reminders
+                # Calculate hours until ticket sale
+                hours_until_sale = (event['ticketonsalestart'] - now).total_seconds() / 3600
+                
+                # Adjust message for reminders
                 reminder_text = "**Tickets go on sale in ~12 hours!**"
-                if is_past_due:
-                    # Calculate how many hours until ticket sale
-                    hours_until_sale = (event['ticketonsalestart'] - now).total_seconds() / 3600
-                    if hours_until_sale < 0:
-                        reminder_text = "**Tickets are now on sale!**"
-                    else:
-                        reminder_text = f"**Tickets go on sale in ~{int(hours_until_sale)} hours!**"
+                can_set_another_reminder = True
+                
+                if hours_until_sale < 0:
+                    reminder_text = "**Tickets are now on sale!**"
+                    can_set_another_reminder = False
+                elif hours_until_sale < 1:
+                    reminder_text = f"**Tickets go on sale in less than 1 hour!**"
+                    can_set_another_reminder = False
+                else:
+                    reminder_text = f"**Tickets go on sale in ~{int(hours_until_sale)} hours!**"
+                
+                # Define the footer message
+                footer_text = "\n\nReact with 🔔 to this message to receive another reminder 1 hour before sale."
+                if not can_set_another_reminder:
+                    footer_text = "\n\nTickets are now on sale or will be very soon. Good luck!"
                 
                 # Create reminder embed
                 embed = discord.Embed(
@@ -206,8 +229,7 @@ async def check_reminders_task():
                     description=(
                         f"{reminder_text}\n"
                         f"**Location**: {event['city']}, {event['state']}\n"
-                        f"**Sale Start**: {onsale_start}\n\n"
-                        f"React with 🔔 to this message to receive another reminder."
+                        f"**Sale Start**: {onsale_start}{footer_text}"
                     ),
                     color=discord.Color.gold()
                 )
