@@ -41,59 +41,58 @@ class NextEvents(commands.Cog):
                 await ctx.send(message)
                 return
 
-            # Fetch each event's information and create a Discord embed
-            for event in rows:
-                event_id = event['eventid']
+            message_lines = []
+            for idx, event in enumerate(rows, start=1):
                 event_name = event['name']
                 artist_name = event['artist_name']
                 
                 # Format title based on whether artist name is available
                 title = f"{event_name}" if artist_name is None else f"{artist_name} - {event_name}"
                 
-                # Get location details
-                location = f"{event['city']}, {event['state']}"
+                # Format sale start time
+                eastern_time = event['ticketonsalestart'].astimezone(self.eastern)
                 
-                # Format dates in human-readable format for eastern time
-                event_date_est = event['eventdate'].astimezone(self.eastern)
-                event_date_str = event_date_est.strftime("%B %d, %Y at %I:%M %p EST")
+                # Manually format time to remove leading zero from hour and exclude seconds
+                hour = int(eastern_time.strftime("%I"))  # convert to int to remove leading zero
+                minute = eastern_time.strftime("%M")
+                ampm = eastern_time.strftime("%p")
+                date_str = eastern_time.strftime("%Y-%m-%d")
+                time_str = f"{date_str} {hour}:{minute} {ampm} EST"
                 
-                onsale_start_est = event['ticketonsalestart'].astimezone(self.eastern)
-                onsale_start_str = onsale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
-                
-                # Create embed
-                embed = discord.Embed(
-                    title=title,
-                    url=event['url'],
-                    color=discord.Color.blue()
-                )
-                
-                # Add event details
-                embed.add_field(name="📍 Location", value=location, inline=True)
-                embed.add_field(name="📅 Event Date", value=event_date_str, inline=True)
-                embed.add_field(name="🎫 Public Sale", value=onsale_start_str, inline=True)
-                
-                # Process presale information if available
+                # Add presale info if available
+                presale_info = ""
                 if event['presaledata']:
                     try:
                         presales = json.loads(event['presaledata'])
                         if presales:
-                            presale_info = []
-                            for presale in presales:
-                                presale_start_utc = parser.parse(presale['startDateTime'])
-                                presale_start_est = presale_start_utc.astimezone(self.eastern)
-                                presale_start_str = presale_start_est.strftime("%b %d, %I:%M %p")
-                                
-                                presale_end_utc = parser.parse(presale['endDateTime'])
-                                presale_end_est = presale_end_utc.astimezone(self.eastern)
-                                presale_end_str = presale_end_est.strftime("%b %d, %I:%M %p")
-                                
-                                presale_info.append(f"**{presale['name']}**: {presale_start_str} - {presale_end_str}")
+                            # Sort presales by start datetime to find the earliest presale
+                            presales.sort(key=lambda x: parser.parse(x['startDateTime']))
+                            # Only use the earliest presale
+                            earliest_presale = presales[0]
                             
-                            embed.add_field(name="🔑 Presales", value="\n".join(presale_info), inline=False)
+                            presale_start_utc = parser.parse(earliest_presale['startDateTime'])
+                            presale_start_est = presale_start_utc.astimezone(self.eastern)
+                            
+                            # Format presale time the same way
+                            p_hour = int(presale_start_est.strftime("%I"))
+                            p_minute = presale_start_est.strftime("%M")
+                            p_ampm = presale_start_est.strftime("%p")
+                            p_date_str = presale_start_est.strftime("%Y-%m-%d")
+                            presale_time = f"{p_date_str} {p_hour}:{p_minute} {p_ampm} EST"
+                            
+                            presale_info = f" (Earliest presale: {earliest_presale['name']} - {presale_time})"
                     except Exception as e:
-                        logger.error(f"Error processing presale data for event {event_id}: {e}", exc_info=True)
+                        logger.error(f"Error processing presale data for event {event['eventid']}: {e}", exc_info=True)
                 
-                await ctx.send(embed=embed)
+                event_line = f"{idx}. [{title}]({event['url']}) sale starts {time_str}{presale_info}\n"
+                message_lines.append(event_line)
+
+            embed = discord.Embed(
+                title="Next Events",
+                description="".join(message_lines),
+                color=discord.Color.blue()
+            )
+            await ctx.send(embed=embed)
 
 async def setup(bot):
     await bot.add_cog(NextEvents(bot))

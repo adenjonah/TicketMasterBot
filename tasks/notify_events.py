@@ -105,19 +105,22 @@ async def notify_events(bot, channel_id, notable_only=False):
                     try:
                         presales = json.loads(event['presaledata'])
                         if presales:
-                            presale_info = []
-                            for presale in presales:
-                                presale_start_utc = parser.parse(presale['startDateTime'])
-                                presale_start_est = presale_start_utc.astimezone(est_tz)
-                                presale_start = presale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
-                                
-                                presale_end_utc = parser.parse(presale['endDateTime'])
-                                presale_end_est = presale_end_utc.astimezone(est_tz)
-                                presale_end = presale_end_est.strftime("%B %d, %Y at %I:%M %p EST")
-                                
-                                presale_info.append(f"**{presale['name']}**\nStart: {presale_start}\nEnd: {presale_end}")
+                            # Sort presales by start datetime to find the earliest presale
+                            presales.sort(key=lambda x: parser.parse(x['startDateTime']))
+                            # Only use the earliest presale
+                            earliest_presale = presales[0]
                             
-                            embed.add_field(name="📅 Presales", value="\n\n".join(presale_info), inline=False)
+                            presale_start_utc = parser.parse(earliest_presale['startDateTime'])
+                            presale_start_est = presale_start_utc.astimezone(est_tz)
+                            presale_start = presale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
+                            
+                            presale_end_utc = parser.parse(earliest_presale['endDateTime'])
+                            presale_end_est = presale_end_utc.astimezone(est_tz)
+                            presale_end = presale_end_est.strftime("%B %d, %Y at %I:%M %p EST")
+                            
+                            presale_info = f"**{earliest_presale['name']}**\nStart: {presale_start}\nEnd: {presale_end}"
+                            
+                            embed.add_field(name="📅 Earliest Presale", value=presale_info, inline=False)
                     except Exception as e:
                         logger.error(f"Error processing presale data for event {event['eventid']}: {e}", exc_info=True)
 
