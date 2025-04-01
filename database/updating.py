@@ -82,6 +82,21 @@ async def set_artist_reminder(artist_id, artist_name):
     
     try:
         async with db_pool.acquire() as conn:
+            # Check if the artist has any active events
+            active_events = await conn.fetch(
+                """
+                SELECT COUNT(*) as event_count
+                FROM Events
+                WHERE artistID = $1 AND eventDate > NOW()
+                """,
+                artist_id
+            )
+            
+            has_active_events = active_events and active_events[0]['event_count'] > 0
+            
+            if not has_active_events:
+                logger.warning(f"Artist {artist_name} (ID: {artist_id}) has no active events, but setting reminder anyway")
+            
             # Check if artist exists
             if not await artist_exists(conn, artist_id):
                 # Insert new artist if not exists
