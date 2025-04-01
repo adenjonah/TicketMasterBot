@@ -2,6 +2,8 @@ import discord
 from config.logging import logger
 from datetime import timedelta
 import pytz
+import json
+from dateutil import parser
 
 async def handle_bell_reaction(bot, payload):
     """Handle bell emoji reactions to set reminders for events"""
@@ -31,7 +33,7 @@ async def handle_bell_reaction(bot, payload):
         async with db_pool.acquire() as conn:
             # Get the event based on URL
             event = await conn.fetchrow(
-                "SELECT eventID, ticketOnsaleStart FROM Events WHERE url = $1",
+                "SELECT eventID, ticketOnsaleStart, presaleData FROM Events WHERE url = $1",
                 event_url
             )
             
@@ -43,16 +45,43 @@ async def handle_bell_reaction(bot, payload):
             # Check if this is a reaction to a reminder message (title starts with 🔔 REMINDER:)
             is_reminder_message = embed.title and embed.title.startswith("🔔 REMINDER:")
             
+            reminder_time = None
+            reminder_text = ""
+            
             if is_reminder_message:
                 # For reactions to reminder messages, set a reminder for 1 hour before sale
                 reminder_time = event['ticketonsalestart'] - timedelta(hours=1)
-                reminder_text = "1 hour"
+                reminder_text = "1 hour before general sale"
                 logger.info(f"Setting 1-hour reminder for event {event['eventid']}")
             else:
-                # For reactions to normal event notifications, set the standard 12-hour reminder
-                reminder_time = event['ticketonsalestart'] - timedelta(hours=12)
-                reminder_text = "12 hours"
-                logger.info(f"Setting 12-hour reminder for event {event['eventid']}")
+                # Check if there's presale data
+                if event['presaledata'] and event['presaledata'] != '[]':
+                    try:
+                        presales = json.loads(event['presaledata'])
+                        if presales:
+                            # Sort presales by start datetime to find the earliest presale
+                            presales.sort(key=lambda x: parser.parse(x['startDateTime']))
+                            # Get the earliest presale
+                            earliest_presale = presales[0]
+                            
+                            presale_start_utc = parser.parse(earliest_presale['startDateTime'])
+                            
+                            # Set reminder for 12 hours before the earliest presale
+                            reminder_time = presale_start_utc - timedelta(hours=12)
+                            reminder_text = f"12 hours before {earliest_presale['name']} presale"
+                            logger.info(f"Setting 12-hour reminder before presale for event {event['eventid']}")
+                    except Exception as e:
+                        logger.error(f"Error processing presale data: {e}", exc_info=True)
+                        # Fall back to general sale if presale processing fails
+                        reminder_time = event['ticketonsalestart'] - timedelta(hours=12)
+                        reminder_text = "12 hours before general sale"
+                        logger.info(f"Setting 12-hour reminder before general sale for event {event['eventid']} (fallback)")
+                
+                # If no presale data, use general sale
+                if not reminder_time:
+                    reminder_time = event['ticketonsalestart'] - timedelta(hours=12)
+                    reminder_text = "12 hours before general sale"
+                    logger.info(f"Setting 12-hour reminder before general sale for event {event['eventid']}")
             
             # Set the reminder - explicitly cast to TIMESTAMPTZ to avoid type issues
             await conn.execute(
@@ -73,9 +102,9 @@ async def handle_bell_reaction(bot, payload):
             if "**Reminder set**" not in description:
                 # Add the reminder note to the description
                 if description.endswith('\n\n'):
-                    new_description = f"{description}**Reminder set for {reminder_text} before sale: {reminder_time_str}**"
+                    new_description = f"{description}**Reminder set for {reminder_text}: {reminder_time_str}**"
                 else:
-                    new_description = f"{description}\n\n**Reminder set for {reminder_text} before sale: {reminder_time_str}**"
+                    new_description = f"{description}\n\n**Reminder set for {reminder_text}: {reminder_time_str}**"
                 
                 # Create a new embed with the updated description
                 new_embed = discord.Embed(
