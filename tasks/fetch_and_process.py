@@ -1,7 +1,7 @@
 import asyncio
 from datetime import datetime, timezone
 import aiohttp
-from database.inserting import store_event, update_status
+from database.inserting import store_event, update_status, record_notable_events_data
 from database.queries import event_exists
 from api.event_req import fetch_events_from_api, fetch_event_details
 from config.logging import logger
@@ -104,6 +104,14 @@ async def process_event(event):
                         logger.info(f"Event {event_id} associated with notable artist. Triggering notifications.")
                         # Call notify_events with notable_only set to True
                         await notify_events(event_to_store["bot"], DISCORD_CHANNEL_ID, notable_only=True)
+                        
+                        # Record the notable event data in the time series
+                        await record_notable_events_data(
+                            region=REGION,
+                            timestamp=datetime.now(timezone.utc),
+                            total_events=1,  # This is just one event
+                            new_events=1     # Since we're in the new event path
+                        )
 
                     return True  # New event added
 

@@ -219,4 +219,183 @@ async def get_hourly_heatmap_data(conn, days_ago=30):
         return [dict(row) for row in results]
     except Exception as e:
         logger.error(f"Error retrieving heatmap data: {e}", exc_info=True)
-        return [] 
+        return []
+
+async def get_notable_events_by_hour(conn, region_id=None, days_ago=30):
+    """
+    Retrieve hourly activity for notable artist events.
+    
+    Args:
+        conn: Database connection
+        region_id: Specific region to analyze or None for all regions
+        days_ago: Number of days to look back
+        
+    Returns:
+        List of dictionaries with hourly notable event activity data
+    """
+    start_date = datetime.now(timezone.utc) - timedelta(days=days_ago)
+    
+    query = """
+    SELECT 
+        region, 
+        hour_of_day,
+        AVG(total_events) as avg_events,
+        AVG(new_events) as avg_new_events,
+        COUNT(*) as sample_count
+    FROM 
+        NotableEventsTimeSeries
+    WHERE 
+        timestamp > $1
+    """
+    
+    params = [start_date]
+    
+    # Add region filter if specified
+    if region_id:
+        query += " AND region = $2"
+        params.append(region_id)
+        
+    query += """
+    GROUP BY 
+        region, hour_of_day
+    ORDER BY 
+        region, hour_of_day
+    """
+    
+    try:
+        results = await conn.fetch(query, *params)
+        return [dict(row) for row in results]
+    except Exception as e:
+        logger.error(f"Error retrieving notable events hourly data: {e}", exc_info=True)
+        return []
+
+async def get_notable_events_by_day(conn, region_id=None, days_ago=30):
+    """
+    Retrieve daily activity for notable artist events.
+    
+    Args:
+        conn: Database connection
+        region_id: Specific region to analyze or None for all regions
+        days_ago: Number of days to look back
+        
+    Returns:
+        List of dictionaries with daily notable event activity data
+    """
+    start_date = datetime.now(timezone.utc) - timedelta(days=days_ago)
+    
+    query = """
+    SELECT 
+        region, 
+        day_of_week,
+        AVG(total_events) as avg_events,
+        AVG(new_events) as avg_new_events,
+        COUNT(*) as sample_count
+    FROM 
+        NotableEventsTimeSeries
+    WHERE 
+        timestamp > $1
+    """
+    
+    params = [start_date]
+    
+    # Add region filter if specified
+    if region_id:
+        query += " AND region = $2"
+        params.append(region_id)
+        
+    query += """
+    GROUP BY 
+        region, day_of_week
+    ORDER BY 
+        region, day_of_week
+    """
+    
+    try:
+        results = await conn.fetch(query, *params)
+        return [dict(row) for row in results]
+    except Exception as e:
+        logger.error(f"Error retrieving notable events daily data: {e}", exc_info=True)
+        return []
+
+async def compare_notable_vs_all_events(conn, region_id=None, days_ago=30):
+    """
+    Compare the proportion of notable events vs. all events.
+    
+    Args:
+        conn: Database connection
+        region_id: Specific region to analyze or None for all regions
+        days_ago: Number of days to look back
+        
+    Returns:
+        Dictionary with comparison data between notable and all events
+    """
+    start_date = datetime.now(timezone.utc) - timedelta(days=days_ago)
+    
+    # Query for all events
+    all_events_query = """
+    SELECT 
+        ServerID as region,
+        SUM(new_events) as total_new_events,
+        COUNT(*) as data_points
+    FROM 
+        ServerTimeSeries
+    WHERE 
+        timestamp > $1
+    """
+    
+    # Query for notable events
+    notable_events_query = """
+    SELECT 
+        region,
+        SUM(new_events) as total_new_events,
+        COUNT(*) as data_points
+    FROM 
+        NotableEventsTimeSeries
+    WHERE 
+        timestamp > $1
+    """
+    
+    params = [start_date]
+    
+    # Add region filter if specified
+    if region_id:
+        all_events_query += " AND ServerID = $2"
+        notable_events_query += " AND region = $2"
+        params.append(region_id)
+    
+    # Group by region
+    all_events_query += " GROUP BY ServerID"
+    notable_events_query += " GROUP BY region"
+    
+    try:
+        # Get data for all events
+        all_events_results = await conn.fetch(all_events_query, *params)
+        all_events_data = {row['region']: dict(row) for row in all_events_results}
+        
+        # Get data for notable events
+        notable_events_results = await conn.fetch(notable_events_query, *params)
+        notable_events_data = {row['region']: dict(row) for row in notable_events_results}
+        
+        # Calculate comparisons
+        comparisons = {}
+        for region in set(list(all_events_data.keys()) + list(notable_events_data.keys())):
+            all_events = all_events_data.get(region, {'total_new_events': 0, 'data_points': 0})
+            notable_events = notable_events_data.get(region, {'total_new_events': 0, 'data_points': 0})
+            
+            # Calculate percentages
+            total_new_all = all_events['total_new_events']
+            total_new_notable = notable_events['total_new_events']
+            
+            # Avoid division by zero
+            percentage = (total_new_notable / total_new_all * 100) if total_new_all > 0 else 0
+            
+            comparisons[region] = {
+                'total_events': total_new_all,
+                'notable_events': total_new_notable,
+                'percentage_notable': percentage
+            }
+        
+        return comparisons
+    except Exception as e:
+        logger.error(f"Error comparing notable vs all events: {e}", exc_info=True)
+        return {} 

@@ -197,3 +197,39 @@ async def update_status(region, last_request=None, events_returned=None, new_eve
                 
             except Exception as e:
                 logger.error(f"Error updating server status for region '{region}': {e}", exc_info=True)
+
+async def record_notable_events_data(region, timestamp=None, total_events=0, new_events=0):
+    """
+    Record time series data for notable artist events.
+    
+    Parameters:
+        region (str): The region identifier.
+        timestamp (datetime, optional): The timestamp of the data point.
+        total_events (int): Total number of notable events.
+        new_events (int): Number of new notable events.
+    """
+    from config.db_pool import db_pool  # Import dynamically to ensure it's initialized
+    
+    # Use current time if timestamp is not provided
+    if timestamp is None:
+        timestamp = datetime.now(timezone.utc)
+    
+    # Calculate hour of day and day of week for time pattern analysis
+    hour_of_day = timestamp.hour
+    day_of_week = timestamp.weekday()  # Monday is 0, Sunday is 6
+    
+    async with db_pool.acquire() as conn:
+        try:
+            # Insert data into the NotableEventsTimeSeries table
+            await conn.execute(
+                '''
+                INSERT INTO NotableEventsTimeSeries
+                (timestamp, hour_of_day, day_of_week, total_events, new_events, region)
+                VALUES ($1, $2, $3, $4, $5, $6)
+                ''',
+                timestamp, hour_of_day, day_of_week, total_events, new_events, region
+            )
+            logger.info(f"Notable events time series data recorded for region {region}: {new_events} new events")
+            
+        except Exception as e:
+            logger.error(f"Error recording notable events time series for region '{region}': {e}", exc_info=True)

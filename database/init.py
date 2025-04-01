@@ -84,6 +84,29 @@ async def initialize_db():
             ON ServerTimeSeries (hour_of_day);
             ''')
             
+            # Create a time series table for notable artist events
+            await conn.execute('''
+            CREATE TABLE IF NOT EXISTS NotableEventsTimeSeries (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMPTZ NOT NULL,
+                hour_of_day INTEGER,
+                day_of_week INTEGER,
+                total_events INTEGER DEFAULT 0,
+                new_events INTEGER DEFAULT 0,
+                region TEXT
+            )''')
+            
+            # Create indexes for the notable events time series table
+            await conn.execute('''
+            CREATE INDEX IF NOT EXISTS idx_notable_timeseries_timestamp
+            ON NotableEventsTimeSeries (timestamp);
+            ''')
+            
+            await conn.execute('''
+            CREATE INDEX IF NOT EXISTS idx_notable_timeseries_hour
+            ON NotableEventsTimeSeries (hour_of_day);
+            ''')
+            
             logger.info("Tables created successfully.")
             
             logger.info("Initializing Server table with default ServerIDs...")
