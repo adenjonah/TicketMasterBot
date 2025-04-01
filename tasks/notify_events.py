@@ -88,7 +88,8 @@ async def notify_events(bot, channel_id, notable_only=False):
                     description=(
                         f"**Location**: {event['city']}, {event['state']}\n"
                         f"**Event Date**: {event_date}\n"
-                        f"**Sale Start**: {onsale_start}"
+                        f"**Sale Start**: {onsale_start}\n\n"
+                        f"React with 🔔 to set a reminder for this event!"
                     ),
                     color=discord.Color.blue()
                 )

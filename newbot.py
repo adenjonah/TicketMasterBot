@@ -66,6 +66,8 @@ async def on_raw_reaction_add(payload):
                 
             # Calculate reminder time (12 hours before ticket sale)
             from datetime import timedelta
+            import pytz
+            
             reminder_time = event['ticketonsalestart'] - timedelta(hours=12)
             
             # Set the reminder - explicitly cast to TIMESTAMPTZ to avoid type issues
@@ -73,6 +75,38 @@ async def on_raw_reaction_add(payload):
                 "UPDATE Events SET reminder = $1::TIMESTAMPTZ WHERE eventID = $2",
                 reminder_time, event['eventid']
             )
+            
+            # Format the reminder time for display
+            est_tz = pytz.timezone('America/New_York')
+            reminder_time_est = reminder_time.astimezone(est_tz)
+            reminder_time_str = reminder_time_est.strftime("%B %d, %Y at %I:%M %p EST")
+            
+            # Edit the original embed to include reminder info
+            original_embed = message.embeds[0]
+            description = original_embed.description
+            
+            # Check if the description already has a reminder note
+            if "**Reminder set**" not in description:
+                # Add the reminder note to the description
+                if description.endswith('\n\n'):
+                    new_description = f"{description}**Reminder set for: {reminder_time_str}**"
+                else:
+                    new_description = f"{description}\n\n**Reminder set for: {reminder_time_str}**"
+                
+                # Create a new embed with the updated description
+                new_embed = discord.Embed(
+                    title=original_embed.title,
+                    url=original_embed.url,
+                    description=new_description,
+                    color=original_embed.color
+                )
+                
+                # Copy the image if it exists
+                if original_embed.image:
+                    new_embed.set_image(url=original_embed.image.url)
+                
+                # Update the message with the new embed
+                await message.edit(embed=new_embed)
             
             logger.info(f"Reminder set for event {event['eventid']} at {reminder_time}")
             
