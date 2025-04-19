@@ -6,6 +6,21 @@ import json
 from dateutil import parser
 from datetime import datetime
 
+def _fix_url(url):
+    """Ensures a URL has the correct http/https scheme."""
+    if not url:
+        return "https://example.com"  # Fallback URL if none is provided
+        
+    # Check and fix various incorrect URL formats
+    if url.startswith('ttps://'):
+        url = 'https://' + url[7:]
+    elif url.startswith('hhttps://'):
+        url = 'https://' + url[8:]
+    elif not (url.startswith('http://') or url.startswith('https://')):
+        url = 'https://' + url
+        
+    return url
+
 async def notify_events(bot, channel_id, notable_only=False):
     from config.db_pool import db_pool  # Import shared db_pool here
     """
@@ -88,7 +103,7 @@ async def notify_events(bot, channel_id, notable_only=False):
                 # Create Discord embed
                 embed = discord.Embed(
                     title = f"{event['name']}" if event['artist_name'] is None else f"{event['artist_name']} - {event['name']}",
-                    url=event['url'],
+                    url=_fix_url(event['url']),
                     description=(
                         f"**Location**: {event['city']}, {event['state']}\n"
                         f"**Event Date**: {event_date}\n"
@@ -98,7 +113,7 @@ async def notify_events(bot, channel_id, notable_only=False):
                     color=discord.Color.blue()
                 )
                 if event['image_url']:
-                    embed.set_image(url=event['image_url'])
+                    embed.set_image(url=_fix_url(event['image_url']))
 
                 # Process presale information from the JSON data
                 if event['presaledata']:
