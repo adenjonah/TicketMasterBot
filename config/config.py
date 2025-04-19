@@ -25,27 +25,25 @@ REDIRECT_URI='http://localhost'
 UNIT='miles'
 
 REGION=os.getenv('REGION')
+# Default API parameters
+CLASSIFICATION_ID='KZFzniwnSyZfZ7v7nJ'
+GENRE_ID=''
 
 if REGION == 'east':
     CENTER_POINT='43.58785,-64.72599'
     RADIUS='950'
-    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7nJ'
 elif REGION == 'north': 
     CENTER_POINT='62.41709,-108.42529'
     RADIUS='1717'
-    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7nJ'
 elif REGION == 'south':
     CENTER_POINT='29.74590,-92.86707'
     RADIUS='1094' 
-    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7nJ'
 elif REGION == 'west': 
     CENTER_POINT='15.42661,-133.61964'
     RADIUS='2171'
-    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7nJ'
 elif REGION == 'europe': 
     CENTER_POINT='47.37116,8.50755'
     RADIUS='1200'
-    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7nJ'
 elif REGION == 'comedy':
     CENTER_POINT='44.69209,-99.95477'
     RADIUS='3016'
