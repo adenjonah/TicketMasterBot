@@ -38,6 +38,9 @@ elif REGION == 'south':
 elif REGION == 'west': 
     CENTER_POINT='15.42661,-133.61964'
     RADIUS='2171'
+elif REGION == 'europe': 
+    CENTER_POINT='47.371156862753615, 8.507552491087807'
+    RADIUS='1200'
     
 if REGION != 'comedy':
     CLASSIFICATION_ID='KZFzniwnSyZfZ7v7nJ'
