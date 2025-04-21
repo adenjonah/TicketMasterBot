@@ -71,8 +71,9 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
         logger.info("Filtering for non-European events")
     
     # Add filters to the query
+    filter_clause = ' AND '.join(filters)
     if filters:
-        query = f"{base_query} AND {' AND '.join(filters)}"
+        query = f"{base_query} AND {filter_clause}"
     else:
         query = base_query
 
@@ -83,9 +84,15 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
         try:
             logger.debug("Acquired database connection.")
             
-            # First, count how many matching events exist in the database
-            count_query = query.replace("SELECT \n            Events.eventID", "SELECT COUNT(*)")
-            count_query = count_query.split("ORDER BY")[0] if "ORDER BY" in count_query else count_query
+            # Count matching events with a simple COUNT(*) query
+            count_query = f"""
+            SELECT COUNT(*) 
+            FROM Events
+            LEFT JOIN Venues ON Events.venueID = Venues.venueID
+            LEFT JOIN Artists ON Events.artistID = Artists.artistID
+            WHERE Events.sentToDiscord = FALSE
+            AND {filter_clause}
+            """
             
             # Execute and log the count query
             logger.info(f"Count SQL Query: {count_query}")
