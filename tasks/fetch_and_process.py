@@ -56,7 +56,7 @@ async def fetch_events():
 
                 for event in events:
                     total_events_processed += 1
-                    if await process_event(event):
+                    if await process_event(event, server_id):
                         new_events_count += 1
 
                 if events_count < 199:
@@ -79,7 +79,7 @@ async def fetch_events():
             error_messages=str(e)
         )
 
-async def process_event(event):
+async def process_event(event, server_id):
     """
     Check if an event exists and store it if not. For new events, fetch detailed information 
     including presale data before storing.

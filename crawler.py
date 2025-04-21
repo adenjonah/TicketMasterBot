@@ -3,6 +3,7 @@ from tasks.fetch_and_process import fetch_events
 from config.db_pool import initialize_db_pool, close_db_pool
 from config.config import DATABASE_URL
 from database.init import initialize_db
+from database.cleanup import cleanup_server_table
 from config.logging import logger
 
 async def main():
@@ -15,6 +16,10 @@ async def main():
         logger.info("Initializing database...")
         await initialize_db()
         logger.info("Database initialized.")
+        
+        logger.info("Cleaning up server table...")
+        await cleanup_server_table()
+        logger.info("Server table cleanup completed.")
 
         while True:
             logger.info("Fetching events...")
