@@ -7,7 +7,6 @@ from handlers.reaction_handlers import handle_bell_reaction, handle_bell_reactio
 from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, DATABASE_URL
 from config.logging import logger
 from database.init import initialize_db
-from database.cleanup import cleanup_server_table
 import asyncio
 import os
 
@@ -25,15 +24,22 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
+    
+    # Initialize database pool first
     await initialize_db_pool(DATABASE_URL)
     logger.info("Database pool initialized.")
     
-    # Initialize database and clean up server table
+    # Then initialize database and clean up server table
     await initialize_db()
     logger.info("Database initialized.")
     
-    await cleanup_server_table()
-    logger.info("Server table cleaned up.")
+    try:
+        # Use direct function call instead of importing from database.cleanup
+        from database.cleanup import cleanup_server_table
+        await cleanup_server_table()
+        logger.info("Server table cleaned up.")
+    except Exception as e:
+        logger.error(f"Error cleaning up server table: {e}", exc_info=True)
     
     # Start tasks
     notify_events_task.start()
