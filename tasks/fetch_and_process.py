@@ -107,8 +107,9 @@ async def process_event(event, server_id):
                     event_to_store = event
                 
                 try:
-                    await store_event(event_to_store)
-                    logger.debug(f"Successfully stored event: {event_id}")
+                    # Pass the server_id as the region parameter
+                    await store_event(event_to_store, region=server_id)
+                    logger.debug(f"Successfully stored event: {event_id} with region: {server_id}")
 
                     # Check if the artist is notable after storing
                     notable_artist_query = '''

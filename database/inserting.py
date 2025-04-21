@@ -6,8 +6,14 @@ import json
 
 now = datetime.now(timezone.utc)
 
-async def store_event(event):
-    """Stores a new event in the database if not already present."""
+async def store_event(event, region=None):
+    """
+    Stores a new event in the database if not already present.
+    
+    Parameters:
+        event (dict): The event data to store
+        region (str, optional): The region from which this event was scraped
+    """
     from config.db_pool import db_pool  # Import dynamically to ensure it's initialized
 
     async with db_pool.acquire() as conn:
@@ -102,17 +108,41 @@ async def store_event(event):
                 )
                 logger.debug(f"Ensured artist exists: {artist_name} (ID: {artist_id})")
 
-            # Insert new event into the database with presale data
-            await conn.execute(
+            # Check if the table has the region column
+            has_region_column = await conn.fetchval(
                 '''
-                INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated, reminder, presaleData)
-                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-                ''',
-                event_id, event_name, artist_ids[0] if artist_ids else None, venue_id, event_date, onsale_start, url, image_url,
-                False, last_updated, None, presale_data
+                SELECT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'region'
+                );
+                '''
             )
-
-            logger.info(f"New event added: {event_name} (ID: {event_id})")
+            
+            if has_region_column:
+                # Insert new event into the database with region data
+                await conn.execute(
+                    '''
+                    INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated, reminder, presaleData, region)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+                    ''',
+                    event_id, event_name, artist_ids[0] if artist_ids else None, venue_id, event_date, onsale_start, url, image_url,
+                    False, last_updated, None, presale_data, region
+                )
+                logger.info(f"New event added with region {region}: {event_name} (ID: {event_id})")
+            else:
+                # Fallback to the old query without region
+                await conn.execute(
+                    '''
+                    INSERT INTO Events (eventID, name, artistID, venueID, eventDate, ticketOnsaleStart, url, image_url, sentToDiscord, lastUpdated, reminder, presaleData)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+                    ''',
+                    event_id, event_name, artist_ids[0] if artist_ids else None, venue_id, event_date, onsale_start, url, image_url,
+                    False, last_updated, None, presale_data
+                )
+                logger.info(f"New event added (no region column available): {event_name} (ID: {event_id})")
+            
             return True
 
         except asyncpg.exceptions.UniqueViolationError:
@@ -122,7 +152,6 @@ async def store_event(event):
         except Exception as e:
             logger.error(f"Error storing event: {e}", exc_info=True)
             return False
-        
 
 async def update_status(region, last_request=None, events_returned=None, new_events=None, error_messages=None):
         """
