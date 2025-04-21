@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from config.db_pool import initialize_db_pool, db_pool, close_db_pool
+from config.db_pool import initialize_db_pool, close_db_pool
 from config.config import DATABASE_URL
 from config.logging import logger
 
@@ -24,6 +24,13 @@ async def add_region_column_to_events():
     logger.info("Starting events table schema update...")
     
     try:
+        # Import db_pool here to ensure it's initialized
+        from config.db_pool import db_pool
+        
+        if not db_pool:
+            logger.error("Database pool is None after initialization")
+            return False
+            
         async with db_pool.acquire() as conn:
             # Get the actual events table name
             events_table = await get_table_name(conn, 'events')
