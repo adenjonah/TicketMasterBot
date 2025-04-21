@@ -16,6 +16,21 @@ from config.config import (
     REGION
 )
 
+# Map full region names to their two-character IDs
+REGION_TO_ID = {
+    'north': 'no',
+    'east': 'ea',
+    'south': 'so',
+    'west': 'we',
+    'europe': 'eu',
+    'comedy': 'co',
+    'theater': 'th'
+}
+
+# Get server ID from region
+def get_server_id(region):
+    return REGION_TO_ID.get(region.lower(), region.lower()[:2])
+
 async def fetch_events():
     """Fetch events asynchronously from Ticketmaster API and process them."""
     logger.info("Starting to fetch events from Ticketmaster API...")
@@ -27,6 +42,9 @@ async def fetch_events():
     total_events_received = 0
     total_events_processed = 0
     new_events_count = 0
+    
+    server_id = get_server_id(REGION)
+    logger.info(f"Using server ID {server_id} for region {REGION}")
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -52,12 +70,12 @@ async def fetch_events():
                     f"Total events processed: {total_events_processed}, "
                     f"New events added: {new_events_count}")
         
-        await update_status(REGION, datetime.now(timezone.utc), total_events_received, new_events_count, None)
+        await update_status(server_id, datetime.now(timezone.utc), total_events_received, new_events_count, None)
 
     except Exception as e:
         logger.error(f"Unexpected error in fetch_events: {e}", exc_info=True)
         await update_status(
-            REGION,
+            server_id,
             error_messages=str(e)
         )
 
@@ -107,7 +125,7 @@ async def process_event(event):
                         
                         # Record the notable event data in the time series
                         await record_notable_events_data(
-                            region=REGION,
+                            region=server_id,
                             timestamp=datetime.now(timezone.utc),
                             total_events=1,  # This is just one event
                             new_events=1     # Since we're in the new event path

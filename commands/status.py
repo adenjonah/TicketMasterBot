@@ -9,6 +9,16 @@ class Status(commands.Cog):
         self.bot = bot
         self.eastern = zoneinfo.ZoneInfo("America/New_York")
         self.utc = zoneinfo.ZoneInfo("UTC")
+        # Map shortened server IDs to full names
+        self.server_names = {
+            'no': 'North',
+            'ea': 'East',
+            'so': 'South',
+            'we': 'West',
+            'eu': 'Europe',
+            'co': 'Comedy',
+            'th': 'Theater'
+        }
 
     @commands.command(name="status", help="Displays the status of all servers.")
     async def status_command(self, ctx):
@@ -33,11 +43,12 @@ class Status(commands.Cog):
         now_local = datetime.now(self.utc).astimezone(self.eastern)
         current_time = now_local.strftime("%H:%M")
 
-        header = "  Status  Last  Events New"
+        header = "  Server   Status  Last  Events New"
         lines = []
 
         for row in rows:
-            s_char = row["serverid"].capitalize()[0] if row["serverid"] else "?"
+            server_id = row["serverid"]
+            server_name = self.server_names.get(server_id, server_id.capitalize())
             stat_emoji = "  👍  " if row["status"] == "Running" else "  👎  "
 
             if row["last_request"]:
@@ -49,7 +60,7 @@ class Status(commands.Cog):
             ev = "  " + str(row["events_returned"]) + "  "
             n = "  " + str(row["new_events"])
 
-            lines.append(f"{s_char} {stat_emoji} {last_str} {ev} {n}")
+            lines.append(f"{server_name[:6]}   {stat_emoji} {last_str} {ev} {n}")
             emsg = row["error_messages"]
             if emsg and emsg.lower() != "none":
                 lines.append(f"  E: {emsg}")

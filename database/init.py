@@ -112,11 +112,13 @@ async def initialize_db():
             logger.info("Initializing Server table with default ServerIDs...")
             await conn.execute('''
             INSERT INTO Server (ServerID) VALUES
-            ('north'),
-            ('east'),
-            ('south'),
-            ('west'),
-            ('comedy')
+            ('no'),
+            ('ea'),
+            ('so'),
+            ('we'),
+            ('eu'),
+            ('co'),
+            ('th')
             ON CONFLICT (ServerID) DO NOTHING
             ''')
             logger.info("Server table initialized with default ServerIDs.")
