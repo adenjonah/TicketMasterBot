@@ -6,6 +6,21 @@ now = datetime.now(timezone.utc)
 # Configure logging
 logger = logging.getLogger(__name__)
 
+async def get_table_name(conn, table_base_name):
+    """Find the actual table name with case sensitivity in mind."""
+    tables = await conn.fetch("""
+    SELECT table_name 
+    FROM information_schema.tables 
+    WHERE table_schema = 'public' 
+      AND table_name ILIKE $1
+    """, table_base_name)
+    
+    if not tables:
+        return None
+        
+    # Return the first matching table name
+    return tables[0]['table_name']
+
 async def initialize_db():
     """Create tables if they do not exist and ensure schema compatibility."""
     logger.info("Initializing the database...")
@@ -44,15 +59,6 @@ async def initialize_db():
                 artistID TEXT PRIMARY KEY,
                 name TEXT,
                 notable BOOLEAN DEFAULT FALSE
-            )''')
-            await conn.execute('''
-            CREATE TABLE IF NOT EXISTS Server (
-                ServerID TEXT PRIMARY KEY,
-                status TEXT,
-                last_request TIMESTAMPTZ,
-                events_returned INTEGER DEFAULT 0,
-                new_events INTEGER DEFAULT 0,
-                error_messages TEXT
             )''')
             
             # Create a time series table for server status metrics
@@ -109,9 +115,32 @@ async def initialize_db():
             
             logger.info("Tables created successfully.")
             
+            # Check if Server table exists with case-insensitive search
+            server_table = await get_table_name(conn, 'server')
+            
+            if not server_table:
+                # Create Server table if it doesn't exist
+                logger.info("Creating Server table...")
+                await conn.execute('''
+                CREATE TABLE Server (
+                    ServerID TEXT PRIMARY KEY,
+                    status TEXT,
+                    last_request TIMESTAMPTZ,
+                    events_returned INTEGER DEFAULT 0,
+                    new_events INTEGER DEFAULT 0,
+                    error_messages TEXT
+                )''')
+                logger.info("Server table created.")
+                
+                # Set the server_table variable to the newly created table
+                server_table = "Server"
+                
+            logger.info(f"Using Server table: {server_table}")
+            
+            # Initializing Server table with short IDs
             logger.info("Initializing Server table with default ServerIDs...")
-            await conn.execute('''
-            INSERT INTO Server (ServerID) VALUES
+            await conn.execute(f'''
+            INSERT INTO {server_table} (ServerID) VALUES
             ('no'),
             ('ea'),
             ('so'),
@@ -122,6 +151,104 @@ async def initialize_db():
             ON CONFLICT (ServerID) DO NOTHING
             ''')
             logger.info("Server table initialized with default ServerIDs.")
+            
+            # Check for and convert any legacy server IDs
+            logger.info("Checking for legacy server IDs...")
+            legacy_ids = {
+                'north': 'no',
+                'east': 'ea',
+                'south': 'so',
+                'west': 'we',
+                'europe': 'eu',
+                'comedy': 'co',
+                'theater': 'th'
+            }
+            
+            for legacy_id, short_id in legacy_ids.items():
+                # Check if legacy ID exists
+                legacy_exists = await conn.fetchval(
+                    f"SELECT 1 FROM {server_table} WHERE LOWER(ServerID) = $1", 
+                    legacy_id.lower()
+                )
+                
+                if legacy_exists:
+                    logger.info(f"Found legacy server ID: {legacy_id} - migrating to {short_id}")
+                    
+                    # Get legacy data
+                    legacy_row = await conn.fetchrow(
+                        f"SELECT * FROM {server_table} WHERE LOWER(ServerID) = $1",
+                        legacy_id.lower()
+                    )
+                    
+                    # Check if short ID exists
+                    short_exists = await conn.fetchval(
+                        f"SELECT 1 FROM {server_table} WHERE LOWER(ServerID) = $1", 
+                        short_id.lower()
+                    )
+                    
+                    if short_exists:
+                        # Update short ID with legacy data if legacy has newer data
+                        if legacy_row['last_request']:
+                            short_row = await conn.fetchrow(
+                                f"SELECT * FROM {server_table} WHERE LOWER(ServerID) = $1",
+                                short_id.lower()
+                            )
+                            
+                            if not short_row['last_request'] or legacy_row['last_request'] > short_row['last_request']:
+                                await conn.execute(f"""
+                                UPDATE {server_table}
+                                SET status = $1, last_request = $2, events_returned = $3, new_events = $4, error_messages = $5
+                                WHERE LOWER(ServerID) = $6
+                                """,
+                                legacy_row['status'],
+                                legacy_row['last_request'],
+                                legacy_row['events_returned'],
+                                legacy_row['new_events'],
+                                legacy_row['error_messages'],
+                                short_id.lower())
+                                
+                                logger.info(f"Updated {short_id} with data from {legacy_id}")
+                    else:
+                        # Insert new short ID with legacy data
+                        await conn.execute(f"""
+                        INSERT INTO {server_table} (ServerID, status, last_request, events_returned, new_events, error_messages)
+                        VALUES ($1, $2, $3, $4, $5, $6)
+                        """,
+                        short_id,
+                        legacy_row['status'],
+                        legacy_row['last_request'],
+                        legacy_row['events_returned'],
+                        legacy_row['new_events'],
+                        legacy_row['error_messages'])
+                        
+                        logger.info(f"Created new entry {short_id} with data from {legacy_id}")
+                    
+                    # Delete legacy ID
+                    await conn.execute(
+                        f"DELETE FROM {server_table} WHERE LOWER(ServerID) = $1",
+                        legacy_id.lower()
+                    )
+                    
+                    logger.info(f"Removed legacy ID: {legacy_id}")
+                    
+                    # Update references in time series tables
+                    time_series_table = await get_table_name(conn, 'servertimeseries')
+                    if time_series_table:
+                        await conn.execute(f"""
+                        UPDATE {time_series_table}
+                        SET ServerID = $1
+                        WHERE LOWER(ServerID) = $2
+                        """, short_id, legacy_id.lower())
+                        
+                    notable_table = await get_table_name(conn, 'notableeventstimeseries')
+                    if notable_table:
+                        await conn.execute(f"""
+                        UPDATE {notable_table}
+                        SET region = $1
+                        WHERE LOWER(region) = $2
+                        """, short_id, legacy_id.lower())
+                        
+                    logger.info(f"Updated references for {legacy_id} -> {short_id}")
 
             # Alter existing columns to TIMESTAMPTZ if necessary
             logger.info("Altering Events table columns to TIMESTAMPTZ if necessary...")
