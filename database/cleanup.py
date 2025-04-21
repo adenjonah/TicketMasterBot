@@ -22,100 +22,89 @@ async def cleanup_server_table():
     try:
         # Get all servers currently in the database
         async with db_pool.acquire() as conn:
+            # First, drop any foreign key constraints so we can freely modify the Server table
+            await conn.execute("""
+            ALTER TABLE ServerTimeSeries DROP CONSTRAINT IF EXISTS fk_server;
+            """)
+            logger.info("Dropped foreign key constraints temporarily")
+            
+            # Get all servers
             servers = await conn.fetch("SELECT ServerID FROM Server")
             logger.info(f"Found {len(servers)} server entries in the database.")
             
-            # Step 1: Fix any full names to use short IDs
-            for server in servers:
-                server_id = server['serverid'].lower()
-                if server_id in REGION_TO_ID.keys():
-                    new_id = REGION_TO_ID[server_id]
-                    logger.info(f"Converting full name {server_id} to short ID {new_id}")
-                    
-                    # Update all references in ServerTimeSeries first
-                    await conn.execute(
-                        "UPDATE ServerTimeSeries SET ServerID = $1 WHERE ServerID = $2",
-                        new_id, server_id
-                    )
-                    
-                    # Update references in NotableEventsTimeSeries
-                    await conn.execute(
-                        "UPDATE NotableEventsTimeSeries SET region = $1 WHERE region = $2",
-                        new_id, server_id
-                    )
-                    
-                    # Delete the old entry from Server
-                    await conn.execute(
-                        "DELETE FROM Server WHERE ServerID = $1",
-                        server_id
-                    )
+            # Complete cleanup - drop and recreate the Server table with correct entries
+            logger.info("Performing complete server table cleanup...")
             
-            # Step 2: Get the current list of server IDs after fixing full names
-            servers = await conn.fetch("SELECT ServerID FROM Server")
-            seen_ids = set()
-            duplicates = []
+            # Create a temporary table to hold the cleaned data
+            await conn.execute("""
+            CREATE TEMP TABLE CleanedServer (
+                ServerID TEXT PRIMARY KEY,
+                status TEXT,
+                last_request TIMESTAMPTZ,
+                events_returned INTEGER DEFAULT 0,
+                new_events INTEGER DEFAULT 0,
+                error_messages TEXT
+            )
+            """)
             
-            # Find duplicates
-            for server in servers:
-                server_id = server['serverid'].lower()
-                if server_id in seen_ids:
-                    duplicates.append(server_id)
-                else:
-                    seen_ids.add(server_id)
-            
-            if duplicates:
-                logger.info(f"Found duplicate server IDs: {duplicates}")
-                
-                # Handle duplicates by keeping only one entry
-                for dup in duplicates:
-                    # Get all duplicate entries
-                    dup_entries = await conn.fetch(
-                        "SELECT ServerID, status, last_request FROM Server WHERE LOWER(ServerID) = $1 ORDER BY last_request DESC NULLS LAST",
-                        dup
-                    )
-                    
-                    # Keep the most recent one (first in sorted list)
-                    if len(dup_entries) > 1:
-                        keep_id = dup_entries[0]['serverid']
-                        logger.info(f"Keeping server ID: {keep_id}")
-                        
-                        # Remove the others
-                        for i in range(1, len(dup_entries)):
-                            remove_id = dup_entries[i]['serverid']
-                            logger.info(f"Removing duplicate server ID: {remove_id}")
-                            
-                            # Update all references in ServerTimeSeries first
-                            await conn.execute(
-                                "UPDATE ServerTimeSeries SET ServerID = $1 WHERE ServerID = $2",
-                                keep_id, remove_id
-                            )
-                            
-                            # Update references in NotableEventsTimeSeries if needed
-                            await conn.execute(
-                                "UPDATE NotableEventsTimeSeries SET region = $1 WHERE region = $2",
-                                keep_id, remove_id
-                            )
-                            
-                            # Delete the duplicate entry from Server
-                            await conn.execute(
-                                "DELETE FROM Server WHERE ServerID = $1",
-                                remove_id
-                            )
-            
-            # Step 3: Ensure all required server IDs exist
+            # Process and migrate data for each region
             for region, short_id in REGION_TO_ID.items():
-                # Check if the server ID exists
-                exists = await conn.fetchval(
-                    "SELECT 1 FROM Server WHERE ServerID = $1", 
-                    short_id
-                )
+                # Try to find the best entry for this region (either the short ID or the full name)
+                server_data = await conn.fetchrow("""
+                SELECT * FROM Server 
+                WHERE LOWER(ServerID) = $1 OR LOWER(ServerID) = $2
+                ORDER BY last_request DESC NULLS LAST
+                LIMIT 1
+                """, short_id.lower(), region.lower())
                 
-                if not exists:
-                    logger.info(f"Adding missing server ID: {short_id} for region {region}")
-                    await conn.execute(
-                        "INSERT INTO Server (ServerID) VALUES ($1)",
-                        short_id
-                    )
+                if server_data:
+                    # Use the data but with the correct short ID
+                    await conn.execute("""
+                    INSERT INTO CleanedServer (ServerID, status, last_request, events_returned, new_events, error_messages)
+                    VALUES ($1, $2, $3, $4, $5, $6)
+                    """, 
+                    short_id, 
+                    server_data['status'], 
+                    server_data['last_request'],
+                    server_data['events_returned'],
+                    server_data['new_events'],
+                    server_data['error_messages'])
+                    
+                    logger.info(f"Migrated data for region {region} -> {short_id}")
+                else:
+                    # Insert a new entry with default values
+                    await conn.execute("""
+                    INSERT INTO CleanedServer (ServerID) VALUES ($1)
+                    """, short_id)
+                    logger.info(f"Created new entry for missing region {short_id}")
+            
+            # Update all references in the time series tables
+            for region, short_id in REGION_TO_ID.items():
+                # Update ServerTimeSeries
+                await conn.execute("""
+                UPDATE ServerTimeSeries 
+                SET ServerID = $1
+                WHERE LOWER(ServerID) = $2 OR LOWER(ServerID) = $3
+                """, short_id, short_id.lower(), region.lower())
+                
+                # Update NotableEventsTimeSeries
+                await conn.execute("""
+                UPDATE NotableEventsTimeSeries 
+                SET region = $1
+                WHERE LOWER(region) = $2 OR LOWER(region) = $3
+                """, short_id, short_id.lower(), region.lower())
+                
+                logger.info(f"Updated all references for {region} -> {short_id}")
+            
+            # Drop the original Server table and rename the cleaned one
+            await conn.execute("DROP TABLE Server CASCADE")
+            await conn.execute("ALTER TABLE CleanedServer RENAME TO Server")
+            
+            # Recreate the foreign key constraint
+            await conn.execute("""
+            ALTER TABLE ServerTimeSeries 
+            ADD CONSTRAINT fk_server FOREIGN KEY (ServerID) REFERENCES Server(ServerID)
+            """)
             
             final_count = await conn.fetchval("SELECT COUNT(*) FROM Server")
             logger.info(f"Server table cleanup complete. Now have {final_count} unique server entries.")
