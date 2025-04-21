@@ -72,12 +72,14 @@ async def notify_events_task():
         # Send notable artist events to the main channel
         await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region=None)
         
-        # Send European events to the European channel
+        # Send European events to the European channel or fallback to secondary channel
         if EUROPEAN_CHANNEL and EUROPEAN_CHANNEL != 0:
             logger.info(f"Checking for European events to send to channel ID: {EUROPEAN_CHANNEL}")
             await notify_events(bot, EUROPEAN_CHANNEL, notable_only=False, region='eu')
         else:
-            logger.warning("European channel is not configured. Skipping European events.")
+            # If European channel is not configured, use the secondary channel as fallback
+            logger.warning("European channel is not configured. Using secondary channel as fallback.")
+            await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
         
         # Send all other non-notable events to the secondary channel
         await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='non-eu')

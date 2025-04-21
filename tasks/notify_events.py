@@ -34,6 +34,39 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
     """
     logger.info(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}, region={region}")
 
+    # If we're checking for European events, first do a diagnostic
+    if region == 'eu':
+        async with db_pool.acquire() as conn:
+            try:
+                # Check what EU regions actually exist
+                regions_query = """
+                SELECT region, COUNT(*) 
+                FROM Events 
+                WHERE sentToDiscord = FALSE 
+                GROUP BY region
+                """
+                regions = await conn.fetch(regions_query)
+                logger.info(f"Unsent events by region: {regions}")
+                
+                # Explicitly check for EU events
+                eu_count = await conn.fetchval("""
+                SELECT COUNT(*) FROM Events 
+                WHERE sentToDiscord = FALSE 
+                AND LOWER(region) = 'eu'
+                """)
+                logger.info(f"Found {eu_count} unsent European events with exact match 'eu'")
+                
+                # Exactly matches on capitalization
+                eu_case_counts = await conn.fetch("""
+                SELECT region, COUNT(*) FROM Events 
+                WHERE sentToDiscord = FALSE 
+                AND region LIKE 'e%'
+                GROUP BY region
+                """)
+                logger.info(f"Case analysis of EU regions: {eu_case_counts}")
+            except Exception as e:
+                logger.error(f"Error during EU diagnostics: {e}")
+
     base_query = '''
         SELECT 
             Events.eventID, 
