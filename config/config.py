@@ -8,6 +8,7 @@ load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 DISCORD_CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID', 0))  # Main notable events channel
 DISCORD_CHANNEL_ID_TWO = int(os.getenv('DISCORD_CHANNEL_ID_TWO', 0))  # Secondary channel for all unsent events
+EUROPEAN_CHANNEL = int(os.getenv('EUROPEAN_CHANNEL', 0))  # Channel for European events
 
 
 DEBUG_LOGS = os.getenv('DEBUG_LOGS')

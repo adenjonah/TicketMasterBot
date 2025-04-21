@@ -4,7 +4,7 @@ from config.db_pool import initialize_db_pool, close_db_pool
 from tasks.notify_events import notify_events
 from tasks.check_reminders import check_reminders
 from handlers.reaction_handlers import handle_bell_reaction, handle_bell_reaction_remove, handle_x_reaction
-from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, DATABASE_URL
+from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, EUROPEAN_CHANNEL, DATABASE_URL
 from config.logging import logger
 from database.init import initialize_db
 import asyncio
@@ -69,8 +69,15 @@ async def on_raw_reaction_remove(payload):
 async def notify_events_task():
     logger.info("Starting event notification process...")
     try:
-        await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True)
-        await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False)
+        # Send notable artist events to the main channel
+        await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region=None)
+        
+        # Send European events to the European channel
+        if EUROPEAN_CHANNEL and EUROPEAN_CHANNEL != 0:
+            await notify_events(bot, EUROPEAN_CHANNEL, notable_only=False, region='eu')
+        
+        # Send all other non-notable events to the secondary channel
+        await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='non-eu')
     except Exception as e:
         logger.error(f"Error during event notification: {e}", exc_info=True)
 
@@ -78,7 +85,7 @@ async def notify_events_task():
 async def check_reminders_task():
     """Check for upcoming reminders and send notifications"""
     try:
-        await check_reminders(bot, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO)
+        await check_reminders(bot, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, EUROPEAN_CHANNEL)
     except Exception as e:
         logger.error(f"Error checking reminders: {e}", exc_info=True)
 

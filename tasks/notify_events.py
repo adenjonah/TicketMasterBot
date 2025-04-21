@@ -21,17 +21,18 @@ def _fix_url(url):
         
     return url
 
-async def notify_events(bot, channel_id, notable_only=False):
+async def notify_events(bot, channel_id, notable_only=False, region=None):
     from config.db_pool import db_pool  # Import shared db_pool here
     """
-    Notifies Discord about unsent events. If notable_only is True, only notifies about notable artist events.
-
+    Notifies Discord about unsent events. 
+    
     Parameters:
         bot (discord.Client): The Discord bot instance.
         channel_id (int): The Discord channel ID to send notifications to.
         notable_only (bool): Whether to only notify events with notable artists.
+        region (str): Filter events by region ('eu' for European events, 'non-eu' for non-European events).
     """
-    logger.debug(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}")
+    logger.debug(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}, region={region}")
 
     base_query = '''
         SELECT 
@@ -41,6 +42,7 @@ async def notify_events(bot, channel_id, notable_only=False):
             Events.eventDate, 
             Events.url, 
             Events.presaleData,
+            Events.region,
             Venues.city, 
             Venues.state, 
             Events.image_url, 
@@ -51,12 +53,26 @@ async def notify_events(bot, channel_id, notable_only=False):
         WHERE Events.sentToDiscord = FALSE
     '''
 
+    # Build the query filters based on parameters
+    filters = []
+    
+    # Add the notable filter
     if notable_only:
-        notable_filter = "AND Artists.notable = TRUE"
+        filters.append("Artists.notable = TRUE")
     else:
-        notable_filter = "AND (Artists.notable = FALSE OR Artists.artistID IS NULL)"
-
-    query = f"{base_query} {notable_filter}"
+        filters.append("(Artists.notable = FALSE OR Artists.artistID IS NULL)")
+    
+    # Add the region filter
+    if region == 'eu':
+        filters.append("Events.region = 'eu'")
+    elif region == 'non-eu':
+        filters.append("(Events.region != 'eu' OR Events.region IS NULL)")
+    
+    # Add filters to the query
+    if filters:
+        query = f"{base_query} AND {' AND '.join(filters)}"
+    else:
+        query = base_query
 
     logger.debug(f"Database query prepared: {query}")
 
@@ -67,7 +83,8 @@ async def notify_events(bot, channel_id, notable_only=False):
             logger.debug(f"Fetched {len(events_to_notify)} events to notify.")
 
             if not events_to_notify:
-                logger.info(f"No new {"notable" if notable_only else "non-notable"} events to notify.")
+                region_str = f"({region}) " if region else ""
+                logger.info(f"No new {region_str}{"notable" if notable_only else "non-notable"} events to notify.")
                 return
 
             channel = bot.get_channel(channel_id)
@@ -99,6 +116,10 @@ async def notify_events(bot, channel_id, notable_only=False):
                 logger.debug(f"Converted onsale_start to EST: {onsale_start}")
                 logger.debug(f"Converted event_date to EST: {event_date}")
 
+                # Set appropriate color based on region
+                embed_color = discord.Color.blue()
+                if event['region'] == 'eu':
+                    embed_color = discord.Color.purple()  # European events get a different color
 
                 # Create Discord embed
                 embed = discord.Embed(
@@ -110,7 +131,7 @@ async def notify_events(bot, channel_id, notable_only=False):
                         f"**Sale Start**: {onsale_start}\n\n"
                         f"React with 🔔 to set a reminder for this event!"
                     ),
-                    color=discord.Color.blue()
+                    color=embed_color
                 )
                 if event['image_url']:
                     embed.set_image(url=_fix_url(event['image_url']))
@@ -138,6 +159,25 @@ async def notify_events(bot, channel_id, notable_only=False):
                             embed.add_field(name="📅 Earliest Presale", value=presale_info, inline=False)
                     except Exception as e:
                         logger.error(f"Error processing presale data for event {event['eventid']}: {e}", exc_info=True)
+
+                # Add region footer text
+                region_text = "Region: Unknown"
+                if event['region'] == 'eu':
+                    region_text = "Region: Europe"
+                elif event['region'] == 'no':
+                    region_text = "Region: North"
+                elif event['region'] == 'ea':
+                    region_text = "Region: East"
+                elif event['region'] == 'so':
+                    region_text = "Region: South"
+                elif event['region'] == 'we':
+                    region_text = "Region: West"
+                elif event['region'] == 'co':
+                    region_text = "Region: Comedy"
+                elif event['region'] == 'th':
+                    region_text = "Region: Theater"
+                
+                embed.set_footer(text=region_text)
 
                 # Send notification to Discord channel
                 logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")

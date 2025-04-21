@@ -3,7 +3,7 @@ from config.logging import logger
 from datetime import datetime, timezone, timedelta
 import pytz
 
-async def check_reminders(bot, channel_id_notable, channel_id_regular):
+async def check_reminders(bot, channel_id_notable, channel_id_regular, channel_id_european=None):
     """Check for upcoming reminders and send notifications"""
     logger.info("Checking for upcoming reminders...")
     try:
@@ -23,6 +23,7 @@ async def check_reminders(bot, channel_id_notable, channel_id_regular):
                     Events.ticketOnsaleStart, 
                     Events.reminder,
                     Events.url,
+                    Events.region,
                     Venues.city, 
                     Venues.state,
                     Artists.name AS artist_name
@@ -41,22 +42,28 @@ async def check_reminders(bot, channel_id_notable, channel_id_regular):
             
             # Process each event with a reminder
             for event in events:
-                await process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, now)
+                await process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, channel_id_european, now)
                 
     except Exception as e:
         logger.error(f"Error checking reminders: {e}", exc_info=True)
 
-async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, now):
+async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, channel_id_european, now):
     """Process and send a reminder for a specific event"""
     try:
-        # Get the appropriate channel based on whether the artist is notable
+        # Determine which channel to use based on event region and artist notability
         is_notable = False
         if event['artist_name']:
             is_notable = await conn.fetchval(
                 "SELECT notable FROM Artists WHERE name = $1",
                 event['artist_name']
             )
-        channel_id = channel_id_notable if is_notable else channel_id_regular
+        
+        # If it's a European event and we have a European channel, use that
+        if channel_id_european and event['region'] == 'eu':
+            channel_id = channel_id_european
+        # Otherwise use notable or regular channel based on artist notability
+        else:
+            channel_id = channel_id_notable if is_notable else channel_id_regular
         
         channel = bot.get_channel(channel_id)
         if not channel:
@@ -92,6 +99,24 @@ async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regu
         footer_text = "\n\nReact with 🔔 to this message to receive another reminder 1 hour before sale."
         if not can_set_another_reminder:
             footer_text = "\n\nTickets are now on sale or will be very soon. Good luck!"
+            
+        # Set appropriate color based on region
+        embed_color = discord.Color.gold()  # Default reminder color
+        if event['region'] == 'eu':
+            embed_color = discord.Color.purple()  # European events get a different color
+        
+        # Add region text to the footer
+        region_text = ""
+        if event['region'] == 'eu':
+            region_text = " | Region: Europe"
+        elif event['region'] == 'no':
+            region_text = " | Region: North"
+        elif event['region'] == 'ea':
+            region_text = " | Region: East"
+        elif event['region'] == 'so':
+            region_text = " | Region: South"
+        elif event['region'] == 'we':
+            region_text = " | Region: West"
         
         # Create reminder embed
         embed = discord.Embed(
@@ -102,8 +127,11 @@ async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regu
                 f"**Location**: {event['city']}, {event['state']}\n"
                 f"**Sale Start**: {onsale_start}{footer_text}"
             ),
-            color=discord.Color.gold()
+            color=embed_color
         )
+        
+        # Set footer with region information
+        embed.set_footer(text=f"Ticket sale reminder{region_text}")
         
         # Send reminder
         await channel.send(embed=embed)
