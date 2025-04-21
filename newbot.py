@@ -74,7 +74,10 @@ async def notify_events_task():
         
         # Send European events to the European channel
         if EUROPEAN_CHANNEL and EUROPEAN_CHANNEL != 0:
+            logger.info(f"Checking for European events to send to channel ID: {EUROPEAN_CHANNEL}")
             await notify_events(bot, EUROPEAN_CHANNEL, notable_only=False, region='eu')
+        else:
+            logger.warning("European channel is not configured. Skipping European events.")
         
         # Send all other non-notable events to the secondary channel
         await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='non-eu')

@@ -50,9 +50,19 @@ async def add_region_column_to_events():
             """, events_table)
             
             column_names = [col['column_name'].lower() for col in columns]
+            logger.info(f"Existing columns in events table: {column_names}")
             
             if 'region' in column_names:
                 logger.info("Region column already exists in the events table.")
+                
+                # Check current region values
+                region_counts = await conn.fetch(f"""
+                SELECT region, COUNT(*) 
+                FROM {events_table} 
+                GROUP BY region
+                """)
+                
+                logger.info(f"Current region distribution: {region_counts}")
                 return True
             
             # Add the region column
@@ -63,6 +73,16 @@ async def add_region_column_to_events():
             """)
             
             logger.info("Region column added successfully!")
+            
+            # Update existing events with default region based on server
+            logger.info("Updating existing events with region information...")
+            await conn.execute(f"""
+            UPDATE {events_table}
+            SET region = 'no'
+            WHERE region IS NULL
+            """)
+            
+            logger.info("Existing events updated with default region!")
             return True
             
     except Exception as e:

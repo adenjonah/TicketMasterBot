@@ -32,7 +32,7 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
         notable_only (bool): Whether to only notify events with notable artists.
         region (str): Filter events by region ('eu' for European events, 'non-eu' for non-European events).
     """
-    logger.debug(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}, region={region}")
+    logger.info(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}, region={region}")
 
     base_query = '''
         SELECT 
@@ -64,9 +64,11 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
     
     # Add the region filter
     if region == 'eu':
-        filters.append("Events.region = 'eu'")
+        filters.append("LOWER(Events.region) = 'eu'")
+        logger.info("Filtering for European events (region='eu')")
     elif region == 'non-eu':
-        filters.append("(Events.region != 'eu' OR Events.region IS NULL)")
+        filters.append("(LOWER(Events.region) != 'eu' OR Events.region IS NULL)")
+        logger.info("Filtering for non-European events")
     
     # Add filters to the query
     if filters:
@@ -74,13 +76,25 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
     else:
         query = base_query
 
-    logger.debug(f"Database query prepared: {query}")
+    # Log the complete SQL query for debugging
+    logger.info(f"SQL Query: {query}")
 
     async with db_pool.acquire() as conn:
         try:
             logger.debug("Acquired database connection.")
+            
+            # First, count how many matching events exist in the database
+            count_query = query.replace("SELECT \n            Events.eventID", "SELECT COUNT(*)")
+            count_query = count_query.split("ORDER BY")[0] if "ORDER BY" in count_query else count_query
+            
+            # Execute and log the count query
+            logger.info(f"Count SQL Query: {count_query}")
+            total_matching = await conn.fetchval(count_query)
+            logger.info(f"Found {total_matching} total matching events in database for region={region}, notable_only={notable_only}")
+            
+            # Now get the actual events to notify
             events_to_notify = await conn.fetch(query)
-            logger.debug(f"Fetched {len(events_to_notify)} events to notify.")
+            logger.info(f"Fetched {len(events_to_notify)} unsent events to notify for region={region}, notable_only={notable_only}")
 
             if not events_to_notify:
                 region_str = f"({region}) " if region else ""
