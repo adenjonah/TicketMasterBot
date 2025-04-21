@@ -75,7 +75,11 @@ async def notify_events_task():
         # Send European events to the European channel or fallback to secondary channel
         if EUROPEAN_CHANNEL and EUROPEAN_CHANNEL != 0:
             logger.info(f"Checking for European events to send to channel ID: {EUROPEAN_CHANNEL}")
-            await notify_events(bot, EUROPEAN_CHANNEL, notable_only=False, region='eu')
+            try:
+                await notify_events(bot, EUROPEAN_CHANNEL, notable_only=False, region='eu')
+            except discord.errors.Forbidden as e:
+                logger.error(f"Failed to send to European channel: {e}. Using fallback channel.")
+                await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
         else:
             # If European channel is not configured, use the secondary channel as fallback
             logger.warning("European channel is not configured. Using secondary channel as fallback.")
