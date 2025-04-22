@@ -118,13 +118,32 @@ async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regu
         elif event['region'] == 'we':
             region_text = " | Region: West"
         
+        # Format location based on region
+        location_text = "TBA"
+        if event['region'] == 'eu':
+            # For European events, use city and country (Venues.state contains country for EU events)
+            if event['city']:
+                if event['state']:
+                    location_text = f"{event['city']}, {event['state']}"
+                else:
+                    # For European cities without a state/country, just show the city
+                    location_text = f"{event['city']}"
+        else:
+            # For US events, use city and state as before
+            if event['city'] and event['state']:
+                location_text = f"{event['city']}, {event['state']}"
+            elif event['city']:
+                location_text = f"{event['city']}"
+            elif event['state']:
+                location_text = f"{event['state']}"
+        
         # Create reminder embed
         embed = discord.Embed(
             title=f"🔔 REMINDER: {event['name'] if not event['artist_name'] else f"{event['artist_name']} - {event['name']}"}",
             url=event['url'],
             description=(
                 f"{reminder_text}\n"
-                f"**Location**: {event['city']}, {event['state']}\n"
+                f"**Location**: {location_text}\n"
                 f"**Sale Start**: {onsale_start}{footer_text}"
             ),
             color=embed_color
