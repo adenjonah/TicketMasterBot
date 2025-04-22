@@ -3,6 +3,7 @@ import asyncpg
 from dateutil import parser
 from config.logging import logger
 import json
+from database.country_lookup import determine_country_from_venue, is_european_venue
 
 now = datetime.now(timezone.utc)
 
@@ -59,6 +60,20 @@ async def store_event(event, region=None):
             venue_name = venue_data.get('name', 'Unknown Venue')
             venue_city = venue_data.get('city', {}).get('name', 'Unknown City')
             venue_state = venue_data.get('state', {}).get('stateCode', 'Unknown State')
+
+            # For European venues, use country information instead of state
+            if region and region.lower() == 'eu':
+                # Try to determine country
+                country = determine_country_from_venue(venue_data)
+                if country:
+                    venue_state = country
+                    logger.debug(f"Set venue state to country for European venue: {venue_name} (Country: {country})")
+            # Check if this is a European venue in a non-European region
+            elif is_european_venue(venue_data):
+                country = determine_country_from_venue(venue_data)
+                if country:
+                    venue_state = country
+                    logger.debug(f"Set venue state to country for European venue in non-EU region: {venue_name} (Country: {country})")
 
             # Artist data
             attractions = event['_embedded'].get('attractions', [])
