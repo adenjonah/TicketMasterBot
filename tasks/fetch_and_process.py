@@ -49,7 +49,13 @@ async def fetch_events():
     try:
         async with aiohttp.ClientSession() as session:
             while page < max_pages:
-                events = await fetch_events_from_api(session, page, current_time, current_date)
+                # Use alternating classifications for the comedy server
+                if REGION.lower() == 'comedy':
+                    from api.alternating_events import fetch_events_with_alternating_classification
+                    events = await fetch_events_with_alternating_classification(session, page, current_time, current_date)
+                else:
+                    events = await fetch_events_from_api(session, page, current_time, current_date)
+                
                 events_count = len(events)
                 total_events_received += events_count
                 logger.info(f"Page {page + 1}: Received {events_count} events.")
