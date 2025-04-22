@@ -245,12 +245,12 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                     region_text = "Region: South"
                 elif event['region'] == 'we':
                     region_text = "Region: West"
-                elif event['region'] == 'ctf':
-                    region_text = "Region: Comedy/Theatre/Film"
-                elif event['region'] == 'co':  # Legacy region
+                elif event['region'] == 'co':
                     region_text = "Region: Comedy"
-                elif event['region'] == 'th':  # Legacy region
+                elif event['region'] == 'th':
                     region_text = "Region: Theater"
+                elif event['region'] == 'fi':
+                    region_text = "Region: Film"
                 
                 # Only set the footer if we have a valid region to display
                 if region_text:

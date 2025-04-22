@@ -23,10 +23,9 @@ REGION_TO_ID = {
     'south': 'so',
     'west': 'we',
     'europe': 'eu',
-    'comedy': 'ctf',
-    'comedy-theatre-film': 'ctf',
-    'ctf': 'ctf',
-    'theater': 'ctf'
+    'comedy': 'co',
+    'theater': 'th',
+    'film': 'fi'  # New film region
 }
 
 # Get server ID from region
@@ -51,10 +50,10 @@ async def fetch_events():
     try:
         async with aiohttp.ClientSession() as session:
             while page < max_pages:
-                # Use alternating classifications for the comedy server
-                if REGION.lower() == 'comedy':
-                    from api.alternating_events import fetch_events_with_alternating_classification
-                    events = await fetch_events_with_alternating_classification(session, page, current_time, current_date)
+                # Use specialized event fetch methods based on region
+                if REGION.lower() == 'film':
+                    from api.film_events import fetch_film_events
+                    events = await fetch_film_events(session, page, current_time, current_date)
                 else:
                     events = await fetch_events_from_api(session, page, current_time, current_date)
                 
