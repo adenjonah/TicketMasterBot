@@ -16,12 +16,20 @@ from config.config import TICKETMASTER_API_KEY, CENTER_POINT, RADIUS, UNIT, REGI
 # KnvZfZ7vAe1 = Comedy
 # KnvZfZ7v7l1 = Theatre
 
-# Define alternating classifications for the comedy server
+# Define alternating classifications for the comedy-theatre-film server
 CLASSIFICATIONS = [
     {
         "name": "Comedy",
         "classification_id": "KZFzniwnSyZfZ7v7na",  # Arts & Theatre
         "genre_id": "KnvZfZ7vAe1",                  # Comedy
+        "subgenre_id": None,
+        "type_id": None,
+        "subtype_id": None
+    },
+    {
+        "name": "Theatre",
+        "classification_id": "KZFzniwnSyZfZ7v7na",  # Arts & Theatre
+        "genre_id": "KnvZfZ7v7l1",                  # Theatre
         "subgenre_id": None,
         "type_id": None,
         "subtype_id": None
@@ -52,19 +60,19 @@ def get_current_classification():
 async def fetch_events_with_alternating_classification(session, page, current_time, current_date):
     """
     Fetch events from the Ticketmaster API using alternating classifications.
-    This is specifically designed for the comedy region server to maximize
+    This is specifically designed for the comedy-theatre-film server to maximize
     the variety of events detected.
     """
     global current_classification_index
     
-    # Only use alternating classifications for the comedy region
-    if REGION.lower() != 'comedy':
+    # Only use alternating classifications for the comedy/ctf region
+    if REGION.lower() not in ['comedy', 'comedy-theatre-film', 'ctf']:
         from api.event_req import fetch_events_from_api
         return await fetch_events_from_api(session, page, current_time, current_date)
     
     # Get current classification in the rotation
     classification = get_current_classification()
-    logger.info(f"Using alternating classification: {classification['name']}")
+    logger.info(f"CTF Server using classification: {classification['name']}")
     
     base_url = "https://app.ticketmaster.com/discovery/v2/events"
     params = {
@@ -113,7 +121,7 @@ async def fetch_events_with_alternating_classification(session, page, current_ti
                     presale_count = len(event['sales']['presales'])
                     logger.debug(f"Event {event.get('id')} has {presale_count} presale(s)")
             
-            logger.info(f"[{classification['name']}] Retrieved {len(events)} events, {events_with_presales} with presale information")
+            logger.info(f"[CTF:{classification['name']}] Retrieved {len(events)} events, {events_with_presales} with presale information")
             return events
         except Exception as e:
             logger.error(f"Error fetching data from {full_url}: {e}")

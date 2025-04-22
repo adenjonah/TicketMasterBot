@@ -23,8 +23,10 @@ REGION_TO_ID = {
     'south': 'so',
     'west': 'we',
     'europe': 'eu',
-    'comedy': 'co',
-    'theater': 'th'
+    'comedy': 'ctf',
+    'comedy-theatre-film': 'ctf',
+    'ctf': 'ctf',
+    'theater': 'ctf'
 }
 
 # Get server ID from region

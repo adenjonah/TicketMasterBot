@@ -45,16 +45,12 @@ elif REGION == 'west':
 elif REGION == 'europe': 
     CENTER_POINT='47.37116,8.50755'
     RADIUS='1200'
-elif REGION == 'comedy':
+elif REGION == 'comedy' or REGION == 'comedy-theatre-film' or REGION == 'ctf':
     CENTER_POINT='44.69209,-99.95477'
     RADIUS='3016'
+    # Default to Comedy classification - will be overridden by alternating_events.py
     CLASSIFICATION_ID='KZFzniwnSyZfZ7v7na'
     GENRE_ID='KnvZfZ7vAe1'
-elif REGION == 'theater':
-    CENTER_POINT='44.69209,-99.95477'
-    RADIUS='3016'
-    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7na'
-    GENRE_ID='KnvZfZ7v7l1'
 
 # Validation to ensure critical environment variables are set
 if not DISCORD_BOT_TOKEN:

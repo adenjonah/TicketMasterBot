@@ -1,33 +1,39 @@
-# Alternating Classifications System
+# Alternating Classifications System for CTF Region
 
 ## Overview
 
-The alternating classifications system allows the Comedy region server to cycle through different event types on each API request. This maximizes the variety of events that can be discovered while still respecting Ticketmaster's rate limits.
+The alternating classifications system allows the Comedy-Theatre-Film (CTF) region server to cycle through different event types on each API request. This maximizes the variety of events that can be discovered while still respecting Ticketmaster's rate limits.
 
 ## How It Works
 
-1. Every 60 seconds, the Comedy server makes an API request to Ticketmaster
-2. Each request alternates between two classifications:
+1. Every 60 seconds, the CTF server makes an API request to Ticketmaster
+2. Each request rotates through three classifications:
    - First request: Comedy events (Arts & Theatre + Comedy genre)
-   - Second request: Film events (Film + Miscellaneous genre with specific subtypes)
-   - Third request: Back to Comedy events, and the cycle continues
+   - Second request: Theatre events (Arts & Theatre + Theatre genre)
+   - Third request: Film events (Film + Miscellaneous genre with specific subtypes)
+   - Fourth request: Back to Comedy events, and the cycle continues
 
 ## Classification IDs Used
 
-The system alternates between these two Ticketmaster classifications:
+The system rotates through these three Ticketmaster classifications:
 
 | Request Cycle | Name | Classification ID | Genre ID | Additional Parameters | Description |
 |---------------|------|-------------------|----------|------------------------|-------------|
 | 1 | Comedy | KZFzniwnSyZfZ7v7na | KnvZfZ7vAe1 | None | Comedy events |
-| 2 | Film Events | KZFzniwnSyZfZ7v7nn | KnvZfZ7vAka | subGenreId=KZazBEonSMnZfZ7vFln, typeId=KZAyXgnZfZ7v7nI, subTypeId=KZFzBErXgnZfZ7v7lJ | Film events, including movies, screenings, and film festivals |
+| 2 | Theatre | KZFzniwnSyZfZ7v7na | KnvZfZ7v7l1 | None | Theater/Broadway events |
+| 3 | Film Events | KZFzniwnSyZfZ7v7nn | KnvZfZ7vAka | subGenreId=KZazBEonSMnZfZ7vFln, typeId=KZAyXgnZfZ7v7nI, subTypeId=KZFzBErXgnZfZ7v7lJ | Film events, including movies, screenings, and film festivals |
 
 ## Implementation Details
 
 - The classification rotation is maintained in `api/alternating_events.py`
 - Global state tracks the current position in the rotation
 - Each request updates the position to the next in sequence
-- The rotation only applies to the Comedy region server; other regions maintain their specific classification focus
+- The rotation only applies to the CTF region server; other regions maintain their specific classification focus
 - Film events use additional Ticketmaster classification parameters (subGenreId, typeId, subTypeId) for more specific targeting
+
+## Server Naming
+
+The Comedy-Theatre-Film server is identified in the database using the ServerID "ctf". This represents the merger of the previous Comedy ("co") and Theatre ("th") servers into a single server with a rotating classification system.
 
 ## Adding More Classifications
 
