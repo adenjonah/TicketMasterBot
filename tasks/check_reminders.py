@@ -117,6 +117,12 @@ async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regu
             region_text = " | Region: South"
         elif event['region'] == 'we':
             region_text = " | Region: West"
+        elif event['region'] == 'ctf':
+            region_text = " | Region: Comedy/Theatre/Film"
+        elif event['region'] == 'co':  # Legacy region
+            region_text = " | Region: Comedy"
+        elif event['region'] == 'th':  # Legacy region
+            region_text = " | Region: Theater"
         
         # Format location based on region
         location_text = "TBA"

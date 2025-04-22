@@ -234,7 +234,7 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                         logger.error(f"Error processing presale data for event {event['eventid']}: {e}", exc_info=True)
 
                 # Add region footer text
-                region_text = "Region: Unknown"
+                region_text = None  # Default to no region text
                 if event['region'] == 'eu':
                     region_text = "Region: Europe"
                 elif event['region'] == 'no':
@@ -245,12 +245,16 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                     region_text = "Region: South"
                 elif event['region'] == 'we':
                     region_text = "Region: West"
-                elif event['region'] == 'co':
+                elif event['region'] == 'ctf':
+                    region_text = "Region: Comedy/Theatre/Film"
+                elif event['region'] == 'co':  # Legacy region
                     region_text = "Region: Comedy"
-                elif event['region'] == 'th':
+                elif event['region'] == 'th':  # Legacy region
                     region_text = "Region: Theater"
                 
-                embed.set_footer(text=region_text)
+                # Only set the footer if we have a valid region to display
+                if region_text:
+                    embed.set_footer(text=region_text)
 
                 # Send notification to Discord channel
                 logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")
