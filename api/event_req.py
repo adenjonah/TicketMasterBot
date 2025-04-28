@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 import urllib.parse
 from config.logging import logger
-import urllib.parse  # Import for URL encoding
+import logging
 
 from config.config import (
     TICKETMASTER_API_KEY,
@@ -44,25 +44,34 @@ async def fetch_events_from_api(session, page, current_time, current_date):
     # Construct the full URL with encoded parameters
     full_url = f"{base_url}?{urllib.parse.urlencode(params)}"
 
-    logger.info(f"Request made to {full_url}")
+    if logger.isEnabledFor(logging.DEBUG):
+        logger.debug(f"Request made to {full_url}")
+    
     async with session.get(full_url) as response:
         try:
             response.raise_for_status()
             data = await response.json()
             events = data.get("_embedded", {}).get("events", [])
             
-            # Check if events have presale information
-            events_with_presales = 0
-            for event in events:
-                if 'sales' in event and 'presales' in event['sales'] and event['sales']['presales']:
-                    events_with_presales += 1
-                    presale_count = len(event['sales']['presales'])
-                    logger.debug(f"Event {event.get('id')} has {presale_count} presale(s)")
+            # Only log details about presales in debug mode
+            if logger.isEnabledFor(logging.DEBUG):
+                # Check if events have presale information
+                events_with_presales = 0
+                for event in events:
+                    if 'sales' in event and 'presales' in event['sales'] and event['sales']['presales']:
+                        events_with_presales += 1
+                        presale_count = len(event['sales']['presales'])
+                        logger.debug(f"Event {event.get('id')} has {presale_count} presale(s)")
+                
+                logger.debug(f"Retrieved {len(events)} events, {events_with_presales} with presale information")
             
-            logger.info(f"Retrieved {len(events)} events, {events_with_presales} with presale information")
+            # In production, just log a simple count
+            if not logger.isEnabledFor(logging.DEBUG) and logger.isEnabledFor(logging.INFO):
+                logger.info(f"Retrieved {len(events)} events (page {page})")
+                
             return events
         except Exception as e:
-            logger.error(f"Error fetching data from {full_url}: {e}")
+            logger.error(f"Error fetching events: {e}")
             raise
 
 async def fetch_event_details(session, event_id):
@@ -84,18 +93,21 @@ async def fetch_event_details(session, event_id):
     # Construct the full URL with encoded parameters
     full_url = f"{base_url}?{urllib.parse.urlencode(params)}"
     
-    logger.info(f"Fetching detailed event info for {event_id}")
+    if logger.isEnabledFor(logging.DEBUG):
+        logger.debug(f"Fetching detailed event info for {event_id}")
+    
     async with session.get(full_url) as response:
         try:
             response.raise_for_status()
             event_data = await response.json()
             
-            # Check for presale information
-            if 'sales' in event_data and 'presales' in event_data['sales']:
-                presale_count = len(event_data['sales']['presales'])
-                logger.debug(f"Event {event_id} has {presale_count} presale(s) in detailed view")
-            else:
-                logger.debug(f"Event {event_id} has no presales in detailed view")
+            # Only log details about presales in debug mode
+            if logger.isEnabledFor(logging.DEBUG):
+                if 'sales' in event_data and 'presales' in event_data['sales']:
+                    presale_count = len(event_data['sales']['presales'])
+                    logger.debug(f"Event {event_id} has {presale_count} presale(s) in detailed view")
+                else:
+                    logger.debug(f"Event {event_id} has no presales in detailed view")
                 
             return event_data
         except Exception as e:

@@ -5,6 +5,7 @@ from database.inserting import store_event, update_status, record_notable_events
 from database.queries import event_exists
 from api.event_req import fetch_events_from_api, fetch_event_details
 from config.logging import logger
+import logging
 
 from config.config import (
     DISCORD_BOT_TOKEN,
@@ -34,7 +35,9 @@ def get_server_id(region):
 
 async def fetch_events():
     """Fetch events asynchronously from Ticketmaster API and process them."""
-    logger.info("Starting to fetch events from Ticketmaster API...")
+    if logger.isEnabledFor(logging.DEBUG):
+        logger.debug("Starting to fetch events from Ticketmaster API...")
+    
     current_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     current_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
@@ -45,7 +48,8 @@ async def fetch_events():
     new_events_count = 0
     
     server_id = get_server_id(REGION)
-    logger.info(f"Using server ID {server_id} for region {REGION}")
+    if logger.isEnabledFor(logging.DEBUG):
+        logger.debug(f"Using server ID {server_id} for region {REGION}")
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -59,7 +63,10 @@ async def fetch_events():
                 
                 events_count = len(events)
                 total_events_received += events_count
-                logger.info(f"Page {page + 1}: Received {events_count} events.")
+                
+                # Only log per-page counts in debug mode
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug(f"Page {page + 1}: Received {events_count} events.")
 
                 for event in events:
                     total_events_processed += 1
@@ -67,20 +74,27 @@ async def fetch_events():
                         new_events_count += 1
 
                 if events_count < 199:
-                    logger.info("No more events to fetch. Stopping.")
+                    if logger.isEnabledFor(logging.DEBUG):
+                        logger.debug("No more events to fetch. Stopping.")
                     break
 
                 page += 1
                 await asyncio.sleep(1)  # Avoid hitting rate limits
 
-        logger.info(f"Total events received: {total_events_received}, "
-                    f"Total events processed: {total_events_processed}, "
-                    f"New events added: {new_events_count}")
+        # Log summary info at INFO level, but only if there are new events
+        if new_events_count > 0 and logger.isEnabledFor(logging.INFO):
+            logger.info(f"Events update: {new_events_count} new events")
+            
+        # More detailed summary only in debug mode
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f"Total events received: {total_events_received}, "
+                      f"Total events processed: {total_events_processed}, "
+                      f"New events added: {new_events_count}")
         
         await update_status(server_id, datetime.now(timezone.utc), total_events_received, new_events_count, None)
 
     except Exception as e:
-        logger.error(f"Unexpected error in fetch_events: {e}", exc_info=True)
+        logger.error(f"Error in fetch_events: {e}")
         await update_status(
             server_id,
             error_messages=str(e)
@@ -99,7 +113,9 @@ async def process_event(event, server_id):
         async with db_pool.acquire() as conn:
             event_id = event["id"]
             if not await event_exists(conn, event_id):
-                logger.info(f"Found new event: {event_id} - {event['name']}")
+                # Only log new events at debug level unless they're notable events
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug(f"Found new event: {event_id} - {event['name']}")
                 
                 # For new events, fetch detailed information to get complete presale data
                 async with aiohttp.ClientSession() as session:
@@ -107,16 +123,19 @@ async def process_event(event, server_id):
                     
                 # If detailed event fetch was successful, use that instead of the list event data
                 if detailed_event:
-                    logger.info(f"Successfully fetched detailed information for event: {event_id}")
+                    if logger.isEnabledFor(logging.DEBUG):
+                        logger.debug(f"Successfully fetched detailed information for event: {event_id}")
                     event_to_store = detailed_event
                 else:
-                    logger.warn(f"Could not fetch detailed information for event: {event_id}. Using summary data.")
+                    logger.warning(f"Could not fetch details for event: {event_id}")
                     event_to_store = event
                 
                 try:
                     # Pass the server_id as the region parameter
                     await store_event(event_to_store, region=server_id)
-                    logger.debug(f"Successfully stored event: {event_id} with region: {server_id}")
+                    
+                    if logger.isEnabledFor(logging.DEBUG):
+                        logger.debug(f"Stored event: {event_id} with region: {server_id}")
 
                     # Check if the artist is notable after storing
                     notable_artist_query = '''
@@ -127,7 +146,10 @@ async def process_event(event, server_id):
                     artist_notable = await conn.fetchval(notable_artist_query, event_to_store.get("artistID"))
 
                     if artist_notable:
-                        logger.info(f"Event {event_id} associated with notable artist. Triggering notifications.")
+                        # Log notable events at INFO level
+                        if logger.isEnabledFor(logging.INFO):
+                            logger.info(f"Notable artist event: {event_id} - {event['name']}")
+                            
                         # Call notify_events with notable_only set to True
                         await notify_events(event_to_store["bot"], DISCORD_CHANNEL_ID, notable_only=True)
                         
@@ -142,11 +164,12 @@ async def process_event(event, server_id):
                     return True  # New event added
 
                 except Exception as e:
-                    logger.error(f"Error storing event: {event_id}, name: {event['name']}, error: {e}")
+                    logger.error(f"Error storing event {event_id}: {e}")
                     return False  # Failed to store event
             else:
-                logger.debug(f"Event already exists in DB: {event_id} - {event['name']}")
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug(f"Event exists: {event_id}")
                 return False  # Event already exists
     except Exception as e:
-        logger.error(f"Failed to acquire DB connection for event: {event_id}, error: {e}")
+        logger.error(f"DB error processing event {event.get('id', 'unknown')}: {e}")
         return False  # Failed to process event
