@@ -9,6 +9,11 @@ from datetime import datetime
 import re
 from urllib.parse import urlparse, quote, unquote
 
+# List of known bad event IDs that trigger Discord URL validation errors
+KNOWN_BAD_EVENT_IDS = set([
+    "1AsZk19Gkd3D7VP"  # Known problematic event ID from the logs
+])
+
 def _fix_url(url):
     """Ensures a URL has the correct http/https scheme and is well-formed."""
     if not url:
@@ -22,8 +27,15 @@ def _fix_url(url):
         url = url.strip()
         url = re.sub(r'[\x00-\x1F\x7F]', '', url)  # Remove control characters
         
+        # Handle specific case with capitalized protocol (Https://, Http://)
+        # Discord requires lowercase protocol
+        if url.startswith('Https://'):
+            url = 'https://' + url[8:]
+        elif url.startswith('Http://'):
+            url = 'http://' + url[7:]
+        
         # Check for common malformed URLs
-        if url.startswith('ttps://'):
+        elif url.startswith('ttps://'):
             url = 'https://' + url[7:]
         elif url.startswith('hhttps://'):
             url = 'https://' + url[8:]
@@ -58,7 +70,9 @@ def _fix_url(url):
             fragment = quote(parsed.fragment, safe='-_.~')
             
             # Reconstruct the URL with encoded components
-            fixed_url = f"{parsed.scheme}://{parsed.netloc}{path}"
+            # Always use lowercase scheme (http or https) as required by Discord
+            scheme = parsed.scheme.lower()
+            fixed_url = f"{scheme}://{parsed.netloc}{path}"
             if query:
                 fixed_url += f"?{query}"
             if fragment:
@@ -187,6 +201,11 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
     elif region == 'non-eu':
         filters.append("(LOWER(Events.region) != 'eu' OR Events.region IS NULL)")
     
+    # Add filters to exclude known bad event IDs
+    if KNOWN_BAD_EVENT_IDS:
+        bad_ids_list = ", ".join(f"'{event_id}'" for event_id in KNOWN_BAD_EVENT_IDS)
+        filters.append(f"Events.eventID NOT IN ({bad_ids_list})")
+    
     # Add filters to the query
     filter_clause = ' AND '.join(filters)
     if filters:
@@ -241,9 +260,24 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                         event_id = event['eventid']
                         event_name = event['name']
                         
+                        # Skip known problematic events
+                        if event_id in KNOWN_BAD_EVENT_IDS:
+                            logger.warning(f"Skipping known problematic event: {event_id}")
+                            # Mark as sent to avoid retrying
+                            await conn.execute(
+                                "UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1",
+                                event_id
+                            )
+                            continue
+                        
                         # Save original URLs for troubleshooting
                         original_event_url = event['url']
                         original_image_url = event['image_url']
+                        
+                        # Check if the URL is empty or None (this happens with some events)
+                        if not original_event_url:
+                            logger.warning(f"Event {event_id} has no URL. Using fallback URL.")
+                            original_event_url = f"https://www.ticketmaster.com/event/{event_id}"
                         
                         # Fix URLs before creating embed
                         fixed_event_url = _fix_url(original_event_url)
@@ -278,11 +312,20 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                         
                     except discord.errors.HTTPException as e:
                         error_count += 1
+                        # Add this event ID to the known bad events list
+                        if "Not a well formed URL" in str(e):
+                            KNOWN_BAD_EVENT_IDS.add(event_id)
+                            logger.error(f"Added event {event_id} to known bad events list due to URL error")
+                            
                         # Log detailed info on the problematic URLs
                         logger.error(f"Discord embed error for event {event['eventid']} ({event['name']}): {e}")
                         logger.error(f"Problem URL: original='{event['url']}', fixed='{fixed_event_url}'")
                         
-                        # Skip this event but continue with others
+                        # Mark it as sent to avoid trying again
+                        await conn.execute(
+                            "UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1",
+                            event_id
+                        )
                         continue
                     except Exception as e:
                         error_count += 1
@@ -291,6 +334,14 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                 
                 if logger.isEnabledFor(logging.INFO):
                     logger.info(f"Processed batch: {len(batch)} events")
+            
+            # Also mark any known bad events as sent to avoid retrying them
+            if KNOWN_BAD_EVENT_IDS:
+                bad_ids_list = ", ".join(f"'{event_id}'" for event_id in KNOWN_BAD_EVENT_IDS)
+                await conn.execute(
+                    f"UPDATE Events SET sentToDiscord = TRUE WHERE eventID IN ({bad_ids_list}) AND sentToDiscord = FALSE"
+                )
+                logger.info(f"Marked {len(KNOWN_BAD_EVENT_IDS)} known problematic events as sent")
             
             # Log summary at the end
             if logger.isEnabledFor(logging.INFO):
