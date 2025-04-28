@@ -1,56 +1,93 @@
 import discord
 from config.logging import logger
+import logging
 from helpers.formatting import format_date_human_readable
 import pytz
 import json
 from dateutil import parser
 from datetime import datetime
+import re
+from urllib.parse import urlparse, quote, unquote
 
 def _fix_url(url):
     """Ensures a URL has the correct http/https scheme and is well-formed."""
     if not url:
         return "https://example.com"  # Fallback URL if none is provided
-        
-    # Remove any whitespace
-    url = url.strip()
     
-    # Check and fix various incorrect URL formats
-    if url.startswith('ttps://'):
-        url = 'https://' + url[7:]
-    elif url.startswith('hhttps://'):
-        url = 'https://' + url[8:]
-    elif not (url.startswith('http://') or url.startswith('https://')):
-        url = 'https://' + url
+    # For logging only in debug mode
+    original_url = url
     
-    # Basic URL validation
     try:
-        from urllib.parse import urlparse
-        parsed = urlparse(url)
-        if not all([parsed.scheme, parsed.netloc]):
-            logger.warning(f"Invalid URL format: {url}")
+        # Remove any whitespace and control characters
+        url = url.strip()
+        url = re.sub(r'[\x00-\x1F\x7F]', '', url)  # Remove control characters
+        
+        # Check for common malformed URLs
+        if url.startswith('ttps://'):
+            url = 'https://' + url[7:]
+        elif url.startswith('hhttps://'):
+            url = 'https://' + url[8:]
+        elif url.startswith('http:/www.'):
+            url = 'http://www.' + url[9:]
+        elif url.startswith('https:/www.'):
+            url = 'https://www.' + url[10:]
+        elif url.startswith('www.'):
+            url = 'https://' + url
+        elif not (url.startswith('http://') or url.startswith('https://')):
+            url = 'https://' + url
+        
+        # Replace double slashes (except after protocol)
+        url = re.sub(r'(?<!:)//+', '/', url)
+        
+        # Fix potential percent encoding issues
+        try:
+            # First decode any already encoded parts to avoid double encoding
+            decoded_url = unquote(url)
+            
+            # Parse into components
+            parsed = urlparse(decoded_url)
+            
+            # Basic validation
+            if not parsed.netloc:
+                logger.warning(f"URL missing domain: {url}")
+                return "https://example.com"
+                
+            # Ensure the URL components are properly encoded
+            path = quote(parsed.path, safe='/-_.~')
+            query = quote(parsed.query, safe='=&-_.~')
+            fragment = quote(parsed.fragment, safe='-_.~')
+            
+            # Reconstruct the URL with encoded components
+            fixed_url = f"{parsed.scheme}://{parsed.netloc}{path}"
+            if query:
+                fixed_url += f"?{query}"
+            if fragment:
+                fixed_url += f"#{fragment}"
+                
+            # One final validation with regex for RFC 3986 compliant URLs
+            if not re.match(r'^(https?):\/\/[^\s/$.?#].[^\s]*$', fixed_url):
+                logger.warning(f"URL failed final validation: {fixed_url}")
+                return "https://example.com"
+                
+            if logger.isEnabledFor(logging.DEBUG) and original_url != fixed_url:
+                logger.debug(f"Fixed URL: '{original_url}' -> '{fixed_url}'")
+                
+            return fixed_url
+            
+        except Exception as e:
+            logger.warning(f"Error encoding URL components: {e}")
             return "https://example.com"
             
-        # Ensure the URL is properly encoded
-        from urllib.parse import quote
-        path = quote(parsed.path, safe='/-_~.')
-        query = quote(parsed.query, safe='=&')
-        fragment = quote(parsed.fragment, safe='')
-        
-        # Reconstruct the URL with encoded components
-        fixed_url = f"{parsed.scheme}://{parsed.netloc}{path}"
-        if query:
-            fixed_url += f"?{query}"
-        if fragment:
-            fixed_url += f"#{fragment}"
-            
-        return fixed_url
     except Exception as e:
         logger.error(f"Error fixing URL: {e}")
         return "https://example.com"
 
-# Test cases for URL fixing
+# Test cases for URL fixing - only run in debug mode
 def _test_url_fixing():
     """Test the URL fixing function with various cases."""
+    if not logger.isEnabledFor(logging.DEBUG):
+        return
+        
     test_cases = [
         "https://example.com",
         "http://example.com",
@@ -62,20 +99,27 @@ def _test_url_fixing():
         "https://example.com#fragment",
         "https://example.com/path?query=test#fragment",
         "https://example.com/path with spaces?query=test with spaces#fragment with spaces",
+        "http:/www.example.com",
+        "https:/www.example.com",
+        "www.example.com",
         "",  # Empty URL
         None,  # None URL
         "invalid url",  # Invalid URL
+        "http:// example.com",  # URL with space after scheme
+        "https://example.com//path//subpath",  # Double slashes
+        "https://example.com/%7Euser/",  # Already encoded URL
     ]
     
-    logger.info("Testing URL fixing function...")
+    logger.debug("Testing URL fixing function...")
     for test_url in test_cases:
         fixed = _fix_url(test_url)
-        logger.info(f"Test case: '{test_url}' -> '{fixed}'")
+        logger.debug(f"Test URL: '{test_url}' -> Fixed: '{fixed}'")
     
-    logger.info("URL fixing tests completed.")
+    logger.debug("URL fixing tests completed.")
 
-# Run tests when module is imported
-_test_url_fixing()
+# Run tests only in debug mode
+if logger.isEnabledFor(logging.DEBUG):
+    _test_url_fixing()
 
 async def notify_events(bot, channel_id, notable_only=False, region=None):
     from config.db_pool import db_pool  # Import shared db_pool here
@@ -88,10 +132,13 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
         notable_only (bool): Whether to only notify events with notable artists.
         region (str): Filter events by region ('eu' for European events, 'non-eu' for non-European events).
     """
-    logger.info(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}, region={region}")
+    if logger.isEnabledFor(logging.DEBUG):
+        logger.debug(f"Starting notify_events with channel_id={channel_id}, notable_only={notable_only}, region={region}")
+    elif logger.isEnabledFor(logging.INFO):
+        logger.info(f"Notifying {'notable' if notable_only else 'all'} events for region {region or 'all'}")
 
     # If we're checking for European events, first do a diagnostic
-    if region == 'eu':
+    if region == 'eu' and logger.isEnabledFor(logging.DEBUG):
         async with db_pool.acquire() as conn:
             try:
                 # Check what EU regions actually exist
@@ -102,7 +149,7 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                 GROUP BY region
                 """
                 regions = await conn.fetch(regions_query)
-                logger.info(f"Unsent events by region: {regions}")
+                logger.debug(f"Unsent events by region: {regions}")
             except Exception as e:
                 logger.error(f"Error during EU diagnostics: {e}")
 
@@ -160,7 +207,10 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
             """
             
             total_matching = await conn.fetchval(count_query)
-            logger.info(f"Found {total_matching} total matching events in database for region={region}, notable_only={notable_only}")
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug(f"Found {total_matching} events to notify")
+            elif total_matching > 0 and logger.isEnabledFor(logging.INFO):
+                logger.info(f"Found {total_matching} events to notify")
             
             # Get the actual events to notify
             events_to_notify = await conn.fetch(query)
@@ -170,7 +220,7 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
 
             channel = bot.get_channel(channel_id)
             if not channel:
-                logger.error(f"Discord channel with ID {channel_id} not found.")
+                logger.error(f"Discord channel with ID {channel_id} not found")
                 return
 
             utc_tz = pytz.utc
@@ -178,19 +228,30 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
 
             # Batch process events and log in groups
             batch_size = 10
+            success_count = 0
+            error_count = 0
+            
             for i in range(0, len(events_to_notify), batch_size):
                 batch = events_to_notify[i:i+batch_size]
-                logger.info(f"Processing batch of {len(batch)} events...")
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug(f"Processing batch of {len(batch)} events...")
                 
                 for event in batch:
                     try:
+                        event_id = event['eventid']
+                        event_name = event['name']
+                        
+                        # Save original URLs for troubleshooting
+                        original_event_url = event['url']
+                        original_image_url = event['image_url']
+                        
                         # Fix URLs before creating embed
-                        fixed_event_url = _fix_url(event['url'])
-                        fixed_image_url = _fix_url(event['image_url']) if event['image_url'] else None
+                        fixed_event_url = _fix_url(original_event_url)
+                        fixed_image_url = _fix_url(original_image_url) if original_image_url else None
 
                         # Create Discord embed
                         embed = discord.Embed(
-                            title = f"{event['name']}" if event['artist_name'] is None else f"{event['artist_name']} - {event['name']}",
+                            title = f"{event_name}" if event['artist_name'] is None else f"{event['artist_name']} - {event_name}",
                             url=fixed_event_url,
                             description=(
                                 f"**Location**: {event['city']}, {event['state']}\n"
@@ -210,19 +271,33 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                         # Mark event as sent in the database
                         await conn.execute(
                             "UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1",
-                            event['eventid']
+                            event_id
                         )
                         
+                        success_count += 1
+                        
                     except discord.errors.HTTPException as e:
-                        logger.error(f"Failed to send embed for event {event['eventid']} ({event['name']}): {e}")
+                        error_count += 1
+                        # Log detailed info on the problematic URLs
+                        logger.error(f"Discord embed error for event {event['eventid']} ({event['name']}): {e}")
+                        logger.error(f"Problem URL: original='{event['url']}', fixed='{fixed_event_url}'")
+                        
+                        # Skip this event but continue with others
                         continue
                     except Exception as e:
-                        logger.error(f"Error processing event {event['eventid']}: {e}")
+                        error_count += 1
+                        logger.error(f"Error processing event {event.get('eventid', 'unknown')}: {e}")
                         continue
                 
-                logger.info(f"Completed batch of {len(batch)} events")
+                if logger.isEnabledFor(logging.INFO):
+                    logger.info(f"Processed batch: {len(batch)} events")
+            
+            # Log summary at the end
+            if logger.isEnabledFor(logging.INFO):
+                logger.info(f"Notify summary: {success_count} sent, {error_count} errors")
                 
         except Exception as e:
-            logger.error(f"Error notifying events: {e}")
+            logger.error(f"Notification error: {e}")
         finally:
-            logger.debug("Database connection released.")
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug("Database connection released.")
