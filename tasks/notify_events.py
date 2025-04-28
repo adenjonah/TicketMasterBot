@@ -7,19 +7,87 @@ from dateutil import parser
 from datetime import datetime
 
 def _fix_url(url):
-    """Ensures a URL has the correct http/https scheme."""
+    """Ensures a URL has the correct http/https scheme and is well-formed."""
     if not url:
+        logger.warning("No URL provided, using fallback URL")
         return "https://example.com"  # Fallback URL if none is provided
         
+    # Remove any whitespace
+    url = url.strip()
+    
+    # Log the original URL for debugging
+    logger.debug(f"Original URL: {url}")
+    
     # Check and fix various incorrect URL formats
     if url.startswith('ttps://'):
         url = 'https://' + url[7:]
+        logger.debug(f"Fixed 'ttps://' to 'https://': {url}")
     elif url.startswith('hhttps://'):
         url = 'https://' + url[8:]
+        logger.debug(f"Fixed 'hhttps://' to 'https://': {url}")
     elif not (url.startswith('http://') or url.startswith('https://')):
         url = 'https://' + url
+        logger.debug(f"Added 'https://' prefix: {url}")
+    
+    # Basic URL validation
+    try:
+        from urllib.parse import urlparse
+        parsed = urlparse(url)
         
-    return url
+        # Log parsed components for debugging
+        logger.debug(f"Parsed URL components - Scheme: {parsed.scheme}, Netloc: {parsed.netloc}, Path: {parsed.path}")
+        
+        if not all([parsed.scheme, parsed.netloc]):
+            logger.warning(f"Invalid URL format: {url} - Missing scheme or netloc")
+            return "https://example.com"
+            
+        # Ensure the URL is properly encoded
+        from urllib.parse import quote
+        path = quote(parsed.path, safe='/-_~.')
+        query = quote(parsed.query, safe='=&')
+        fragment = quote(parsed.fragment, safe='')
+        
+        # Reconstruct the URL with encoded components
+        fixed_url = f"{parsed.scheme}://{parsed.netloc}{path}"
+        if query:
+            fixed_url += f"?{query}"
+        if fragment:
+            fixed_url += f"#{fragment}"
+            
+        logger.debug(f"Final fixed URL: {fixed_url}")
+        return fixed_url
+    except Exception as e:
+        logger.error(f"Error fixing URL {url}: {e}", exc_info=True)
+        return "https://example.com"
+
+# Test cases for URL fixing
+def _test_url_fixing():
+    """Test the URL fixing function with various cases."""
+    test_cases = [
+        "https://example.com",
+        "http://example.com",
+        "example.com",
+        "ttps://example.com",
+        "hhttps://example.com",
+        "https://example.com/path with spaces",
+        "https://example.com?query=test&param=value",
+        "https://example.com#fragment",
+        "https://example.com/path?query=test#fragment",
+        "https://example.com/path with spaces?query=test with spaces#fragment with spaces",
+        "",  # Empty URL
+        None,  # None URL
+        "invalid url",  # Invalid URL
+    ]
+    
+    logger.info("Testing URL fixing function...")
+    for test_url in test_cases:
+        fixed = _fix_url(test_url)
+        logger.info(f"Test case: '{test_url}' -> '{fixed}'")
+    
+    logger.info("URL fixing tests completed.")
+
+# Run tests when module is imported
+_test_url_fixing()
 
 async def notify_events(bot, channel_id, notable_only=False, region=None):
     from config.db_pool import db_pool  # Import shared db_pool here
@@ -152,6 +220,10 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
             for event in events_to_notify:
                 logger.debug(f"Processing event: {event}")
 
+                # Log the original URLs for debugging
+                logger.debug(f"Event URL before fixing: {event['url']}")
+                logger.debug(f"Image URL before fixing: {event['image_url']}")
+
                 # Extract and manually convert ticketOnsaleStart to EST
                 onsale_start = "TBA"
                 if event['ticketonsalestart']:
@@ -194,10 +266,17 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                     elif event['state']:
                         location_text = f"{event['state']}"
 
+                # Fix URLs before creating embed
+                fixed_event_url = _fix_url(event['url'])
+                fixed_image_url = _fix_url(event['image_url']) if event['image_url'] else None
+                
+                logger.debug(f"Fixed event URL: {fixed_event_url}")
+                logger.debug(f"Fixed image URL: {fixed_image_url}")
+
                 # Create Discord embed
                 embed = discord.Embed(
                     title = f"{event['name']}" if event['artist_name'] is None else f"{event['artist_name']} - {event['name']}",
-                    url=_fix_url(event['url']),
+                    url=fixed_event_url,
                     description=(
                         f"**Location**: {location_text}\n"
                         f"**Event Date**: {event_date}\n"
@@ -206,8 +285,8 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                     ),
                     color=embed_color
                 )
-                if event['image_url']:
-                    embed.set_image(url=_fix_url(event['image_url']))
+                if fixed_image_url:
+                    embed.set_image(url=fixed_image_url)
 
                 # Process presale information from the JSON data
                 if event['presaledata']:
@@ -258,7 +337,13 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
 
                 # Send notification to Discord channel
                 logger.debug(f"Sending event notification for {event['name']} (ID: {event['eventid']})")
-                await channel.send(embed=embed)
+                try:
+                    await channel.send(embed=embed)
+                except discord.errors.HTTPException as e:
+                    logger.error(f"Failed to send embed for event {event['eventid']} ({event['name']}): {e}")
+                    logger.error(f"Event URL: {fixed_event_url}")
+                    logger.error(f"Image URL: {fixed_image_url}")
+                    continue  # Skip this event and continue with the next one
 
                 # Mark event as sent in the database
                 await conn.execute(
