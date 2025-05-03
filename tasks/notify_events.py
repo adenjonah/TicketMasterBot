@@ -179,7 +179,8 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
             Venues.city, 
             Venues.state, 
             Events.image_url, 
-            Artists.name AS artist_name
+            Artists.name AS artist_name,
+            Artists.notable
         FROM Events
         LEFT JOIN Venues ON Events.venueID = Venues.venueID
         LEFT JOIN Artists ON Events.artistID = Artists.artistID

@@ -4,7 +4,7 @@ from config.db_pool import initialize_db_pool, close_db_pool
 from tasks.notify_events import notify_events
 from tasks.check_reminders import check_reminders
 from handlers.reaction_handlers import handle_bell_reaction, handle_bell_reaction_remove, handle_x_reaction
-from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, EUROPEAN_CHANNEL, DATABASE_URL
+from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, EUROPEAN_CHANNEL, EUROPEAN_CHANNEL_TWO, DATABASE_URL
 from config.logging import logger
 import logging
 from database.init import initialize_db
@@ -85,27 +85,46 @@ async def notify_events_task():
         logger.debug("Starting event notification process...")
     
     try:
-        # Send notable artist events to the main channel
-        await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region=None)
+        # Process notable US events (notable=True, region=non-eu) -> US1 (DISCORD_CHANNEL_ID)
+        await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region='non-eu')
         
-        # Send European events to the European channel or fallback to secondary channel
+        # Process notable EU events (notable=True, region=eu) -> EU1 (EUROPEAN_CHANNEL)
         if EUROPEAN_CHANNEL and EUROPEAN_CHANNEL != 0:
             if logger.isEnabledFor(logging.DEBUG):
-                logger.debug(f"Checking for European events to send to channel ID: {EUROPEAN_CHANNEL}")
+                logger.debug(f"Checking for notable European events to send to channel ID: {EUROPEAN_CHANNEL}")
             
             try:
-                await notify_events(bot, EUROPEAN_CHANNEL, notable_only=False, region='eu')
+                await notify_events(bot, EUROPEAN_CHANNEL, notable_only=True, region='eu')
             except discord.errors.Forbidden as e:
                 logger.error(f"Failed to send to European channel: {e}")
+                # Fallback to US1 if EU1 is not accessible
+                await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region='eu')
+        else:
+            # If EU1 is not configured, use US1 as fallback for notable EU events
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug("European channel not configured, using primary US channel for notable EU events")
+            
+            await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region='eu')
+        
+        # Process non-notable EU events (notable=False, region=eu) -> EU2 (EUROPEAN_CHANNEL_TWO)
+        if EUROPEAN_CHANNEL_TWO and EUROPEAN_CHANNEL_TWO != 0:
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug(f"Checking for non-notable European events to send to channel ID: {EUROPEAN_CHANNEL_TWO}")
+            
+            try:
+                await notify_events(bot, EUROPEAN_CHANNEL_TWO, notable_only=False, region='eu')
+            except discord.errors.Forbidden as e:
+                logger.error(f"Failed to send to secondary European channel: {e}")
+                # Fallback to US2 if EU2 is not accessible
                 await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
         else:
-            # If European channel is not configured, use the secondary channel as fallback
+            # If EU2 is not configured, use US2 as fallback for non-notable EU events
             if logger.isEnabledFor(logging.DEBUG):
-                logger.debug("European channel not configured, using secondary channel")
+                logger.debug("Secondary European channel not configured, using secondary US channel for non-notable EU events")
             
             await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
         
-        # Send all other non-notable events to the secondary channel
+        # Process non-notable US events (notable=False, region=non-eu) -> US2 (DISCORD_CHANNEL_ID_TWO)
         await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='non-eu')
     except Exception as e:
         logger.error(f"Event notification error: {e}")
@@ -114,7 +133,13 @@ async def notify_events_task():
 async def check_reminders_task():
     """Check for upcoming reminders and send notifications"""
     try:
-        await check_reminders(bot, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, EUROPEAN_CHANNEL)
+        await check_reminders(
+            bot, 
+            DISCORD_CHANNEL_ID,         # US1 - notable US events
+            DISCORD_CHANNEL_ID_TWO,     # US2 - non-notable US events
+            EUROPEAN_CHANNEL,           # EU1 - notable EU events
+            EUROPEAN_CHANNEL_TWO        # EU2 - non-notable EU events
+        )
     except Exception as e:
         logger.error(f"Reminder check error: {e}")
 

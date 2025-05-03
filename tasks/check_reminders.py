@@ -3,7 +3,7 @@ from config.logging import logger
 from datetime import datetime, timezone, timedelta
 import pytz
 
-async def check_reminders(bot, channel_id_notable, channel_id_regular, channel_id_european=None):
+async def check_reminders(bot, channel_id_notable, channel_id_regular, channel_id_european=None, channel_id_european_regular=None):
     """Check for upcoming reminders and send notifications"""
     logger.info("Checking for upcoming reminders...")
     try:
@@ -26,7 +26,8 @@ async def check_reminders(bot, channel_id_notable, channel_id_regular, channel_i
                     Events.region,
                     Venues.city, 
                     Venues.state,
-                    Artists.name AS artist_name
+                    Artists.name AS artist_name,
+                    Artists.notable
                 FROM Events
                 LEFT JOIN Venues ON Events.venueID = Venues.venueID
                 LEFT JOIN Artists ON Events.artistID = Artists.artistID
@@ -42,28 +43,33 @@ async def check_reminders(bot, channel_id_notable, channel_id_regular, channel_i
             
             # Process each event with a reminder
             for event in events:
-                await process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, channel_id_european, now)
+                await process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, channel_id_european, channel_id_european_regular, now)
                 
     except Exception as e:
         logger.error(f"Error checking reminders: {e}", exc_info=True)
 
-async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, channel_id_european, now):
+async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regular, channel_id_european, channel_id_european_regular, now):
     """Process and send a reminder for a specific event"""
     try:
         # Determine which channel to use based on event region and artist notability
-        is_notable = False
-        if event['artist_name']:
-            is_notable = await conn.fetchval(
-                "SELECT notable FROM Artists WHERE name = $1",
-                event['artist_name']
-            )
+        is_notable = event['notable'] if event['notable'] is not None else False
+        is_european = event['region'] == 'eu'
         
-        # If it's a European event and we have a European channel, use that
-        if channel_id_european and event['region'] == 'eu':
-            channel_id = channel_id_european
-        # Otherwise use notable or regular channel based on artist notability
+        # Get appropriate channel ID based on region and notability
+        if is_european:
+            if is_notable:
+                # Notable European event -> EU1 (if available, otherwise US1)
+                channel_id = channel_id_european if channel_id_european else channel_id_notable
+            else:
+                # Non-notable European event -> EU2 (if available, otherwise US2)
+                channel_id = channel_id_european_regular if channel_id_european_regular else channel_id_regular
         else:
-            channel_id = channel_id_notable if is_notable else channel_id_regular
+            if is_notable:
+                # Notable non-European event -> US1
+                channel_id = channel_id_notable
+            else:
+                # Non-notable non-European event -> US2
+                channel_id = channel_id_regular
         
         channel = bot.get_channel(channel_id)
         if not channel:
