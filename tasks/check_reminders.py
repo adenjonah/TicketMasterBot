@@ -78,31 +78,75 @@ async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regu
         
         # Format times
         est_tz = pytz.timezone('America/New_York')
+        
+        # Get the first presale time
+        first_presale_time = None
+        presale_name = None
+        try:
+            # Get presale data for this event
+            presale_data = await conn.fetchval(
+                "SELECT presaleData FROM Events WHERE eventID = $1",
+                event['eventid']
+            )
+            if presale_data and presale_data != '[]':
+                import json
+                from dateutil import parser
+                presales = json.loads(presale_data)
+                if presales:
+                    # Sort presales by start datetime to find the earliest presale
+                    presales.sort(key=lambda x: parser.parse(x['startDateTime']))
+                    # Get the earliest presale
+                    earliest_presale = presales[0]
+                    first_presale_time = parser.parse(earliest_presale['startDateTime'])
+                    presale_name = earliest_presale.get('name', 'First Presale')
+        except Exception as e:
+            logger.error(f"Error getting presale data: {e}", exc_info=True)
+        
+        # Format the times for display
         onsale_start_utc = event['ticketonsalestart']
         onsale_start_est = onsale_start_utc.astimezone(est_tz)
         onsale_start = onsale_start_est.strftime("%B %d, %Y at %I:%M %p EST")
         
+        # Format the first presale time if available
+        first_presale_display = onsale_start
+        presale_title = "First Presale"
+        if first_presale_time:
+            first_presale_est = first_presale_time.astimezone(est_tz)
+            first_presale_display = first_presale_est.strftime("%B %d, %Y at %I:%M %p EST")
+            if presale_name:
+                presale_title = f"{presale_name}"
+        
         # Check if reminder is past-due
         is_past_due = event['reminder'] < now
         
-        # Calculate hours until ticket sale
-        hours_until_sale = (event['ticketonsalestart'] - now).total_seconds() / 3600
+        # Calculate hours until ticket sale (presale)
+        # For reminders, we need to calculate based on when the reminder was set for
+        # Since our reminder is typically 12h before first presale or 1h before general sale
+        # We can simply calculate from reminder time + the offset used when setting it
+        if event['reminder'] + timedelta(hours=12) < event['ticketonsalestart']:
+            # This is a 12-hour reminder before first presale
+            sale_time = event['reminder'] + timedelta(hours=12)
+        else:
+            # This is a 1-hour reminder before general sale
+            sale_time = event['reminder'] + timedelta(hours=1)
+        
+        hours_until_sale = (sale_time - now).total_seconds() / 3600
         
         # Adjust message for reminders
-        reminder_text = "**Tickets go on sale in ~12 hours!**"
+        reminder_text = "**First presale starts in ~12 hours!**"
         can_set_another_reminder = True
         
         if hours_until_sale < 0:
             reminder_text = "**Tickets are now on sale!**"
             can_set_another_reminder = False
         elif hours_until_sale < 1:
-            reminder_text = f"**Tickets go on sale in less than 1 hour!**"
+            reminder_text = f"**First presale starts in less than 1 hour!**"
             can_set_another_reminder = False
         else:
-            reminder_text = f"**Tickets go on sale in ~{int(hours_until_sale)} hours!**"
+            reminder_text = f"**First presale starts in ~{int(hours_until_sale)} hours!**"
         
         # Define the footer message
-        footer_text = "\n\nReact with 🔔 to this message to receive another reminder 1 hour before sale."
+        footer_text = "\n\nReact with 🔔 to this message to receive another reminder 1 hour before the first presale."
         if not can_set_another_reminder:
             footer_text = "\n\nTickets are now on sale or will be very soon. Good luck!"
             
@@ -156,7 +200,7 @@ async def process_reminder(bot, conn, event, channel_id_notable, channel_id_regu
             description=(
                 f"{reminder_text}\n"
                 f"**Location**: {location_text}\n"
-                f"**Sale Start**: {onsale_start}{footer_text}"
+                f"**{presale_title}**: {first_presale_display}{footer_text}"
             ),
             color=embed_color
         )
