@@ -1,7 +1,7 @@
 import discord
 from discord.ext import tasks, commands
 from config.db_pool import initialize_db_pool, close_db_pool
-from tasks.notify_events import notify_events
+from tasks.notify_events import notify_events_legacy
 from tasks.check_reminders import check_reminders
 from handlers.reaction_handlers import handle_bell_reaction, handle_bell_reaction_remove, handle_x_reaction
 from config.config import DISCORD_BOT_TOKEN, DISCORD_CHANNEL_ID, DISCORD_CHANNEL_ID_TWO, EUROPEAN_CHANNEL, EUROPEAN_CHANNEL_TWO, DATABASE_URL
@@ -86,7 +86,7 @@ async def notify_events_task():
     
     try:
         # Process notable US events (notable=True, region=non-eu) -> US1 (DISCORD_CHANNEL_ID)
-        await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region='non-eu')
+        await notify_events_legacy(bot, DISCORD_CHANNEL_ID, notable_only=True, region='non-eu')
         
         # Process notable EU events (notable=True, region=eu) -> EU1 (EUROPEAN_CHANNEL)
         if EUROPEAN_CHANNEL and EUROPEAN_CHANNEL != 0:
@@ -94,17 +94,17 @@ async def notify_events_task():
                 logger.debug(f"Checking for notable European events to send to channel ID: {EUROPEAN_CHANNEL}")
             
             try:
-                await notify_events(bot, EUROPEAN_CHANNEL, notable_only=True, region='eu')
+                await notify_events_legacy(bot, EUROPEAN_CHANNEL, notable_only=True, region='eu')
             except discord.errors.Forbidden as e:
                 logger.error(f"Failed to send to European channel: {e}")
                 # Fallback to US1 if EU1 is not accessible
-                await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region='eu')
+                await notify_events_legacy(bot, DISCORD_CHANNEL_ID, notable_only=True, region='eu')
         else:
             # If EU1 is not configured, use US1 as fallback for notable EU events
             if logger.isEnabledFor(logging.DEBUG):
                 logger.debug("European channel not configured, using primary US channel for notable EU events")
             
-            await notify_events(bot, DISCORD_CHANNEL_ID, notable_only=True, region='eu')
+            await notify_events_legacy(bot, DISCORD_CHANNEL_ID, notable_only=True, region='eu')
         
         # Process non-notable EU events (notable=False, region=eu) -> EU2 (EUROPEAN_CHANNEL_TWO)
         if EUROPEAN_CHANNEL_TWO and EUROPEAN_CHANNEL_TWO != 0:
@@ -112,20 +112,20 @@ async def notify_events_task():
                 logger.debug(f"Checking for non-notable European events to send to channel ID: {EUROPEAN_CHANNEL_TWO}")
             
             try:
-                await notify_events(bot, EUROPEAN_CHANNEL_TWO, notable_only=False, region='eu')
+                await notify_events_legacy(bot, EUROPEAN_CHANNEL_TWO, notable_only=False, region='eu')
             except discord.errors.Forbidden as e:
                 logger.error(f"Failed to send to secondary European channel: {e}")
                 # Fallback to US2 if EU2 is not accessible
-                await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
+                await notify_events_legacy(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
         else:
             # If EU2 is not configured, use US2 as fallback for non-notable EU events
             if logger.isEnabledFor(logging.DEBUG):
                 logger.debug("Secondary European channel not configured, using secondary US channel for non-notable EU events")
             
-            await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
+            await notify_events_legacy(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='eu')
         
         # Process non-notable US events (notable=False, region=non-eu) -> US2 (DISCORD_CHANNEL_ID_TWO)
-        await notify_events(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='non-eu')
+        await notify_events_legacy(bot, DISCORD_CHANNEL_ID_TWO, notable_only=False, region='non-eu')
     except Exception as e:
         logger.error(f"Event notification error: {e}")
 
