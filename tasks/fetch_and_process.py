@@ -25,7 +25,6 @@ REGION_TO_ID = {
     'west': 'we',
     'europe': 'eu',
     'comedy': 'co',
-    'theater': 'th',
     'film': 'fi'  # New film region
 }
 
