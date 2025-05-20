@@ -25,6 +25,7 @@ REGION_TO_ID = {
     'west': 'we',
     'europe': 'eu',
     'comedy': 'co',
+    'theater': 'th',
     'film': 'fi'  # New film region
 }
 
@@ -106,7 +107,7 @@ async def process_event(event, server_id):
     """
     from config.db_pool import db_pool  # Import shared db_pool here
     from helpers.formatting import format_date_human_readable
-    from tasks.notify_events import notify_events_legacy  # Import notify_events_legacy here to avoid circular imports
+    from tasks.notify_events import notify_events  # Import notify_events here to avoid circular imports
 
     try:
         async with db_pool.acquire() as conn:
@@ -149,8 +150,8 @@ async def process_event(event, server_id):
                         if logger.isEnabledFor(logging.INFO):
                             logger.info(f"Notable artist event: {event_id} - {event['name']}")
                             
-                        # Call notify_events_legacy with notable_only set to True
-                        await notify_events_legacy(event_to_store["bot"], DISCORD_CHANNEL_ID, notable_only=True)
+                        # Call notify_events with notable_only set to True
+                        await notify_events(event_to_store["bot"], DISCORD_CHANNEL_ID, notable_only=True)
                         
                         # Record the notable event data in the time series
                         await record_notable_events_data(

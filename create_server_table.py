@@ -12,7 +12,8 @@ SERVER_IDS = [
     'so',  # South
     'we',  # West
     'eu',  # Europe
-    'co'   # Comedy/Theater/Film
+    'co',  # Comedy
+    'th'   # Theater
 ]
 
 async def get_table_name(conn, table_base_name):

@@ -51,6 +51,11 @@ elif REGION == 'comedy':
     RADIUS='3016'
     CLASSIFICATION_ID='KZFzniwnSyZfZ7v7na'
     GENRE_ID='KnvZfZ7vAe1'
+elif REGION == 'theater':
+    CENTER_POINT='44.69209,-99.95477'
+    RADIUS='3016'
+    CLASSIFICATION_ID='KZFzniwnSyZfZ7v7na'
+    GENRE_ID='KnvZfZ7v7l1'
 elif REGION == 'film':
     CENTER_POINT='44.69209,-99.95477'
     RADIUS='3016'

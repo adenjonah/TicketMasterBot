@@ -11,7 +11,8 @@ REGION_TO_ID = {
     'south': 'so',
     'west': 'we',
     'europe': 'eu',
-    'comedy': 'co'
+    'comedy': 'co',
+    'theater': 'th'
 }
 
 async def get_table_name(conn, table_base_name):
