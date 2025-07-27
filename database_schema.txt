@@ -1,0 +1,118 @@
+# TicketMasterBot Database Schema
+
+## Events Table
+```sql
+CREATE TABLE Events (
+    eventID TEXT PRIMARY KEY,
+    name TEXT,
+    artistID TEXT,
+    venueID TEXT,
+    eventDate TIMESTAMPTZ,
+    ticketOnsaleStart TIMESTAMPTZ,
+    url TEXT,
+    image_url TEXT,
+    sentToDiscord BOOLEAN DEFAULT FALSE,
+    lastUpdated TIMESTAMPTZ,
+    reminder TIMESTAMPTZ DEFAULT NULL,
+    presaleData JSONB DEFAULT NULL,
+    region TEXT
+)
+```
+
+## Venues Table
+```sql
+CREATE TABLE Venues (
+    venueID TEXT PRIMARY KEY,
+    name TEXT,
+    city TEXT,
+    state TEXT
+)
+```
+
+## Artists Table
+```sql
+CREATE TABLE Artists (
+    artistID TEXT PRIMARY KEY,
+    name TEXT,
+    notable BOOLEAN DEFAULT FALSE
+)
+```
+
+## Server Table
+```sql
+CREATE TABLE Server (
+    ServerID TEXT PRIMARY KEY,
+    status TEXT,
+    last_request TIMESTAMPTZ,
+    events_returned INTEGER DEFAULT 0,
+    new_events INTEGER DEFAULT 0,
+    error_messages TEXT
+)
+```
+
+## ServerTimeSeries Table
+```sql
+CREATE TABLE ServerTimeSeries (
+    id SERIAL PRIMARY KEY,
+    ServerID TEXT NOT NULL,
+    timestamp TIMESTAMPTZ NOT NULL,
+    status TEXT,
+    events_returned INTEGER DEFAULT 0,
+    new_events INTEGER DEFAULT 0,
+    hour_of_day INTEGER,
+    day_of_week INTEGER,
+    error_messages TEXT,
+    CONSTRAINT fk_server
+        FOREIGN KEY(ServerID)
+        REFERENCES Server(ServerID)
+)
+
+-- Indexes
+CREATE INDEX idx_server_timeseries_serverid_timestamp
+ON ServerTimeSeries (ServerID, timestamp);
+
+CREATE INDEX idx_server_timeseries_hour
+ON ServerTimeSeries (hour_of_day);
+```
+
+## NotableEventsTimeSeries Table
+```sql
+CREATE TABLE NotableEventsTimeSeries (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMPTZ NOT NULL,
+    hour_of_day INTEGER,
+    day_of_week INTEGER,
+    total_events INTEGER DEFAULT 0,
+    new_events INTEGER DEFAULT 0,
+    region TEXT
+)
+
+-- Indexes
+CREATE INDEX idx_notable_timeseries_timestamp
+ON NotableEventsTimeSeries (timestamp);
+
+CREATE INDEX idx_notable_timeseries_hour
+ON NotableEventsTimeSeries (hour_of_day);
+```
+
+## Relationships
+1. Events.artistID -> Artists.artistID (Logical foreign key)
+2. Events.venueID -> Venues.venueID (Logical foreign key)
+3. ServerTimeSeries.ServerID -> Server.ServerID (Enforced foreign key)
+
+## Default Server IDs
+The Server table is initialized with the following default short IDs:
+- 'no' (North)
+- 'ea' (East)
+- 'so' (South)
+- 'we' (West)
+- 'eu' (Europe)
+- 'co' (Comedy)
+- 'th' (Theater)
+
+## Notes
+1. All timestamp fields use TIMESTAMPTZ (timestamp with timezone)
+2. The Events table includes a JSONB field for presaleData to store flexible presale information
+3. The region column in Events table was added as a schema update to support regional event tracking
+4. ServerTimeSeries and NotableEventsTimeSeries tables include time-based indexes for efficient querying
+5. The Server table uses short IDs (2 characters) after migration from legacy longer IDs 
