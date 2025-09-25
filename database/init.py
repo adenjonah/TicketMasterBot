@@ -312,6 +312,42 @@ async def initialize_db():
                 END IF;
             END $$;
             ''')
+            
+            # Add notification tracking columns if they don't exist
+            await conn.execute('''
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'notification_attempts'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN notification_attempts INTEGER DEFAULT 0;
+                    RAISE NOTICE 'Added notification_attempts column to Events table';
+                END IF;
+                
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'last_notification_attempt'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN last_notification_attempt TIMESTAMPTZ DEFAULT NULL;
+                    RAISE NOTICE 'Added last_notification_attempt column to Events table';
+                END IF;
+                
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'notification_error'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN notification_error TEXT DEFAULT NULL;
+                    RAISE NOTICE 'Added notification_error column to Events table';
+                END IF;
+            END $$;
+            ''')
 
         except Exception as e:
             logger.error(f"Error during database initialization: {e}", exc_info=True)

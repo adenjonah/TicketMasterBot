@@ -5,7 +5,7 @@ from helpers.formatting import format_date_human_readable
 import pytz
 import json
 from dateutil import parser
-from datetime import datetime
+from datetime import datetime, timezone
 import re
 from urllib.parse import urlparse, quote, unquote
 
@@ -176,6 +176,9 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
             Events.url, 
             Events.presaleData,
             Events.region,
+            Events.notification_attempts,
+            Events.last_notification_attempt,
+            Events.notification_error,
             Venues.city, 
             Venues.state, 
             Events.image_url, 
@@ -185,6 +188,7 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
         LEFT JOIN Venues ON Events.venueID = Venues.venueID
         LEFT JOIN Artists ON Events.artistID = Artists.artistID
         WHERE Events.sentToDiscord = FALSE
+            AND (Events.notification_attempts IS NULL OR Events.notification_attempts < 3)
     '''
 
     # Build the query filters based on parameters
@@ -260,6 +264,7 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                     try:
                         event_id = event['eventid']
                         event_name = event['name']
+                        current_attempts = event.get('notification_attempts', 0) or 0
                         
                         # Skip known problematic events
                         if event_id in KNOWN_BAD_EVENT_IDS:
@@ -270,6 +275,14 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                                 event_id
                             )
                             continue
+                        
+                        # Increment attempt counter before trying
+                        await conn.execute('''
+                            UPDATE Events 
+                            SET notification_attempts = COALESCE(notification_attempts, 0) + 1,
+                                last_notification_attempt = $1
+                            WHERE eventID = $2
+                        ''', datetime.now(timezone.utc), event_id)
                         
                         # Save original URLs for troubleshooting
                         original_event_url = event['url']
@@ -301,37 +314,83 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                             embed.set_image(url=fixed_image_url)
 
                         # Send notification to Discord channel
-                        await channel.send(embed=embed)
+                        message = await channel.send(embed=embed)
                         
-                        # Mark event as sent in the database
-                        await conn.execute(
-                            "UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1",
-                            event_id
-                        )
+                        # Only mark as sent if we successfully got a message object back
+                        if message and message.id:
+                            await conn.execute('''
+                                UPDATE Events 
+                                SET sentToDiscord = TRUE, 
+                                    notification_error = NULL
+                                WHERE eventID = $1
+                            ''', event_id)
+                            success_count += 1
+                            if logger.isEnabledFor(logging.DEBUG):
+                                logger.debug(f"Successfully sent event {event_id} to Discord (message ID: {message.id})")
+                        else:
+                            error_count += 1
+                            await conn.execute('''
+                                UPDATE Events 
+                                SET notification_error = $1
+                                WHERE eventID = $2
+                            ''', "No message object returned from Discord", event_id)
+                            logger.error(f"Failed to send event {event_id}: No message object returned")
                         
-                        success_count += 1
+                    except discord.errors.Forbidden as e:
+                        error_count += 1
+                        await conn.execute('''
+                            UPDATE Events 
+                            SET notification_error = $1
+                            WHERE eventID = $2
+                        ''', f"Permission denied: {str(e)}", event_id)
+                        logger.error(f"Permission denied sending event {event_id} to channel {channel_id}: {e}")
+                        # Don't mark as sent - this is a fixable issue
                         
                     except discord.errors.HTTPException as e:
                         error_count += 1
-                        # Add this event ID to the known bad events list
-                        if "Not a well formed URL" in str(e):
-                            KNOWN_BAD_EVENT_IDS.add(event_id)
-                            logger.error(f"Added event {event_id} to known bad events list due to URL error")
-                            
-                        # Log detailed info on the problematic URLs
-                        logger.error(f"Discord embed error for event {event['eventid']} ({event['name']}): {e}")
-                        logger.error(f"Problem URL: original='{event['url']}', fixed='{fixed_event_url}'")
+                        # Check if this is a permanent error (bad URL, invalid embed)
+                        permanent_errors = [
+                            "Not a well formed URL",
+                            "Invalid Form Body", 
+                            "Request entity too large",
+                            "Embed title is too long",
+                            "Embed description is too long"
+                        ]
                         
-                        # Mark it as sent to avoid trying again
-                        await conn.execute(
-                            "UPDATE Events SET sentToDiscord = TRUE WHERE eventID = $1",
-                            event_id
-                        )
-                        continue
+                        is_permanent = any(error_text in str(e) for error_text in permanent_errors)
+                        
+                        if is_permanent:
+                            # Add to known bad events and mark as sent to avoid retrying
+                            KNOWN_BAD_EVENT_IDS.add(event_id)
+                            logger.error(f"Permanent error for event {event_id}: {e}")
+                            logger.error(f"Problem URL: original='{event['url']}', fixed='{fixed_event_url}'")
+                            logger.error(f"Adding to known bad events list to prevent retries")
+                            
+                            await conn.execute('''
+                                UPDATE Events 
+                                SET sentToDiscord = TRUE, 
+                                    notification_error = $1
+                                WHERE eventID = $2
+                            ''', f"Permanent error: {str(e)}", event_id)
+                        else:
+                            # Transient error - don't mark as sent, allow retry
+                            await conn.execute('''
+                                UPDATE Events 
+                                SET notification_error = $1
+                                WHERE eventID = $2
+                            ''', f"Transient error: {str(e)}", event_id)
+                            logger.warning(f"Transient Discord error for event {event_id}: {e}")
+                            logger.warning(f"Event will be retried on next notification cycle")
+                    
                     except Exception as e:
                         error_count += 1
-                        logger.error(f"Error processing event {event.get('eventid', 'unknown')}: {e}")
-                        continue
+                        await conn.execute('''
+                            UPDATE Events 
+                            SET notification_error = $1
+                            WHERE eventID = $2
+                        ''', f"Unexpected error: {str(e)}", event_id)
+                        logger.error(f"Unexpected error sending event {event_id}: {e}")
+                        # Don't mark as sent for unexpected errors
                 
                 if logger.isEnabledFor(logging.INFO):
                     logger.info(f"Processed batch: {len(batch)} events")
@@ -347,6 +406,17 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
             # Log summary at the end
             if logger.isEnabledFor(logging.INFO):
                 logger.info(f"Notify summary: {success_count} sent, {error_count} errors")
+            
+            # Report on events that have reached max attempts
+            if logger.isEnabledFor(logging.WARNING):
+                max_attempts_count = await conn.fetchval('''
+                    SELECT COUNT(*) 
+                    FROM Events 
+                    WHERE sentToDiscord = FALSE 
+                    AND notification_attempts >= 3
+                ''')
+                if max_attempts_count > 0:
+                    logger.warning(f"Warning: {max_attempts_count} events have reached max notification attempts and won't be retried")
                 
         except Exception as e:
             logger.error(f"Notification error: {e}")
