@@ -1,0 +1,2272 @@
+{
+  "_embedded": {
+    "events": [
+      {
+        "name": "Yiyo Sarante",
+        "type": "event",
+        "id": "k7v17bbFkG7B0N7",
+        "test": false,
+        "url": "https://www.ticketmaster.com/yiyo-sarante-elizabeth-new-jersey-12-28-2024/event/0000618206EA48C4",
+        "locale": "en-us",
+        "images": [
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RETINA_PORTRAIT_16_9.jpg",
+            "width": 640,
+            "height": 360,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RETINA_PORTRAIT_3_2.jpg",
+            "width": 640,
+            "height": 427,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_TABLET_LANDSCAPE_3_2.jpg",
+            "width": 1024,
+            "height": 683,
+            "fallback": false
+          },
+          {
+            "ratio": "4_3",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_CUSTOM.jpg",
+            "width": 305,
+            "height": 225,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RECOMENDATION_16_9.jpg",
+            "width": 100,
+            "height": 56,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RETINA_LANDSCAPE_16_9.jpg",
+            "width": 1136,
+            "height": 639,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_EVENT_DETAIL_PAGE_16_9.jpg",
+            "width": 205,
+            "height": 115,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_TABLET_LANDSCAPE_16_9.jpg",
+            "width": 1024,
+            "height": 576,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_SOURCE",
+            "width": 2426,
+            "height": 1365,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_ARTIST_PAGE_3_2.jpg",
+            "width": 305,
+            "height": 203,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+            "width": 2048,
+            "height": 1152,
+            "fallback": false
+          }
+        ],
+        "sales": {
+          "public": {
+            "startDateTime": "2024-12-03T01:41:00Z",
+            "startTBD": false,
+            "startTBA": false,
+            "endDateTime": "2024-12-29T01:00:00Z"
+          }
+        },
+        "dates": {
+          "start": {
+            "localDate": "2024-12-28",
+            "localTime": "20:00:00",
+            "dateTime": "2024-12-29T01:00:00Z",
+            "dateTBD": false,
+            "dateTBA": false,
+            "timeTBA": false,
+            "noSpecificTime": false
+          },
+          "timezone": "America/New_York",
+          "status": {
+            "code": "onsale"
+          },
+          "spanMultipleDays": false
+        },
+        "classifications": [
+          {
+            "primary": true,
+            "segment": {
+              "id": "KZFzniwnSyZfZ7v7nJ",
+              "name": "Music"
+            },
+            "genre": {
+              "id": "KnvZfZ7vAJ6",
+              "name": "Latin"
+            },
+            "subGenre": {
+              "id": "KZazBEonSMnZfZ7va1a",
+              "name": "Latin"
+            },
+            "type": {
+              "id": "KZAyXgnZfZ7v7nI",
+              "name": "Undefined"
+            },
+            "subType": {
+              "id": "KZFzBErXgnZfZ7v7lJ",
+              "name": "Undefined"
+            },
+            "family": false
+          }
+        ],
+        "promoter": {
+          "id": "494",
+          "name": "PROMOTED BY VENUE",
+          "description": "PROMOTED BY VENUE / NTL / USA"
+        },
+        "promoters": [
+          {
+            "id": "494",
+            "name": "PROMOTED BY VENUE",
+            "description": "PROMOTED BY VENUE / NTL / USA"
+          }
+        ],
+        "priceRanges": [
+          {
+            "type": "standard",
+            "currency": "USD",
+            "min": 39,
+            "max": 299
+          }
+        ],
+        "seatmap": {
+          "staticUrl": "https://mapsapi.tmol.io/maps/geometry/3/event/0000618206EA48C4/staticImage?type=png&systemId=HOST",
+          "id": "seatmap"
+        },
+        "accessibility": {
+          "id": "accessibility"
+        },
+        "ageRestrictions": {
+          "legalAgeEnforced": false,
+          "id": "ageRestrictions"
+        },
+        "ticketing": {
+          "safeTix": {
+            "enabled": true
+          },
+          "allInclusivePricing": {
+            "enabled": false
+          },
+          "id": "ticketing"
+        },
+        "_links": {
+          "self": {
+            "href": "/discovery/v2/events/k7v17bbFkG7B0N7?locale=en-us"
+          },
+          "attractions": [
+            {
+              "href": "/discovery/v2/attractions/K8vZ9174z57?locale=en-us"
+            }
+          ],
+          "venues": [
+            {
+              "href": "/discovery/v2/venues/KovZpZAdlenA?locale=en-us"
+            }
+          ]
+        },
+        "_embedded": {
+          "venues": [
+            {
+              "name": "Ritz Theatre",
+              "type": "venue",
+              "id": "KovZpZAdlenA",
+              "test": false,
+              "url": "https://www.ticketmaster.com/ritz-theatre-tickets-elizabeth/venue/92",
+              "locale": "en-us",
+              "postalCode": "07201",
+              "timezone": "America/New_York",
+              "city": {
+                "name": "Elizabeth"
+              },
+              "state": {
+                "name": "New Jersey",
+                "stateCode": "NJ"
+              },
+              "country": {
+                "name": "United States Of America",
+                "countryCode": "US"
+              },
+              "address": {
+                "line1": "1148 East Jersey St."
+              },
+              "location": {
+                "longitude": "-74.2133999",
+                "latitude": "40.6644999"
+              },
+              "markets": [
+                {
+                  "name": "New York/Tri-State Area",
+                  "id": "35"
+                },
+                {
+                  "name": "Northern New Jersey",
+                  "id": "55"
+                },
+                {
+                  "name": "Connecticut",
+                  "id": "124"
+                }
+              ],
+              "dmas": [
+                {
+                  "id": 296
+                },
+                {
+                  "id": 345
+                },
+                {
+                  "id": 422
+                }
+              ],
+              "boxOfficeInfo": {
+                "phoneNumberDetail": "Box Office Number: (908) 352-7469 / (800) 317-7725",
+                "openHoursDetail": "None Prior To The Night Of The Show.",
+                "acceptedPaymentDetail": "Cash",
+                "willCallDetail": "Pick-Up Tickets One Hour Prior To Show. Customer Must Present The Actual Credit Card Used To Place The Order, A Photo I.D., And The Order Number."
+              },
+              "parkingDetail": "Parking Is Available At The Venue",
+              "accessibleSeatingDetail": "Special Seating Is Available Upon Request Or Notification",
+              "generalInfo": {
+                "generalRule": "No Smoking No Drugs Allowed No Dress Code",
+                "childRule": "All Ages Show (No Discounts)"
+              },
+              "upcomingEvents": {
+                "ticketmaster": 9,
+                "_total": 9,
+                "_filtered": 0
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/venues/KovZpZAdlenA?locale=en-us"
+                }
+              }
+            }
+          ],
+          "attractions": [
+            {
+              "name": "Yiyo Sarante",
+              "type": "attraction",
+              "id": "K8vZ9174z57",
+              "test": false,
+              "url": "https://www.ticketmaster.com/yiyo-sarante-tickets/artist/2350844",
+              "locale": "en-us",
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RETINA_PORTRAIT_16_9.jpg",
+                  "width": 640,
+                  "height": 360,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RETINA_PORTRAIT_3_2.jpg",
+                  "width": 640,
+                  "height": 427,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_TABLET_LANDSCAPE_3_2.jpg",
+                  "width": 1024,
+                  "height": 683,
+                  "fallback": false
+                },
+                {
+                  "ratio": "4_3",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_CUSTOM.jpg",
+                  "width": 305,
+                  "height": 225,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RECOMENDATION_16_9.jpg",
+                  "width": 100,
+                  "height": 56,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_RETINA_LANDSCAPE_16_9.jpg",
+                  "width": 1136,
+                  "height": 639,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_EVENT_DETAIL_PAGE_16_9.jpg",
+                  "width": 205,
+                  "height": 115,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_TABLET_LANDSCAPE_16_9.jpg",
+                  "width": 1024,
+                  "height": 576,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_SOURCE",
+                  "width": 2426,
+                  "height": 1365,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_ARTIST_PAGE_3_2.jpg",
+                  "width": 305,
+                  "height": 203,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/7b6/a95fe9e4-5032-4677-b03c-ef1b128967b6_1652661_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+                  "width": 2048,
+                  "height": 1152,
+                  "fallback": false
+                }
+              ],
+              "classifications": [
+                {
+                  "primary": true,
+                  "segment": {
+                    "id": "KZFzniwnSyZfZ7v7nJ",
+                    "name": "Music"
+                  },
+                  "genre": {
+                    "id": "KnvZfZ7vAeF",
+                    "name": "World"
+                  },
+                  "subGenre": {
+                    "id": "KZazBEonSMnZfZ7v6Id",
+                    "name": "Bachata"
+                  },
+                  "type": {
+                    "id": "KZAyXgnZfZ7v7la",
+                    "name": "Individual"
+                  },
+                  "subType": {
+                    "id": "KZFzBErXgnZfZ7vAd7",
+                    "name": "Musician"
+                  },
+                  "family": false
+                }
+              ],
+              "upcomingEvents": {
+                "ticketmaster": 0,
+                "_total": 0,
+                "_filtered": 0
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/attractions/K8vZ9174z57?locale=en-us"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "R&B Only",
+        "type": "event",
+        "id": "G5dIZbbFNGNb0",
+        "test": false,
+        "url": "https://concerts.livenation.com/rb-only-houston-texas-02-14-2025/event/3A00618223323624",
+        "locale": "en-us",
+        "images": [
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RETINA_LANDSCAPE_16_9.jpg",
+            "width": 1136,
+            "height": 639,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_TABLET_LANDSCAPE_16_9.jpg",
+            "width": 1024,
+            "height": 576,
+            "fallback": false
+          },
+          {
+            "ratio": "4_3",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_CUSTOM.jpg",
+            "width": 305,
+            "height": 225,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+            "width": 2048,
+            "height": 1152,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RETINA_PORTRAIT_3_2.jpg",
+            "width": 640,
+            "height": 427,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_SOURCE",
+            "width": 2426,
+            "height": 1620,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_TABLET_LANDSCAPE_3_2.jpg",
+            "width": 1024,
+            "height": 683,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_ARTIST_PAGE_3_2.jpg",
+            "width": 305,
+            "height": 203,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_EVENT_DETAIL_PAGE_16_9.jpg",
+            "width": 205,
+            "height": 115,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RETINA_PORTRAIT_16_9.jpg",
+            "width": 640,
+            "height": 360,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RECOMENDATION_16_9.jpg",
+            "width": 100,
+            "height": 56,
+            "fallback": false
+          }
+        ],
+        "sales": {
+          "public": {
+            "startDateTime": "2024-12-03T03:00:00Z",
+            "startTBD": false,
+            "startTBA": false,
+            "endDateTime": "2025-02-15T02:00:00Z"
+          }
+        },
+        "dates": {
+          "start": {
+            "localDate": "2025-02-14",
+            "localTime": "20:00:00",
+            "dateTime": "2025-02-15T02:00:00Z",
+            "dateTBD": false,
+            "dateTBA": false,
+            "timeTBA": false,
+            "noSpecificTime": false
+          },
+          "timezone": "America/Chicago",
+          "status": {
+            "code": "onsale"
+          },
+          "spanMultipleDays": false
+        },
+        "classifications": [
+          {
+            "primary": true,
+            "segment": {
+              "id": "KZFzniwnSyZfZ7v7nJ",
+              "name": "Music"
+            },
+            "genre": {
+              "id": "KnvZfZ7vAee",
+              "name": "R&B"
+            },
+            "subGenre": {
+              "id": "KZazBEonSMnZfZ7vkIt",
+              "name": "R&B"
+            },
+            "type": {
+              "id": "KZAyXgnZfZ7v7nI",
+              "name": "Undefined"
+            },
+            "subType": {
+              "id": "KZFzBErXgnZfZ7v7lJ",
+              "name": "Undefined"
+            },
+            "family": false
+          }
+        ],
+        "info": "COLORS Worldwide Presents: R&B ONLY LIVE 18+ Q: What is R&B ONLY LIVE? A: R&B ONLY LIVE is a journey of R&B music from past to present. Q: How should I dress for R&B ONLY LIVE? A: Come camera ready! Our photographers will be on site.",
+        "accessibility": {
+          "id": "accessibility"
+        },
+        "ageRestrictions": {
+          "legalAgeEnforced": false,
+          "id": "ageRestrictions"
+        },
+        "ticketing": {
+          "safeTix": {
+            "enabled": false
+          },
+          "allInclusivePricing": {
+            "enabled": false
+          },
+          "id": "ticketing"
+        },
+        "_links": {
+          "self": {
+            "href": "/discovery/v2/events/G5dIZbbFNGNb0?locale=en-us"
+          },
+          "attractions": [
+            {
+              "href": "/discovery/v2/attractions/K8vZ917bcfV?locale=en-us"
+            }
+          ],
+          "venues": [
+            {
+              "href": "/discovery/v2/venues/KovZpZAEkIIA?locale=en-us"
+            }
+          ]
+        },
+        "_embedded": {
+          "venues": [
+            {
+              "name": "Bayou Music Center",
+              "type": "venue",
+              "id": "KovZpZAEkIIA",
+              "test": false,
+              "url": "https://www.ticketmaster.com/bayou-music-center-tickets-houston/venue/475416",
+              "locale": "en-us",
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dbimages/22007v.jpg",
+                  "width": 205,
+                  "height": 115,
+                  "fallback": false
+                }
+              ],
+              "postalCode": "77002",
+              "timezone": "America/Chicago",
+              "city": {
+                "name": "Houston"
+              },
+              "state": {
+                "name": "Texas",
+                "stateCode": "TX"
+              },
+              "country": {
+                "name": "United States Of America",
+                "countryCode": "US"
+              },
+              "address": {
+                "line1": "520 Texas Ave."
+              },
+              "location": {
+                "longitude": "-95.3672891",
+                "latitude": "29.7628087"
+              },
+              "markets": [
+                {
+                  "name": "Houston and More",
+                  "id": "22"
+                },
+                {
+                  "name": "Beaumont",
+                  "id": "123"
+                }
+              ],
+              "dmas": [
+                {
+                  "id": 227
+                },
+                {
+                  "id": 300
+                },
+                {
+                  "id": 408
+                }
+              ],
+              "boxOfficeInfo": {
+                "phoneNumberDetail": "713-230-1666 Information 713-230-1600 Box Office Rental Inquiries RENTBMC@livenation.com VIP Premium Services Premium Experiences email: HoustonPremiumSeating@livenation.com for more information",
+                "openHoursDetail": "Due to the ongoing global pandemic, and to protect the health and safety of our guests and venue staff members, the box office at Bayou Music Center will be open on day of show only. If you are looking to purchase tickets, we ask you to visit us at www.livenation.com . If you are looking to obtain a refund for a show that was either canceled or rescheduled, please visit www.livenation.com/refund for more information. We look forward to seeing you at our next show at Bayou Music Center.",
+                "acceptedPaymentDetail": "Cash, American Express, Discover, MasterCard and Visa. Credit card purchases require a valid matching photo ID. The name on the ID must match the name on the credit card used to purchase tickets.",
+                "willCallDetail": "Customers may pick up tickets day of show one (1) hour prior to door time with a photo ID and the credit card used for purchase. The name on the ID must match the name on the credit card used to purchase tickets."
+              },
+              "parkingDetail": "Patrons may park in the Theater District Parking Garage. Event parking is $12.00 after 5 pm - 12 am Mon-Fri and all day on Sat-Sun. Daytime event parking prices from 12am - 5pm, Mon-Fri is $15.00. The parking garage is special needs accessible and spaces are based on availability. This area is painted blue for easy viewing. **Valet parking is available for $16.00, with entrances on both Texas Avenue and Smith Street.",
+              "accessibleSeatingDetail": "FULLY ACCESSIBLE seating is located downstairs and in the Grand Tier. Space is limited and is based on a first come first serve basis. Sight/Hearing Impaired seating is also located downstairs.",
+              "generalInfo": {
+                "generalRule": "There is a $5.00 service charge added to each ticket purchased at the Box Office. Camera Policy: Personal cameras are allowed in the venue. Flash photography, video and removable lens cameras are not permitted without venue approval. All Sales are Final. No Refunds or Exchanges. Tailgating, open alcoholic beverages, open fires and the selling of merchandise are not permitted in the parking garage. Guests are subject to bag searches and various levels of screening subject to artist or management discretion upon entry. ATM services are located inside the theater. Smoking is not allowed in the venue. Smoking is permitted in a designated outdoor area. The following items are not permitted: Cameras or Recording Devices Outside food or beverages including alcohol Markers or laser pointers Sharp or dangerous items (weapons, knives, wallet chains, mace)",
+                "childRule": "All ages are welcome - unless otherwise stated on the ticket. Children, 2 years and older, require a ticket to enter the venue. All children's events require a ticket for all children who have reached their first birthday. Please call the box office to verify."
+              },
+              "upcomingEvents": {
+                "ticketmaster": 32,
+                "_total": 32,
+                "_filtered": 10
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/venues/KovZpZAEkIIA?locale=en-us"
+                }
+              }
+            }
+          ],
+          "attractions": [
+            {
+              "name": "R&B ONLY",
+              "type": "attraction",
+              "id": "K8vZ917bcfV",
+              "test": false,
+              "url": "https://www.livenation.com/artist/K8vZ917bcfV/rb-only-events",
+              "locale": "en-us",
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RETINA_LANDSCAPE_16_9.jpg",
+                  "width": 1136,
+                  "height": 639,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_TABLET_LANDSCAPE_16_9.jpg",
+                  "width": 1024,
+                  "height": 576,
+                  "fallback": false
+                },
+                {
+                  "ratio": "4_3",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_CUSTOM.jpg",
+                  "width": 305,
+                  "height": 225,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+                  "width": 2048,
+                  "height": 1152,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RETINA_PORTRAIT_3_2.jpg",
+                  "width": 640,
+                  "height": 427,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_SOURCE",
+                  "width": 2426,
+                  "height": 1620,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_TABLET_LANDSCAPE_3_2.jpg",
+                  "width": 1024,
+                  "height": 683,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_ARTIST_PAGE_3_2.jpg",
+                  "width": 305,
+                  "height": 203,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_EVENT_DETAIL_PAGE_16_9.jpg",
+                  "width": 205,
+                  "height": 115,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RETINA_PORTRAIT_16_9.jpg",
+                  "width": 640,
+                  "height": 360,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/b44/c039f779-12fd-4b47-9ea3-4c7c05c50b44_RECOMENDATION_16_9.jpg",
+                  "width": 100,
+                  "height": 56,
+                  "fallback": false
+                }
+              ],
+              "classifications": [
+                {
+                  "primary": true,
+                  "segment": {
+                    "id": "KZFzniwnSyZfZ7v7nJ",
+                    "name": "Music"
+                  },
+                  "genre": {
+                    "id": "KnvZfZ7vAee",
+                    "name": "R&B"
+                  },
+                  "subGenre": {
+                    "id": "KZazBEonSMnZfZ7vkIt",
+                    "name": "R&B"
+                  },
+                  "type": {
+                    "id": "KZAyXgnZfZ7v7lt",
+                    "name": "Event Style"
+                  },
+                  "subType": {
+                    "id": "KZFzBErXgnZfZ7vA6J",
+                    "name": "Concert"
+                  },
+                  "family": false
+                }
+              ],
+              "upcomingEvents": {
+                "ticketmaster": 11,
+                "_total": 11,
+                "_filtered": 27
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/attractions/K8vZ917bcfV?locale=en-us"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Donna the Buffalo",
+        "type": "event",
+        "id": "G5eVZbb1Dw7Fm",
+        "test": false,
+        "url": "https://www.ticketmaster.com/donna-the-buffalo-charleston-south-carolina-05-08-2025/event/2D006182BBC8422E",
+        "locale": "en-us",
+        "images": [
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RETINA_PORTRAIT_16_9.jpg",
+            "width": 640,
+            "height": 360,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_TABLET_LANDSCAPE_3_2.jpg",
+            "width": 1024,
+            "height": 683,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RETINA_PORTRAIT_3_2.jpg",
+            "width": 640,
+            "height": 427,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_TABLET_LANDSCAPE_16_9.jpg",
+            "width": 1024,
+            "height": 576,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RECOMENDATION_16_9.jpg",
+            "width": 100,
+            "height": 56,
+            "fallback": false
+          },
+          {
+            "ratio": "4_3",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_CUSTOM.jpg",
+            "width": 305,
+            "height": 225,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RETINA_LANDSCAPE_16_9.jpg",
+            "width": 1136,
+            "height": 639,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+            "width": 2048,
+            "height": 1152,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_EVENT_DETAIL_PAGE_16_9.jpg",
+            "width": 205,
+            "height": 115,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_ARTIST_PAGE_3_2.jpg",
+            "width": 305,
+            "height": 203,
+            "fallback": false
+          }
+        ],
+        "sales": {
+          "public": {
+            "startDateTime": "2024-12-03T15:00:00Z",
+            "startTBD": false,
+            "startTBA": false,
+            "endDateTime": "2025-05-09T02:00:00Z"
+          }
+        },
+        "dates": {
+          "start": {
+            "localDate": "2025-05-08",
+            "localTime": "21:00:00",
+            "dateTime": "2025-05-09T01:00:00Z",
+            "dateTBD": false,
+            "dateTBA": false,
+            "timeTBA": false,
+            "noSpecificTime": false
+          },
+          "timezone": "America/New_York",
+          "status": {
+            "code": "onsale"
+          },
+          "spanMultipleDays": false
+        },
+        "classifications": [
+          {
+            "primary": true,
+            "segment": {
+              "id": "KZFzniwnSyZfZ7v7nJ",
+              "name": "Music"
+            },
+            "genre": {
+              "id": "KnvZfZ7vAeA",
+              "name": "Rock"
+            },
+            "subGenre": {
+              "id": "KZazBEonSMnZfZ7v6F1",
+              "name": "Pop"
+            },
+            "type": {
+              "id": "KZAyXgnZfZ7v7nI",
+              "name": "Undefined"
+            },
+            "subType": {
+              "id": "KZFzBErXgnZfZ7v7lJ",
+              "name": "Undefined"
+            },
+            "family": false
+          }
+        ],
+        "promoter": {
+          "id": "172",
+          "name": "FRANK PRODUCTIONS",
+          "description": "FRANK PRODUCTIONS / ACTIVE / TBA"
+        },
+        "promoters": [
+          {
+            "id": "172",
+            "name": "FRANK PRODUCTIONS",
+            "description": "FRANK PRODUCTIONS / ACTIVE / TBA"
+          }
+        ],
+        "info": "Doors at 8:00 pm | Show at 9:00 pm ACCESSIBILITY: The Music Farm is a general admission venue. If you have specific needs or questions, please email us at info@musicfarm.com or call 843-853-2252 and we would be happy to help. CASHLESS VENUE - The Music Farm services all credit and debit payments only. No cash accepted at the box office or bar. BAG POLICY: Bags (max size 12\" x 6\" x 12\") are allowed and will be searched upon entry. Exceptions will be made for necessary medical equipment and nursing mothers. We encourage you to pack light with only the necessities to make the entry process as soon as possible. We hope you enjoy the show!",
+        "pleaseNote": "Doors at 8:00 pm | Show at 9:00 pm ACCESSIBILITY: The Music Farm is a general admission venue. If you have specific needs or questions, please email us at info@musicfarm.com or call 843-853-2252 and we would be happy to help. CASHLESS VENUE - The Music Farm services all credit and debit payments only. No cash accepted at the box office or bar. BAG POLICY: Bags (max size 12\" x 6\" x 12\") are allowed and will be searched upon entry. Exceptions will be made for necessary medical equipment and nursing mothers. We encourage you to pack light with only the necessities to make the entry process as soon as possible. We hope you enjoy the show!",
+        "priceRanges": [
+          {
+            "type": "standard",
+            "currency": "USD",
+            "min": 25,
+            "max": 25
+          }
+        ],
+        "products": [
+          {
+            "name": "MF Hat Merch Add-On: Donna the Buffalo (Not A Concert Ticket)",
+            "id": "G5eVZbb1DwVFS",
+            "url": "https://www.ticketmaster.com/mf-hat-merch-addon-donna-the-charleston-south-carolina-05-08-2025/event/2D006182BBCB4233",
+            "type": "Upsell",
+            "classifications": [
+              {
+                "primary": true,
+                "segment": {
+                  "id": "KZFzniwnSyZfZ7v7n1",
+                  "name": "Miscellaneous"
+                },
+                "genre": {
+                  "id": "KnvZfZ7v7ll",
+                  "name": "Undefined"
+                },
+                "subGenre": {
+                  "id": "KZazBEonSMnZfZ7vAv1",
+                  "name": "Undefined"
+                },
+                "type": {
+                  "id": "KZAyXgnZfZ7v7nJ",
+                  "name": "Upsell"
+                },
+                "subType": {
+                  "id": "KZFzBErXgnZfZ7vAke",
+                  "name": "Merchandise Voucher"
+                },
+                "family": false
+              }
+            ]
+          },
+          {
+            "name": "Tito's Balcony Upgrade: Donna the Buffalo (Not A Concert Ticket)",
+            "id": "G5eVZbb1DwVaC",
+            "url": "https://www.ticketmaster.com/titos-balcony-upgrade-donna-the-buffalo-charleston-south-carolina-05-08-2025/event/2D006182BBCB424E",
+            "type": "VIP",
+            "classifications": [
+              {
+                "primary": true,
+                "segment": {
+                  "id": "KZFzniwnSyZfZ7v7n1",
+                  "name": "Miscellaneous"
+                },
+                "genre": {
+                  "id": "KnvZfZ7v7ll",
+                  "name": "Undefined"
+                },
+                "subGenre": {
+                  "id": "KZazBEonSMnZfZ7vAv1",
+                  "name": "Undefined"
+                },
+                "type": {
+                  "id": "KZAyXgnZfZ7v7nJ",
+                  "name": "Upsell"
+                },
+                "subType": {
+                  "id": "KZFzBErXgnZfZ7v7lv",
+                  "name": "Special Entry"
+                },
+                "family": false
+              }
+            ]
+          },
+          {
+            "name": "MF T-Shirt Merch Add-On: Donna the Buffalo (Not A Concert Ticket)",
+            "id": "G5eVZbb1DwVaf",
+            "url": "https://www.ticketmaster.com/mf-tshirt-merch-addon-donna-the-charleston-south-carolina-05-08-2025/event/2D006182BBCB4254",
+            "type": "Upsell",
+            "classifications": [
+              {
+                "primary": true,
+                "segment": {
+                  "id": "KZFzniwnSyZfZ7v7n1",
+                  "name": "Miscellaneous"
+                },
+                "genre": {
+                  "id": "KnvZfZ7v7ll",
+                  "name": "Undefined"
+                },
+                "subGenre": {
+                  "id": "KZazBEonSMnZfZ7vAv1",
+                  "name": "Undefined"
+                },
+                "type": {
+                  "id": "KZAyXgnZfZ7v7nJ",
+                  "name": "Upsell"
+                },
+                "subType": {
+                  "id": "KZFzBErXgnZfZ7vAke",
+                  "name": "Merchandise Voucher"
+                },
+                "family": false
+              }
+            ]
+          }
+        ],
+        "seatmap": {
+          "staticUrl": "https://mapsapi.tmol.io/maps/geometry/3/event/2D006182BBC8422E/staticImage?type=png&systemId=HOST",
+          "id": "seatmap"
+        },
+        "accessibility": {
+          "ticketLimit": 4,
+          "id": "accessibility"
+        },
+        "ticketLimit": {
+          "info": "There is an overall eight (8) ticket limit on this event.",
+          "id": "ticketLimit"
+        },
+        "ageRestrictions": {
+          "legalAgeEnforced": false,
+          "id": "ageRestrictions"
+        },
+        "doorsTimes": {
+          "localDate": "2025-05-08",
+          "localTime": "20:00:00",
+          "dateTime": "2025-05-09T00:00:00Z",
+          "id": "doorsTimes"
+        },
+        "ticketing": {
+          "safeTix": {
+            "enabled": true
+          },
+          "allInclusivePricing": {
+            "enabled": false
+          },
+          "id": "ticketing"
+        },
+        "_links": {
+          "self": {
+            "href": "/discovery/v2/events/G5eVZbb1Dw7Fm?locale=en-us"
+          },
+          "attractions": [
+            {
+              "href": "/discovery/v2/attractions/K8vZ9171h50?locale=en-us"
+            }
+          ],
+          "venues": [
+            {
+              "href": "/discovery/v2/venues/KovZpZA7eJkA?locale=en-us"
+            }
+          ]
+        },
+        "_embedded": {
+          "venues": [
+            {
+              "name": "Music Farm",
+              "type": "venue",
+              "id": "KovZpZA7eJkA",
+              "test": false,
+              "url": "https://www.ticketmaster.com/music-farm-tickets-charleston/venue/369334",
+              "locale": "en-us",
+              "postalCode": "29403",
+              "timezone": "America/New_York",
+              "city": {
+                "name": "Charleston"
+              },
+              "state": {
+                "name": "South Carolina",
+                "stateCode": "SC"
+              },
+              "country": {
+                "name": "United States Of America",
+                "countryCode": "US"
+              },
+              "address": {
+                "line1": "32 Ann Street"
+              },
+              "location": {
+                "longitude": "-79.938335",
+                "latitude": "32.790188"
+              },
+              "markets": [
+                {
+                  "name": "Charlotte",
+                  "id": "2"
+                },
+                {
+                  "name": "South Carolina",
+                  "id": "121"
+                }
+              ],
+              "dmas": [
+                {
+                  "id": 243
+                },
+                {
+                  "id": 245
+                },
+                {
+                  "id": 256
+                },
+                {
+                  "id": 291
+                },
+                {
+                  "id": 292
+                }
+              ],
+              "boxOfficeInfo": {
+                "phoneNumberDetail": "843-408-1599",
+                "openHoursDetail": "Thursday & Friday 10am to 3pm Box Office Located at Charleston Music Hall (37 John St.) Day of Event: One hour before doors open",
+                "acceptedPaymentDetail": "American Express, Discover, Mastercard, Visa",
+                "willCallDetail": "Will Call Window Located on Ann Street Day of Event: One hour before doors open PLEASE BRING A PICTURE ID, THE ACTUAL CREDIT CARD USED TO PURCHASE THE TICKETS, AND YOUR ORDER NUMBER."
+              },
+              "parkingDetail": "Public lots available near venue.",
+              "accessibleSeatingDetail": "Venue is General Admission. Patrons should purchase Best Available.",
+              "generalInfo": {
+                "childRule": "Age limit varies depending on show - See individual event info. All ages require a ticket."
+              },
+              "upcomingEvents": {
+                "ticketmaster": 44,
+                "_total": 44,
+                "_filtered": 0
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/venues/KovZpZA7eJkA?locale=en-us"
+                }
+              }
+            }
+          ],
+          "attractions": [
+            {
+              "name": "Donna the Buffalo",
+              "type": "attraction",
+              "id": "K8vZ9171h50",
+              "test": false,
+              "url": "https://www.ticketmaster.com/donna-the-buffalo-tickets/artist/798834",
+              "locale": "en-us",
+              "externalLinks": {
+                "wiki": [
+                  {
+                    "url": "https://en.wikipedia.org/wiki/Donna_the_Buffalo"
+                  }
+                ],
+                "musicbrainz": [
+                  {
+                    "id": "a916ce0a-0ab7-4b2f-b169-2166b746e31e"
+                  }
+                ],
+                "homepage": [
+                  {
+                    "url": "http://www.donnathebuffalo.com/"
+                  }
+                ]
+              },
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RETINA_PORTRAIT_16_9.jpg",
+                  "width": 640,
+                  "height": 360,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_TABLET_LANDSCAPE_3_2.jpg",
+                  "width": 1024,
+                  "height": 683,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RETINA_PORTRAIT_3_2.jpg",
+                  "width": 640,
+                  "height": 427,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_TABLET_LANDSCAPE_16_9.jpg",
+                  "width": 1024,
+                  "height": 576,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RECOMENDATION_16_9.jpg",
+                  "width": 100,
+                  "height": 56,
+                  "fallback": false
+                },
+                {
+                  "ratio": "4_3",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_CUSTOM.jpg",
+                  "width": 305,
+                  "height": 225,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_RETINA_LANDSCAPE_16_9.jpg",
+                  "width": 1136,
+                  "height": 639,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+                  "width": 2048,
+                  "height": 1152,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_EVENT_DETAIL_PAGE_16_9.jpg",
+                  "width": 205,
+                  "height": 115,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/72f/be6960ed-8660-430d-b700-ea2facd0072f_ARTIST_PAGE_3_2.jpg",
+                  "width": 305,
+                  "height": 203,
+                  "fallback": false
+                }
+              ],
+              "classifications": [
+                {
+                  "primary": true,
+                  "segment": {
+                    "id": "KZFzniwnSyZfZ7v7nJ",
+                    "name": "Music"
+                  },
+                  "genre": {
+                    "id": "KnvZfZ7vAeA",
+                    "name": "Rock"
+                  },
+                  "subGenre": {
+                    "id": "KZazBEonSMnZfZ7v6F1",
+                    "name": "Pop"
+                  },
+                  "type": {
+                    "id": "KZAyXgnZfZ7v7nI",
+                    "name": "Undefined"
+                  },
+                  "subType": {
+                    "id": "KZFzBErXgnZfZ7v7lJ",
+                    "name": "Undefined"
+                  },
+                  "family": false
+                }
+              ],
+              "upcomingEvents": {
+                "ticketmaster": 3,
+                "_total": 3,
+                "_filtered": 6
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/attractions/K8vZ9171h50?locale=en-us"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Dogs In A Pile Annual Holiday Show",
+        "type": "event",
+        "id": "k7vGFb9p0fgq7",
+        "test": false,
+        "url": "https://www.ticketmaster.com/dogs-in-a-pile-annual-holiday-asbury-park-new-jersey-12-21-2024/event/00006175A4535744",
+        "locale": "en-us",
+        "images": [
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_EVENT_DETAIL_PAGE_16_9.jpg",
+            "width": 205,
+            "height": 115,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RECOMENDATION_16_9.jpg",
+            "width": 100,
+            "height": 56,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+            "width": 2048,
+            "height": 1152,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_TABLET_LANDSCAPE_3_2.jpg",
+            "width": 1024,
+            "height": 683,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RETINA_LANDSCAPE_16_9.jpg",
+            "width": 1136,
+            "height": 639,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_TABLET_LANDSCAPE_16_9.jpg",
+            "width": 1024,
+            "height": 576,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RETINA_PORTRAIT_3_2.jpg",
+            "width": 640,
+            "height": 427,
+            "fallback": false
+          },
+          {
+            "ratio": "4_3",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_CUSTOM.jpg",
+            "width": 305,
+            "height": 225,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_SOURCE",
+            "width": 2426,
+            "height": 1365,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_ARTIST_PAGE_3_2.jpg",
+            "width": 305,
+            "height": 203,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RETINA_PORTRAIT_16_9.jpg",
+            "width": 640,
+            "height": 360,
+            "fallback": false
+          }
+        ],
+        "sales": {
+          "public": {
+            "startDateTime": "2024-12-03T15:00:00Z",
+            "startTBD": false,
+            "startTBA": false,
+            "endDateTime": "2024-12-21T23:00:00Z"
+          }
+        },
+        "dates": {
+          "start": {
+            "localDate": "2024-12-21",
+            "localTime": "19:00:00",
+            "dateTime": "2024-12-22T00:00:00Z",
+            "dateTBD": false,
+            "dateTBA": false,
+            "timeTBA": false,
+            "noSpecificTime": false
+          },
+          "timezone": "America/New_York",
+          "status": {
+            "code": "onsale"
+          },
+          "spanMultipleDays": false
+        },
+        "classifications": [
+          {
+            "primary": true,
+            "segment": {
+              "id": "KZFzniwnSyZfZ7v7nJ",
+              "name": "Music"
+            },
+            "genre": {
+              "id": "KnvZfZ7vAeA",
+              "name": "Rock"
+            },
+            "subGenre": {
+              "id": "KZazBEonSMnZfZ7v6F1",
+              "name": "Pop"
+            },
+            "type": {
+              "id": "KZAyXgnZfZ7v7nI",
+              "name": "Undefined"
+            },
+            "subType": {
+              "id": "KZFzBErXgnZfZ7v7lJ",
+              "name": "Undefined"
+            },
+            "family": false
+          }
+        ],
+        "promoter": {
+          "id": "653",
+          "name": "LIVE NATION MUSIC",
+          "description": "LIVE NATION MUSIC / NTL / USA"
+        },
+        "promoters": [
+          {
+            "id": "653",
+            "name": "LIVE NATION MUSIC",
+            "description": "LIVE NATION MUSIC / NTL / USA"
+          }
+        ],
+        "info": "ALL AGE SHOW DOORS 7:00 PM Dogs in a PIle Annual Holiday Show The Jersey Shore's own Dogs in a Pile are coming home to the Pony after a year of relentless touring! An evening with the Dogs with a two set show.",
+        "priceRanges": [
+          {
+            "type": "standard",
+            "currency": "USD",
+            "min": 30,
+            "max": 30
+          }
+        ],
+        "seatmap": {
+          "staticUrl": "https://mapsapi.tmol.io/maps/geometry/3/event/00006175A4535744/staticImage?type=png&systemId=HOST",
+          "id": "seatmap"
+        },
+        "accessibility": {
+          "ticketLimit": 2,
+          "id": "accessibility"
+        },
+        "ticketLimit": {
+          "info": "There is an overall 8 ticket limit for this event.",
+          "id": "ticketLimit"
+        },
+        "ageRestrictions": {
+          "legalAgeEnforced": false,
+          "id": "ageRestrictions"
+        },
+        "ticketing": {
+          "safeTix": {
+            "enabled": true
+          },
+          "allInclusivePricing": {
+            "enabled": false
+          },
+          "id": "ticketing"
+        },
+        "_links": {
+          "self": {
+            "href": "/discovery/v2/events/k7vGFb9p0fgq7?locale=en-us"
+          },
+          "attractions": [
+            {
+              "href": "/discovery/v2/attractions/K8vZfZ7EtIk?locale=en-us"
+            }
+          ],
+          "venues": [
+            {
+              "href": "/discovery/v2/venues/KovZpZAdt7AA?locale=en-us"
+            }
+          ]
+        },
+        "_embedded": {
+          "venues": [
+            {
+              "name": "The Stone Pony",
+              "type": "venue",
+              "id": "KovZpZAdt7AA",
+              "test": false,
+              "url": "https://www.ticketmaster.com/the-stone-pony-tickets-asbury-park/venue/112",
+              "locale": "en-us",
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dbimages/22331v.jpg",
+                  "width": 640,
+                  "height": 360,
+                  "fallback": false
+                }
+              ],
+              "postalCode": "07712",
+              "timezone": "America/New_York",
+              "city": {
+                "name": "Asbury Park"
+              },
+              "state": {
+                "name": "New Jersey",
+                "stateCode": "NJ"
+              },
+              "country": {
+                "name": "United States Of America",
+                "countryCode": "US"
+              },
+              "address": {
+                "line1": "913 Ocean Ave"
+              },
+              "location": {
+                "longitude": "-74.00071097",
+                "latitude": "40.220001"
+              },
+              "markets": [
+                {
+                  "name": "New York/Tri-State Area",
+                  "id": "35"
+                },
+                {
+                  "name": "Northern New Jersey",
+                  "id": "55"
+                },
+                {
+                  "name": "Connecticut",
+                  "id": "124"
+                }
+              ],
+              "dmas": [
+                {
+                  "id": 296
+                },
+                {
+                  "id": 345
+                },
+                {
+                  "id": 422
+                }
+              ],
+              "boxOfficeInfo": {
+                "phoneNumberDetail": "(732)502-0600",
+                "openHoursDetail": "Wed-Mon: 12 noon-5PM and all show hours",
+                "acceptedPaymentDetail": "CASH and Credit Accepted at Box Office",
+                "willCallDetail": "Will Call pick up available at the time of the event."
+              },
+              "parkingDetail": "Ample street parking is available. Valet parking will be available for selected shows & special events.",
+              "accessibleSeatingDetail": "This is an accessible venue",
+              "generalInfo": {
+                "generalRule": "Smoking IS allowed in the venue Must be 18 or older to enter (unless otherwise noted) Alcohol served (must be 21 or older w/ I.D.) Food & beverages are available. Dress code is relaxed",
+                "childRule": "Children ONLY allowed at All Ages shows."
+              },
+              "upcomingEvents": {
+                "ticketmaster": 25,
+                "_total": 25,
+                "_filtered": 0
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/venues/KovZpZAdt7AA?locale=en-us"
+                }
+              }
+            }
+          ],
+          "attractions": [
+            {
+              "name": "Dogs In A Pile",
+              "type": "attraction",
+              "id": "K8vZfZ7EtIk",
+              "test": false,
+              "url": "https://www.ticketmaster.com/dogs-in-a-pile-tickets/artist/2797915",
+              "locale": "en-us",
+              "externalLinks": {
+                "facebook": [
+                  {
+                    "url": "https://www.facebook.com/dogsinapileNJ"
+                  }
+                ],
+                "spotify": [
+                  {
+                    "url": "https://open.spotify.com/artist/5lObmA5WxJpUj8QO6YX7yF"
+                  }
+                ],
+                "instagram": [
+                  {
+                    "url": "https://www.instagram.com/dogsinapileband/"
+                  }
+                ],
+                "homepage": [
+                  {
+                    "url": "https://www.dogsinapileofficial.com"
+                  }
+                ]
+              },
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_EVENT_DETAIL_PAGE_16_9.jpg",
+                  "width": 205,
+                  "height": 115,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RECOMENDATION_16_9.jpg",
+                  "width": 100,
+                  "height": 56,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+                  "width": 2048,
+                  "height": 1152,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_TABLET_LANDSCAPE_3_2.jpg",
+                  "width": 1024,
+                  "height": 683,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RETINA_LANDSCAPE_16_9.jpg",
+                  "width": 1136,
+                  "height": 639,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_TABLET_LANDSCAPE_16_9.jpg",
+                  "width": 1024,
+                  "height": 576,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RETINA_PORTRAIT_3_2.jpg",
+                  "width": 640,
+                  "height": 427,
+                  "fallback": false
+                },
+                {
+                  "ratio": "4_3",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_CUSTOM.jpg",
+                  "width": 305,
+                  "height": 225,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_SOURCE",
+                  "width": 2426,
+                  "height": 1365,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_ARTIST_PAGE_3_2.jpg",
+                  "width": 305,
+                  "height": 203,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_RETINA_PORTRAIT_16_9.jpg",
+                  "width": 640,
+                  "height": 360,
+                  "fallback": false
+                }
+              ],
+              "classifications": [
+                {
+                  "primary": true,
+                  "segment": {
+                    "id": "KZFzniwnSyZfZ7v7nJ",
+                    "name": "Music"
+                  },
+                  "genre": {
+                    "id": "KnvZfZ7vAeA",
+                    "name": "Rock"
+                  },
+                  "subGenre": {
+                    "id": "KZazBEonSMnZfZ7v6F1",
+                    "name": "Pop"
+                  },
+                  "type": {
+                    "id": "KZAyXgnZfZ7v7l1",
+                    "name": "Group"
+                  },
+                  "subType": {
+                    "id": "KZFzBErXgnZfZ7vA71",
+                    "name": "Band"
+                  },
+                  "family": false
+                }
+              ],
+              "upcomingEvents": {
+                "ticketmaster": 4,
+                "_total": 4,
+                "_filtered": 7
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/attractions/K8vZfZ7EtIk?locale=en-us"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Wax Jaw",
+        "type": "event",
+        "id": "k7vGFbb1MZvgb",
+        "test": false,
+        "url": "https://www.ticketmaster.com/wax-jaw-asbury-park-new-jersey-01-24-2025/event/00006182B7001D58",
+        "locale": "en-us",
+        "images": [
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_EVENT_DETAIL_PAGE_16_9.jpg",
+            "width": 205,
+            "height": 115,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_ARTIST_PAGE_3_2.jpg",
+            "width": 305,
+            "height": 203,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_SOURCE",
+            "width": 2426,
+            "height": 1365,
+            "fallback": false
+          },
+          {
+            "ratio": "4_3",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_CUSTOM.jpg",
+            "width": 305,
+            "height": 225,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RECOMENDATION_16_9.jpg",
+            "width": 100,
+            "height": 56,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RETINA_PORTRAIT_16_9.jpg",
+            "width": 640,
+            "height": 360,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RETINA_LANDSCAPE_16_9.jpg",
+            "width": 1136,
+            "height": 639,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+            "width": 2048,
+            "height": 1152,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RETINA_PORTRAIT_3_2.jpg",
+            "width": 640,
+            "height": 427,
+            "fallback": false
+          },
+          {
+            "ratio": "16_9",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_TABLET_LANDSCAPE_16_9.jpg",
+            "width": 1024,
+            "height": 576,
+            "fallback": false
+          },
+          {
+            "ratio": "3_2",
+            "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_TABLET_LANDSCAPE_3_2.jpg",
+            "width": 1024,
+            "height": 683,
+            "fallback": false
+          }
+        ],
+        "sales": {
+          "public": {
+            "startDateTime": "2024-12-03T15:00:00Z",
+            "startTBD": false,
+            "startTBA": false,
+            "endDateTime": "2025-01-24T23:00:00Z"
+          }
+        },
+        "dates": {
+          "start": {
+            "localDate": "2025-01-24",
+            "localTime": "19:00:00",
+            "dateTime": "2025-01-25T00:00:00Z",
+            "dateTBD": false,
+            "dateTBA": false,
+            "timeTBA": false,
+            "noSpecificTime": false
+          },
+          "timezone": "America/New_York",
+          "status": {
+            "code": "onsale"
+          },
+          "spanMultipleDays": false
+        },
+        "classifications": [
+          {
+            "primary": true,
+            "segment": {
+              "id": "KZFzniwnSyZfZ7v7nJ",
+              "name": "Music"
+            },
+            "genre": {
+              "id": "KnvZfZ7vAeA",
+              "name": "Rock"
+            },
+            "subGenre": {
+              "id": "KZazBEonSMnZfZ7v6a6",
+              "name": "Punk"
+            },
+            "type": {
+              "id": "KZAyXgnZfZ7v7nI",
+              "name": "Undefined"
+            },
+            "subType": {
+              "id": "KZFzBErXgnZfZ7v7lJ",
+              "name": "Undefined"
+            },
+            "family": false
+          }
+        ],
+        "promoter": {
+          "id": "653",
+          "name": "LIVE NATION MUSIC",
+          "description": "LIVE NATION MUSIC / NTL / USA"
+        },
+        "promoters": [
+          {
+            "id": "653",
+            "name": "LIVE NATION MUSIC",
+            "description": "LIVE NATION MUSIC / NTL / USA"
+          }
+        ],
+        "info": "21 AND OVER ADMITTED DOORS 7:00 PM Wax Jaw Teen Idle Loveseat Pete",
+        "priceRanges": [
+          {
+            "type": "standard",
+            "currency": "USD",
+            "min": 15,
+            "max": 15
+          }
+        ],
+        "seatmap": {
+          "staticUrl": "https://mapsapi.tmol.io/maps/geometry/3/event/00006182B7001D58/staticImage?type=png&systemId=HOST",
+          "id": "seatmap"
+        },
+        "accessibility": {
+          "ticketLimit": 2,
+          "id": "accessibility"
+        },
+        "ticketLimit": {
+          "info": "There is an overall 8 ticket limit for this event.",
+          "id": "ticketLimit"
+        },
+        "ageRestrictions": {
+          "legalAgeEnforced": false,
+          "id": "ageRestrictions"
+        },
+        "ticketing": {
+          "safeTix": {
+            "enabled": true
+          },
+          "allInclusivePricing": {
+            "enabled": false
+          },
+          "id": "ticketing"
+        },
+        "_links": {
+          "self": {
+            "href": "/discovery/v2/events/k7vGFbb1MZvgb?locale=en-us"
+          },
+          "attractions": [
+            {
+              "href": "/discovery/v2/attractions/K8vZ917qCI0?locale=en-us"
+            },
+            {
+              "href": "/discovery/v2/attractions/K8vZ917juM0?locale=en-us"
+            }
+          ],
+          "venues": [
+            {
+              "href": "/discovery/v2/venues/KovZpZAdnEtA?locale=en-us"
+            }
+          ]
+        },
+        "_embedded": {
+          "venues": [
+            {
+              "name": "The Wonder Bar",
+              "type": "venue",
+              "id": "KovZpZAdnEtA",
+              "test": false,
+              "url": "https://www.ticketmaster.com/the-wonder-bar-tickets-asbury-park/venue/1217",
+              "locale": "en-us",
+              "postalCode": "07712",
+              "timezone": "America/New_York",
+              "city": {
+                "name": "Asbury Park"
+              },
+              "state": {
+                "name": "New Jersey",
+                "stateCode": "NJ"
+              },
+              "country": {
+                "name": "United States Of America",
+                "countryCode": "US"
+              },
+              "address": {
+                "line1": "1213 Ocean Ave"
+              },
+              "location": {
+                "longitude": "-73.99950139",
+                "latitude": "40.22328639"
+              },
+              "markets": [
+                {
+                  "name": "New York/Tri-State Area",
+                  "id": "35"
+                },
+                {
+                  "name": "Northern New Jersey",
+                  "id": "55"
+                },
+                {
+                  "name": "Connecticut",
+                  "id": "124"
+                }
+              ],
+              "dmas": [
+                {
+                  "id": 296
+                },
+                {
+                  "id": 345
+                },
+                {
+                  "id": 422
+                }
+              ],
+              "upcomingEvents": {
+                "ticketmaster": 25,
+                "_total": 25,
+                "_filtered": 0
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/venues/KovZpZAdnEtA?locale=en-us"
+                }
+              }
+            }
+          ],
+          "attractions": [
+            {
+              "name": "Wax Jaw",
+              "type": "attraction",
+              "id": "K8vZ917qCI0",
+              "test": false,
+              "url": "https://www.ticketmaster.com/wax-jaw-tickets/artist/3107411",
+              "locale": "en-us",
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_EVENT_DETAIL_PAGE_16_9.jpg",
+                  "width": 205,
+                  "height": 115,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_ARTIST_PAGE_3_2.jpg",
+                  "width": 305,
+                  "height": 203,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_SOURCE",
+                  "width": 2426,
+                  "height": 1365,
+                  "fallback": false
+                },
+                {
+                  "ratio": "4_3",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_CUSTOM.jpg",
+                  "width": 305,
+                  "height": 225,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RECOMENDATION_16_9.jpg",
+                  "width": 100,
+                  "height": 56,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RETINA_PORTRAIT_16_9.jpg",
+                  "width": 640,
+                  "height": 360,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RETINA_LANDSCAPE_16_9.jpg",
+                  "width": 1136,
+                  "height": 639,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+                  "width": 2048,
+                  "height": 1152,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_RETINA_PORTRAIT_3_2.jpg",
+                  "width": 640,
+                  "height": 427,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_TABLET_LANDSCAPE_16_9.jpg",
+                  "width": 1024,
+                  "height": 576,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/408/5d660528-0e97-4868-94a3-92cec9f78408_TABLET_LANDSCAPE_3_2.jpg",
+                  "width": 1024,
+                  "height": 683,
+                  "fallback": false
+                }
+              ],
+              "classifications": [
+                {
+                  "primary": true,
+                  "segment": {
+                    "id": "KZFzniwnSyZfZ7v7nJ",
+                    "name": "Music"
+                  },
+                  "genre": {
+                    "id": "KnvZfZ7vAeA",
+                    "name": "Rock"
+                  },
+                  "subGenre": {
+                    "id": "KZazBEonSMnZfZ7v6a6",
+                    "name": "Punk"
+                  },
+                  "type": {
+                    "id": "KZAyXgnZfZ7v7l1",
+                    "name": "Group"
+                  },
+                  "subType": {
+                    "id": "KZFzBErXgnZfZ7vA71",
+                    "name": "Band"
+                  },
+                  "family": false
+                }
+              ],
+              "upcomingEvents": {
+                "ticketmaster": 1,
+                "_total": 1,
+                "_filtered": 0
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/attractions/K8vZ917qCI0?locale=en-us"
+                }
+              }
+            },
+            {
+              "name": "Loveseat Pete",
+              "type": "attraction",
+              "id": "K8vZ917juM0",
+              "test": false,
+              "url": "https://www.ticketmaster.com/loveseat-pete-tickets/artist/3092522",
+              "locale": "en-us",
+              "externalLinks": {
+                "spotify": [
+                  {
+                    "url": "https://open.spotify.com/artist/2Id3BvYWBVXzV3zFSKFbnY"
+                  }
+                ],
+                "instagram": [
+                  {
+                    "url": "https://www.instagram.com/loveseatpete"
+                  }
+                ]
+              },
+              "images": [
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_RECOMENDATION_16_9.jpg",
+                  "width": 100,
+                  "height": 56,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_TABLET_LANDSCAPE_3_2.jpg",
+                  "width": 1024,
+                  "height": 683,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_EVENT_DETAIL_PAGE_16_9.jpg",
+                  "width": 205,
+                  "height": 115,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_RETINA_PORTRAIT_16_9.jpg",
+                  "width": 640,
+                  "height": 360,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_RETINA_PORTRAIT_3_2.jpg",
+                  "width": 640,
+                  "height": 427,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_TABLET_LANDSCAPE_16_9.jpg",
+                  "width": 1024,
+                  "height": 576,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_SOURCE",
+                  "width": 2426,
+                  "height": 1365,
+                  "fallback": false
+                },
+                {
+                  "ratio": "4_3",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_CUSTOM.jpg",
+                  "width": 305,
+                  "height": 225,
+                  "fallback": false
+                },
+                {
+                  "ratio": "3_2",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_ARTIST_PAGE_3_2.jpg",
+                  "width": 305,
+                  "height": 203,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_RETINA_LANDSCAPE_16_9.jpg",
+                  "width": 1136,
+                  "height": 639,
+                  "fallback": false
+                },
+                {
+                  "ratio": "16_9",
+                  "url": "https://s1.ticketm.net/dam/a/38d/b28087b3-45cb-4085-b3ab-2c99ede5138d_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+                  "width": 2048,
+                  "height": 1152,
+                  "fallback": false
+                }
+              ],
+              "classifications": [
+                {
+                  "primary": true,
+                  "segment": {
+                    "id": "KZFzniwnSyZfZ7v7nJ",
+                    "name": "Music"
+                  },
+                  "genre": {
+                    "id": "KnvZfZ7vAeA",
+                    "name": "Rock"
+                  },
+                  "subGenre": {
+                    "id": "KZazBEonSMnZfZ7v66A",
+                    "name": "Indie Rock"
+                  },
+                  "type": {
+                    "id": "KZAyXgnZfZ7v7l1",
+                    "name": "Group"
+                  },
+                  "subType": {
+                    "id": "KZFzBErXgnZfZ7vA71",
+                    "name": "Band"
+                  },
+                  "family": false
+                }
+              ],
+              "upcomingEvents": {
+                "ticketmaster": 0,
+                "_total": 0,
+                "_filtered": 0
+              },
+              "_links": {
+                "self": {
+                  "href": "/discovery/v2/attractions/K8vZ917juM0?locale=en-us"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "/discovery/v2/events?onsaleStartDateTime=2024-12-03T18%3A57%3A31Z&countryCode=US&source=ticketmaster&onsaleOnAfterStartDate=2024-12-03&locale=*&classificationId=KZFzniwnSyZfZ7v7nJ&page=0&size=5&sort=onSaleStartDate,asc"
+    },
+    "self": {
+      "href": "/discovery/v2/events?size=5&onsaleStartDateTime=2024-12-03T18%3A57%3A31Z&countryCode=US&sort=onSaleStartDate%2Casc&page=0&source=ticketmaster&onsaleOnAfterStartDate=2024-12-03&locale=*&classificationId=KZFzniwnSyZfZ7v7nJ"
+    },
+    "next": {
+      "href": "/discovery/v2/events?onsaleStartDateTime=2024-12-03T18%3A57%3A31Z&countryCode=US&source=ticketmaster&onsaleOnAfterStartDate=2024-12-03&locale=*&classificationId=KZFzniwnSyZfZ7v7nJ&page=1&size=5&sort=onSaleStartDate,asc"
+    },
+    "last": {
+      "href": "/discovery/v2/events?onsaleStartDateTime=2024-12-03T18%3A57%3A31Z&countryCode=US&source=ticketmaster&onsaleOnAfterStartDate=2024-12-03&locale=*&classificationId=KZFzniwnSyZfZ7v7nJ&page=156&size=5&sort=onSaleStartDate,asc"
+    }
+  },
+  "page": {
+    "size": 5,
+    "totalElements": 781,
+    "totalPages": 157,
+    "number": 0
+  }
+}
