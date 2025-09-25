@@ -111,6 +111,10 @@ async def notify_events_task():
             if logger.isEnabledFor(logging.DEBUG):
                 logger.debug(f"Checking for non-notable European events to send to channel ID: {EUROPEAN_CHANNEL_TWO}")
             
+            # Check if EU2 is same as US Unfiltered (this indicates a configuration issue)
+            if EUROPEAN_CHANNEL_TWO == DISCORD_CHANNEL_ID_TWO:
+                logger.warning(f"CONFIGURATION ISSUE: EUROPEAN_CHANNEL_TWO ({EUROPEAN_CHANNEL_TWO}) is the same as DISCORD_CHANNEL_ID_TWO. Non-notable EU events will go to the same channel as non-notable US events!")
+            
             try:
                 await notify_events(bot, EUROPEAN_CHANNEL_TWO, notable_only=False, region='eu')
             except discord.errors.Forbidden as e:

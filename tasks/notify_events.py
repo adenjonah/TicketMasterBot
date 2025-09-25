@@ -196,9 +196,11 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
     
     # Add the notable filter
     if notable_only:
+        # Only events with notable artists
         filters.append("Artists.notable = TRUE")
     else:
-        filters.append("(Artists.notable = FALSE OR Artists.artistID IS NULL)")
+        # Only events with non-notable artists or events with no artist info
+        filters.append("(Artists.notable = FALSE OR Artists.notable IS NULL)")
     
     # Add the region filter
     if region == 'eu':
@@ -405,7 +407,15 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
             
             # Log summary at the end
             if logger.isEnabledFor(logging.INFO):
-                logger.info(f"Notify summary: {success_count} sent, {error_count} errors")
+                channel_name = "Unknown"
+                if channel_id == 1305661436512436364:
+                    channel_name = "Main (notable non-EU)"
+                elif channel_id == 1305661467844018188:
+                    channel_name = "Unfiltered (non-notable non-EU/EU-shared)"
+                elif channel_id == 1362511365486543158:
+                    channel_name = "EU Main (notable EU)"
+                
+                logger.info(f"Channel {channel_name} ({channel_id}): {success_count} sent, {error_count} errors, notable_only={notable_only}, region={region}")
             
             # Report on events that have reached max attempts
             if logger.isEnabledFor(logging.WARNING):
