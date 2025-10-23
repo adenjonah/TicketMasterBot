@@ -36,15 +36,32 @@ def format_date_human_readable(date_str):
 async def notify_events(bot, channel_id, notable_only=False):
     """Notifies Discord about unsent events. If notable_only is True, only notifies about notable artist events."""
     
-    # Build query based on notable_only flag
-    query = '''
-    SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
-           Venues.city, Venues.state, Events.image_url, Artists.name
-    FROM Events
-    LEFT JOIN Venues ON Events.venueID = Venues.venueID
-    LEFT JOIN Artists ON Events.artistID = Artists.artistID
-    WHERE Events.sentToDiscord = 0
-    '''
+    # Check if VF columns exist (backwards compatibility)
+    c.execute("PRAGMA table_info(Events)")
+    existing_columns = {row[1] for row in c.fetchall()}
+    has_vf_columns = 'hasVF' in existing_columns and 'vfUrl' in existing_columns
+    
+    # Build query based on notable_only flag and column availability
+    if has_vf_columns:
+        query = '''
+        SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
+               Venues.city, Venues.state, Events.image_url, Artists.name, Events.hasVF, Events.vfUrl
+        FROM Events
+        LEFT JOIN Venues ON Events.venueID = Venues.venueID
+        LEFT JOIN Artists ON Events.artistID = Artists.artistID
+        WHERE Events.sentToDiscord = 0
+        '''
+    else:
+        # Fallback for backwards compatibility (old DB schema)
+        query = '''
+        SELECT Events.eventID, Events.name, Events.ticketOnsaleStart, Events.eventDate, Events.url, 
+               Venues.city, Venues.state, Events.image_url, Artists.name
+        FROM Events
+        LEFT JOIN Venues ON Events.venueID = Venues.venueID
+        LEFT JOIN Artists ON Events.artistID = Artists.artistID
+        WHERE Events.sentToDiscord = 0
+        '''
+    
     if notable_only:
         query += " AND Artists.notable = 1"
 
@@ -62,11 +79,18 @@ async def notify_events(bot, channel_id, notable_only=False):
             onsale_start = format_date_human_readable(event[2]) if event[2] else "TBA"
             event_date = format_date_human_readable(event[3]) if event[3] else "TBA"
 
+            # Build description with VF info if available
+            description = f"**Location**: {event[5]}, {event[6]}\n**Event Date**: {event_date}\n**Sale Start**: {onsale_start}"
+            
+            # Add Verified Fan link if available (backwards compatible)
+            if has_vf_columns and len(event) >= 11 and event[9] and event[10]:
+                description += f"\n**Verified Fan**: {event[10]}"
+
             # Create an embed message with event details
             embed = discord.Embed(
                 title=f"{event[8]} - {event[1]}",  # Adding artist's name to the title for context
                 url=event[4],
-                description=f"**Location**: {event[5]}, {event[6]}\n**Event Date**: {event_date}\n**Sale Start**: {onsale_start}",
+                description=description,
                 color=discord.Color.blue()
             )
             if event[7]:  # Set image if available

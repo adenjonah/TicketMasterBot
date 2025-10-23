@@ -7,6 +7,14 @@ from commandHandler import bot
 import os
 from dotenv import load_dotenv
 
+# Import VF checker if available (backwards compatible)
+try:
+    from vf_checker import recheck_recent_events
+    VF_CHECKER_AVAILABLE = True
+except ImportError:
+    VF_CHECKER_AVAILABLE = False
+    recheck_recent_events = None
+
 # Load environment variables
 load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
@@ -46,6 +54,17 @@ async def fetch_and_notify_events():
     # Notify all unsent events to SECONDARY_CHANNEL_ID
     await notify_events(bot, SECONDARY_CHANNEL_ID, notable_only=False)
 
+@tasks.loop(minutes=10)
+async def recheck_vf_signups():
+    """Periodically recheck recent events for VF signups that may have been added later."""
+    if not VF_CHECKER_AVAILABLE:
+        return
+    try:
+        await recheck_recent_events()
+        event_logger.info("Completed VF recheck for recent events.")
+    except Exception as e:
+        event_logger.error(f"Error during VF recheck: {e}")
+
 @bot.event
 async def on_ready():
     # Check if the task is already running
@@ -54,6 +73,16 @@ async def on_ready():
         event_logger.info("Bot connected and task started.")
     else:
         event_logger.info("Bot reconnected; fetch_and_notify_events task is already running.")
+    
+    # Start VF recheck task (if available)
+    if VF_CHECKER_AVAILABLE:
+        if not recheck_vf_signups.is_running():
+            recheck_vf_signups.start()
+            event_logger.info("VF recheck task started.")
+        else:
+            event_logger.info("VF recheck task is already running.")
+    else:
+        event_logger.info("VF checker module not available, VF recheck task skipped.")
 
 if __name__ == "__main__":
     bot.run(DISCORD_BOT_TOKEN)
