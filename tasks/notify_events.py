@@ -183,7 +183,9 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
             Venues.state, 
             Events.image_url, 
             Artists.name AS artist_name,
-            Artists.notable
+            Artists.notable,
+            Events.hasVF,
+            Events.vfUrl
         FROM Events
         LEFT JOIN Venues ON Events.venueID = Venues.venueID
         LEFT JOIN Artists ON Events.artistID = Artists.artistID
@@ -299,16 +301,24 @@ async def notify_events(bot, channel_id, notable_only=False, region=None):
                         fixed_event_url = _fix_url(original_event_url)
                         fixed_image_url = _fix_url(original_image_url) if original_image_url else None
 
+                        # Build description with VF info if available
+                        description_parts = [
+                            f"**Location**: {event['city']}, {event['state']}",
+                            f"**Event Date**: {event['eventdate'].astimezone(est_tz).strftime('%B %d, %Y at %I:%M %p EST') if event['eventdate'] else 'TBA'}",
+                            f"**Sale Start**: {event['ticketonsalestart'].astimezone(est_tz).strftime('%B %d, %Y at %I:%M %p EST') if event['ticketonsalestart'] else 'TBA'}"
+                        ]
+                        
+                        # Add Verified Fan link if available
+                        if event.get('hasvf') and event.get('vfurl'):
+                            description_parts.append(f"**Verified Fan**: {event['vfurl']}")
+                        
+                        description_parts.append("\nReact with 🔔 to set a reminder for this event!")
+                        
                         # Create Discord embed
                         embed = discord.Embed(
                             title = f"{event_name}" if event['artist_name'] is None else f"{event['artist_name']} - {event_name}",
                             url=fixed_event_url,
-                            description=(
-                                f"**Location**: {event['city']}, {event['state']}\n"
-                                f"**Event Date**: {event['eventdate'].astimezone(est_tz).strftime('%B %d, %Y at %I:%M %p EST') if event['eventdate'] else 'TBA'}\n"
-                                f"**Sale Start**: {event['ticketonsalestart'].astimezone(est_tz).strftime('%B %d, %Y at %I:%M %p EST') if event['ticketonsalestart'] else 'TBA'}\n\n"
-                                f"React with 🔔 to set a reminder for this event!"
-                            ),
+                            description="\n".join(description_parts),
                             color=discord.Color.purple() if event['region'] == 'eu' else discord.Color.blue()
                         )
                         

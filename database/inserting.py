@@ -158,6 +158,15 @@ async def store_event(event, region=None):
                 )
                 logger.info(f"New event added (no region column available): {event_name} (ID: {event_id})")
             
+            # Queue VF detection for this new event (non-blocking)
+            try:
+                from helpers.vf_checker import schedule_vf_check_for_new_event
+                schedule_vf_check_for_new_event(event_id, url, artist_name)
+            except ImportError:
+                logger.debug("VF checker module not available, skipping VF detection")
+            except Exception as e:
+                logger.debug(f"Failed to queue VF detection for event {event_id}: {e}")
+            
             return True
 
         except asyncpg.exceptions.UniqueViolationError:

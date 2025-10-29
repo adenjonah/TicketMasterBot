@@ -348,6 +348,47 @@ async def initialize_db():
                 END IF;
             END $$;
             ''')
+            
+            # Add Verified Fan (VF) tracking columns if they don't exist
+            await conn.execute('''
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'hasvf'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN hasVF BOOLEAN DEFAULT FALSE;
+                    RAISE NOTICE 'Added hasVF column to Events table';
+                END IF;
+                
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'vfurl'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN vfUrl TEXT DEFAULT NULL;
+                    RAISE NOTICE 'Added vfUrl column to Events table';
+                END IF;
+                
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM information_schema.columns
+                    WHERE table_name = 'events'
+                    AND column_name = 'vfdetectedat'
+                ) THEN
+                    ALTER TABLE Events ADD COLUMN vfDetectedAt TIMESTAMPTZ DEFAULT NULL;
+                    RAISE NOTICE 'Added vfDetectedAt column to Events table';
+                END IF;
+            END $$;
+            ''')
+            
+            # Create index on hasVF for efficient VF queries
+            await conn.execute('''
+            CREATE INDEX IF NOT EXISTS idx_events_hasvf ON Events(hasVF);
+            ''')
 
         except Exception as e:
             logger.error(f"Error during database initialization: {e}", exc_info=True)

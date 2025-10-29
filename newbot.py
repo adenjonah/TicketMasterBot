@@ -56,6 +56,7 @@ async def on_ready():
     # Start tasks
     notify_events_task.start()
     check_reminders_task.start()
+    recheck_vf_signups_task.start()
     
     logger.info("Bot ready")
 
@@ -147,12 +148,26 @@ async def check_reminders_task():
     except Exception as e:
         logger.error(f"Reminder check error: {e}")
 
+@tasks.loop(minutes=10)
+async def recheck_vf_signups_task():
+    """Periodically recheck recent events for VF signups that may have been added later"""
+    try:
+        from helpers.vf_checker import recheck_recent_events
+        await recheck_recent_events()
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug("Completed VF recheck for recent events")
+    except ImportError:
+        logger.debug("VF checker module not available, skipping VF recheck")
+    except Exception as e:
+        logger.error(f"VF recheck error: {e}")
+
 async def shutdown():
     if logger.isEnabledFor(logging.DEBUG):
         logger.debug("Shutting down bot...")
     
     notify_events_task.stop()
     check_reminders_task.stop()
+    recheck_vf_signups_task.stop()
     await close_db_pool()
 
 async def main():
