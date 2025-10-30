@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+{
+  "description": "Ensure all code files remain under 200 lines. If a file exceeds this, restructure it into smaller, modular components.",
+  "conditions": [
+    {
+      "fileType": ["code/*"],
+      "maxLines": 200
+    }
+  ],
+  "actions": [
+    {
+      "type": "refactor",
+      "message": "This file exceeds 200 lines. Please break it into smaller modules."
+    }
+  ]
+}
